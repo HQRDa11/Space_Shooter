@@ -35,4 +35,14 @@ public class Shot : MonoBehaviour
             GameObject.Destroy(this.gameObject);
         }
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.GetComponent<Enemy_Health>().TakeDamage(10);
+            GameObject.Destroy(this.gameObject);
+        }
+    }
 }
