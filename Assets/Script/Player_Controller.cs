@@ -6,21 +6,12 @@ public class Player_Controller : MonoBehaviour
     private float _speed;
     [SerializeField]
     private float _offSet;
-    [SerializeField]
-    private float _shotTimerMax;
-    private float _shotTimer;
-
+   
     private Vector2 _velocity = Vector2.zero;
 
-    public void Start()
-    {
-        _shotTimerMax = 0.4f;
-        _shotTimer = 0;
-    }
 
     private void Update()
     {
-        _shotTimer += Time.deltaTime;
         Update_Inputs();
     }
 
@@ -45,17 +36,7 @@ public class Player_Controller : MonoBehaviour
 
     private void Shoot()
     {
-        if (_shotTimer >= _shotTimerMax)
-        {
-            GameObject newShot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Shot"));
-            newShot.transform.position = this.transform.position + Vector3.up;
-            _shotTimer = 0;
-        }
-
+        gameObject.GetComponent<TurretSystem>().Shoot();
     }
 
-    private void ShootTimerOk()
-    {
-
-    }
 }
