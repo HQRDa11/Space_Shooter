@@ -13,6 +13,6 @@ public class ScoreSystem : MonoBehaviour
     }
     public void AddScore(int score)
     {
-        _currentScore += score;
+        _currentScore += ComboSystem.Instance.Multiplier(score);
     }
 }

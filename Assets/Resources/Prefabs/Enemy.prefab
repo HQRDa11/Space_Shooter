@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6766521835634613379}
   - component: {fileID: 863336077476331227}
+  - component: {fileID: 2009741406234845592}
   - component: {fileID: 4871432833228723494}
   - component: {fileID: -5807438035087156833}
+  - component: {fileID: 4669481038763468181}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -27,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3057125044468099672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23632519, y: 0.3504376, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2009741406234845592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057125044468099672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb1ecf9a9a36dd4fb45a800e8bbac95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4871432833228723494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a21eef3192fea47b0e09155f1ee655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _smoothing: 1
+  _speed: 3
+  _smoothing: 0.3
   _wireRadius: 1.5
 --- !u!114 &-5807438035087156833
 MonoBehaviour:
@@ -112,3 +126,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 20
+--- !u!114 &4669481038763468181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057125044468099672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3bbfd717bceb343a746d9c67b4db23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreReward: 10
+  _lootChance: 20

@@ -9,7 +9,7 @@ public class Enemy_Reward : MonoBehaviour
     [SerializeField]
     private float _lootChance;
 
-    public void Reward()
+    public void GetReward()
     {
         ScoreSystem.Instance.AddScore(_scoreReward);
 
