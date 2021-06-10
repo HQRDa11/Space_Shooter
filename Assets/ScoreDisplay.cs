@@ -42,8 +42,8 @@ public class ScoreDisplay : MonoBehaviour
         else if (_clock >= 2 && _clock < 2.5f)
         {
             _text.text = "0";
-            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 0); Debug.Log("HERE " + _text.color);
-            _text.color += new Color(0, 0, 0, _opacity * Time.deltaTime); Debug.Log("HERE 1 " + _text.color);
+            _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 0);
+            _text.color += new Color(0, 0, 0, _opacity * Time.deltaTime);
             _rectTransform.anchoredPosition = Vector2.zero;
         }
         else if (_clock >= 2.5f)
