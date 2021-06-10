@@ -8,6 +8,7 @@ public class WaveSystem : MonoBehaviour
 
     private List<Wave> _allWaves;
     private Wave _currentWave;
+    private int _currentWaveIndex;
 
     private void Awake()
     {
@@ -15,11 +16,11 @@ public class WaveSystem : MonoBehaviour
 
         _allWaves = new List<Wave>();
         _allWaves.Add(SetWaveOnDiffilculty(1));
-        _allWaves.Add(SetWaveOnDiffilculty(2));
-        _allWaves.Add(SetWaveOnDiffilculty(3));
+        //_allWaves.Add(SetWaveOnDiffilculty(2));
+        //_allWaves.Add(SetWaveOnDiffilculty(3));
 
-        _allWaves.Add(new Wave(5, 2, .5f, 2, 2f, new int[6] { 0, 11, 12, 23, 24, 35 }, true));
-        _allWaves.Add(new Wave(10, 1, .5f, 1, 3f, new int[6] { 1, 19, 4, 1, 22, 30 }, false));
+        //_allWaves.Add(new Wave(5, 2, .5f, 2, 2f, new int[6] { 0, 11, 12, 23, 24, 35 }, true));
+        //_allWaves.Add(new Wave(10, 1, .5f, 1, 3f, new int[6] { 1, 19, 4, 1, 22, 30 }, false));
 
         _currentWave = _allWaves[0];
     }
@@ -30,7 +31,12 @@ public class WaveSystem : MonoBehaviour
 
     public void NextWave()
     {
-        if(_allWaves.IndexOf(_currentWave) < _allWaves.Count - 1) _currentWave = _allWaves[_allWaves.IndexOf(_currentWave) + 1];
+        _currentWaveIndex++;
+        if(_currentWaveIndex % 5 > 0) _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5);
+        else _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5); // <<< A REMPLACER
+        // ELSE BossWave !!!
+
+        //if(_allWaves.IndexOf(_currentWave) < _allWaves.Count - 1) _currentWave = _allWaves[_allWaves.IndexOf(_currentWave) + 1];
     }
 
     private Wave RandomWave()
