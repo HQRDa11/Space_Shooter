@@ -39,7 +39,7 @@ public class Enemy_Movement : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            transform.position = Vector2.SmoothDamp(transform.position, Map.CheckPointIndexToPosition(_number), ref velocity, _smoothing * 5);  
+            transform.position = Vector2.SmoothDamp(transform.position, Map.CheckPointIndexToPosition(_number), ref velocity, _smoothing * Time.deltaTime * _speed);  
             transform.eulerAngles = Vector3.zero;
         }
     }
@@ -51,8 +51,6 @@ public class Enemy_Movement : MonoBehaviour
     private void Move()
     {
         GetComponent<Rigidbody2D>().velocity = _direction * _speed * Time.deltaTime;
-        //transform.Translate(_direction * _speed * Time.deltaTime);
-        //transform.position = Vector2.SmoothDamp(transform.position, (Vector2)transform.position + _direction * _speed * Time.deltaTime, ref velocity, _smoothing);
         _direction = Vector2.SmoothDamp(_direction, (_allCheckPoints[_checkPointIndex] - (Vector2)transform.position).normalized, ref velocity, _smoothing);
     }
 
