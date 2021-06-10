@@ -13,6 +13,10 @@ public class Enemy_Reward : MonoBehaviour
     {
         ScoreSystem.Instance.AddScore(_scoreReward);
 
-        if (Random.Range(0, 100) <= _lootChance) Debug.Log("Bonus Looted.");
+        if (Random.Range(0, 100) <= _lootChance)
+        {
+            GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonus") );
+            bonusLoot.transform.position = gameObject.transform.position ;
+        };
     }
 }

@@ -18,4 +18,10 @@ public class Player : MonoBehaviour
             this.gameObject.GetComponent<TurretSystem>().ModifyNbOfTurret(1);
         }
     }
+
+    public void OnBonus()
+    {
+        Debug.Log("bonus on");
+        this.gameObject.GetComponent<TurretSystem>().ModifyNbOfTurret(1);
+    }
 }
