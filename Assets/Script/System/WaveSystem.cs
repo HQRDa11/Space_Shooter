@@ -14,9 +14,13 @@ public class WaveSystem : MonoBehaviour
         _instance = this;
 
         _allWaves = new List<Wave>();
-        _allWaves.Add(RandomWave());
+        _allWaves.Add(SetWaveOnDiffilculty(1));
+        _allWaves.Add(SetWaveOnDiffilculty(2));
+        _allWaves.Add(SetWaveOnDiffilculty(3));
+
         _allWaves.Add(new Wave(5, 2, .5f, 2, 2f, new int[6] { 0, 11, 12, 23, 24, 35 }, true));
         _allWaves.Add(new Wave(10, 1, .5f, 1, 3f, new int[6] { 1, 19, 4, 1, 22, 30 }, false));
+
         _currentWave = _allWaves[0];
     }
     void Update()
@@ -53,22 +57,14 @@ public class WaveSystem : MonoBehaviour
 
     private Wave SetWaveOnDiffilculty(int difficulty)
     {
-        int numberOfEnemy = Random.Range(5, 8) * difficulty;
+        int numberOfEnemy = Random.Range(4, 8) * difficulty;
         int spawnPoint = Random.Range(0, Map.SpawnDensity - 1);
-        float spawnDelay = Random.Range(.1f, 1f);
-        int repeatTimes = Random.Range(0, 3);
-        float repeatFrenquency = Random.Range(3f, 5f);
-        int[] checkPoints = new int[Random.Range(5, 10)];
+        float spawnDelay = Random.Range(.5f, 2f) / difficulty;
+        int repeatTimes = Random.Range(0, 1) * difficulty;
+        float repeatFrenquency = Random.Range(3f, 5f) / difficulty;
+        int[] checkPoints = new int[Random.Range(3, 5) * difficulty];
         for (int i = 0; i < checkPoints.Length; i++) checkPoints[i] = Random.Range(0, Map.CheckPointDensityWidth * Map.CheckPointDensityHeight - 1);
-        bool mirror = true;
-
-        //Debug.Log("numberOfEnemy " + numberOfEnemy);
-        //Debug.Log("spawnPoint " + spawnPoint);
-        //Debug.Log("spawnDelay " + spawnDelay);
-        //Debug.Log("repeatTimes " + repeatTimes);
-        //Debug.Log("repeatFrenquency " + repeatFrenquency);
-        //Debug.Log("checkPoints lenght" + checkPoints.Length);
-        //Debug.Log("");
+        bool mirror = Random.Range(0, 1 - difficulty / 10) == 1 ? true : false;
 
         return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror);
     }
