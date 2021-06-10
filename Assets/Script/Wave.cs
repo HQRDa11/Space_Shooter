@@ -35,6 +35,7 @@ public class Wave
     }
     public void Update()
     {
+        _allEnemies.RemoveAll(enemy => enemy == null);
         _clock += Time.deltaTime;
         if (_enemyRemaining > 0)
         {

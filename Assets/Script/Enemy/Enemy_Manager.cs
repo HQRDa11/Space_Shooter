@@ -6,8 +6,8 @@ public class Enemy_Manager : MonoBehaviour
 {
     public void DestroyFromHit()
     {
-        ComboSystem.Instance.Addcombo();
         GetComponent<Enemy_Reward>().GetReward();
+        ComboSystem.Instance.Addcombo();
         Destroy(gameObject);
     }
 

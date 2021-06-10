@@ -9,7 +9,7 @@ public class Enemy_Health : MonoBehaviour
 
     private void Update()
     {
-        if (_health <= 0) Destroy(gameObject);
+        if (_health <= 0) GetComponent<Enemy_Manager>().DestroyFromHit();
     }
     public void TakeDamage(float damage)
     {

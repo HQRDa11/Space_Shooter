@@ -17,14 +17,10 @@ public class WaveSystem : MonoBehaviour
         _allWaves.Add(RandomWave());
         _allWaves.Add(new Wave(5, 2, .5f, 2, 2f, new int[6] { 0, 11, 12, 23, 24, 35 }, true));
         _allWaves.Add(new Wave(10, 1, .5f, 1, 3f, new int[6] { 1, 19, 4, 1, 22, 30 }, false));
+        _currentWave = _allWaves[0];
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            _currentWave = _allWaves[0]; 
-        }
-
         if (_currentWave != null) _currentWave.Update();
     }
 
@@ -41,16 +37,16 @@ public class WaveSystem : MonoBehaviour
         int repeatTimes = Random.Range(0, 3); 
         float repeatFrenquency = Random.Range(3f, 5f); 
         int[] checkPoints = new int[Random.Range(5, 10)]; 
-        for (int i = 0; i < checkPoints.Length; i++) checkPoints[i] = Random.Range(0, (int)Mathf.Pow(Map.CheckPointDensityWidth, 2) - 1);
+        for (int i = 0; i < checkPoints.Length; i++) checkPoints[i] = Random.Range(0, Map.CheckPointDensityWidth * Map.CheckPointDensityHeight - 1);
         bool mirror = true;
 
-        Debug.Log("numberOfEnemy " + numberOfEnemy);
-        Debug.Log("spawnPoint " + spawnPoint);
-        Debug.Log("spawnDelay " + spawnDelay);
-        Debug.Log("repeatTimes " + repeatTimes);
-        Debug.Log("repeatFrenquency " + repeatFrenquency);
-        Debug.Log("checkPoints lenght" + checkPoints.Length);
-        Debug.Log("");
+        //Debug.Log("numberOfEnemy " + numberOfEnemy);
+        //Debug.Log("spawnPoint " + spawnPoint);
+        //Debug.Log("spawnDelay " + spawnDelay);
+        //Debug.Log("repeatTimes " + repeatTimes);
+        //Debug.Log("repeatFrenquency " + repeatFrenquency);
+        //Debug.Log("checkPoints lenght" + checkPoints.Length);
+        //Debug.Log("");
 
         return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror);
     }
