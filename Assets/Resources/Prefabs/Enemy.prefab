@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _smoothing: 0.1
+  _smoothing: 0.3
   _wireRadius: 1.5
 --- !u!114 &-5807438035087156833
 MonoBehaviour:
