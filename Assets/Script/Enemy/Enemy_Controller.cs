@@ -24,7 +24,7 @@ public class Enemy_Controller : MonoBehaviour
     private void Update()
     {
         Target();
-        if (_checkPointIndex == _allCheckPoints.Count) Destroy(gameObject);
+        if (_checkPointIndex == _allCheckPoints.Count) GetComponent<Enemy_Manager>().DestroyFromDeadzone();
     }
     void FixedUpdate()
     {

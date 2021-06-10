@@ -4,20 +4,36 @@ using UnityEngine;
 
 public class Wave
 {
-    protected int _numberOfEnemy;    
-    protected Vector2 _spawnPoint;
-    protected List<Vector2> _allCheckPoints;
-    protected float _spawnDelay;
+    private int _numberOfEnemy;
+    private Vector2 _spawnPoint;
+    private float _spawnDelay;
 
-    protected float _repeatTimes;
-    protected float _repeatFrenquency;
+    private float _repeatTimes;
+    private float _repeatFrenquency;
+
+    private List<Vector2> _allCheckPoints;
 
     private int _enemyRemaining;
     private float _clock = 0;
 
+    public Wave(int numberOfEnemy, int spawnPoint, float spawnDelay, int repeatTimes, float repeatFrequency, int[] checkPoints)
+    {
+        _numberOfEnemy = numberOfEnemy;
+        _spawnPoint = Map.SpawnIndexToPosition(spawnPoint);
+        _spawnDelay = spawnDelay;
+        _repeatTimes = repeatTimes;
+        _repeatFrenquency = repeatFrequency;
+
+        _allCheckPoints = new List<Vector2>();
+        foreach (int index in checkPoints) _allCheckPoints.Add(Map.CheckPointIndexToPosition(index));
+        _allCheckPoints.Add(Map.DeadzonePoint);
+
+        _enemyRemaining = _numberOfEnemy;
+    }
     protected void Initialize()
     {
         _enemyRemaining = _numberOfEnemy;
+        _allCheckPoints.Add(Map.DeadzonePoint); 
     }
     public void Update()
     {
@@ -48,42 +64,5 @@ public class Wave
         enemy.GetComponent<Enemy_Controller>().AllCheckPoints = _allCheckPoints;
         _enemyRemaining--;
     }
-}
 
-public class Wave01 : Wave
-{
-    public Wave01()
-    {
-        base._numberOfEnemy = 5;
-        base._spawnPoint = Map.SpawnIndexToPosition(2);
-        base._allCheckPoints = new List<Vector2>();
-        base._spawnDelay = .5f;
-
-        base._repeatTimes = 2;
-        base._repeatFrenquency = 2f;
-
-        int[] checkPoints = new int[6] { 0, 11, 12, 23, 24, 35 };
-        foreach(int index in checkPoints) base._allCheckPoints.Add(Map.CheckPointIndexToPosition(index));
-
-        base.Initialize();
-    }
-}
-
-public class Wave02 : Wave
-{
-    public Wave02()
-    {
-        base._numberOfEnemy = 10;
-        base._spawnPoint = Map.SpawnIndexToPosition(1);
-        base._allCheckPoints = new List<Vector2>();
-        base._spawnDelay = .5f;
-
-        base._repeatTimes = 1;
-        base._repeatFrenquency = 3f;
-
-        int[] checkPoints = new int[6] { 1, 19, 4, 1, 22, 30 };
-        foreach(int index in checkPoints) base._allCheckPoints.Add(Map.CheckPointIndexToPosition(index));
-
-        base.Initialize();
-    }
 }
