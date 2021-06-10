@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Enemy_Health : MonoBehaviour
 {
-    [SerializeField]
     private float _health;
+    private float _maxHealth;
+
+    private void Start()
+    {
+        _maxHealth = 20;
+        _health = _maxHealth;
+    }
 
     private void Update()
     {
@@ -14,5 +20,6 @@ public class Enemy_Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        this.gameObject.transform.GetComponentInChildren<Canvas>().GetComponentInChildren<Image>().fillAmount = _health / _maxHealth; 
     }
 }

@@ -12,16 +12,25 @@ public class TurretSystem : MonoBehaviour
         m_allTurrets = new List<Turret>();
     }
 
-    public void Initialise( int nbOfTurrets)
+    public void Initialise()
     {
+        ModifyNbOfTurret(1);
+    }
+
+    public void ModifyNbOfTurret(int modifier)
+    {
+        int totalTurret = m_allTurrets.Count + modifier;
+        m_allTurrets.Clear();
+
         float posX = -gameObject.transform.localScale.x / 2;
-        float margin = gameObject.transform.localScale.x * 1.5f / nbOfTurrets;
-        for (int i = 0; i < nbOfTurrets; i++)
+        float margin = gameObject.transform.localScale.x * ( 1 + 0.1f * totalTurret) / totalTurret;
+        for (int i = 0; i < totalTurret; i++)
         {
             float newXOffset = posX + (i * margin);
-            Turret newTurret = new Turret(this.gameObject, newXOffset );
+            Turret newTurret = new Turret(this.gameObject, newXOffset);
             m_allTurrets.Add(newTurret);
         }
+
     }
 
     public void Shoot()
