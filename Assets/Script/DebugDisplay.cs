@@ -14,10 +14,13 @@ public class DebugDisplay : MonoBehaviour
             Gizmos.DrawWireCube(Map.SpawnIndexToPosition(i), Vector3.one / 2);
         }
 
-        for (int i = 0; i < Mathf.Pow(Map.CheckPointDensity, 2); i++)
+        for (int i = 0; i < Map.CheckPointDensityWidth * Map.CheckPointDensityHeight; i++)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(Map.CheckPointIndexToPosition(i), .5f);
         }
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Map.CheckPointIndexToPosition(35), 1);
     }
 }

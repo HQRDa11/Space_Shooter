@@ -7,6 +7,8 @@ public class Enemy_Movement : MonoBehaviour
     private List<Vector2> _allCheckPoints; public List<Vector2> AllCheckPoints { set => _allCheckPoints = value; }
     private int _checkPointIndex;
     private Vector2 _direction;
+    private bool _isAtLastCheckPoint;
+    private int _number; public int Number { set => _number = value; }
 
     [SerializeField]
     private float _speed;
@@ -20,15 +22,17 @@ public class Enemy_Movement : MonoBehaviour
     {
         _checkPointIndex = 0;
         _direction = (_allCheckPoints[_checkPointIndex] - (Vector2)transform.position).normalized;
+        _isAtLastCheckPoint = false;
     }
     private void Update()
     {
-        Target();
-        if (_checkPointIndex == _allCheckPoints.Count) GetComponent<Enemy_Manager>().DestroyFromDeadzone();
+        if (!_isAtLastCheckPoint) Target();
+        if (_checkPointIndex == _allCheckPoints.Count) _isAtLastCheckPoint = true;
     }
     void FixedUpdate()
     {
-        Move();
+        if (!_isAtLastCheckPoint) Move();
+        else transform.position = Vector2.SmoothDamp(transform.position, Map.CheckPointIndexToPosition(_number), ref velocity, _smoothing * _speed);
     }
 
     private void Target()
