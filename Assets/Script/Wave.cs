@@ -45,7 +45,7 @@ public class Wave
     {
         GameObject enemy = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
         enemy.transform.position = _spawnPoint;
-        enemy.GetComponent<Enemy_Controller>().AllCheckPoints = _allCheckPoints;
+        enemy.GetComponent<Enemy_Movement>().AllCheckPoints = _allCheckPoints;
         _enemyRemaining--;
     }
 }
