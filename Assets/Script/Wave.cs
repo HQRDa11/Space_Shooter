@@ -52,7 +52,8 @@ public class Wave
                 _clock = 0;
                 _enemyRemaining = _numberOfEnemy;
                 _repeatTimes--;
-            } else WaveSystem.Instance.NextWave();
+            } 
+            else WaveSystem.Instance.NextWave();
         }       
     }
     private void Spawn()
