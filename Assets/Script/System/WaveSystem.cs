@@ -15,8 +15,6 @@ public class WaveSystem : MonoBehaviour
 
         _allWaves = new List<Wave>();
         _allWaves.Add(RandomWave());
-        _allWaves.Add(RandomWave());
-        _allWaves.Add(RandomWave());
         _allWaves.Add(new Wave(5, 2, .5f, 2, 2f, new int[6] { 0, 11, 12, 23, 24, 35 }));
         _allWaves.Add(new Wave(10, 1, .5f, 1, 3f, new int[6] { 1, 19, 4, 1, 22, 30 }));
     }
