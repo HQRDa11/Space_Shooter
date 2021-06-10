@@ -45,17 +45,15 @@ public class Wave
                 Spawn();
             }
         }
-        else if (_repeatTimes > 0)
+        else if (_allEnemies.Count == 0)
         {
-
-            if(_clock >= _repeatFrenquency && _allEnemies.Count == 0)
+            if(_repeatTimes > 0 && _clock >= _repeatFrenquency)
             {
                 _clock = 0;
                 _enemyRemaining = _numberOfEnemy;
                 _repeatTimes--;
-            }
-        }
-        else WaveSystem.Instance.NextWave();
+            } else WaveSystem.Instance.NextWave();
+        }       
     }
     private void Spawn()
     {
