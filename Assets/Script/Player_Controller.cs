@@ -6,15 +6,25 @@ public class Player_Controller : MonoBehaviour
     private float _speed;
     [SerializeField]
     private float _offSet;
+    [SerializeField]
+    private float _shotTimerMax;
+    private float _shotTimer;
 
     private Vector2 _velocity = Vector2.zero;
 
-    private void Update()
+    public void Start()
     {
-        Move();
+        _shotTimerMax = 0.4f;
+        _shotTimer = 0;
     }
 
-    private void Move()
+    private void Update()
+    {
+        _shotTimer += Time.deltaTime;
+        Update_Inputs();
+    }
+
+    private void Update_Inputs()
     {
         // If Mouse's position is on Screen && Mouse0 is maintained >> Player follow MousePosition;
 
@@ -22,8 +32,30 @@ public class Player_Controller : MonoBehaviour
         
         if (Map.IsOnScreen(mousePosition) && Input.GetKey(KeyCode.Mouse0))
         {
-            this.gameObject.transform.position = Vector2.SmoothDamp(this.gameObject.transform.position, mousePosition + new Vector2(0, _offSet), ref _velocity, Time.deltaTime / _speed);
+            Move(mousePosition);
+
+            Shoot(); 
         }
     }
 
+    private void Move(Vector2 mousePosition)
+    {
+        this.gameObject.transform.position = Vector2.SmoothDamp(this.gameObject.transform.position, mousePosition + new Vector2(0, _offSet), ref _velocity, Time.deltaTime / _speed);
+    }
+
+    private void Shoot()
+    {
+        if (_shotTimer >= _shotTimerMax)
+        {
+            GameObject newShot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Shot"));
+            newShot.transform.position = this.transform.position + Vector3.up;
+            _shotTimer = 0;
+        }
+
+    }
+
+    private void ShootTimerOk()
+    {
+
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Controller : MonoBehaviour
+public class Enemy_Movement : MonoBehaviour
 {
     private List<Vector2> _allCheckPoints; public List<Vector2> AllCheckPoints { set => _allCheckPoints = value; }
     private int _checkPointIndex;
