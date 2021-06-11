@@ -26,8 +26,8 @@ public static class Map
     }
 
     // Enemy's check Points
-    private static int _checkPointDensityWidth = 6; public static int CheckPointDensityWidth { get => _checkPointDensityWidth; }
-    private static int _checkPointDensityHeight = 10; public static int CheckPointDensityHeight { get => _checkPointDensityHeight; }
+    private static int _checkPointDensityWidth = 10; public static int CheckPointDensityWidth { get => _checkPointDensityWidth; }
+    private static int _checkPointDensityHeight = 15; public static int CheckPointDensityHeight { get => _checkPointDensityHeight; }
 
     private static Vector2 _firstCheckPoint = new Vector2(-_width / 2 + .5f, _height / 2 - .5f);
     private static Vector2 _lastCheckPoint = new Vector2(_width / 2 - .5f, -_height / 2 + .5f);
