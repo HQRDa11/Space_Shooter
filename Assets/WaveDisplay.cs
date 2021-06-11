@@ -9,8 +9,6 @@ public class WaveDisplay : MonoBehaviour
     private Text _text;
     private RectTransform _rectTransform;
 
-    private float _currentCombo;
-
     private void Awake()
     {
         _instance = this;
@@ -19,7 +17,6 @@ public class WaveDisplay : MonoBehaviour
     {
         _text = GetComponent<Text>();
         _rectTransform = GetComponent<RectTransform>();
-        _currentCombo = 1;
     }
 
     private void Update()
