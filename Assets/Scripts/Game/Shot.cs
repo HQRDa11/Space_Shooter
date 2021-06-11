@@ -10,8 +10,8 @@ public class Shot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _lifeTime = 8;
-        _speed = 12;
+        _lifeTime = 3;
+        _speed = 16;
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class Shot : MonoBehaviour
         Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.GetComponent<Enemy_Health>().TakeDamage(10);
+            collision.GetComponent<Enemy_Health>().TakeDamage(3);
             GameObject.Destroy(this.gameObject);
         }
     }

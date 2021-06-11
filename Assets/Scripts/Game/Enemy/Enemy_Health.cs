@@ -7,6 +7,13 @@ public class Enemy_Health : MonoBehaviour
     private float _health;
     private float _maxHealth;
 
+    public void SetHealth( float max, float current)
+    {
+        Debug.Log(current);
+        _maxHealth = max;
+        _health = current;
+    }
+
     private void Start()
     {
         _maxHealth = 20;
@@ -15,7 +22,7 @@ public class Enemy_Health : MonoBehaviour
 
     private void Update()
     {
-        if (_health <= 0) GetComponent<Enemy_Manager>().DestroyFromHit();
+        if (_health <= 0) GetComponent<Enemy_OnDestruction>().DestroyFromHit();
     }
     public void TakeDamage(float damage)
     {
