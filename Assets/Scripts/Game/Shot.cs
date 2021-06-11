@@ -17,15 +17,17 @@ public class Shot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
         Update_LifeTime();
     }
 
-    private void Move()
+    private void FixedUpdate()
     {
-        {
-            this.transform.Translate(Vector3.up * _speed * Time.deltaTime);
-        }
+        Move();
+    }
+
+    private void Move()
+    {        
+        this.transform.Translate(Vector3.up * _speed * Time.deltaTime);       
     }
     private void Update_LifeTime()
     {

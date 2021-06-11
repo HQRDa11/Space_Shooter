@@ -9,24 +9,19 @@ public class Player_Controller : MonoBehaviour
    
     private Vector2 _velocity = Vector2.zero;
 
-
+    private Vector2 _mousePosition;
+    private bool _isMouseOnScreen;
     private void Update()
     {
-        Update_Inputs();
+        _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _isMouseOnScreen = Map.IsOnScreen(_mousePosition) && Input.GetKey(KeyCode.Mouse0) ? true : false;
+
+        if (_isMouseOnScreen) Shoot();
     }
 
-    private void Update_Inputs()
+    private void FixedUpdate()
     {
-        // If Mouse's position is on Screen && Mouse0 is maintained >> Player follow MousePosition;
-
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        if (Map.IsOnScreen(mousePosition) && Input.GetKey(KeyCode.Mouse0))
-        {
-            Move(mousePosition);
-
-            Shoot(); 
-        }
+        if (_isMouseOnScreen) Move(_mousePosition);
     }
 
     private void Move(Vector2 mousePosition)
