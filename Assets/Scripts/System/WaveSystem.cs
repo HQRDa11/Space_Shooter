@@ -8,22 +8,20 @@ public class WaveSystem : MonoBehaviour
 
     private List<Wave> _allWaves;
     private Wave _currentWave;
-    private int _currentWaveIndex;
+
+    [SerializeField]
+    private int _startAtWave;
+    private int _currentWaveIndex; public int CurrentWaveIndex { get => _currentWaveIndex; }
 
     private void Awake()
     {
         _instance = this;
 
         _allWaves = new List<Wave>();
-        _allWaves.Add(SetWaveOnDiffilculty(1));
-        //_allWaves.Add(SetWaveOnDiffilculty(2));
-        //_allWaves.Add(SetWaveOnDiffilculty(3));
-
-        //_allWaves.Add(new Wave(5, 2, .5f, 2, 2f, new int[6] { 0, 11, 12, 23, 24, 35 }, true));
-        //_allWaves.Add(new Wave(10, 1, .5f, 1, 3f, new int[6] { 1, 19, 4, 1, 22, 30 }, false));
+        _allWaves.Add(SetWaveOnDiffilculty(_startAtWave));
 
         _currentWave = _allWaves[0];
-        _currentWaveIndex = 1;
+        _currentWaveIndex = _startAtWave;
     }
     void Update()
     {
@@ -33,6 +31,8 @@ public class WaveSystem : MonoBehaviour
     public void NextWave()
     {
         _currentWaveIndex++;
+        WaveDisplay.Instance.PulseEffect();
+
         if(_currentWaveIndex % 5 > 0) _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5 + 1);
         else _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5 + 1); // <<< A REMPLACER
         // ELSE BossWave !!!
@@ -51,14 +51,6 @@ public class WaveSystem : MonoBehaviour
         for (int i = 0; i < checkPoints.Length; i++) checkPoints[i] = Random.Range(0, Map.CheckPointDensityWidth * Map.CheckPointDensityHeight - 1);
         bool mirror = true;
 
-        //Debug.Log("numberOfEnemy " + numberOfEnemy);
-        //Debug.Log("spawnPoint " + spawnPoint);
-        //Debug.Log("spawnDelay " + spawnDelay);
-        //Debug.Log("repeatTimes " + repeatTimes);
-        //Debug.Log("repeatFrenquency " + repeatFrenquency);
-        //Debug.Log("checkPoints lenght" + checkPoints.Length);
-        //Debug.Log("");
-
         return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror);
     }
 
@@ -72,7 +64,9 @@ public class WaveSystem : MonoBehaviour
         float repeatFrenquency = Random.Range(3f, 5f) / difficulty;
         int[] checkPoints = new int[Random.Range(3, 5) * difficulty];
         for (int i = 0; i < checkPoints.Length; i++) checkPoints[i] = Random.Range(0, Map.CheckPointDensityWidth * Map.CheckPointDensityHeight - 1);
-        bool mirror = (float)Random.Range(0, 100 / difficulty != 0 ? difficulty : 1) <= (float)100 / (float)difficulty ? false : true; Debug.Log("Mirror " + (float)Random.Range(0, 100 / difficulty));
+        bool mirror = Random.Range(0, 100) <= 100 / difficulty ? false : true; 
+        Debug.Log("Random " + (float)Random.Range(0, 100 / difficulty));
+        Debug.Log("Chance " + (100 / difficulty));
 
         return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror);
     }
