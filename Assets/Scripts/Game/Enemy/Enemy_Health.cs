@@ -8,6 +8,13 @@ public class Enemy_Health : MonoBehaviour
     [SerializeField]
     private float _maxHealth;
 
+    public void SetHealth( float max, float current)
+    {
+        Debug.Log(current);
+        _maxHealth = max;
+        _health = current;
+    }
+
     private void Start()
     {
         _maxHealth = EnemyBalance.HealthBalancing(_maxHealth);
@@ -16,7 +23,7 @@ public class Enemy_Health : MonoBehaviour
 
     private void Update()
     {
-        if (_health <= 0) GetComponent<Enemy_Manager>().DestroyFromHit();
+        if (_health <= 0) GetComponent<Enemy_OnDestruction>().DestroyFromHit();
     }
     public void TakeDamage(float damage)
     {
