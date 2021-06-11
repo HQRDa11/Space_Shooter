@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
+    [SerializeField]
     private float _lifeTime;
+    [SerializeField]
     private float _speed;
+    [SerializeField]
+    private float _damage;
 
     // Start is called before the first frame update
     void Start()
