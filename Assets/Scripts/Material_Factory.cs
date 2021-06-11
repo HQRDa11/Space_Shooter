@@ -23,7 +23,6 @@ public class Material_Factory
                 statusMaterials[2] = new Material(Resources.Load<Material>("Materials/Status/Green"));
                 statusMaterials[3] = new Material(Resources.Load<Material>("Materials/Status/White"));
 
-
     }
 
     public Material GetMaterial(Rarity color)
