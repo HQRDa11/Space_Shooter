@@ -39,14 +39,14 @@ public class ScoreDisplay : MonoBehaviour
         {
             _rectTransform.anchoredPosition += new Vector2(0, _offSet * Time.deltaTime);
         }
-        else if (_clock >= 2 && _clock < 2.5f)
+        else if (_clock >= 2 && _clock < 3f)
         {
             _text.text = "0";
             _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 0);
             _text.color += new Color(0, 0, 0, _opacity * Time.deltaTime);
             _rectTransform.anchoredPosition = Vector2.zero;
         }
-        else if (_clock >= 2.5f)
+        else if (_clock >= 3f)
         {
             _isStarted = true;
         }
