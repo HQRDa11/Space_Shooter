@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
+    [SerializeField]
     private float _lifeTime;
+    [SerializeField]
     private float _speed;
+    [SerializeField]
+    private float _damage;
 
     // Start is called before the first frame update
     void Start()
     {
         _lifeTime = 3;
         _speed = 16;
+        _damage = 3;
     }
 
     // Update is called once per frame
@@ -43,7 +48,7 @@ public class Shot : MonoBehaviour
         Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.GetComponent<Enemy_Health>().TakeDamage(3);
+            collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
             GameObject.Destroy(this.gameObject);
         }
     }
