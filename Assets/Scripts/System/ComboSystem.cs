@@ -13,7 +13,7 @@ public class ComboSystem : MonoBehaviour
     {
         _instance = this;
     }
-    public void Addcombo() { _currentCombo++; }
+    public void Addcombo() { _currentCombo++; ComboDisplay.Instance.PulseEffect(); }
     public void ResetCombo() { _currentCombo = 0; }
-    public int Multiplier(int score) { return score * _currentCombo; }
+    public int Multiplier(int score) { return score * (_currentCombo + 1); }
 }
