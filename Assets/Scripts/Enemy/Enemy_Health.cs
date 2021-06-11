@@ -5,11 +5,12 @@ using UnityEngine.UI;
 public class Enemy_Health : MonoBehaviour
 {
     private float _health;
+    [SerializeField]
     private float _maxHealth;
 
     private void Start()
     {
-        _maxHealth = 20;
+        _maxHealth = EnemyBalance.HealthBalancing(_maxHealth);
         _health = _maxHealth;
     }
 
