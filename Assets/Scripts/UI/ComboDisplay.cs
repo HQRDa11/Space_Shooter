@@ -16,10 +16,6 @@ public class ComboDisplay : MonoBehaviour
 
     private bool _isStarted;
     private float _clock;
-
-
-    private float _currentCombo;
-
     private void Awake()
     {
         _instance = this;
@@ -28,12 +24,11 @@ public class ComboDisplay : MonoBehaviour
     {
         _text = GetComponent<Text>();
         _rectTransform = GetComponent<RectTransform>();
-        _currentCombo = 1;
     }
 
     private void Update()
     {
-        if (_isStarted) ShowScore();
+        if (_isStarted) ShowCombo();
     }
 
     void FixedUpdate()
@@ -52,7 +47,7 @@ public class ComboDisplay : MonoBehaviour
         }
         else if (_clock >= 2 && _clock < 2.5f)
         {
-            _text.text = "x"+_currentCombo;
+            _text.text = "x0";
             _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 0);
             _text.color += new Color(0, 0, 0, _opacity * Time.deltaTime);
             _rectTransform.anchoredPosition = Vector2.zero + new Vector2(0,-135) ;
@@ -63,7 +58,7 @@ public class ComboDisplay : MonoBehaviour
         }
     }
 
-    private void ShowScore()
+    private void ShowCombo()
     {
         _text.text = "x" + ComboSystem.Instance.CurrentCombo.ToString();
     }
