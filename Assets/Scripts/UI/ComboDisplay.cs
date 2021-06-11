@@ -55,7 +55,7 @@ public class ComboDisplay : MonoBehaviour
             _text.text = "x"+_currentCombo;
             _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 0);
             _text.color += new Color(0, 0, 0, _opacity * Time.deltaTime);
-            _rectTransform.anchoredPosition = Vector2.zero + new Vector2(0,-120) ;
+            _rectTransform.anchoredPosition = Vector2.zero + new Vector2(0,-135) ;
         }
         else if (_clock >= 2.5f)
         {
