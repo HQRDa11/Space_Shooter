@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offSet: 90
-  _opacity: 80
+  _opacity: 32
 --- !u!114 &1144194307
 MonoBehaviour:
   m_ObjectHideFlags: 0
