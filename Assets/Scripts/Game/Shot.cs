@@ -16,6 +16,7 @@ public class Shot : MonoBehaviour
     {
         _lifeTime = 3;
         _speed = 16;
+        _damage = 3;
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class Shot : MonoBehaviour
         Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.GetComponent<Enemy_Health>().TakeDamage(3);
+            collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
             GameObject.Destroy(this.gameObject);
         }
     }
