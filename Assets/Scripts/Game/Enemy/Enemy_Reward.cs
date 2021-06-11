@@ -19,8 +19,7 @@ public class Enemy_Reward : MonoBehaviour
 
         if (Random.Range(0, 100) <= _lootChance)
         {
-            GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonus") );
-            bonusLoot.transform.position = gameObject.transform.position ;
+            GameObject.FindObjectOfType<Factory>().Bonus_Factory.InstantiateBonus(this.transform.position);
         };
     }
 }

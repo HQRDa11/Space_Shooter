@@ -6,6 +6,9 @@ public class Bonus : MonoBehaviour
 {
     private float _lifeTime;
     private float _speed;
+    private Rarity _rarity;
+
+    public Rarity Rarity { get => _rarity; set { _rarity = value; } }
 
     // Start is called before the first frame update
     void Start()
