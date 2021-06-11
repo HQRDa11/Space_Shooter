@@ -7,6 +7,8 @@ public class ComboSystem : MonoBehaviour
     private static ComboSystem _instance; public static ComboSystem Instance { get => _instance; }
 
     private int _currentCombo;
+    public int CurrentCombo { get => _currentCombo; }
+
     private void Awake()
     {
         _instance = this;
