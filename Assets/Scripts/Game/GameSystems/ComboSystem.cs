@@ -6,14 +6,25 @@ public class ComboSystem : MonoBehaviour
 {
     private static ComboSystem _instance; public static ComboSystem Instance { get => _instance; }
 
-    private int _currentCombo;
-    public int CurrentCombo { get => _currentCombo; }
+    [SerializeField]
+    private float _resetDelay;
+    private int _currentCombo; public int CurrentCombo { get => _currentCombo; }
+
+    private float _clock;
 
     private void Awake()
     {
         _instance = this;
+        _resetDelay = 2f;
+        _clock = 0;
     }
-    public void Addcombo() { _currentCombo++; ComboDisplay.Instance.PulseEffect(); }
+
+    private void Update()
+    {
+        _clock += Time.deltaTime;
+        if (_clock > _resetDelay) ResetCombo();
+    }
+    public void Addcombo() { _currentCombo++; ComboDisplay.Instance.PulseEffect(); _clock = 0; }
     public void ResetCombo() { _currentCombo = 0; }
     public int Multiplier(int score) { return score * (_currentCombo + 1); }
 }
