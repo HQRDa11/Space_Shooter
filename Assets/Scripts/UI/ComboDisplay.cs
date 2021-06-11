@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ComboDisplay : MonoBehaviour
 {
+    private static ComboDisplay _instance; public static ComboDisplay Instance { get => _instance; }
     private Text _text;
     private RectTransform _rectTransform;
 
@@ -19,6 +20,10 @@ public class ComboDisplay : MonoBehaviour
 
     private float _currentCombo;
 
+    private void Awake()
+    {
+        _instance = this;
+    }
     void Start()
     {
         _text = GetComponent<Text>();
@@ -34,6 +39,7 @@ public class ComboDisplay : MonoBehaviour
     void FixedUpdate()
     {
         if (!_isStarted) Initialize();
+        PulseEffectRevert();
     }
 
     private void Initialize()
@@ -61,4 +67,7 @@ public class ComboDisplay : MonoBehaviour
     {
         _text.text = "x" + ComboSystem.Instance.CurrentCombo.ToString();
     }
+
+    public void PulseEffect() { if(_text.fontSize < 110) _text.fontSize += 20; }
+    private void PulseEffectRevert() { if (_text.fontSize != 50) _text.fontSize -= 1; Debug.Log("Font size " + _text.fontSize); }
 }
