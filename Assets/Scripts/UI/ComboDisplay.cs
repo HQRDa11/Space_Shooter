@@ -69,5 +69,5 @@ public class ComboDisplay : MonoBehaviour
     }
 
     public void PulseEffect() { if(_text.fontSize < 110) _text.fontSize += 20; }
-    private void PulseEffectRevert() { if (_text.fontSize != 50) _text.fontSize -= 1; Debug.Log("Font size " + _text.fontSize); }
+    private void PulseEffectRevert() { if (_text.fontSize != 50) _text.fontSize -= 1; }
 }
