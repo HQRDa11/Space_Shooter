@@ -7,7 +7,7 @@ public class Enemy_Movement : MonoBehaviour
     private List<Vector2> _allCheckPoints; public List<Vector2> AllCheckPoints { set => _allCheckPoints = value; }
     private int _checkPointIndex;
     private Vector2 _direction;
-    private bool _isAtLastCheckPoint;
+    private bool _isAtLastCheckPoint; public bool IsAtLastCheckPoint { get => _isAtLastCheckPoint; }
     private int _number; public int Number { set => _number = value; }
 
     [SerializeField]
