@@ -19,7 +19,9 @@ public class Wave
     private List<GameObject> _allEnemies;
     private float _clock = 0;
 
-    public Wave(int numberOfEnemy, int spawnPoint, float spawnDelay, int repeatTimes, float repeatFrequency, int[] checkPoints, bool mirror)
+    private float _shotClock;
+    private float _shotFrequency;
+    public Wave(int numberOfEnemy, int spawnPoint, float spawnDelay, int repeatTimes, float repeatFrequency, int[] checkPoints, bool mirror, float shotFrequency)
     {
         _numberOfEnemy = numberOfEnemy;
         _spawnPoint = Map.SpawnIndexToPosition(spawnPoint);
@@ -32,11 +34,14 @@ public class Wave
 
         _enemyRemaining = _numberOfEnemy;
         _allEnemies = new List<GameObject>();
+
+        _shotFrequency = shotFrequency;
     }
     public void Update()
     {
         _allEnemies.RemoveAll(enemy => enemy == null);
         _clock += Time.deltaTime;
+
         if (_enemyRemaining > 0)
         {
             if (_clock >= _spawnDelay)
@@ -52,6 +57,8 @@ public class Wave
             _repeatTimes--;            
         }       
         else if (_allEnemies.Count == 0) WaveSystem.Instance.NextWave();
+
+        EnemyShot();
     }
 private void Spawn()
     {
@@ -77,5 +84,20 @@ private void Spawn()
             enemyReverse.GetComponent<Enemy_Movement>().Number = _allEnemies.IndexOf(enemyReverse);
         }
         _enemyRemaining--;
+    }
+
+    private void EnemyShot()
+    {
+        _shotClock += Time.deltaTime;
+
+        if(_shotClock >= _shotFrequency)
+        {
+            foreach(GameObject gameObject in _allEnemies)
+            {
+                gameObject.GetComponent<Enemy_Weapon>().Shoot();
+            }
+
+            _shotClock = 0;
+        }
     }
 }
