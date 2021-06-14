@@ -19,8 +19,5 @@ public class DebugDisplay : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(Map.CheckPointIndexToPosition(i), .5f);
         }
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Map.CheckPointIndexToPosition(35), 1);
     }
 }
