@@ -7,7 +7,6 @@ public class WaveDisplay : MonoBehaviour
 {
     private static WaveDisplay _instance; public static WaveDisplay Instance { get => _instance; }
     private Text _text;
-    private RectTransform _rectTransform;
 
     private void Awake()
     {
@@ -16,7 +15,6 @@ public class WaveDisplay : MonoBehaviour
     void Start()
     {
         _text = GetComponent<Text>();
-        _rectTransform = GetComponent<RectTransform>();
     }
 
     private void Update()
