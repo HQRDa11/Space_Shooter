@@ -9,7 +9,7 @@ public class Wave
     private float _spawnDelay;
 
     private float _repeatTimes;
-    private float _repeatFrenquency;
+    private float _repeatFrequency;
 
     private bool _mirror;
 
@@ -25,7 +25,7 @@ public class Wave
         _spawnPoint = Map.SpawnIndexToPosition(spawnPoint);
         _spawnDelay = spawnDelay;
         _repeatTimes = repeatTimes;
-        _repeatFrenquency = repeatFrequency;
+        _repeatFrequency = repeatFrequency;
         _mirror = mirror;
         _allCheckPoints = new List<Vector2>();
         foreach (int index in checkPoints) _allCheckPoints.Add(Map.CheckPointIndexToPosition(index));
@@ -45,18 +45,15 @@ public class Wave
                 Spawn();
             }
         }
-        else if (_allEnemies.Count == 0)
+        else if (_repeatTimes > 0 && _clock >= _repeatFrequency && _allEnemies.Count == 0)
         {
-            if(_repeatTimes > 0 && _clock >= _repeatFrenquency)
-            {
-                _clock = 0;
-                _enemyRemaining = _numberOfEnemy;
-                _repeatTimes--;
-            } 
-            else WaveSystem.Instance.NextWave();
+            _clock = 0;
+            _enemyRemaining = _numberOfEnemy;
+            _repeatTimes--;            
         }       
+        else if (_allEnemies.Count == 0) WaveSystem.Instance.NextWave();
     }
-    private void Spawn()
+private void Spawn()
     {
         GameObject enemy = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
         if (!enemy.GetComponent<Enemy>())
