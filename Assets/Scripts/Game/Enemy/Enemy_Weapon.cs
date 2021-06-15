@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Weapon : MonoBehaviour
 {
+    [SerializeField]
     private float _shotChance;
     public void Shoot()
     {
