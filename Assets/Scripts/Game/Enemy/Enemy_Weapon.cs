@@ -11,7 +11,7 @@ public class Enemy_Weapon : MonoBehaviour
         if(!GetComponent<Enemy_Movement>().IsAtLastCheckPoint) Debug.Log("The enemy fired !");
         else
         {
-            if(Random.Range(0, 100) < _shotChance) Debug.Log("The enemy fired !");
+            if(Random.Range(0, 100) < _shotChance) /*Debug.Log("The enemy fired !")*/;
         }
     }
 

@@ -13,7 +13,7 @@ public class Turret_Factory
 
     public Turret CreateTurret(Rarity rarity)
     {
-        Debug.Log("new turret rarity" + rarity);
+        //Debug.Log("new turret rarity" + rarity);
         switch (rarity)
         {
             case Rarity.WHITE:

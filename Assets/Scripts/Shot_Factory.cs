@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shot_Factory : MonoBehaviour
+public class Shot_Factory 
 {
     private GameObject _shotPrefab;
     public Shot_Factory()

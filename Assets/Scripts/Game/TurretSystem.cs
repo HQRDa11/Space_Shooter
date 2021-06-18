@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class TurretSystem : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class TurretSystem : MonoBehaviour
             m_allTurrets.Add(turret);
         }
 
+        ReorganiseTurrets();
         ResetAllTurretsOffsets();
     }
 
@@ -69,5 +71,45 @@ public class TurretSystem : MonoBehaviour
         {
             t.Update();
         }
+    }
+
+    public void ReorganiseTurrets()
+    {
+
+
+        List<Turret> orderedList = new List<Turret>();
+
+        while (m_allTurrets.Count > 0)
+        {
+            orderedList.Add(MinRarity());
+            m_allTurrets.Remove(MinRarity());
+        }
+
+        Turret[] arrayToReturn = new Turret[orderedList.Count];
+
+        for (int i = 0; i < orderedList.Count; i++)
+        {
+            if (i == 0) arrayToReturn[0] = orderedList[0];
+
+            else
+            {
+                if (i % 2 == 0) arrayToReturn[0 + i / 2] = orderedList[i];
+                else arrayToReturn[arrayToReturn.Length - 1 - i / 2] = orderedList[i];
+            }
+        }
+        m_allTurrets = arrayToReturn.ToList();
+    }
+
+    private Turret MinRarity()
+    {
+        Turret lowest = m_allTurrets[0];
+        foreach (Turret t in m_allTurrets)
+        {
+            if ( (int)t.Rarity <= (int)lowest.Rarity)
+            {
+                lowest = t;
+            }
+        }
+        return lowest;
     }
 }
