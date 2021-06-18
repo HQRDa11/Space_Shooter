@@ -14,36 +14,46 @@ public class TurretSystem : MonoBehaviour
 
     public void Initialise()
     {
-        ModifyNbOfTurret(1);
+        AddTurret(Factory.Instance.Turret_Factory.CreateTurret(Rarity.GREY));
     }
 
-    public void ModifyNbOfTurret(int modifier)
+    public void AddTurret(Turret turret)
     {
-        int totalTurret = m_allTurrets.Count + modifier;
-        m_allTurrets.Clear();
-
-        //float posX = -gameObject.transform.localScale.x / 2;
-        //float margin = gameObject.transform.localScale.x * ( 1 + 0.1f * totalTurret) / totalTurret;
-
-        float spacing =( 1f + 0.2f* totalTurret) / totalTurret;
-        float totalDistance = spacing * (totalTurret - 1);
-
-        for (int i = 0; i < totalTurret; i++)
+        bool replaced = false;
+        for (int i = 0; i < m_allTurrets.Count && replaced == false; i++)
         {
-            if(i == 0)
+            switch ( (int)turret.Rarity > (int)m_allTurrets[i].Rarity)
             {
-                float newXOffset = -totalDistance / 2;
-                Turret newTurret = new Turret(this.gameObject, newXOffset);
-                m_allTurrets.Add(newTurret);
+                case true:
+                    m_allTurrets[i] = turret;
+                    replaced = true;
+                    break;
+            }
+        }
+        if(!replaced)
+        {
+            m_allTurrets.Add(turret);
+        }
+
+        ResetAllTurretsOffsets();
+    }
+
+    public void ResetAllTurretsOffsets()
+    {
+        float spacing = (0.16f * m_allTurrets.Count) / m_allTurrets.Count;
+        float totalDistance = spacing * (m_allTurrets.Count - 1);
+
+        for (int i = 0; i < m_allTurrets.Count; i++)
+        {
+            if (i == 0)
+            {
+                m_allTurrets[i].setOffset(-totalDistance / 2);
             }
             else
             {
-                float newXOffset = -totalDistance / 2 + spacing * i;
-                Turret newTurret = new Turret(this.gameObject, newXOffset);
-                m_allTurrets.Add(newTurret);
+                m_allTurrets[i].setOffset(-totalDistance / 2 + spacing * i);
             }
         }
-
     }
 
     public void Shoot()

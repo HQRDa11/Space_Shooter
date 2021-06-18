@@ -15,13 +15,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T) == true)
         {
-            this.gameObject.GetComponent<TurretSystem>().ModifyNbOfTurret(1);
+            this.gameObject.GetComponent<TurretSystem>().AddTurret(Factory.Instance.Turret_Factory.CreateRandom());
         }
     }
 
-    public void OnBonus()
+    public void OnBonus(Rarity rarity)
     {
         Debug.Log("bonus on");
-        this.gameObject.GetComponent<TurretSystem>().ModifyNbOfTurret(1);
+        this.gameObject.GetComponent<TurretSystem>().AddTurret(Factory.Instance.Turret_Factory.CreateTurret(rarity));
     }
 }

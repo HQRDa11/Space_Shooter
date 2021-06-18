@@ -9,28 +9,36 @@ public class Turret
 
     private Transform _playerTransform;
 
+    private Rarity _rarity;
+    public Rarity Rarity { get=>_rarity; }
     private float _xOffset;
 
-    public Turret(GameObject player, float xOffset)
+    public Turret(Transform parent, float shotTimerMax, Rarity rarity )
     {
-        _shotTimerMax = 0.4f;
+        _shotTimerMax = shotTimerMax;
         _shotTimer = 0;
 
-        _playerTransform = player.transform;
-        _xOffset = xOffset;
+        _rarity = rarity;
+
+        _playerTransform = parent;
     }
 
     public void Update()
     {
+
         _shotTimer += Time.deltaTime;
     }
 
+    public void setOffset(float xOffset)
+    {
+        _xOffset = xOffset;
+    }
     public void Shoot()
     {
         if (_shotTimer >= _shotTimerMax)
         {
-            GameObject newShot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Shot"));
-            newShot.transform.position = _playerTransform.position + (Vector3.right * _xOffset) + Vector3.up;
+            GameObject newShot = Factory.Instance.Shot_Factory.CreateShot(_rarity);
+            newShot.transform.position = _playerTransform.position + (Vector3.right * _xOffset) + Vector3.up/2;
             _shotTimer = 0;
         }
     }

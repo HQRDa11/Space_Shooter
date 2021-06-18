@@ -44,7 +44,8 @@ public class Bonus : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().OnBonus();
+            Debug.Log("bonus rarity: " + _rarity);
+            collision.gameObject.GetComponent<Player>().OnBonus(_rarity);
             GameObject.Destroy(this.gameObject);
         }
     }

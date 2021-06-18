@@ -15,7 +15,9 @@ public class Bonus_Factory
         GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonus"));
         if (!bonusLoot.GetComponent<Bonus>()) { bonusLoot.AddComponent<Bonus>(); }
         bonusLoot.transform.position = position;
-        bonusLoot.GetComponent<SpriteRenderer>().material = GameObject.FindObjectOfType<Factory>().Material_Factory.GetMaterial((Rarity)Random.Range(0, (int)Rarity.Total));
+        Rarity rarity = (Rarity)Random.Range(0, (int)Rarity.Total);
+        bonusLoot.GetComponent<Bonus>().Rarity = rarity;
+        bonusLoot.GetComponent<SpriteRenderer>().material = GameObject.FindObjectOfType<Factory>().Material_Factory.GetMaterial(rarity);
         return bonusLoot.GetComponent<Bonus>();
     }
 

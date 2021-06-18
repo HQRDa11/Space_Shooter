@@ -16,7 +16,12 @@ public class Shot : MonoBehaviour
     {
         _lifeTime = 3;
         _speed = 16;
-        _damage = 3;
+        _damage = 10;
+    }
+
+    public void Initialise(float damage)
+    {
+        _damage = damage ;
     }
 
     // Update is called once per frame
@@ -45,7 +50,6 @@ public class Shot : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Enemy")
         {
             collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
