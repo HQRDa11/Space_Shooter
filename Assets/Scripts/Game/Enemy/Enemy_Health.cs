@@ -10,7 +10,6 @@ public class Enemy_Health : MonoBehaviour
 
     public void SetHealth( float max, float current)
     {
-        Debug.Log(current);
         _maxHealth = max;
         _health = current;
     }
