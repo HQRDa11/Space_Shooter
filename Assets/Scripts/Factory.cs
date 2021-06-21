@@ -19,6 +19,9 @@ public class Factory : MonoBehaviour
     private Shot_Factory _shotFactory;
     public Shot_Factory  Shot_Factory { get => _shotFactory; }
 
+    private Ship_Factory _shipFactory;
+    public Ship_Factory Ship_Factory { get => _shipFactory; }
+
     private void Awake()
     {
         _instance = this;
@@ -26,6 +29,7 @@ public class Factory : MonoBehaviour
         _bonusFactory = new Bonus_Factory();
         _turretFactory = new Turret_Factory();
         _shotFactory = new Shot_Factory();
+        _shipFactory = new Ship_Factory();
     }
 
     // Start is called before the first frame update

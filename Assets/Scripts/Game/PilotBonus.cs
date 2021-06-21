@@ -41,7 +41,7 @@ public class PilotBonus : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("New Pilot: ");
+            Debug.Log("New Pilot");
             collision.gameObject.GetComponent<Player>().OnPilotBonus();
             GameObject.Destroy(this.gameObject);
         }

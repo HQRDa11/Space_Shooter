@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ally : MonoBehaviour
+public class Ally 
 {
-    // Start is called before the first frame update
-    void Start()
+    private Ship m_ship;
+    public Ship Ship { get; }
+    public Ally(Ship ship)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_ship = ship;
     }
 }
