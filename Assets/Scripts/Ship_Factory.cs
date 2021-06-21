@@ -10,7 +10,7 @@ public class Ship_Factory
         _shipPrefab = Resources.Load<GameObject>("Prefabs/Ship1");
     }
 
-    public Ship CreateShip(GameObject parent, Vector2 relativePosition)
+    public Ship CreateAllyShip(GameObject parent, Vector2 relativePosition)
     {
         GameObject newShip = GameObject.Instantiate(_shipPrefab, parent.transform);
         newShip.transform.position = relativePosition;
@@ -18,6 +18,7 @@ public class Ship_Factory
         {
             newShip.AddComponent<Ship>();
         }
+        newShip.transform.localScale *= 0.8f;
         return newShip.GetComponent<Ship>();
     }
                 

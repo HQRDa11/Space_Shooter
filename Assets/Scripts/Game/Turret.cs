@@ -7,20 +7,15 @@ public class Turret
     private float _shotTimerMax;
     private float _shotTimer;
 
-    private Transform _playerTransform;
-
     private Rarity _rarity;
     public Rarity Rarity { get=>_rarity; }
-    private float _xOffset;
+    public Transform SlotTransform { get; set; }
 
-    public Turret(Transform parent, float shotTimerMax, Rarity rarity )
+    public Turret( float shotTimerMax, Rarity rarity )
     {
         _shotTimerMax = shotTimerMax;
         _shotTimer = 0;
-
         _rarity = rarity;
-
-        _playerTransform = parent;
     }
 
     public void Update()
@@ -29,16 +24,12 @@ public class Turret
         _shotTimer += Time.deltaTime;
     }
 
-    public void setOffset(float xOffset)
-    {
-        _xOffset = xOffset;
-    }
     public void Shoot()
     {
         if (_shotTimer >= _shotTimerMax)
         {
             GameObject newShot = Factory.Instance.Shot_Factory.CreateShot(_rarity);
-            newShot.transform.position = _playerTransform.position + (Vector3.right * _xOffset) + Vector3.up/2;
+            newShot.transform.position = (Vector2)SlotTransform.position + new Vector2(0f,0.1f) ;
             _shotTimer = 0;
         }
     }
