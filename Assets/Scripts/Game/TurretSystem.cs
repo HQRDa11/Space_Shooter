@@ -13,7 +13,7 @@ public class TurretSystem : MonoBehaviour
         m_allTurretSlots = new List<TurretSlot>();
         m_allTurretSlots = GetComponentsInChildren<TurretSlot>().ToList<TurretSlot>();
         Debug.Log("nbOfTurretSlots: " + m_allTurretSlots.Count);
-        AddTurret(Factory.Instance.Turret_Factory.CreateTurret(Rarity.PURPLE));
+        AddTurret(Factory.Instance.Turret_Factory.CreateTurret(Rarity.GREY));
     }
 
 

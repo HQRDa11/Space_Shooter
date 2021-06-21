@@ -8,7 +8,7 @@ public class TurretSlot : MonoBehaviour
     private Turret m_turret;
     public bool isFree { get; set; }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         isFree = true;
     }

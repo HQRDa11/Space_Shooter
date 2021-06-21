@@ -14,7 +14,7 @@ public class Shot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _lifeTime = 3;
+        _lifeTime = 2;
         _speed = 16;
         _damage = 10;
     }
