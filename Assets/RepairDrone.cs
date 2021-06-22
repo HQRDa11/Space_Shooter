@@ -46,7 +46,7 @@ public class RepairDrone : MonoBehaviour
 
     private void Update_Target()
     {
-        switch( _target == null || _target.HealthRatio >= 0.9f)
+        switch( _target == null || _target.HealthRatio >= 1f)
         {
             case true:
                 _target = NewTarget();
@@ -58,12 +58,12 @@ public class RepairDrone : MonoBehaviour
     }
     private Ship NewTarget()
     {
-        if (_player.Ship.HealthRatio < 0.9f) return _player.Ship;
+        if (_player.Ship.HealthRatio < 1) return _player.Ship;
         else
         {
             foreach(Ally ally in _player.AllAllies)
             {
-                if (ally.Ship.HealthRatio < 0.9f)
+                if (ally.Ship.HealthRatio < 1)
                 {
                     return ally.Ship;
                 }

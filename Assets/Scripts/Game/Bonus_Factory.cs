@@ -15,37 +15,37 @@ public class Bonus_Factory
     {
         int luck = Random.Range(0, 100);
 
-        if ( luck <= 30 )
+        if ( luck <= 25 )
         {
             Instantiate_TurretBonus(position, Rarity.GREY);
                 return;
         }
-        else if ( luck <= 55 )
+        else if ( luck <= 45 )
         {
             Instantiate_TurretBonus(position, Rarity.WHITE);
             return;
         }
-        else if ( luck <= 70 )
+        else if ( luck <= 57 )
         {
             Instantiate_TurretBonus(position, Rarity.GREEN);
             return;
         }
-        else if ( luck <= 78 )
+        else if ( luck <= 63 )
         {
             Instantiate_TurretBonus(position, Rarity.BLUE);
             return;
         }        
-        else if ( luck <= 83 )
+        else if ( luck <= 68 )
         {
             Instantiate_TurretBonus(position, Rarity.PURPLE);
             return;
         }
-        else if (luck <= 85)
+        else if (luck <= 70)
         {
             Instantiate_TurretBonus(position, Rarity.ORANGE);
             return;
         }  
-        else if (luck <= 95)
+        else if (luck <= 90)
         {
             Instantiate_RepairBonus(position);
             return;
