@@ -58,7 +58,7 @@ public class WaveSystem : MonoBehaviour
     private Wave SetWaveOnDiffilculty(int difficulty)
     {
         //Debug.Log(difficulty);
-        int numberOfEnemy = Random.Range(4, 8) * difficulty;
+        int numberOfEnemy = (int)(Random.Range(5, 10) * Mathf.Sqrt(difficulty));
         int spawnPoint = Random.Range(0, Map.SpawnDensity - 1);
         float spawnDelay = Random.Range(.5f, 2f) / difficulty;
         int repeatTimes = Random.Range(0, 1) * difficulty;
