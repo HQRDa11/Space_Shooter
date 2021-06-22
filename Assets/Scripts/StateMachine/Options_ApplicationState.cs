@@ -5,8 +5,8 @@ using UnityEngine;
 public class Options_ApplicationState : ApplicationState
 {
     private float tempTimer = 5;
-    public Options_ApplicationState()
-        : base()
+    public Options_ApplicationState(string name)
+        : base(name)
     {
         m_type = ApplicationState_Type.OPTIONS;
     }
@@ -14,7 +14,7 @@ public class Options_ApplicationState : ApplicationState
     public override void update()
     {
         base.update();
-        Debug.Log("I am state." + m_type + " and I just updated! ");
+        GameObject.FindGameObjectWithTag("ApplicationState").name = "state - Options";
         tempTimer -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0)) { tempTimer = 0; }
     }

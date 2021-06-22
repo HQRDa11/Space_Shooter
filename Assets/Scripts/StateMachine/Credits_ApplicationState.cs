@@ -5,8 +5,8 @@ using UnityEngine;
 public class Credits_ApplicationState : ApplicationState
 {
     private float tempTimer = 5;
-    public Credits_ApplicationState()
-        : base()
+    public Credits_ApplicationState(string name)
+        : base(name)
     {
 
         m_type = ApplicationState_Type.CREDITS;

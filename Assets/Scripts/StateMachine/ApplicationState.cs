@@ -7,9 +7,9 @@ public class ApplicationState
     protected ApplicationState_Type m_type;
     public ApplicationState_Type Type { get {return m_type; } }
 
-    public ApplicationState()
+    public ApplicationState(string name)
     {
-       
+        GameObject.FindGameObjectWithTag("ApplicationState").name = name;
     }
     
     public virtual void update()

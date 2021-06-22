@@ -12,7 +12,7 @@ public class Application_StateMachine : MonoBehaviour
     public void Awake()
     {
         m_states = new List<ApplicationState>();
-        m_states.Add(new Intro_ApplicationState());
+        m_states.Add(new Intro_ApplicationState("State_Intro"));
         m_currentState = m_states[0];
     }
 
@@ -37,7 +37,7 @@ public class Application_StateMachine : MonoBehaviour
                 {
                     case ApplicationState_Type.MAINMENU:
                         EndCurrentState();
-                        SetCurrentState(new MainMenu_ApplicationState());
+                        SetCurrentState(new MainMenu_ApplicationState("State_MainMenu"));
                         isSwitch = true;
                         break;
                 }
@@ -50,26 +50,26 @@ public class Application_StateMachine : MonoBehaviour
                 {
                     case ApplicationState_Type.GAME:
                         EndCurrentState();
-                        SetCurrentState(new Game_ApplicationState());
+                        SetCurrentState(new Game_ApplicationState("State_Game"));
                         isSwitch = true;
                         break;
 
                     case ApplicationState_Type.OPTIONS:
                         EndCurrentState();
-                        SetCurrentState(new Options_ApplicationState());
+                        SetCurrentState(new Options_ApplicationState("State_Options"));
                         isSwitch = true;
                         break;
 
                     case ApplicationState_Type.CREDITS:
                         EndCurrentState();
-                        SetCurrentState(new Credits_ApplicationState());
+                        SetCurrentState(new Credits_ApplicationState("State_Credits"));
                         isSwitch = true;
                         break;
 
                     case ApplicationState_Type.QUIT:
                         EndCurrentState();
                         //for each states s in m_states s.end?
-                        SetCurrentState(new Quit_ApplicationState());
+                        SetCurrentState(new Quit_ApplicationState("State_Quit"));
                         isSwitch = true;
                         break;
                 }
@@ -81,7 +81,7 @@ public class Application_StateMachine : MonoBehaviour
                 switch (stateResquest)
                 {
                     case ApplicationState_Type.PAUSE:
-                        SetCurrentState(new InGameMenu_ApplicationState());
+                        SetCurrentState(new Pause_ApplicationState("State_Pause"));
                         isSwitch = true;
                         break;
                 }
@@ -99,14 +99,14 @@ public class Application_StateMachine : MonoBehaviour
                     case ApplicationState_Type.MAINMENU:
                         PopCurrentState();
                         EndCurrentState();
-                        SetCurrentState(new MainMenu_ApplicationState());
+                        SetCurrentState(new MainMenu_ApplicationState("State_MainMenu"));
                         isSwitch = true;
                         break;
 
                     case ApplicationState_Type.QUIT:
                         PopCurrentState();
                         EndCurrentState();
-                        SetCurrentState(new Quit_ApplicationState());
+                        SetCurrentState(new Quit_ApplicationState("State_Quit"));
                         isSwitch = true;
                         break;
                 }
@@ -118,7 +118,7 @@ public class Application_StateMachine : MonoBehaviour
                 {
                     case ApplicationState_Type.MAINMENU:
                         EndCurrentState();
-                        SetCurrentState(new MainMenu_ApplicationState());
+                        SetCurrentState(new MainMenu_ApplicationState("State_MainMenu"));
                         isSwitch = true;
                         break;
                 }
@@ -131,7 +131,7 @@ public class Application_StateMachine : MonoBehaviour
                     case ApplicationState_Type.MAINMENU:
 
                         EndCurrentState();
-                        SetCurrentState(new MainMenu_ApplicationState());
+                        SetCurrentState(new MainMenu_ApplicationState("State_MainMenu"));
                         isSwitch = true;
                         break;
                 }

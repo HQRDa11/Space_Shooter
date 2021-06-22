@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MainMenu_ApplicationState : ApplicationState
 {
-    public MainMenu_ApplicationState() 
-        : base()
+    public MainMenu_ApplicationState(string name) 
+        : base(name)
     {
         m_type = ApplicationState_Type.MAINMENU;
     }

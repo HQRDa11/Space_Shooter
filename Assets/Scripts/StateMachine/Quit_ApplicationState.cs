@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Quit_ApplicationState : ApplicationState
 {
-    public Quit_ApplicationState()
-        : base()
+    public Quit_ApplicationState(string name)
+        : base(name)
     {
         m_type = ApplicationState_Type.QUIT;
     }

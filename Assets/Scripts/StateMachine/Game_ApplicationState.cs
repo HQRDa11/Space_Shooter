@@ -5,8 +5,8 @@ using UnityEngine;
 public class Game_ApplicationState : ApplicationState
 {
 
-    public Game_ApplicationState()
-        : base()
+    public Game_ApplicationState(string name)
+        : base(name)
     {
         m_type = ApplicationState_Type.GAME;
     }
@@ -14,8 +14,6 @@ public class Game_ApplicationState : ApplicationState
     public override void update()
     {
         base.update();
-
-        //Debug.Log("I am state." + m_type + " and I just updated! ");
     }
 
     public override void end()

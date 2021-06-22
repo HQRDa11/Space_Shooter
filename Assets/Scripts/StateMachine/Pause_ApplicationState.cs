@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameMenu_ApplicationState : ApplicationState
+public class Pause_ApplicationState : ApplicationState
 {
-    public InGameMenu_ApplicationState()
-        : base()
+    public Pause_ApplicationState(string name)
+        : base(name)
     {
 
         m_type = ApplicationState_Type.PAUSE;
@@ -14,7 +14,6 @@ public class InGameMenu_ApplicationState : ApplicationState
     public override void update()
     {
         base.update();
-        Debug.Log("I am state." + m_type + " and I just updated! ");
     }
 
     public override void end()
