@@ -8,7 +8,6 @@ public class Credits_ApplicationState : ApplicationState
     public Credits_ApplicationState(string name)
         : base(name)
     {
-
         m_type = ApplicationState_Type.CREDITS;
     }
 
