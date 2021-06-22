@@ -64,11 +64,11 @@ public class Shot : MonoBehaviour
                 return;
 
             case "Enemy":
-                if (collision.gameObject.tag == "Player")
+                if (collision.gameObject.tag == "PlayerShip")
                 {
 
-                    //collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
-                    //GameObject.Destroy(this.gameObject);
+                    collision.GetComponent<Ship>().TakeDamage(_damage);
+                    GameObject.Destroy(this.gameObject);
                 }
                 return;
             default:

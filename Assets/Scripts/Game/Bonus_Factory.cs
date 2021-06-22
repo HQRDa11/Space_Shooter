@@ -15,34 +15,39 @@ public class Bonus_Factory
     {
         int luck = Random.Range(0, 100);
 
-        if ( luck <= 35 )
+        if ( luck <= 30 )
         {
             Instantiate_TurretBonus(position, Rarity.GREY);
                 return;
         }
-        else if ( luck <= 60 )
+        else if ( luck <= 55 )
         {
             Instantiate_TurretBonus(position, Rarity.WHITE);
             return;
         }
-        else if ( luck <= 75 )
+        else if ( luck <= 70 )
         {
             Instantiate_TurretBonus(position, Rarity.GREEN);
             return;
         }
-        else if ( luck <= 83 )
+        else if ( luck <= 78 )
         {
             Instantiate_TurretBonus(position, Rarity.BLUE);
             return;
         }        
-        else if ( luck <= 87 )
+        else if ( luck <= 83 )
         {
             Instantiate_TurretBonus(position, Rarity.PURPLE);
             return;
         }
-        else if (luck <= 89)
+        else if (luck <= 85)
         {
             Instantiate_TurretBonus(position, Rarity.ORANGE);
+            return;
+        }  
+        else if (luck <= 95)
+        {
+            Instantiate_RepairBonus(position);
             return;
         }
         else 
@@ -67,5 +72,12 @@ public class Bonus_Factory
         if (!bonusLoot.GetComponent<PilotBonus>()) { bonusLoot.AddComponent<PilotBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<PilotBonus>();
+    }
+    public RepairBonus Instantiate_RepairBonus(Vector2 position)
+    {
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairBonus"));
+        if (!bonusLoot.GetComponent<RepairBonus>()) { bonusLoot.AddComponent<RepairBonus>(); }
+        bonusLoot.transform.position = position;
+        return bonusLoot.GetComponent<RepairBonus>();
     }
 }

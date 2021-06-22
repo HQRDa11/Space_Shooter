@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - HealthBar
+  - PlayerShip
   layers:
   - Default
   - TransparentFX

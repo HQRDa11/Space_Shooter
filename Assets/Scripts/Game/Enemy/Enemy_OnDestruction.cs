@@ -8,6 +8,11 @@ public class Enemy_OnDestruction : MonoBehaviour
     {
         GetComponent<Enemy_Reward>().GetReward();
         ComboSystem.Instance.Addcombo();
+
+        GameObject explosion = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Explosion"));
+        explosion.transform.position = this.gameObject.transform.position;
+
+
         Destroy(gameObject);
     }
 

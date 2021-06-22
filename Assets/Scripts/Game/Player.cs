@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Ship m_ship; // not done yet
-
+    private Ship m_ship;
+    public Ship Ship { get => m_ship; }
+    
     // Ally system
     private List<Ally> m_allAllies;
+    public List<Ally> AllAllies { get => m_allAllies; }
     private int m_maxAllies;
 
     // Start is called before the first frame update
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
         m_maxAllies = 4;
 
         m_ship = GetComponentInChildren<Ship>();
+        m_ship.Initialise(0, 200);
     }
 
     // Update is called once per frame
@@ -25,6 +28,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T) == true)
         {
             OnPilotBonus();
+        }
+        if (Input.GetKeyDown(KeyCode.U) == true)
+        {
+            OnRepairBonus();
         }
     }
 
@@ -64,7 +71,7 @@ public class Player : MonoBehaviour
     {
         if (m_allAllies.Count < m_maxAllies)
         {
-            Ship newShip = Factory.Instance.Ship_Factory.CreateAllyShip(this.gameObject, GetRelativeAllyPosition());
+            Ship newShip = Factory.Instance.Ship_Factory.CreateAllyShip(this.gameObject, GetRelativeAllyPosition(),m_allAllies.Count+1,200);
             Ally newAlly = new Ally(newShip);
             m_allAllies.Add(newAlly);
         }
@@ -87,5 +94,10 @@ public class Player : MonoBehaviour
                 Debug.LogError("Undefined possibility");
                 return Vector2.zero;
         }
+    }
+
+    public void OnRepairBonus()
+    {
+        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"));
     }
 }
