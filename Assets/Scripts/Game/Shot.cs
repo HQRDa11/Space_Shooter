@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
-    [SerializeField]
-    private float _lifeTime;
+
     [SerializeField]
     private float _speed;
     [SerializeField]
     private float _damage;
 
+    private Vector2 _direction;
+
     // Start is called before the first frame update
     void Start()
     {
-        _lifeTime = 2;
-        _speed = 16;
         _damage = 10;
     }
 
-    public void Initialise(float damage)
+    public void Initialise(int damage, Vector2 direction, float speed)
     {
         _damage = damage ;
+        _direction = direction;
+        _speed = speed;
+        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(_direction.x, -_direction.y)) * 180 / Mathf.PI;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Update_LifeTime();
+       if (!Map.IsOnScreen(this.transform.position))
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -36,24 +41,39 @@ public class Shot : MonoBehaviour
     }
 
     private void Move()
-    {        
-        this.transform.Translate(Vector3.up * _speed * Time.deltaTime);       
-    }
-    private void Update_LifeTime()
     {
-        _lifeTime -= Time.deltaTime;
-        if (_lifeTime <= 0)
-        {
-            GameObject.Destroy(this.gameObject);
-        }
+        //this.transform.Translate( _direction * _speed * Time.deltaTime);
+        this.transform.position += (Vector3)_direction * _speed * Time.deltaTime;
     }
+
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        switch (gameObject.tag)
         {
-            collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
-            GameObject.Destroy(this.gameObject);
+            case "Player":
+                if (collision.gameObject.tag == "Enemy")
+                {
+                    if (collision.GetComponent<Enemy_Health>())
+                    {
+                        collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
+                        GameObject.Destroy(this.gameObject);
+                    }
+                   
+                }
+                return;
+
+            case "Enemy":
+                if (collision.gameObject.tag == "Player")
+                {
+
+                    //collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
+                    //GameObject.Destroy(this.gameObject);
+                }
+                return;
+            default:
+                Debug.Log("Unkown Exception");
+                break;
         }
     }
 }

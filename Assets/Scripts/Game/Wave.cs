@@ -94,7 +94,7 @@ private void Spawn()
         {
             foreach(GameObject gameObject in _allEnemies)
             {
-                gameObject.GetComponent<Enemy_Weapon>().Shoot();
+                gameObject.GetComponent<Enemy_Weapon>().TryShooting();
             }
 
             _shotClock = 0;

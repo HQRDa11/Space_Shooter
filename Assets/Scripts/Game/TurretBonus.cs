@@ -44,9 +44,12 @@ public class TurretBonus : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("bonus rarity: " + _rarity);
-            collision.gameObject.GetComponent<Player>().OnTurretBonus(_rarity);
-            GameObject.Destroy(this.gameObject);
+            if (collision.gameObject.GetComponent<Player>())
+            {
+                Debug.Log("bonus rarity: " + _rarity);
+                collision.gameObject.GetComponent<Player>().OnTurretBonus(_rarity);
+                GameObject.Destroy(this.gameObject);
+            }
         }
     }
 }

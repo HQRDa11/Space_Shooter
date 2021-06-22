@@ -21,6 +21,7 @@ public class TurretSlot : MonoBehaviour
             case true:
                 m_turret = turret;
                 m_turret.SlotTransform = this.gameObject.transform;
+                this.gameObject.GetComponentInChildren<SpriteRenderer>().color = Factory.Instance.Material_Factory.GetMaterial(m_turret.Rarity).color;
                 isFree = false;
                 return true;
 
@@ -29,8 +30,11 @@ public class TurretSlot : MonoBehaviour
                 {
 
                     case true:
+                        Rarity replaced = m_turret.Rarity;
                         m_turret = turret;
                         m_turret.SlotTransform = this.gameObject.transform;
+                        this.gameObject.GetComponentInChildren<SpriteRenderer>().color = Factory.Instance.Material_Factory.GetMaterial(m_turret.Rarity).color;
+                        GameObject.Find("Player").GetComponent<Player>().OnTurretBonus(replaced);
                         return true;
 
                     case false:

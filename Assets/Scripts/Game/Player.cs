@@ -80,9 +80,9 @@ public class Player : MonoBehaviour
             case 2:
                 return (Vector2)this.gameObject.transform.position + new Vector2(-pos,   -pos/2);
             case 3:
-                return (Vector2)this.gameObject.transform.position + new Vector2( pos*2, -pos/2);
+                return (Vector2)this.gameObject.transform.position + new Vector2( pos*1.8f, -pos);
             case 4:
-                return (Vector2)this.gameObject.transform.position + new Vector2(-pos*2, -pos/2);
+                return (Vector2)this.gameObject.transform.position + new Vector2(-pos*1.8f, -pos);
             default:
                 Debug.LogError("Undefined possibility");
                 return Vector2.zero;

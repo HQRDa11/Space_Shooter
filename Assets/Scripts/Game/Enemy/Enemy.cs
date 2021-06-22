@@ -11,4 +11,5 @@ public class Enemy : MonoBehaviour
         this.gameObject.GetComponent<Enemy_Weapon>().SetShotChance(EnemyBalance.ShotChanceBalancing(20));
     }
 
+
 }

@@ -28,7 +28,7 @@ public class Turret
     {
         if (_shotTimer >= _shotTimerMax)
         {
-            GameObject newShot = Factory.Instance.Shot_Factory.CreateShot(_rarity);
+            GameObject newShot = Factory.Instance.Shot_Factory.CreateShot(_rarity,Vector2.up,12f,"Player");
             newShot.transform.position = (Vector2)SlotTransform.position + new Vector2(0f,0.1f) ;
             _shotTimer = 0;
         }

@@ -7,7 +7,6 @@ public class TurretSystem : MonoBehaviour
 {
     private List<TurretSlot> m_allTurretSlots;
 
-
     private void Start()
     {
         m_allTurretSlots = new List<TurretSlot>();
