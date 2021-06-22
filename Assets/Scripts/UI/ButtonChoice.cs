@@ -37,6 +37,7 @@ public class ButtonChoice
         rect.sizeDelta = new Vector2(160, 30);
         rect.localScale = new Vector3(1, 1, 1);
 
+        //button.GetComponent<Image>().sprite = Resources.Load("Sprites/UI/Rectangle") as Sprite;
         button.GetComponent<Image>().color = colorButton;
         m_button = button.GetComponent<Button>();
 
@@ -47,7 +48,7 @@ public class ButtonChoice
         Text text = textGO.GetComponent<Text>();
         text.text = name;
         text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-        text.fontSize = 14;
+        text.fontSize = 32;
         text.alignment = TextAnchor.MiddleCenter;
         text.color = colorText;
 

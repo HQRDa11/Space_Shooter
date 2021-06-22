@@ -8,6 +8,8 @@ public class MainMenu_ApplicationState : ApplicationState
         : base(name)
     {
         m_type = ApplicationState_Type.MAINMENU;
+
+        ButtonsPanel newPanel = new ButtonsPanel(this.m_gameObject, "MAIN MENU", 32,new string[]{ "Play", "Options", "Credits", "Quit" }, new Color32(32,32,32,255),Color.white);
     }
 
     public override void update()
