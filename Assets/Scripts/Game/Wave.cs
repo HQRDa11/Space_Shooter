@@ -13,7 +13,7 @@ public class Wave
 
     private bool _mirror;
 
-    private List<Vector2> _allCheckPoints;
+    private List<Vector2> _allCheckPoints; public List<Vector2> AllCheckPoints { get => _allCheckPoints; } // <<<< Remplacer par class de List de checkpoints dans wave system
 
     private int _enemyRemaining;
     private List<GameObject> _allEnemies;
@@ -67,7 +67,7 @@ private void Spawn()
         {
             enemy.AddComponent<Enemy>();
         }
-        enemy.GetComponent<Enemy>().Initialise(Random.Range(1 , 10));
+        //enemy.GetComponent<Enemy>().Initialise(Random.Range(1 , 10));
         _allEnemies.Add(enemy);
         enemy.transform.position = _spawnPoint;
         enemy.GetComponent<Enemy_Movement>().AllCheckPoints = _allCheckPoints;
