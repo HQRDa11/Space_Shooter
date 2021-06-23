@@ -40,8 +40,8 @@ public class Enemy_Movement : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.position = Vector2.SmoothDamp(transform.position, Map.CheckPointIndexToPosition(_number), ref velocity, _smoothing * Time.deltaTime * _speed);  
-            transform.eulerAngles = Vector3.zero;
-            transform.GetChild(0).localEulerAngles = Vector3.zero;
+            transform.eulerAngles = new Vector3(0, 0, 180);
+            transform.GetChild(0).localEulerAngles = new Vector3(0,0,180);
         }
     }
 
@@ -57,7 +57,7 @@ public class Enemy_Movement : MonoBehaviour
 
     private void Rotation()
     {
-        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(_direction.x, -_direction.y)) * 180 / Mathf.PI;
-        transform.GetChild(0).localEulerAngles = new Vector3(0, 0, -Mathf.Atan2(_direction.x, -_direction.y)) * 180 / Mathf.PI;
+        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(-_direction.x, _direction.y)) * 180 / Mathf.PI;
+        transform.GetChild(0).localEulerAngles = new Vector3(0, 0, -Mathf.Atan2(-_direction.x, _direction.y)) * 180 / Mathf.PI;
     }
 }

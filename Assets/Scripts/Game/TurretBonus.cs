@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bonus : MonoBehaviour
+public class TurretBonus : MonoBehaviour
 {
     private float _lifeTime;
     private float _speed;
@@ -44,8 +44,12 @@ public class Bonus : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().OnBonus();
-            GameObject.Destroy(this.gameObject);
+            if (collision.gameObject.GetComponent<Player>())
+            {
+                Debug.Log("bonus rarity: " + _rarity);
+                collision.gameObject.GetComponent<Player>().OnTurretBonus(_rarity);
+                GameObject.Destroy(this.gameObject);
+            }
         }
     }
 }

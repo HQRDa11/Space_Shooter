@@ -31,7 +31,7 @@ public class Player_Controller : MonoBehaviour
 
     private void Shoot()
     {
-        gameObject.GetComponent<TurretSystem>().Shoot();
+        gameObject.GetComponent<Player>().Shoot();
     }
 
 }
