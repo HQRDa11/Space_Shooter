@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour
     private Wave _wave;
 
     // GAMEOBJECT
-    private GameObject _gameObject;
-    private Transform _transform;
     private Rigidbody2D _rigidbody2D;
 
     // HEALTH
@@ -44,14 +42,12 @@ public class Enemy : MonoBehaviour
         _index = index;
         _wave = wave;
 
-        _gameObject =           this.gameObject;
-        _transform =            _gameObject.transform;
-        _rigidbody2D =          _transform.GetComponent<Rigidbody2D>();
+        _rigidbody2D =          transform.GetComponent<Rigidbody2D>();
 
         _healthBehaviour =      data.HealthBehaviour;
         _maxHealth =            EnemyBalance.HealthBalancing(data.Health);
         _currentHealth =        _maxHealth;
-        _healthBarTransform =   _transform.Find("CanvasRotationPoint");
+        _healthBarTransform =   transform.Find("CanvasRotationPoint");
         _healthBarImage =       _healthBarTransform.GetComponentInChildren<Image>();
 
         _movementBehaviour =    data.MovementBehaviour;
@@ -99,8 +95,6 @@ public class Enemy : MonoBehaviour
     public Wave Wave { get => _wave; }
 
     // GameObject
-    public GameObject GameObject { get => _gameObject; }
-    public Transform Transform { get => _transform; }
     public Rigidbody2D Rigidbody2D { get => _rigidbody2D; }
 
     // Health
