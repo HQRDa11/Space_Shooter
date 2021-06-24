@@ -7,16 +7,17 @@ public class Enemy_Movement_MoveToIndexPosition : Enemy_Behaviours.Movement
     public void Move(Enemy enemy)
     {
         enemy.Rigidbody2D.velocity = Vector2.zero;
-        enemy.Transform.position = Vector2.SmoothDamp(
-            enemy.Transform.position,
+        
+        enemy.transform.position = Vector2.SmoothDamp(
+            enemy.transform.position,
             Map.CheckPointIndexToPosition(enemy.Index),
             ref _velocity,
-            enemy.SmoothingSpeed) * Time.deltaTime * enemy.MoveSpeed;
-        enemy.Transform.eulerAngles = Vector3.zero;
+            enemy.SmoothingSpeed * Time.deltaTime * enemy.MoveSpeed);
     }
     public void Rotation(Enemy enemy)
     {
-        enemy.HealthBarTransform.localEulerAngles = Vector3.zero;
+        enemy.transform.eulerAngles = new Vector3(0, 0, 180);
+        enemy.HealthBarTransform.localEulerAngles = new Vector3(0, 0, 180);
     }
     public Enemy_Behaviours.Movement GetNextBehaviour()
     {

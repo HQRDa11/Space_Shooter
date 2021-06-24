@@ -23,12 +23,13 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed; 
     private float _smoothingSpeed; 
     private float _wireRadius;
+    public int _checkPointIndex = 0;
 
     // DEATH
     private Enemy_Behaviours.Death _deathBehaviour;
 
     // REWARD
-    private Enemy_Behaviours.Reward _rewarBehaviour;
+    private Enemy_Behaviours.Reward _rewardBehaviour;
     private float _scoreReward;
     private float _lootchance;
 
@@ -47,7 +48,7 @@ public class Enemy : MonoBehaviour
         _healthBehaviour =      data.HealthBehaviour;
         _maxHealth =            EnemyBalance.HealthBalancing(data.Health);
         _currentHealth =        _maxHealth;
-        _healthBarTransform =   transform.Find("CanvasRotationPoint");
+        _healthBarTransform =   transform.Find("Canvas rotation point");
         _healthBarImage =       _healthBarTransform.GetComponentInChildren<Image>();
 
         _movementBehaviour =    data.MovementBehaviour;
@@ -57,7 +58,7 @@ public class Enemy : MonoBehaviour
 
         _deathBehaviour =       data.DeathBehaviour;
 
-        _rewarBehaviour =       data.RewardBehaviour;
+        _rewardBehaviour =      data.RewardBehaviour;
         _scoreReward =          data.ScoreReward;
         _lootchance =           data.LootChance;
 
@@ -75,18 +76,46 @@ public class Enemy : MonoBehaviour
         _movementBehaviour.Move(this);
         _movementBehaviour.Rotation(this);   
     }
+    public void TakeDamage(float damage)
+    {
+        _currentHealth += _healthBehaviour.TakeDamage(damage);
+    }
+    public void Shoot()
+    {
+        _weaponBehaviour.Shoot(this);
+    }
+    public void OnDestruction()
+    {
+        _deathBehaviour.OnDestruction(this);
+    }
+
+    // BEHAVIOUR SETTERS
+
     public void SetNextMovementBehaviour()
     {
         Enemy_Behaviours.Movement next = _movementBehaviour.GetNextBehaviour();
         if (next != null) _movementBehaviour = next;
+        Debug.Log("Movement Behaviour Changed ! Is now > " + _movementBehaviour.ToString());
     }
     public void SetMovementBehaviour(Enemy_Behaviours.Movement movementBehaviour)
     {
         _movementBehaviour = movementBehaviour;
     }
-    public void TakeDamage(float damage)
+    public void SetHealthBehaviour(Enemy_Behaviours.Health healthBehaviour)
     {
-        _currentHealth += _healthBehaviour.TakeDamage(damage);
+        _healthBehaviour = healthBehaviour;
+    }
+    public void SetDeathBehaviour(Enemy_Behaviours.Death deathBehaviour)
+    {
+        _deathBehaviour = deathBehaviour;
+    }
+    public void SetRewardBehaviour(Enemy_Behaviours.Reward rewardBehaviour)
+    {
+        _rewardBehaviour = rewardBehaviour;
+    }
+    public void SetWeaponBehaviour(Enemy_Behaviours.Weapon weaponBehaviour)
+    {
+        _weaponBehaviour = weaponBehaviour;
     }
 
     // ACCESSORS
@@ -114,7 +143,7 @@ public class Enemy : MonoBehaviour
     public Enemy_Behaviours.Death DeathBehaviour { get => _deathBehaviour; }
 
     // Reward
-    public Enemy_Behaviours.Reward RewardBehaviour { get => _rewarBehaviour; }
+    public Enemy_Behaviours.Reward RewardBehaviour { get => _rewardBehaviour; }
     public float ScoreReward { get => _scoreReward; }
     public float Lootchance { get => _lootchance; }
 

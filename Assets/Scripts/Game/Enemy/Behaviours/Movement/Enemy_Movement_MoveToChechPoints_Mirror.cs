@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy_Movement_MoveToCheckPoints : Enemy_Behaviours.Movement
+public class Enemy_Movement_MoveToCheckPoints_Mirror : Enemy_Behaviours.Movement
 {
     private int _checkPointIndex = 0;
 
@@ -8,15 +8,13 @@ public class Enemy_Movement_MoveToCheckPoints : Enemy_Behaviours.Movement
     private Vector2 _velocity = Vector2.zero;
     public void Move(Enemy enemy)
     {
-
-        Debug.Log("HERE");
-        Vector2 checkPointTargeted = enemy.Wave.AllCheckPoints[_checkPointIndex];
+        Vector2 checkPointTargeted = enemy.Wave.AllCheckPoints[_checkPointIndex] * new Vector2(-1, 1);
         Vector2 position = enemy.transform.position;
-        Debug.DrawLine(enemy.transform.position, checkPointTargeted);
+
         _direction = Vector2.SmoothDamp(
-            _direction, 
-            (checkPointTargeted - position).normalized, 
-            ref _velocity, 
+            _direction,
+            (checkPointTargeted - position).normalized,
+            ref _velocity,
             enemy.SmoothingSpeed);
 
         enemy.Rigidbody2D.velocity = _direction * enemy.MoveSpeed * Time.deltaTime;
@@ -33,8 +31,8 @@ public class Enemy_Movement_MoveToCheckPoints : Enemy_Behaviours.Movement
     }
     public void Rotation(Enemy enemy)
     {
-        enemy.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(-_direction.x, _direction.y)) * 180 / Mathf.PI;
-        enemy.HealthBarTransform.localEulerAngles = new Vector3(0, 0, -Mathf.Atan2(-_direction.x, _direction.y)) * 180 / Mathf.PI;
+        enemy.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(_direction.x, -_direction.y)) * 180 / Mathf.PI;
+        enemy.HealthBarTransform.localEulerAngles = new Vector3(0, 0, -Mathf.Atan2(_direction.x, -_direction.y)) * 180 / Mathf.PI;
     }
     public Enemy_Behaviours.Movement GetNextBehaviour()
     {
