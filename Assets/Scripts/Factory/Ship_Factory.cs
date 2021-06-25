@@ -21,7 +21,7 @@ public class Ship_Factory
             newShip.AddComponent<Ship>();
         }
         newShip.transform.localScale *= 0.8f;
-        newShip.GetComponent<Ship>().Initialise(id, maxHealth);
+        newShip.GetComponent<Ship>().InitialiseAllyShip(id, maxHealth);
         return newShip.GetComponent<Ship>();
     }
                 

@@ -61,11 +61,12 @@ public class RepairDrone : MonoBehaviour
         if (_player.Ship.HealthRatio < 1) return _player.Ship;
         else
         {
-            foreach(Ally ally in _player.AllAllies)
+            for (int i = 0; i < _player.AllAllies.Length; i++)
             {
-                if (ally.Ship.HealthRatio < 1)
+                switch (_player.AllAllies[i] != null && _player.AllAllies[i].Ship.HealthRatio < 1)
                 {
-                    return ally.Ship;
+                    case true:
+                        return _player.AllAllies[i].Ship;
                 }
             }
         }
