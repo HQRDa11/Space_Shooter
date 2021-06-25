@@ -48,8 +48,9 @@ public class Player : MonoBehaviour
     public void OnTurretBonus(Rarity rarity)
     {
         //this.gameObject.GetComponent<TurretSystem>().AddTurret(Factory.Instance.Turret_Factory.CreateTurret(rarity));
-
+        GameObject.Find("Sound").GetComponent<Sound>().Play_WeaponDeploy();
         Turret turret = Factory.Instance.Turret_Factory.CreateTurret(rarity);
+
         switch (m_ship.gameObject.GetComponent<TurretSystem>().AddTurret(turret))
         {
             case true:
