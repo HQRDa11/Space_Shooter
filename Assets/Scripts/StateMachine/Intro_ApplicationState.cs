@@ -15,7 +15,7 @@ public class Intro_ApplicationState : ApplicationState
     public override void load()
     {
         m_UI = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_States/UI_Intro"));
-        m_UI.transform.parent = m_gameObject.transform;
+        m_UI.transform.SetParent(m_gameObject.transform);
     }
     public override void unload()
     {

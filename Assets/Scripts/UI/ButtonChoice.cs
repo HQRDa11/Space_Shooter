@@ -34,10 +34,10 @@ public class ButtonChoice
         // > SET Button
 
         RectTransform rect = button.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(160, 30);
+        rect.sizeDelta = new Vector2(512, 256);
         rect.localScale = new Vector3(1, 1, 1);
 
-        //button.GetComponent<Image>().sprite = Resources.Load("Sprites/UI/Rectangle") as Sprite;
+        // button.GetComponent<Image>().sprite = Resources.Load("Sprites/UI/Rectangle") as Sprite;
         button.GetComponent<Image>().color = colorButton;
         m_button = button.GetComponent<Button>();
 

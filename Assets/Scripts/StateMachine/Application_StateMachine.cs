@@ -6,11 +6,16 @@ using UnityEngine;
 public enum ApplicationState_Type { NULL, INTRO, MAINMENU, UPGRADE, GAME, PAUSE, OPTIONS, CREDITS, QUIT }
 public class Application_StateMachine : MonoBehaviour
 {
+    private static Application_StateMachine _instance;
+    public static Application_StateMachine Instance { get => _instance; }
+
+
     private List<ApplicationState> m_states;
     private ApplicationState m_currentState;
 
     public void Awake()
     {
+        _instance = this;
         m_states = new List<ApplicationState>();
         m_states.Add(new Intro_ApplicationState("State_Intro"));
         m_currentState = m_states[0];

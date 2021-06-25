@@ -5,8 +5,10 @@ using UnityEngine;
 public class Ship_Factory 
 {
     private GameObject _shipPrefab;
+    private Transform m_parent;
     public Ship_Factory()
     {
+        m_parent = GameObject.Find("FactoredObjects").transform;
         _shipPrefab = Resources.Load<GameObject>("Prefabs/Ship1");
     }
 
@@ -20,6 +22,7 @@ public class Ship_Factory
         }
         newShip.transform.localScale *= 0.8f;
         newShip.GetComponent<Ship>().Initialise(id, maxHealth);
+        newShip.transform.SetParent(m_parent);
         return newShip.GetComponent<Ship>();
     }
                 

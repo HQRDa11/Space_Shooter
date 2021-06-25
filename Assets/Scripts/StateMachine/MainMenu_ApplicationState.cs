@@ -8,8 +8,8 @@ public class MainMenu_ApplicationState : ApplicationState
         : base(name)
     {
         m_type = ApplicationState_Type.MAINMENU;
-
-        ButtonsPanel newPanel = new ButtonsPanel(this.m_gameObject, "MAIN MENU", 32,new string[]{ "Play", "Options", "Credits", "Quit" }, new Color32(32,32,32,255),Color.white);
+        m_UI = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_States/UI_MainMenu"));
+        m_UI.transform.SetParent(GameObject.Find("State_MainMenu").gameObject.transform);
     }
 
     public override void update()
@@ -20,6 +20,8 @@ public class MainMenu_ApplicationState : ApplicationState
 
     public override void end()
     {
+        GameObject.Destroy(m_UI);
         Debug.Log("state" + m_type + " ending! ");
     }
 }
+
