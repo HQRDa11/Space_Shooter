@@ -9,12 +9,13 @@ public class Shot_Factory
     {
         _shotPrefab = Resources.Load<GameObject>("Prefabs/Shot");
     }
-    public GameObject CreateShot(Rarity rarity, Vector2 direction, float speed, string tag)
+    public GameObject CreateShot(Transform parent, Rarity rarity, Vector2 direction, float speed, string tag)
     {
         GameObject newShot = GameObject.Instantiate(_shotPrefab);
         newShot.GetComponent<SpriteRenderer>().material = Factory.Instance.Material_Factory.GetMaterial(rarity);
         newShot.GetComponent<Shot>().Initialise( (int)rarity, direction, speed );
         newShot.tag = tag;
+        newShot.transform.SetParent(Factory.Instance.InGameObjectsList);
         return newShot;
     }
 }

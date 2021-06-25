@@ -22,6 +22,8 @@ public class Factory : MonoBehaviour
     private Ship_Factory _shipFactory;
     public Ship_Factory Ship_Factory { get => _shipFactory; }
 
+    public Transform _InGameObjects_Parent;
+
     private void Awake()
     {
         _instance = this;
@@ -32,6 +34,11 @@ public class Factory : MonoBehaviour
         _shipFactory = new Ship_Factory();
     }
 
+    public Transform InGameObjectsList { get => _InGameObjects_Parent; }
+    public void SetInGameObjects_Parent(Transform parent)
+    {
+        _InGameObjects_Parent = parent;
+    }
     // Start is called before the first frame update
     void Start()
     {

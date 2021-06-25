@@ -12,6 +12,7 @@ public class Game_ApplicationState : ApplicationState
         m_type = ApplicationState_Type.GAME;
         m_game = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Game/Game"));
         m_game.transform.SetParent(GameObject.Find("State_Game").transform);
+        Factory.Instance.SetInGameObjects_Parent(GameObject.Find("InGameObjects").transform);
     }
 
     public override void update()

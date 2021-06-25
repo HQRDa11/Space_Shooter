@@ -31,7 +31,7 @@ public class Enemy_Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject shot = Factory.Instance.Shot_Factory.CreateShot(Rarity.WHITE, transform.rotation * Vector2.up ,3f,"Enemy");
+        GameObject shot = Factory.Instance.Shot_Factory.CreateShot(this.gameObject.transform, Rarity.WHITE, transform.rotation * Vector2.up, 3f, "Enemy"); ;
         shot.transform.position = this.gameObject.transform.position;
     }
 }
