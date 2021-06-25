@@ -21,7 +21,7 @@ public class MainMenu_ApplicationState : ApplicationState
     public override void end()
     {
         GameObject.Destroy(m_UI);
-        Debug.Log("state" + m_type + " ending! ");
+        //Debug.Log("state" + m_type + " ending! ");
     }
 }
 

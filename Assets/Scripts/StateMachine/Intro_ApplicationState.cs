@@ -25,11 +25,11 @@ public class Intro_ApplicationState : ApplicationState
     {
         base.update();
         _introTime -= Time.deltaTime;
-        Debug.Log(_introTime);
+        //Debug.Log(_introTime);
         switch ( _introTime <= 0 || Input.GetKeyDown(KeyCode.Mouse0) )
         {
             case true:
-                Debug.Log("condition ok");
+                //Debug.Log("condition ok");
                 m_stateMachine.stateRequest(ApplicationState_Type.MAINMENU);
                 break;
         }

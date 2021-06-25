@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretBonus : MonoBehaviour
+public class ZoneBonus : MonoBehaviour
 {
     private float _speed;
     private Rarity _rarity;
@@ -43,10 +43,12 @@ public class TurretBonus : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Player>())
             {
-                Debug.Log("bonus rarity: " + _rarity);
-                collision.gameObject.GetComponent<Player>().OnTurretBonus(_rarity);
+                Debug.Log("ZoneBonus!");
+                GameObject zoneAttack = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ZoneAttack"));
+                zoneAttack.transform.position = this.gameObject.transform.position;
                 GameObject.Destroy(this.gameObject);
             }
         }
+
     }
 }

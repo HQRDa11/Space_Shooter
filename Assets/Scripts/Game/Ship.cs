@@ -73,8 +73,8 @@ public class Ship : MonoBehaviour
     }
     public void Update_HealthBar()
     {
-        Debug.Log(_health + "/" + _maxHealth);
-        Debug.Log(_healtBar.name);
+        //Debug.Log(_health + "/" + _maxHealth);
+        //Debug.Log(_healtBar.name);
         _healtBar.fillAmount = _health / _maxHealth;
     }
 

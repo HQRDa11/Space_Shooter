@@ -15,41 +15,48 @@ public class Bonus_Factory
     {
         int luck = Random.Range(0, 100);
 
-        if ( luck <= 25 )
+        if ( luck <= 23 )
         {
             Instantiate_TurretBonus(position, Rarity.GREY);
                 return;
         }
-        else if ( luck <= 45 )
+        else if ( luck <= 40 )
         {
             Instantiate_TurretBonus(position, Rarity.WHITE);
             return;
         }
-        else if ( luck <= 57 )
+        else if ( luck <= 52 )
         {
             Instantiate_TurretBonus(position, Rarity.GREEN);
             return;
         }
-        else if ( luck <= 63 )
+        else if ( luck <= 60 )
         {
             Instantiate_TurretBonus(position, Rarity.BLUE);
             return;
         }        
-        else if ( luck <= 68 )
+        else if ( luck <= 65 )
         {
             Instantiate_TurretBonus(position, Rarity.PURPLE);
             return;
         }
-        else if (luck <= 70)
+        else if (luck <= 67)
         {
             Instantiate_TurretBonus(position, Rarity.ORANGE);
             return;
         }  
+        else if (luck <= 80)
+        {
+            Instantiate_ZoneBonus(position);
+            return;
+        }
+
         else if (luck <= 90)
         {
             Instantiate_RepairBonus(position);
             return;
         }
+
         else 
         {
             Instantiate_PilotBonus(position);
@@ -79,5 +86,12 @@ public class Bonus_Factory
         if (!bonusLoot.GetComponent<RepairBonus>()) { bonusLoot.AddComponent<RepairBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<RepairBonus>();
+    }
+    public ZoneBonus Instantiate_ZoneBonus(Vector2 position)
+    {
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ZoneBonus"));
+        if (!bonusLoot.GetComponent<ZoneBonus>()) { bonusLoot.AddComponent<ZoneBonus>(); }
+        bonusLoot.transform.position = position;
+        return bonusLoot.GetComponent<ZoneBonus>();
     }
 }
