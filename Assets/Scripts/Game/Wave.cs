@@ -72,6 +72,7 @@ private void Spawn()
         enemy.transform.position = _spawnPoint;
         enemy.GetComponent<Enemy_Movement>().AllCheckPoints = _allCheckPoints;
         enemy.GetComponent<Enemy_Movement>().Number = _allEnemies.IndexOf(enemy);
+        enemy.transform.SetParent(GameObject.Find("InGameObjects").transform);
 
         if (_mirror)
         {
@@ -82,6 +83,7 @@ private void Spawn()
             foreach (Vector2 vect in _allCheckPoints) allCheckPointReverse.Add(new Vector2(-vect.x, vect.y));
             enemyReverse.GetComponent<Enemy_Movement>().AllCheckPoints = allCheckPointReverse;
             enemyReverse.GetComponent<Enemy_Movement>().Number = _allEnemies.IndexOf(enemyReverse);
+            enemy.transform.SetParent(GameObject.Find("InGameObjects").transform);
         }
         _enemyRemaining--;
     }

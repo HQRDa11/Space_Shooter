@@ -10,13 +10,13 @@ public class Player : MonoBehaviour
     // Ally system
     private Ally[] m_allAllies;
     public Ally[] AllAllies { get => m_allAllies; }
-    private int m_maxAllies;
+    //private int m_maxAllies;
 
     // Start is called before the first frame update
     void Start()
     {
         m_allAllies = new Ally[4];
-        m_maxAllies = 4;
+        //m_maxAllies = 4;
 
         m_ship = GetComponentInChildren<Ship>();
         m_ship.InitialisePlayerShip(200);
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
             {
                 case true:
                     m_allAllies[i].Ship.GetComponent<TurretSystem>().Shoot();
-                    return;
+                    break;
             }
         }
     }

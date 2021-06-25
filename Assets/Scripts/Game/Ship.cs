@@ -44,6 +44,7 @@ public class Ship : MonoBehaviour
             {
                 case true:
                     Debug.LogWarning("GameOver");
+                    GameObject.Find("Game").GetComponent<Game>().OnGameOver();
                     break;
                 case false:
                     OnAllyDestruction();
