@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private Vector2 GetRelativeAllyPosition(int id)
+    public Vector2 GetRelativeAllyPosition(int id)
     {
         float pos = 0.4f;
         switch ( id)

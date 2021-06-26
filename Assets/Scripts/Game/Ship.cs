@@ -10,13 +10,17 @@ public class Ship : MonoBehaviour
     private Image _healtBar;
     private bool _isPlayerShip;
     private int  _AllyId;
+    private Player _player;
+    private Vector3 _velocity;
     public float HealthRatio { get { return _health / _maxHealth; } }
 
     private GameObject _explosionAnim;
 
     public void Start()
     {
+        _player = GameObject.Find("Player").gameObject.GetComponent<Player>();
         _explosionAnim = Resources.Load<GameObject>("Prefabs/Explosion");
+        _velocity = Vector3.one;
     }
 
     public void InitialisePlayerShip( float maxHealth)
@@ -29,15 +33,22 @@ public class Ship : MonoBehaviour
     }
     public void InitialiseAllyShip(int AllyId, float maxHealth)
     {
+        this.gameObject.transform.localScale *= 0.5f;
         _isPlayerShip = false;
         _AllyId = AllyId;
         _maxHealth = maxHealth;
         _health = _maxHealth;
         this._healtBar = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().HealthBars[AllyId+1];
+        this.gameObject.transform.SetParent(GameObject.Find("InGameObjects").transform);
         Update_HealthBar();
     }
     public void Update()
     {
+        if(_isPlayerShip == false )
+        {
+            gameObject.transform.position = Vector3.SmoothDamp(this.gameObject.transform.position, _player.GetRelativeAllyPosition(_AllyId),ref _velocity,0.18f+(0.04f*_AllyId));
+        }
+
         if (_health <= 0)
         {
             switch (_isPlayerShip)

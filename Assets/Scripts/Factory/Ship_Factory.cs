@@ -14,7 +14,7 @@ public class Ship_Factory
 
     public Ship CreateAllyShip(GameObject parent, Vector2 relativePosition,int id, float maxHealth)
     {
-        GameObject newShip = GameObject.Instantiate(_shipPrefab, parent.transform);
+        GameObject newShip = GameObject.Instantiate(_shipPrefab);
         newShip.transform.position = relativePosition;
         if (!newShip.GetComponent<Ship>())
         {
