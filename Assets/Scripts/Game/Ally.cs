@@ -12,6 +12,6 @@ public class Ally
     }
     ~Ally()
     {
-        Debug.Log("destructor ok");
+        //Debug.Log("destructor ok"); ok!
     }
 }
