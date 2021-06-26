@@ -10,4 +10,8 @@ public class Ally
     {
         m_ship = ship;
     }
+    ~Ally()
+    {
+        //Debug.Log("destructor ok"); ok!
+    }
 }

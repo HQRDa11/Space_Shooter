@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,18 +8,18 @@ public class Player : MonoBehaviour
     public Ship Ship { get => m_ship; }
     
     // Ally system
-    private List<Ally> m_allAllies;
-    public List<Ally> AllAllies { get => m_allAllies; }
-    private int m_maxAllies;
+    private Ally[] m_allAllies;
+    public Ally[] AllAllies { get => m_allAllies; }
+    //private int m_maxAllies;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_allAllies = new List<Ally>();
-        m_maxAllies = 4;
+        m_allAllies = new Ally[4];
+        //m_maxAllies = 4;
 
         m_ship = GetComponentInChildren<Ship>();
-        m_ship.Initialise(0, 200);
+        m_ship.InitialisePlayerShip(200);
     }
 
     // Update is called once per frame
@@ -39,25 +39,32 @@ public class Player : MonoBehaviour
     {
         m_ship.GetComponent<TurretSystem>().Shoot();
 
-        foreach(Ally ally in m_allAllies)
+        for (int i = 0; i<m_allAllies.Length; i++)
         {
-            ally.Ship.GetComponent<TurretSystem>().Shoot();
+            switch (m_allAllies[i]!= null)
+            {
+                case true:
+                    m_allAllies[i].Ship.GetComponent<TurretSystem>().Shoot();
+                    break;
+            }
         }
     }
 
     public void OnTurretBonus(Rarity rarity)
     {
         //this.gameObject.GetComponent<TurretSystem>().AddTurret(Factory.Instance.Turret_Factory.CreateTurret(rarity));
-
+        GameObject.Find("Sound").GetComponent<Sound>().Play_WeaponDeploy();
         Turret turret = Factory.Instance.Turret_Factory.CreateTurret(rarity);
+
         switch (m_ship.gameObject.GetComponent<TurretSystem>().AddTurret(turret))
         {
             case true:
                 return;
             case false:
-                foreach(Ally ally in m_allAllies)
+
+                for (int i = 0; i < m_allAllies.Length; i++)
                 {
-                    switch (ally.Ship.GetComponent<TurretSystem>().AddTurret(turret))
+                    switch (m_allAllies[i] != null && m_allAllies[i].Ship.GetComponent<TurretSystem>().AddTurret(turret))
                     {
                         case true:
                             return;
@@ -69,26 +76,31 @@ public class Player : MonoBehaviour
     }
     public void OnPilotBonus()
     {
-        if (m_allAllies.Count < m_maxAllies)
+
+        for (int i=0; i<m_allAllies.Length; i++)
         {
-            Ship newShip = Factory.Instance.Ship_Factory.CreateAllyShip(this.gameObject, GetRelativeAllyPosition(),m_allAllies.Count+1,200);
-            Ally newAlly = new Ally(newShip);
-            m_allAllies.Add(newAlly);
+            if (m_allAllies[i] == null)
+            {
+                Ship newShip = Factory.Instance.Ship_Factory.CreateAllyShip(this.gameObject, GetRelativeAllyPosition(i), i, 200);
+                Ally newAlly = new Ally(newShip);
+                m_allAllies[i]=newAlly;
+                return;
+            }
         }
     }
 
-    private Vector2 GetRelativeAllyPosition()
+    public Vector2 GetRelativeAllyPosition(int id)
     {
         float pos = 0.4f;
-        switch ( m_allAllies.Count + 1)
+        switch ( id)
         {
-            case 1:
+            case 0:
                 return (Vector2)this.gameObject.transform.position + new Vector2( pos,   -pos/2);
-            case 2:
+            case 1:
                 return (Vector2)this.gameObject.transform.position + new Vector2(-pos,   -pos/2);
-            case 3:
+            case 2:
                 return (Vector2)this.gameObject.transform.position + new Vector2( pos*1.8f, -pos);
-            case 4:
+            case 3:
                 return (Vector2)this.gameObject.transform.position + new Vector2(-pos*1.8f, -pos);
             default:
                 Debug.LogError("Undefined possibility");
@@ -100,4 +112,5 @@ public class Player : MonoBehaviour
     {
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"));
     }
+
 }

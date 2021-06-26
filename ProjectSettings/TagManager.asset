@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - HealthBar
   - PlayerShip
+  - ApplicationState
   layers:
   - Default
   - TransparentFX
@@ -41,12 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 3093114585
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: TopTop
-    uniqueID: 2067052865
-    locked: 0
   - name: Top
     uniqueID: 2722262811
+    locked: 0
+  - name: TopTop
+    uniqueID: 2067052865
     locked: 0
