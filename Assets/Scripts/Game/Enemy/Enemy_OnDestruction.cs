@@ -13,7 +13,7 @@ public class Enemy_OnDestruction : MonoBehaviour
     public void DestroyFromHit()
     {
         GetComponent<Enemy_Reward>().GetReward();
-        ComboSystem.Instance.Addcombo();
+        ComboSystem.Instance.AddCombo();
 
         GameObject explosion = GameObject.Instantiate(_explosionAnim);
         explosion.transform.position = this.gameObject.transform.position;

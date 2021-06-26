@@ -13,7 +13,7 @@ public class Wave
 
     private bool _mirror;
 
-    private List<Vector2> _allCheckPoints;
+    private List<Vector2> _allCheckPoints; public List<Vector2> AllCheckPoints { get => _allCheckPoints; } // <<<< Remplacer par class de List de checkpoints dans wave system
 
     private int _enemyRemaining;
     private List<GameObject> _allEnemies;
@@ -62,28 +62,15 @@ public class Wave
     }
 private void Spawn()
     {
-        GameObject enemy = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
-        if (!enemy.GetComponent<Enemy>())
-        {
-            enemy.AddComponent<Enemy>();
-        }
-        enemy.GetComponent<Enemy>().Initialise(Random.Range(1 , 10));
-        _allEnemies.Add(enemy);
-        enemy.transform.position = _spawnPoint;
-        enemy.GetComponent<Enemy_Movement>().AllCheckPoints = _allCheckPoints;
-        enemy.GetComponent<Enemy_Movement>().Number = _allEnemies.IndexOf(enemy);
-        enemy.transform.SetParent(GameObject.Find("InGameObjects").transform);
 
+        _allEnemies.Add(Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this));
+        
         if (_mirror)
         {
-            GameObject enemyReverse = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
-            _allEnemies.Add(enemyReverse);
-            enemyReverse.transform.position = new Vector2(-_spawnPoint.x, _spawnPoint.y);
-            List<Vector2> allCheckPointReverse = new List<Vector2>();
-            foreach (Vector2 vect in _allCheckPoints) allCheckPointReverse.Add(new Vector2(-vect.x, vect.y));
-            enemyReverse.GetComponent<Enemy_Movement>().AllCheckPoints = allCheckPointReverse;
-            enemyReverse.GetComponent<Enemy_Movement>().Number = _allEnemies.IndexOf(enemyReverse);
-            enemy.transform.SetParent(GameObject.Find("InGameObjects").transform);
+            GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint * new Vector2(-1, 1), _allEnemies.Count + 1, this);
+            gameObject.GetComponent<Enemy>().SetMovementBehaviour(new Enemy_Movement_MoveToCheckPoints_Mirror());
+            _allEnemies.Add(gameObject);
+            _enemyRemaining--;
         }
         _enemyRemaining--;
     }
@@ -96,7 +83,7 @@ private void Spawn()
         {
             foreach(GameObject gameObject in _allEnemies)
             {
-                gameObject.GetComponent<Enemy_Weapon>().TryShooting();
+                gameObject.GetComponent<Enemy>().Shoot();
             }
 
             _shotClock = 0;

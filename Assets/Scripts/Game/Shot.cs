@@ -54,9 +54,9 @@ public class Shot : MonoBehaviour
             case "Player":
                 if (collision.gameObject.tag == "Enemy")
                 {
-                    if (collision.GetComponent<Enemy_Health>())
+                    if (collision.GetComponent<Enemy>())
                     {
-                        collision.GetComponent<Enemy_Health>().TakeDamage(_damage);
+                        collision.GetComponent<Enemy>().TakeDamage(_damage);
                         GameObject.Destroy(this.gameObject);
                     }
                    

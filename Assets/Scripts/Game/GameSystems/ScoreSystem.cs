@@ -11,7 +11,7 @@ public class ScoreSystem : MonoBehaviour
     {
         _instance = this;
     }
-    public void AddScore(int score)
+    public void AddScore(float score)
     {
         _currentScore += ComboSystem.Instance.Multiplier(score);
     }

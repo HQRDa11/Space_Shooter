@@ -22,6 +22,9 @@ public class Factory : MonoBehaviour
     private Ship_Factory _shipFactory;
     public Ship_Factory Ship_Factory { get => _shipFactory; }
 
+    private Enemy_Factory _enemyFactory;
+    public Enemy_Factory Enemy_Factory { get => _enemyFactory; }
+
     public Transform _InGameObjects_Parent;
 
     private void Awake()
@@ -32,6 +35,7 @@ public class Factory : MonoBehaviour
         _turretFactory = new Turret_Factory();
         _shotFactory = new Shot_Factory();
         _shipFactory = new Ship_Factory();
+        _enemyFactory = new Enemy_Factory();
     }
 
     public Transform InGameObjectsList { get => _InGameObjects_Parent; }

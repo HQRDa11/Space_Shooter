@@ -24,7 +24,7 @@ public class ComboSystem : MonoBehaviour
         _clock += Time.deltaTime;
         if (_clock > _resetDelay) ResetCombo();
     }
-    public void Addcombo() { _currentCombo++; ComboDisplay.Instance.PulseEffect(); _clock = 0; }
+    public void AddCombo() { _currentCombo++; ComboDisplay.Instance.PulseEffect(); _clock = 0; }
     public void ResetCombo() { _currentCombo = 0; }
-    public int Multiplier(int score) { return score * (_currentCombo + 1); }
+    public float Multiplier(float score) { return score * (_currentCombo + 1); }
 }
