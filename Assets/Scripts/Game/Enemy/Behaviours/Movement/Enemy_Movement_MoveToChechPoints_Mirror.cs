@@ -31,8 +31,8 @@ public class Enemy_Movement_MoveToCheckPoints_Mirror : Enemy_Behaviours.Movement
     }
     public void Rotation(Enemy enemy)
     {
-        enemy.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(_direction.x, -_direction.y)) * 180 / Mathf.PI;
-        enemy.HealthBarTransform.localEulerAngles = new Vector3(0, 0, -Mathf.Atan2(_direction.x, -_direction.y)) * 180 / Mathf.PI;
+        enemy.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(-_direction.x, _direction.y)) * 180 / Mathf.PI;
+        enemy.HealthBarTransform.localEulerAngles = new Vector3(0, 0, -Mathf.Atan2(-_direction.x, _direction.y)) * 180 / Mathf.PI;
     }
     public Enemy_Behaviours.Movement GetNextBehaviour()
     {

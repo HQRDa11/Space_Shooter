@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        _currentHealth += _healthBehaviour.TakeDamage(damage);
+        _currentHealth -= _healthBehaviour.TakeDamage(damage);
     }
     public void Shoot()
     {

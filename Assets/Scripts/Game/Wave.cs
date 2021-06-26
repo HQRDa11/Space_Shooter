@@ -67,8 +67,9 @@ private void Spawn()
         
         if (_mirror)
         {
-            GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this);
+            GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint * new Vector2(-1, 1), _allEnemies.Count + 1, this);
             gameObject.GetComponent<Enemy>().SetMovementBehaviour(new Enemy_Movement_MoveToCheckPoints_Mirror());
+            _allEnemies.Add(gameObject);
             _enemyRemaining--;
         }
         _enemyRemaining--;
