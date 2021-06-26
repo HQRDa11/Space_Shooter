@@ -31,13 +31,7 @@ public class Wave
         _mirror = mirror;
         _allCheckPoints = new List<Vector2>();
         foreach (int index in checkPoints) _allCheckPoints.Add(Map.CheckPointIndexToPosition(index));
-        GameObject gameObject = GameObject.Find("Circle");
-        foreach(Vector2 vect in _allCheckPoints)
-        {
-            GameObject mark = GameObject.Instantiate(gameObject);
-            mark.transform.position = vect;
 
-        }
         _enemyRemaining = _numberOfEnemy;
         _allEnemies = new List<GameObject>();
 

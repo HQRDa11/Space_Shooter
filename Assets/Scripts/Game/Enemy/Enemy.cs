@@ -95,7 +95,6 @@ public class Enemy : MonoBehaviour
     {
         Enemy_Behaviours.Movement next = _movementBehaviour.GetNextBehaviour();
         if (next != null) _movementBehaviour = next;
-        Debug.Log("Movement Behaviour Changed ! Is now > " + _movementBehaviour.ToString());
     }
     public void SetMovementBehaviour(Enemy_Behaviours.Movement movementBehaviour)
     {

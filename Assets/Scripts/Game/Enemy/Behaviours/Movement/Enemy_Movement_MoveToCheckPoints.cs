@@ -8,11 +8,9 @@ public class Enemy_Movement_MoveToCheckPoints : Enemy_Behaviours.Movement
     private Vector2 _velocity = Vector2.zero;
     public void Move(Enemy enemy)
     {
-
-        Debug.Log("HERE");
         Vector2 checkPointTargeted = enemy.Wave.AllCheckPoints[_checkPointIndex];
         Vector2 position = enemy.transform.position;
-        Debug.DrawLine(enemy.transform.position, checkPointTargeted);
+
         _direction = Vector2.SmoothDamp(
             _direction, 
             (checkPointTargeted - position).normalized, 

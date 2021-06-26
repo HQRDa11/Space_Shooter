@@ -1,3 +1,4 @@
+using UnityEngine;
 public class Enemy_Health_Normal : Enemy_Behaviours.Health
 {
     public void Health(Enemy enemy)
@@ -10,6 +11,7 @@ public class Enemy_Health_Normal : Enemy_Behaviours.Health
     }
     public float TakeDamage(float damage)
     {
+        Debug.Log("HERE");
         return damage;
     }
 }
