@@ -49,6 +49,24 @@ public class Player : MonoBehaviour
             }
         }
     }
+    public Vector2 GetRelativeAllyPosition(int id)
+    {
+        float pos = 0.4f;
+        switch (id)
+        {
+            case 0:
+                return (Vector2)this.gameObject.transform.position + new Vector2(pos, -pos / 2);
+            case 1:
+                return (Vector2)this.gameObject.transform.position + new Vector2(-pos, -pos / 2);
+            case 2:
+                return (Vector2)this.gameObject.transform.position + new Vector2(pos * 1.8f, -pos);
+            case 3:
+                return (Vector2)this.gameObject.transform.position + new Vector2(-pos * 1.8f, -pos);
+            default:
+                Debug.LogError("Undefined possibility");
+                return Vector2.zero;
+        }
+    }
 
     public void OnTurretBonus(Rarity rarity)
     {
@@ -74,9 +92,9 @@ public class Player : MonoBehaviour
                 return;
         }
     }
+
     public void OnPilotBonus()
     {
-
         for (int i=0; i<m_allAllies.Length; i++)
         {
             if (m_allAllies[i] == null)
@@ -86,25 +104,6 @@ public class Player : MonoBehaviour
                 m_allAllies[i]=newAlly;
                 return;
             }
-        }
-    }
-
-    public Vector2 GetRelativeAllyPosition(int id)
-    {
-        float pos = 0.4f;
-        switch ( id)
-        {
-            case 0:
-                return (Vector2)this.gameObject.transform.position + new Vector2( pos,   -pos/2);
-            case 1:
-                return (Vector2)this.gameObject.transform.position + new Vector2(-pos,   -pos/2);
-            case 2:
-                return (Vector2)this.gameObject.transform.position + new Vector2( pos*1.8f, -pos);
-            case 3:
-                return (Vector2)this.gameObject.transform.position + new Vector2(-pos*1.8f, -pos);
-            default:
-                Debug.LogError("Undefined possibility");
-                return Vector2.zero;
         }
     }
 
