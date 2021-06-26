@@ -33,11 +33,12 @@ public class ZoneAttack : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.GetComponent<Enemy_Health>() == true )
+        switch (collision.GetComponent<Enemy>() == true)
         {
             case true:
-            collision.GetComponent<Enemy_Health>().TakeDamage(m_damage);
-            break;
+                    collision.GetComponent<Enemy>().TakeDamage(m_damage);
+                    GameObject.Destroy(this.gameObject);
+                break;
         }
     }
 }
