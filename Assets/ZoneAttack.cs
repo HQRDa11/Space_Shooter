@@ -37,7 +37,6 @@ public class ZoneAttack : MonoBehaviour
         {
             case true:
                     collision.GetComponent<Enemy>().TakeDamage(m_damage);
-                    GameObject.Destroy(this.gameObject);
                 break;
         }
     }

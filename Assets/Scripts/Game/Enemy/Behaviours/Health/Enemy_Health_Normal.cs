@@ -11,7 +11,7 @@ public class Enemy_Health_Normal : Enemy_Behaviours.Health
     }
     public float TakeDamage(float damage)
     {
-        Debug.Log("HERE");
+        //Debug.Log("HERE");
         return damage;
     }
 }

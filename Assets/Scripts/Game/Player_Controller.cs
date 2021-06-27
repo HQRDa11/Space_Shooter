@@ -27,7 +27,7 @@ public class Player_Controller : MonoBehaviour
         if (TryDoubleClick())
         {
             GameObject zoneAttack = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ZoneAttack"));
-            zoneAttack.GetComponent<ZoneAttack>().Initialise(this.transform.position,1f, 200);
+            zoneAttack.GetComponent<ZoneAttack>().Initialise(this.transform.position,0.8f, 200);
         }
     }
 
@@ -53,7 +53,7 @@ public class Player_Controller : MonoBehaviour
         {
             if (_doubleClickTimer > 0 && _doubleClickTimer <= _doubleClickMaxDelay && _isInitialClick)
             {
-                Debug.Log("DoubleClick!");
+                //Debug.Log("DoubleClick!");
                 _isInitialClick = false;
                 return true;
             }
