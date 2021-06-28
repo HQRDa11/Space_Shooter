@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndGame_ApplicationState : ApplicationState
 {
@@ -10,6 +11,17 @@ public class EndGame_ApplicationState : ApplicationState
         m_type = ApplicationState_Type.ENDGAME;
         m_UI = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_States/UI_EndGame"));
         m_UI.transform.SetParent(GameObject.Find("State_EndGame").gameObject.transform);
+
+        GameObject scoreGO = GameObject.Find("Score");
+        m_UI.transform.GetChild(0).GetComponent<Text>().text =
+            "Game Over \n" +
+            "\n" +
+            "\n" +
+            "\n" +
+            "Score : " + scoreGO.transform.GetChild(0).name + "\n" +
+            "Loots : " + "\n" +
+            "RewardChestOpening : ";
+        GameObject.Destroy(scoreGO);
     }
 
     public override void update()
