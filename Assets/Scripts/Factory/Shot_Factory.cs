@@ -11,11 +11,10 @@ public class Shot_Factory
     }
     public GameObject CreateShot(Transform parent, Rarity rarity, Vector2 direction, float speed, string tag)
     {
-        GameObject newShot = GameObject.Instantiate(_shotPrefab);
+        GameObject newShot = GameObject.Instantiate(_shotPrefab, Factory.Instance.InGameObjectsList);
         newShot.GetComponent<SpriteRenderer>().material = Factory.Instance.Material_Factory.GetMaterial(rarity);
         newShot.GetComponent<Shot>().Initialise( (int)rarity, direction, speed );
         newShot.tag = tag;
-        newShot.transform.SetParent(Factory.Instance.InGameObjectsList);
         return newShot;
     }
 }
