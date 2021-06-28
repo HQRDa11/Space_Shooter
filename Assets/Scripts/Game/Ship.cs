@@ -63,6 +63,10 @@ public class Ship : MonoBehaviour
             }
 
         }
+        if (Input.GetKey(KeyCode.K))
+        {
+            TakeDamage(100); Debug.Log("Key K has been Pressed");
+        }
     }
 
     public void SetHealth(float max, float current)
