@@ -19,7 +19,7 @@ public class Enemy_Data_Sample : Enemy_Data
         _scoreReward = 10f;
         _lootChance = 30f;
 
-        _weaponBehaviour = new Enemy_Weapon_MultiShot_Circle();
+        _weaponBehaviour = new Enemy_Weapon_Normal();
         _shotChance = 20f;
         _shotDamage = 10f;
     }

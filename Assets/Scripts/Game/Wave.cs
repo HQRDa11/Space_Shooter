@@ -62,17 +62,22 @@ public class Wave
     }
 private void Spawn()
     {
+        GameObject gameObject1 = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this);
+        _allEnemies.Add(gameObject1);
+        _enemyRemaining--;
+        if((_enemyRemaining % 2 == 0 && !_mirror) || (_enemyRemaining / 2 % 2 == 0 && _mirror))
+        {
+            gameObject1.GetComponent<Enemy>().SetWeaponBehaviour(new Enemy_Weapon_MultiShot_Circle());
+        }
 
-        _allEnemies.Add(Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this));
-        
         if (_mirror)
         {
             GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint * new Vector2(-1, 1), _allEnemies.Count + 1, this);
             gameObject.GetComponent<Enemy>().SetMovementBehaviour(new Enemy_Movement_MoveToCheckPoints_Mirror());
             _allEnemies.Add(gameObject);
             _enemyRemaining--;
+            gameObject.GetComponent<Enemy>().SetWeaponBehaviour(gameObject1.GetComponent<Enemy>().WeaponBehaviour);
         }
-        _enemyRemaining--;
     }
 
     private void EnemyShot()
