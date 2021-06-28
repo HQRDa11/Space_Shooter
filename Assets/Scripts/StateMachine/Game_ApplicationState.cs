@@ -25,6 +25,9 @@ public class Game_ApplicationState : ApplicationState
     public override void end()
     {
         // Call Game.save()
+        GameObject scoreParent = new GameObject("Score");
+        GameObject scoreChild = new GameObject(ScoreSystem.Instance.CurrentScore.ToString());
+        scoreChild.transform.parent = scoreParent.transform;
         GameObject.Destroy(m_game);
     }
 
