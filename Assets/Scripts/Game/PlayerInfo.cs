@@ -15,7 +15,7 @@ public class PlayerInfo : MonoBehaviour
         m_healthBars = new List<Image>();
         m_healthBars.Add(GameObject.Find("PlayerHealthBar").GetComponent<Image>());
         List<Image> temp = new List<Image>();
-        temp = GameObject.Find("AllysHealthbar").gameObject.GetComponentsInChildren<Image>().ToList<Image>();
+        temp = GameObject.Find("AllysHealthBar").gameObject.GetComponentsInChildren<Image>().ToList<Image>();
         foreach (Image i in temp)
         {
             m_healthBars.Add(i);
