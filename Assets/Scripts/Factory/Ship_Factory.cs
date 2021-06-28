@@ -22,6 +22,17 @@ public class Ship_Factory
         }
         newShip.transform.localScale *= 0.8f;
         newShip.GetComponent<Ship>().InitialiseAllyShip(id, maxHealth);
+
+        switch ( id == 0 || id == 1)
+        {
+            case true:
+                newShip.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "AllyShipLvl1";
+                break;
+            case false:
+                newShip.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "AllyShipLvl2";
+                break;
+        }
+
         return newShip.GetComponent<Ship>();
     }
                 

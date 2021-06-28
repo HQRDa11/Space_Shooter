@@ -48,6 +48,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: AllyShipLvl2
+    uniqueID: 4014838167
+    locked: 0
+  - name: AllyShipLvl1
+    uniqueID: 2009810921
+    locked: 0
+  - name: PlayerShip
+    uniqueID: 1128392169
+    locked: 0
   - name: Top
     uniqueID: 2722262811
     locked: 0
