@@ -12,8 +12,15 @@ public class PlayerInfo : MonoBehaviour
 
     private void Awake()
     {
-        m_healthBars = GameObject.Find("AllysHealthbar").gameObject.GetComponentsInChildren<Image>().ToList<Image>();
-        m_healthBars.RemoveAt(0);
+        m_healthBars = new List<Image>();
+        m_healthBars.Add(GameObject.Find("PlayerHealthBar").GetComponent<Image>());
+        List<Image> temp = new List<Image>();
+        temp = GameObject.Find("AllysHealthbar").gameObject.GetComponentsInChildren<Image>().ToList<Image>();
+        foreach (Image i in temp)
+        {
+            m_healthBars.Add(i);
+        }
+        //m_healthBars.RemoveAt(0);
         foreach (Image bar in HealthBars)
         {
             bar.fillAmount = 0;
