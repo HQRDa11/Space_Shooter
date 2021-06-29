@@ -9,7 +9,7 @@ public class Enemy_Data_Sample : Enemy_Data
         _health = 20f;
 
         _movementBehaviour = new Enemy_Movement_MoveToCheckPoints();
-        _moveSpeed = 100f;
+        _moveSpeed = 80f;
         _smoothingSpeed = .3f;
         _wireRadius = .5f;
 
