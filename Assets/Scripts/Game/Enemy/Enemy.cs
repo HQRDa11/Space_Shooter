@@ -37,7 +37,8 @@ public class Enemy : MonoBehaviour
     private Enemy_Behaviours.Weapon _weaponBehaviour;
     private float _shotChance;
     private float _shotDamage;
-    
+    private float _shotClock;
+    private float _shotClockEndTime;
     public void Initialize(Enemy_Data data, int index, Wave wave)
     {
         _index = index;
@@ -83,6 +84,13 @@ public class Enemy : MonoBehaviour
     public void Shoot()
     {
         _weaponBehaviour.Shoot(this);
+    }
+    public void MultiShoot(float shotClockEndTime)
+    {
+        // Si _shotClock est inferieur a _shotClockEndTime
+        // > Incremente _shotClock
+        // > Shoot();
+        // Sinon Shoot();
     }
     public void OnDestruction()
     {
@@ -150,4 +158,5 @@ public class Enemy : MonoBehaviour
     public Enemy_Behaviours.Weapon WeaponBehaviour { get => _weaponBehaviour; }
     public float ShotChance { get => _shotChance; }
     public float ShotDamage { get => _shotDamage; }
+    public float Shottime { get => _shotClock; }
 }
