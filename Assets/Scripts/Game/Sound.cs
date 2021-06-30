@@ -13,6 +13,7 @@ public class Sound : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        _instance = this;
         m_audioSource = GetComponent<AudioSource>();
         m_weaponDeploy = Resources.Load<AudioClip>("AudioClips/WeaponDeploy");
     }
