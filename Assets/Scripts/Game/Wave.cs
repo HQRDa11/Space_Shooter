@@ -17,11 +17,11 @@ public class Wave
 
     private int _enemyRemaining;
     private List<GameObject> _allEnemies;
-    private float _clock = 0;
 
-    private float _shotClock;
-    private float _shotFrequency;
-    public Wave(int numberOfEnemy, int spawnPoint, float spawnDelay, int repeatTimes, float repeatFrequency, int[] checkPoints, bool mirror, float shotFrequency)
+    private float _enemyInstanceClock;
+
+    private float _clock = 0;
+    public Wave(int numberOfEnemy, int spawnPoint, float spawnDelay, int repeatTimes, float repeatFrequency, int[] checkPoints, bool mirror)
     {
         _numberOfEnemy = numberOfEnemy;
         _spawnPoint = Map.SpawnIndexToPosition(spawnPoint);
@@ -34,11 +34,11 @@ public class Wave
 
         _enemyRemaining = _numberOfEnemy;
         _allEnemies = new List<GameObject>();
-
-        _shotFrequency = shotFrequency;
     }
     public void Update()
     {
+        _enemyInstanceClock += Time.deltaTime;
+
         _allEnemies.RemoveAll(enemy => enemy == null);
         _clock += Time.deltaTime;
 
@@ -57,12 +57,17 @@ public class Wave
             _repeatTimes--;            
         }       
         else if (_allEnemies.Count == 0) WaveSystem.Instance.NextWave();
-
-        EnemyShot();
     }
 private void Spawn()
     {
-        GameObject gameObject1 = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this);
+        // UPDATE la _instanceClock DANS Update()
+
+        // SET la Clock de l'ennemi a l'instanciation
+        // >> VOIR Enemy Class
+
+        // FAIRE un switch dans la factory pour pouvoir Set Weapon Behaviour avec Index; <<<<<<<<<<<<<<<<<<<<<<<<
+
+        GameObject gameObject1 = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this, _enemyInstanceClock);
         _allEnemies.Add(gameObject1);
         _enemyRemaining--;
         if((_enemyRemaining % 2 == 0 && !_mirror) || (_enemyRemaining / 2 % 2 == 0 && _mirror))
@@ -72,26 +77,11 @@ private void Spawn()
 
         if (_mirror)
         {
-            GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint * new Vector2(-1, 1), _allEnemies.Count + 1, this);
+            GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint * new Vector2(-1, 1), _allEnemies.Count + 1, this, _enemyInstanceClock);
             gameObject.GetComponent<Enemy>().SetMovementBehaviour(new Enemy_Movement_MoveToCheckPoints_Mirror());
             _allEnemies.Add(gameObject);
             _enemyRemaining--;
             gameObject.GetComponent<Enemy>().SetWeaponBehaviour(gameObject1.GetComponent<Enemy>().WeaponBehaviour);
-        }
-    }
-
-    private void EnemyShot()
-    {
-        _shotClock += Time.deltaTime;
-
-        if(_shotClock >= _shotFrequency)
-        {
-            foreach(GameObject gameObject in _allEnemies)
-            {
-                gameObject.GetComponent<Enemy>().Shoot();
-            }
-
-            _shotClock = 0;
         }
     }
 }
