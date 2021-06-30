@@ -12,4 +12,5 @@ public class Enemy_Weapon_RandomShot : Enemy_Behaviours.Weapon
             shot.transform.position = enemy.transform.position;
         }
     }
+    public void ShootOverTime(Enemy enemy) { }
 }

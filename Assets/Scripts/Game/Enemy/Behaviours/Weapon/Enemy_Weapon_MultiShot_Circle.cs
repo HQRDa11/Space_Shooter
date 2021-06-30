@@ -14,7 +14,7 @@ public class Enemy_Weapon_MultiShot_Circle : Enemy_Behaviours.Weapon
         if (_isFiring == true)
         {
             float angle = enemy.transform.eulerAngles.z + (360 / _numberOfShot * _shotIndex); 
-            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)); Debug.Log(direction);
+            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             GameObject shot = Factory.Instance.Shot_Factory.CreateShot(Factory.Instance.InGameObjectsList, Rarity.WHITE, direction, 3f, "Enemy");
             shot.transform.position = enemy.transform.position;
 
@@ -30,4 +30,6 @@ public class Enemy_Weapon_MultiShot_Circle : Enemy_Behaviours.Weapon
             }
         }
     }
+    public void ShootOverTime(Enemy enemy) { }
+
 }

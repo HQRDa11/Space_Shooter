@@ -22,7 +22,7 @@ public class Enemy_Data
 
     // WEAPON
     protected Enemy_Behaviours.Weapon _weaponBehaviour;
-    protected float _shotChance, _shotDamage;
+    protected float _shotChance, _shotDamage, _shotFrequency;
 
 
     // ACCESS
@@ -40,4 +40,5 @@ public class Enemy_Data
     public Enemy_Behaviours.Weapon WeaponBehaviour { get => _weaponBehaviour; }
     public float ShotChance { get => _shotChance; }
     public float ShotDamage { get => _shotDamage; }
+    public float ShotFrequency { get => _shotFrequency; }
 }

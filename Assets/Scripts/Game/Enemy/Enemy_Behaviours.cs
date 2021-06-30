@@ -22,6 +22,7 @@ public class Enemy_Behaviours
     public interface Weapon
     {
         public void Shoot(Enemy enemy);
+        public void ShootOverTime(Enemy enemy);
     }
 }
 

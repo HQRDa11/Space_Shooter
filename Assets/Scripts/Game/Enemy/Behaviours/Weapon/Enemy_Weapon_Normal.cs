@@ -9,4 +9,6 @@ public class Enemy_Weapon_Normal : Enemy_Behaviours.Weapon
         GameObject shot = Factory.Instance.Shot_Factory.CreateShot(Factory.Instance.InGameObjectsList, Rarity.WHITE, enemy.transform.rotation * Vector2.up, 3f, "Enemy");
         shot.transform.position = enemy.transform.position;
     }
+    public void ShootOverTime(Enemy enemy) { }
+
 }
