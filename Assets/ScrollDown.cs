@@ -10,7 +10,7 @@ public class ScrollDown : MonoBehaviour
     private void Start()
     {
         m_isNext = false;
-        m_speed = 1.2f;
+        m_speed = 0.8f;
     }
     // Update is called once per frame
     void Update()
