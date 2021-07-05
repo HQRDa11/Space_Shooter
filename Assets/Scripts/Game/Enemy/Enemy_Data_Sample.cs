@@ -22,6 +22,6 @@ public class Enemy_Data_Sample : Enemy_Data
         _weaponBehaviour = new Enemy_Weapon_Normal();
         _shotChance = 20f;
         _shotDamage = 10f;
-        _shotFrequency = 3f;
+        _shotFrequency = 4f;
     }
 }
