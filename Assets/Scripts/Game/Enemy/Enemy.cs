@@ -23,7 +23,8 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed; 
     private float _smoothingSpeed; 
     private float _wireRadius;
-    public int _checkPointIndex = 0;
+    private bool _canMove;
+
 
     // DEATH
     private Enemy_Behaviours.Death _deathBehaviour;
@@ -58,6 +59,7 @@ public class Enemy : MonoBehaviour
         _moveSpeed =            data.MoveSpeed;
         _smoothingSpeed =       data.SmoothingSpeed;
         _wireRadius =           data.WireRadius;
+        _canMove =              true;
 
         _deathBehaviour =       data.DeathBehaviour;
 
@@ -88,8 +90,11 @@ public class Enemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _movementBehaviour.Move(this);
-        _movementBehaviour.Rotation(this);   
+        if (_canMove)
+        {
+            _movementBehaviour.Move(this);
+            _movementBehaviour.Rotation(this);   
+        }
     }
     public void TakeDamage(float damage)
     {
@@ -102,6 +107,11 @@ public class Enemy : MonoBehaviour
     public void OnDestruction()
     {
         _deathBehaviour.OnDestruction(this);
+    }
+    public void CanMove(bool b)
+    {
+        if (b == false) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        _canMove = b;
     }
 
     // BEHAVIOUR SETTERS
