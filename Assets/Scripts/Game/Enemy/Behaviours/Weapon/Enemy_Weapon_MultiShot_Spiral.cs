@@ -6,7 +6,7 @@ public class Enemy_Weapon_MultiShot_Spiral : Enemy_Behaviours.Weapon
 {
     private int _numberOfShot = 50;
     private int _shotIndex = 0;
-    private float _shotAngle = 5f;
+    private float _shotAngle = 10f;
     private float _shotDelay = .01f;
 
     private bool _isFiring;
@@ -14,12 +14,14 @@ public class Enemy_Weapon_MultiShot_Spiral : Enemy_Behaviours.Weapon
     public void Shoot(Enemy enemy)
     {
         _isFiring = true;
+        enemy.CanMove(false);
 
         if(_clock > _shotDelay)
         {
             _clock = 0;
-            float angle = enemy.transform.eulerAngles.z + _shotAngle * _shotIndex;
-            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            float angle = (enemy.transform.eulerAngles.z + _shotAngle * _shotIndex) % 360;
+            float rad = Mathf.Deg2Rad * angle;
+            Vector2 direction = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
 
             GameObject shot = Factory.Instance.Shot_Factory.CreateShot(Factory.Instance.InGameObjectsList, Rarity.WHITE, direction, 2f, "Enemy");
             shot.transform.position = enemy.transform.position;
@@ -29,6 +31,7 @@ public class Enemy_Weapon_MultiShot_Spiral : Enemy_Behaviours.Weapon
         if (_shotIndex == _numberOfShot)
         {
             _isFiring = false;
+            enemy.CanMove(true);
             _shotIndex = 0;
         }
     }
