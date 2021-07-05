@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
         _shotDamage =           data.ShotDamage;
         _shotFrequency =        data.ShotFrequency;
 
-        _clock = clock;
+        _clock = clock % _shotFrequency;
     }
 
     public void Update()
