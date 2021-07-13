@@ -1531,13 +1531,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.51
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 246
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1780,7 +1780,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1091173971953654980, guid: dc8c1bbdab34dd340abecd1bc4765ff2, type: 3}
       propertyPath: m_Color.a
-      value: 0.39607844
+      value: 0.4117647
       objectReference: {fileID: 0}
     - target: {fileID: 1091173971953654980, guid: dc8c1bbdab34dd340abecd1bc4765ff2, type: 3}
       propertyPath: m_SortingLayer

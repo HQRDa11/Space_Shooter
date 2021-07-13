@@ -14,8 +14,8 @@ public static class Map
     // Enemy's spawn points
     private static int _spawnDensity = 6; public static int SpawnDensity { get => _spawnDensity; }
 
-    private static Vector2 _firstSpawnPoint = new Vector2(-_width / 2 - .5f, _height / 2 + .5f);
-    private static Vector2 _lastSpawnPoint = new Vector2(_width / 2 + .5f, _height / 2 + .5f);
+    private static Vector2 _firstSpawnPoint = new Vector2(-_width / 2 , _height / 2 + .5f);
+    private static Vector2 _lastSpawnPoint = new Vector2(_width / 2 , _height / 2 + .5f);
 
     public static Vector2 SpawnIndexToPosition(int index)
     {

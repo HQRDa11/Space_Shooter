@@ -55,4 +55,9 @@ public class EndGame_ApplicationState : ApplicationState
         GameObject.Destroy(m_UI);
         Debug.Log("state" + m_type + " ending! ");
     }
+
+    public override int GetMainThemeSchedule()
+    {
+        return 279;
+    }
 }

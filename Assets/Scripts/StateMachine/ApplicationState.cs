@@ -37,6 +37,19 @@ public class ApplicationState
 
     public virtual void end()
     {
+
+    }
+
+    public void endMusic()
+    {
+        MusicPlayer musicPlayer = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
+        musicPlayer.Stop();
+        Debug.Log("isMusicPlayerEnding? " + (musicPlayer == true));
         //Debug.Log("state." + m_type + " ending...");
+    }
+
+    public virtual int GetMainThemeSchedule()
+    {
+        return 0;
     }
 }
