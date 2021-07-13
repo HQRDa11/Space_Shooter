@@ -7,64 +7,41 @@ public class DebugDisplay : MonoBehaviour
 {
     private void OnDrawGizmos()
     {
-        // MAP
-        // Spawn's positions
-        for (int i = 0; i < Map.SpawnDensity; i++)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(Map.SpawnIndexToPosition(i), Vector3.one / 2);
-        }
-
-        for (int i = 0; i < Map.CheckPointDensityWidth * Map.CheckPointDensityHeight; i++)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(Map.CheckPointIndexToPosition(i), .5f);
-        }
+        //// MAP
+        //// Spawn's positions
+        //for (int i = 0; i < Map.SpawnDensity; i++)
+        //{
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawWireCube(Map.SpawnIndexToPosition(i), Vector3.one / 2);
+        //}
+        //// CheckPoint's position
+        //for (int i = 0; i < Map.CheckPointDensityWidth * Map.CheckPointDensityHeight; i++)
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(Map.CheckPointIndexToPosition(i), .5f);
+        //}
     }
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.G)) Debug.Log("No Debug is assigned");
+    }
+
+    public void AngleTester()
+    {
         
-        if (Input.GetKeyDown(KeyCode.G)) OrderBy(RandomArrayOfInt());
-    }
-
-    public int[] RandomArrayOfInt()
-    {
-        int[] intArray = new int[Random.Range(10, 50)];
-        for(int i = 0; i < intArray.Length; i++)
+        for(int i = 0; i < 360; i += 30)
         {
-            intArray[i] = Random.Range(0, 30);
+            float rad = Mathf.Deg2Rad * i;
+            float cos = Mathf.Cos(rad);
+            float sin = Mathf.Sin(rad);
+
+            Vector2 dir = new Vector2(cos, sin);
+
+            Debug.Log("Angle > " + i + " = Vector2 > " + dir);
+            if (i / 10 % 2 == 0) Debug.DrawRay(Vector2.zero, dir * (i + 10) / 10, Color.red, 10f);
+            else Debug.DrawRay(Vector2.zero, dir * (i + 10) / 10, Color.blue, 10f);
         }
-
-        return intArray;
-    }
-    public void OrderBy(int[] intArray)
-    {
-        List<int> list = new List<int>();
-        list = intArray.ToList();
-
-
-        List<int> orderedList = new List<int>();
-
-        while(list.Count > 0)
-        {
-            orderedList.Add(list.Min());
-            list.Remove(list.Min());
-        }
-
-        int[] arrayToReturn = new int[orderedList.Count];
-
-        for(int i = 0; i < orderedList.Count; i++)
-        {
-            if (i == 0) arrayToReturn[0] = orderedList[0];
-
-            else
-            {
-                if (i % 2 == 0) arrayToReturn[0 + i / 2] = orderedList[i];
-                else arrayToReturn[arrayToReturn.Length - 1 - i / 2] = orderedList[i];
-            }
-        }
-
-        foreach (int i in arrayToReturn) Debug.Log(i);
     }
 }

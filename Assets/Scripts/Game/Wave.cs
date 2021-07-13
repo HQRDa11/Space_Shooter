@@ -60,11 +60,6 @@ public class Wave
     }
 private void Spawn()
     {
-        // UPDATE la _instanceClock DANS Update()
-
-        // SET la Clock de l'ennemi a l'instanciation
-        // >> VOIR Enemy Class
-
         // FAIRE un switch dans la factory pour pouvoir Set Weapon Behaviour avec Index; <<<<<<<<<<<<<<<<<<<<<<<<
 
         GameObject gameObject1 = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this, _enemyInstanceClock);

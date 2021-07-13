@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Weapon_MultiShot_Circle : Enemy_Behaviours.Weapon
 {
     private bool _isFiring = false;
-    private int _numberOfShot = 20;
+    private int _numberOfShot = 10;
     private int _shotIndex = 0;
     public void Shoot(Enemy enemy)
     {
@@ -13,8 +13,11 @@ public class Enemy_Weapon_MultiShot_Circle : Enemy_Behaviours.Weapon
 
         if (_isFiring == true)
         {
-            float angle = enemy.transform.eulerAngles.z + (360 / _numberOfShot * _shotIndex); 
-            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            float angle = (enemy.transform.eulerAngles.z + 360 / (_numberOfShot + 1) *_shotIndex ) % 360;
+            float rad = Mathf.Deg2Rad * angle;
+            
+            Vector2 direction = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)); 
+
             GameObject shot = Factory.Instance.Shot_Factory.CreateShot(Factory.Instance.InGameObjectsList, Rarity.WHITE, direction, 3f, "Enemy");
             shot.transform.position = enemy.transform.position;
 
