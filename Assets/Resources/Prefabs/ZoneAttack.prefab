@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 1, g: 0.017465346, b: 0, a: 0.48235294}
+  m_Color: {r: 0.96862745, g: 0.079121076, b: 0.27058825, a: 0.27450982}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,6 +123,10 @@ PrefabInstance:
     - target: {fileID: 534213017621636683, guid: db7980b75c958264c936a9ebbe0d4f6e, type: 3}
       propertyPath: m_Name
       value: Bubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 534213017621636683, guid: db7980b75c958264c936a9ebbe0d4f6e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2103812537465947632, guid: db7980b75c958264c936a9ebbe0d4f6e, type: 3}
       propertyPath: m_RootOrder
