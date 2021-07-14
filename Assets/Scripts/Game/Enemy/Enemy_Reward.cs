@@ -19,7 +19,7 @@ public class Enemy_Reward : MonoBehaviour
 
         if (Random.Range(0, 100) <= _lootChance)
         {
-            Factory.Instance.Bonus_Factory.Instantiate_RandomBonus(this.transform.position);
+            Factory.Instance.Bonus_Factory.Instantiate_DicedBonus(this.transform.position);
         };
     }
 }
