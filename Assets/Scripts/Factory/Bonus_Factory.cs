@@ -14,21 +14,21 @@ public class Bonus_Factory
     public void Instantiate_DicedBonus(Vector2 position)
     {
         
-        int luck = Random.Range(0, 100);  // Turret 52% / Zone 20% / Repair 15% / Pilot 10% / Component 3% //
+        int luck = Random.Range(0, 100);  // Turret 67% / Zone 15% / Repair 10% / Pilot 5% / Component 3% //
        
-        if (luck <= 52)
+        if (luck <= 67)
         {
             Instantiate_TurretBonus(position, Factory.Dice_Rarity());
             return;
         }
 
-        else if (luck <= 72)
+        else if (luck <= 82)
         {
             Instantiate_ZoneBonus(position);
             return;
         }
 
-        else if (luck <= 87)
+        else if (luck <= 92)
         {
             Instantiate_RepairBonus(position);
             return;
