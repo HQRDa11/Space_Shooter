@@ -15,11 +15,11 @@ public static class SaveSystem
     {
         // Find availible save ID;
         int saveNumber = 1;
-        while(File.Exists(SAVE_FOLDER + "save_" + saveNumber + ".txt"))
+        while(File.Exists(SAVE_FOLDER + ApplicationInfo.VERSION +  "_save_" + saveNumber + ".txt"))
         {
             saveNumber++;
         }
-        File.WriteAllText(SAVE_FOLDER + "save_" + saveNumber + ".txt", saveString);
+        File.WriteAllText(SAVE_FOLDER + ApplicationInfo.VERSION + "_save_" + saveNumber + ".txt", saveString);
         { 
         }
     }

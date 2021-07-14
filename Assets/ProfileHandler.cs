@@ -39,54 +39,80 @@ public class ProfileHandler : MonoBehaviour
     private void Save()
     {
         // Save
-        Debug.Log("Saving:" + m_activeProfile.ID + "//" + "highScores:" + m_activeProfile.HighScores[0] + "/" + m_activeProfile.HighScores[1]);
+        //Debug.Log("Saving:" + m_activeProfile.ID + "//" + "highScores:" + m_activeProfile.HighScores[0] + "/" + m_activeProfile.HighScores[1]);
         string profileID = m_activeProfile.ID;
         int gameCurrency = m_activeProfile.GameCurrency;
         int[] highScores = m_activeProfile.HighScores;
+        int[] components = m_activeProfile.Components;
 
         SaveObject saveObject = new SaveObject
         {
+            _ApplicationVersion = ApplicationInfo.VERSION,
             _profileID = profileID,
             _gameCurrency = gameCurrency,
-            _highScores = highScores
-
+            _highScores = highScores,
+            _components = components
         };
         string json = JsonUtility.ToJson(saveObject);
         SaveSystem.Save(json);
-        Debug.LogWarning("Game Saved");
+        Debug.LogWarning("Profile Saved");
 
     }
 
-    private void Load()
+    private bool Load()
     {
         // Load
         string saveString = SaveSystem.LoadMostRecentFile();
         if (saveString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(saveString);
-            m_activeProfile.ID = saveObject._profileID;
-            m_activeProfile.GameCurrency = saveObject._gameCurrency;
-            m_activeProfile.HighScores = saveObject._highScores;
-            Debug.LogWarning("Loaded Profile" + saveString + " profile datas:" + m_activeProfile.ID + "/" + m_activeProfile.GameCurrency + "/" + m_activeProfile.HighScores[0] + m_activeProfile.HighScores[1]);
+            switch (saveObject._ApplicationVersion == ApplicationInfo.VERSION)
+            {
+                case true:
+                    m_activeProfile.ID = saveObject._profileID;
+                    m_activeProfile.GameCurrency = saveObject._gameCurrency;
+                    m_activeProfile.HighScores = saveObject._highScores;
+                    m_activeProfile.Components = saveObject._components;
+                    Debug.LogWarning("Profile Loaded");
+                    return true;
+                case false:
+                    Debug.LogError("Can't load last profile save ( save version outdated ).");
+                    return false;
+            }
         }
-
         else
         {
-            Debug.LogError("No save");
+            Debug.LogError("There is no save in directory: " + Application.persistentDataPath + "/Saves/" );
         }
+        return false;
     }
 
     private class SaveObject
     {
+        public string _ApplicationVersion;
         public string _profileID;
         public int _gameCurrency;
         public int[] _highScores;
+        public int[] _components;
     }
 
     public void UpdateProfile_WithGameResults( GameInfo info)
     {
         Update_HighScores(info.Get_Score()) ;
+        Update_TotalComponents(info.Get_lootedComponents());
         Save();
+    }
+    public void Update_TotalComponents(int[] lootedComponents)
+    {
+        if(!m_activeProfile)
+        {
+            Debug.LogError("No active profile");
+        }
+        for (int i = 0; i<lootedComponents.Length; i++)
+        {
+            m_activeProfile.ModifyNumberOf_Components(i, lootedComponents[i]);
+            Debug.Log("COmponent " + i + " ok");
+        }
     }
     private void Update_HighScores(int score)
     {
