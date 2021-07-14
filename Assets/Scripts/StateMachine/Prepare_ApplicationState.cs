@@ -44,10 +44,10 @@ public class Prepare_ApplicationState : ApplicationState
     {
         base.update();
         //Debug.Log("I am state." + m_type + " and I just updated! ");
-        if (Input.GetMouseButtonDown(0))
-        {
-            m_stateMachine.stateRequest(ApplicationState_Type.GAME);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    m_stateMachine.stateRequest(ApplicationState_Type.GAME);
+        //}
     }
 
     public override void end()
@@ -59,6 +59,6 @@ public class Prepare_ApplicationState : ApplicationState
 
     public override int GetMainThemeSchedule()
     {
-        return 279;
+        return 86;
     }
 }
