@@ -7,7 +7,7 @@ public class Enemy_Reward_Normal : Enemy_Behaviours.Reward
 
         if (Random.Range(0, 100) <= enemy.Lootchance)
         {
-            Factory.Instance.Bonus_Factory.Instantiate_RandomBonus(enemy.transform.position);
+            Factory.Instance.Bonus_Factory.Instantiate_DicedBonus(enemy.transform.position);
         }
     }
 }
