@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
                             return;
                     }
                 }
-                Debug.Log("No room for new Turret");
+                //Debug.Log("No room for new Turret");
                 return;
         }
     }
