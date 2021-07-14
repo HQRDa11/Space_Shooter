@@ -49,4 +49,33 @@ public class Factory : MonoBehaviour
 
     }
 
+    public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely // Current uses : Turrets and Components loot 
+    {
+        int luck = Random.Range(0, 100); // GREY 53% / WHITE 25% / GREEN 12% / BLUE 6% / PURPLE 3% / ORANGE 1% //
+
+        if (luck <= 53)
+        {
+            return Rarity.GREY;
+        }
+        else if (luck <= 78)
+        {
+            return Rarity.WHITE;
+        }
+        else if (luck <= 90)
+        {
+            return Rarity.GREEN;
+        }
+        else if (luck <= 96)
+        {
+            return Rarity.BLUE;
+        }
+        else if (luck <= 99)
+        {
+            return Rarity.PURPLE;
+        }
+        else
+        {
+            return Rarity.ORANGE;
+        }
+    }
 }
