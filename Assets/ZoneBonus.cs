@@ -43,7 +43,7 @@ public class ZoneBonus : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Player>())
             {
-                Debug.Log("ZoneBonus!");
+                //Debug.Log("ZoneBonus!");
                 GameObject zoneAttack = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ZoneAttack"));
                 zoneAttack.transform.position = this.gameObject.transform.position;
                 GameObject.Destroy(this.gameObject);
