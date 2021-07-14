@@ -501,6 +501,7 @@ MonoBehaviour:
   m_gameCurrency: 0
   m_id: 
   m_highScores: 
+  m_components: 
 --- !u!1 &1726231610
 GameObject:
   m_ObjectHideFlags: 0

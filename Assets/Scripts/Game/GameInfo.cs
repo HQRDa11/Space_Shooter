@@ -34,6 +34,15 @@ public class GameInfo : MonoBehaviour
     {
         return m_score;
     }
+    public int[] Get_lootedComponents()
+    {
+        int[] components = new int[6];
+        for (int i = 0; i < components.Length; i++)
+        {
+            components[i] = m_lootedComponents[(Rarity)i];
+        }
+        return components;
+    }
 
     public void AddNewComponent(Rarity rarity)
     {

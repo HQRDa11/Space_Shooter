@@ -15,13 +15,23 @@ public class Profile : MonoBehaviour
     private int[] m_highScores;
     public int[] HighScores { get { return m_highScores; } set { m_highScores = value; } }
 
+    [SerializeField]
+    private int[] m_components;
+    public int[] Components { get { return m_components; } set { m_components = value; } }
+
     // Start is called before the first frame update
     void Awake()
     {
         m_gameCurrency = 0;
         m_id = "noID";
-        HighScores = new int[10];
+        m_highScores = new int[10];
+        m_components = new int[6];
 
+    }
+
+    public void ModifyNumberOf_Components( int rarityIndex, int modifier)
+    {
+        m_components[rarityIndex] += modifier;
     }
 
     // Update is called once per frame
