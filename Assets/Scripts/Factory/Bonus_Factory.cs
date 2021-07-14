@@ -11,58 +11,42 @@ public class Bonus_Factory
 
     }
 
-    public void Instantiate_RandomBonus(Vector2 position)
+    public void Instantiate_DicedBonus(Vector2 position)
     {
-        int luck = Random.Range(0, 100);
+        
+        int luck = Random.Range(0, 100);  // Turret 52% / Zone 20% / Repair 15% / Pilot 10% / Component 3% //
+       
+        if (luck <= 52)
+        {
+            Instantiate_TurretBonus(position, Factory.Dice_Rarity());
+            return;
+        }
 
-        if ( luck <= 23 )
-        {
-            Instantiate_TurretBonus(position, Rarity.GREY);
-                return;
-        }
-        else if ( luck <= 40 )
-        {
-            Instantiate_TurretBonus(position, Rarity.WHITE);
-            return;
-        }
-        else if ( luck <= 52 )
-        {
-            Instantiate_TurretBonus(position, Rarity.GREEN);
-            return;
-        }
-        else if ( luck <= 60 )
-        {
-            Instantiate_TurretBonus(position, Rarity.BLUE);
-            return;
-        }        
-        else if ( luck <= 65 )
-        {
-            Instantiate_TurretBonus(position, Rarity.PURPLE);
-            return;
-        }
-        else if (luck <= 67)
-        {
-            Instantiate_TurretBonus(position, Rarity.ORANGE);
-            return;
-        }  
-        else if (luck <= 80)
+        else if (luck <= 72)
         {
             Instantiate_ZoneBonus(position);
             return;
         }
 
-        else if (luck <= 90)
+        else if (luck <= 87)
         {
             Instantiate_RepairBonus(position);
             return;
         }
 
-        else 
+        else if (luck <= 97)
         {
             Instantiate_PilotBonus(position);
             return;
         }
+
+        else
+        {
+            Instantiate_ComponentBonus(position, Factory.Dice_Rarity());
+            return;
+        }
     }
+
 
     public TurretBonus Instantiate_TurretBonus(Vector2 position, Rarity rarity )
     {
@@ -72,6 +56,15 @@ public class Bonus_Factory
         bonusLoot.GetComponent<TurretBonus>().Rarity = rarity;
         bonusLoot.GetComponent<SpriteRenderer>().material = GameObject.FindObjectOfType<Factory>().Material_Factory.GetMaterial(rarity);
         return bonusLoot.GetComponent<TurretBonus>();
+    }
+    public ComponentBonus Instantiate_ComponentBonus(Vector2 position, Rarity rarity)
+    {
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ComponentBonus"));
+        if (!bonusLoot.GetComponent<ComponentBonus>()) { bonusLoot.AddComponent<ComponentBonus>(); }
+        bonusLoot.transform.position = position;
+        bonusLoot.GetComponent<ComponentBonus>().Rarity = rarity;
+        bonusLoot.GetComponent<SpriteRenderer>().material = GameObject.FindObjectOfType<Factory>().Material_Factory.GetMaterial(rarity);
+        return bonusLoot.GetComponent<ComponentBonus>();
     }
     public PilotBonus Instantiate_PilotBonus(Vector2 position)
     {
