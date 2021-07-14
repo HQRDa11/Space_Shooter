@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     // Ally system
     private Ally[] m_allAllies;
     public Ally[] AllAllies { get => m_allAllies; }
+
+
+    private GameInfo m_gameInfo;
+
     //private int m_maxAllies;
 
     // Start is called before the first frame update
@@ -20,6 +24,9 @@ public class Player : MonoBehaviour
 
         m_ship = GetComponentInChildren<Ship>();
         m_ship.InitialisePlayerShip(200);
+
+        m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
+        if (m_gameInfo == null) Debug.LogError("no GameInfo go found");
     }
 
     // Update is called once per frame
@@ -112,4 +119,8 @@ public class Player : MonoBehaviour
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"));
     }
 
+    public void OnComponentBonus(Rarity rarity)
+    {
+        m_gameInfo.AddNewComponent(rarity);
+    }
 }
