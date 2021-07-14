@@ -28,7 +28,9 @@ public class EndGame_ApplicationState : ApplicationState
 
     private void Display_GameInfo()
     {
-        m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>() ;
+
+        m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
+        int[] loot = m_gameInfo.Get_lootedComponents();
         m_UI.transform.GetChild(0).GetComponent<Text>().text =
             "Game Over \n" +
             "\n" +
@@ -36,7 +38,13 @@ public class EndGame_ApplicationState : ApplicationState
             "\n" +
             "Score : " + m_gameInfo.Get_Score() + "\n" +
             "Last Wave : " + "\n" +
-            "Loots : " + "\n" +
+            "Looted Components : " + "\n" + 
+            "// GREY " + loot[0] + "\n" + 
+            "// WHITE " + loot[1] + "\n" + 
+            "// GREEN " + loot[2] + "\n" + 
+            "// BLUE " + loot[3] + "\n" + 
+            "// PURPLE " + loot[4] + "\n" + 
+            "// ORANGE " + loot[5] + "\n" +
             "RewardChestOpening : ";
     }
     public override void update()
