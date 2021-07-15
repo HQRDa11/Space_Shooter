@@ -28,18 +28,23 @@ public class ScoreDisplay : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!_isStarted) Initialize();
+        switch (!_isStarted)
+        {
+            case true:
+                Initialize();
+                return;
+        }
     }
 
     private void Initialize()
     {
         _clock += Time.deltaTime;
 
-        if (_clock >= 1 && _clock < 2)
+        if (_clock >= 1 && _clock < 1.6f)
         {
-            _rectTransform.anchoredPosition += new Vector2(0, _offSet * Time.deltaTime);
+            _rectTransform.anchoredPosition += new Vector2(0, _offSet * Time.deltaTime *2);
         }
-        else if (_clock >= 2 && _clock < 3f)
+        else if (_clock >= 1.6f && _clock < 4f)
         {
             _text.text = "0";
             _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 0);

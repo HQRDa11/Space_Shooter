@@ -33,30 +33,36 @@ public class ComboDisplay : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!_isStarted) Initialize();
-        PulseEffectRevert();
+        switch (!_isStarted)
+        {
+            case true:
+                Initialize();
+                PulseEffectRevert();
+                return;
+        }
     }
 
     private void Initialize()
     {
         _clock += Time.deltaTime;
 
-        if (_clock >= 1 && _clock < 2)
+        if (_clock >= 1 && _clock < 1.6f)
         {
-            _rectTransform.anchoredPosition += new Vector2(0, _offSet * Time.deltaTime);
+            _rectTransform.anchoredPosition += new Vector2(0, _offSet * Time.deltaTime * 2);
         }
-        else if (_clock >= 2 && _clock < 2.5f)
+        else if (_clock >= 1.6f && _clock < 4f)
         {
-            _text.text = "x0";
+            _text.text = "0";
             _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, 0);
             _text.color += new Color(0, 0, 0, _opacity * Time.deltaTime);
-            _rectTransform.anchoredPosition = Vector2.zero + new Vector2(0,-135) ;
+            _rectTransform.anchoredPosition = Vector2.zero + Vector2.down * 3; ;
         }
-        else if (_clock >= 2.5f)
+        else if (_clock >= 3f)
         {
             _isStarted = true;
         }
     }
+
 
     private void ShowCombo()
     {
