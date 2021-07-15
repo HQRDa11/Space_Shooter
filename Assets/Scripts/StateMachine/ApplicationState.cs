@@ -44,7 +44,7 @@ public class ApplicationState
     {
         MusicPlayer musicPlayer = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
         musicPlayer.Stop();
-        Debug.Log("isMusicPlayerEnding? " + (musicPlayer == true));
+        //Debug.Log("isMusicPlayerEnding? " + (musicPlayer == true));
         //Debug.Log("state." + m_type + " ending...");
     }
 

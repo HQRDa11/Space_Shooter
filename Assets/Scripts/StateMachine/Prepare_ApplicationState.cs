@@ -54,7 +54,7 @@ public class Prepare_ApplicationState : ApplicationState
     {
        // GameObject.Destroy(m_gameInfo.gameObject);
         GameObject.Destroy(m_UI);
-        Debug.Log("state" + m_type + " ending! ");
+        //Debug.Log("state" + m_type + " ending! ");
     }
 
     public override int GetMainThemeSchedule()
