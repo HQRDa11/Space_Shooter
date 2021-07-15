@@ -55,7 +55,7 @@ public class Bonus_Factory
 
     public TurretBonus Instantiate_TurretBonus(Vector2 position, Rarity rarity )
     {
-        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/TurretBonus"));
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/TurretBonus"));
         if (!bonusLoot.GetComponent<TurretBonus>()) { bonusLoot.AddComponent<TurretBonus>(); }
         bonusLoot.transform.position = position;
         bonusLoot.GetComponent<TurretBonus>().Rarity = rarity;
@@ -64,7 +64,7 @@ public class Bonus_Factory
     }
     public ComponentBonus Instantiate_ComponentBonus(Vector2 position, Rarity rarity)
     {
-        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ComponentBonus"));
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/ComponentBonus"));
         if (!bonusLoot.GetComponent<ComponentBonus>()) { bonusLoot.AddComponent<ComponentBonus>(); }
         bonusLoot.transform.position = position;
         bonusLoot.GetComponent<ComponentBonus>().Rarity = rarity;
@@ -73,28 +73,28 @@ public class Bonus_Factory
     }
     public PilotBonus Instantiate_PilotBonus(Vector2 position)
     {
-        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/PilotBonus"));
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/PilotBonus"));
         if (!bonusLoot.GetComponent<PilotBonus>()) { bonusLoot.AddComponent<PilotBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<PilotBonus>();
     }
     public RepairBonus Instantiate_RepairBonus(Vector2 position)
     {
-        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairBonus"));
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/RepairBonus"));
         if (!bonusLoot.GetComponent<RepairBonus>()) { bonusLoot.AddComponent<RepairBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<RepairBonus>();
     }
     public ShieldBonus Instantiate_ShieldBonus(Vector2 position)
     {
-        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ShieldBonus"));
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/ShieldBonus"));
         if (!bonusLoot.GetComponent<RepairBonus>()) { bonusLoot.AddComponent<ShieldBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<ShieldBonus>();
     }
     public ZoneBonus Instantiate_ZoneBonus(Vector2 position)
     {
-        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ZoneBonus"));
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/ZoneBonus"));
         if (!bonusLoot.GetComponent<ZoneBonus>()) { bonusLoot.AddComponent<ZoneBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<ZoneBonus>();
