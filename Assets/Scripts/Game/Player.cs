@@ -153,4 +153,49 @@ public class Player : MonoBehaviour
         }
         return null;
     }
+
+    public void OnShieldBonus() // <= Why is this Method Called 2 times on loot? Multiple player collision?
+    {
+        Debug.Log("test"); 
+        switch (this.Ship.Shield == null)
+        {
+            case true:
+                this.Ship.NewShield();
+                return;
+
+            case false:
+                Shield lowestShield = this.Ship.Shield;
+                foreach (Ally ally in m_allAllies)
+                {
+                    switch(ally != null)
+                    {
+                        case true:
+                            switch(ally.Ship != null )
+                            {
+                                case true:
+                                    switch (ally.Ship.Shield == null)
+                                    {
+                                        case true:
+                                            ally.Ship.NewShield();
+                                            return;
+                                       
+                                        case false:
+                                            switch (ally.Ship.Shield.Energy < lowestShield.Energy)
+                                            {
+                                                case true:
+                                                    lowestShield = ally.Ship.Shield;
+                                                    break;
+                                            }
+                                            break;
+                                    }
+                                    break;
+                            }
+                            break;
+                    }
+
+                }
+                lowestShield.RechargeFull();
+                return;
+        }
+    }
 }
