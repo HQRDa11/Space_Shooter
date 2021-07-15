@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
             case false:
                 foreach (Ally ally in m_allAllies)
                 {
-                    switch (ally.Ship != null)
+                    switch (ally != null && ally.Ship != null)
                     {
                         case true:
                             switch (ally.Ship.hasDrone)
