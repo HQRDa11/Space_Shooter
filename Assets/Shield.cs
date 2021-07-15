@@ -12,7 +12,7 @@ public class Shield : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_maxEnergy = 10;
+        m_maxEnergy = 30;
         m_energy = m_maxEnergy;
     }
 
