@@ -9,6 +9,7 @@ public class Sound : MonoBehaviour
 
     private AudioSource m_audioSource;
     private AudioClip m_weaponDeploy;
+    private AudioClip m_droidShort;
 
     // Start is called before the first frame update
     void Awake()
@@ -16,6 +17,7 @@ public class Sound : MonoBehaviour
         _instance = this;
         m_audioSource = GetComponent<AudioSource>();
         m_weaponDeploy = Resources.Load<AudioClip>("AudioClips/WeaponDeploy");
+        m_droidShort = Resources.Load<AudioClip>("AudioClips/DroidShort");
     }
 
     // Update is called once per frame
@@ -23,12 +25,16 @@ public class Sound : MonoBehaviour
     {
         if ( Input.GetKeyDown(KeyCode.S))
         {
-            Play_WeaponDeploy();
+            Play_Droid();
         }
     }
 
     public void Play_WeaponDeploy()
     {
-        m_audioSource.PlayOneShot(m_weaponDeploy);
+        m_audioSource.PlayOneShot(m_weaponDeploy,0.3f);
+    }
+    public void Play_Droid()
+    {
+        m_audioSource.PlayOneShot(m_droidShort, 1);
     }
 }

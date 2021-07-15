@@ -116,6 +116,7 @@ public class Player : MonoBehaviour
 
     public void OnRepairBonus()
     {
+        GameObject.Find("Sound").GetComponent<Sound>().Play_Droid();
         GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"),Factory._InGameObjects_Parent);
     }
 
