@@ -16,11 +16,14 @@ public class Ship : MonoBehaviour
 
     private GameObject _explosionAnim;
 
+    public bool hasDrone { get; set; }
+
     public void Start()
     {
         _player = GameObject.Find("Player").gameObject.GetComponent<Player>();
         _explosionAnim = Resources.Load<GameObject>("Prefabs/Explosion");
         _velocity = Vector3.one;
+        hasDrone = false;
     }
 
     public void InitialisePlayerShip( float maxHealth)

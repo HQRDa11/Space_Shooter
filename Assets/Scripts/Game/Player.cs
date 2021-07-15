@@ -116,11 +116,41 @@ public class Player : MonoBehaviour
 
     public void OnRepairBonus()
     {
-        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"));
+        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"),Factory._InGameObjects_Parent);
     }
 
     public void OnComponentBonus(Rarity rarity)
     {
         m_gameInfo.AddNewComponent(rarity);
+    }
+
+    public Ship Assign_Drone()
+    {
+        switch(this.Ship.hasDrone == false)
+        {
+            case true:
+                this.Ship.hasDrone = true;
+                return this.Ship;
+
+            case false:
+                foreach (Ally ally in m_allAllies)
+                {
+                    switch (ally.Ship != null)
+                    {
+                        case true:
+                            switch (ally.Ship.hasDrone)
+                            {
+                                case false:
+                                    ally.Ship.hasDrone = true;
+                                    return ally.Ship;
+                                default:
+                                    break;
+                            }
+                            break;
+                    }
+                }
+                break;
+        }
+        return null;
     }
 }

@@ -25,7 +25,7 @@ public class Factory : MonoBehaviour
     private Enemy_Factory _enemyFactory;
     public Enemy_Factory Enemy_Factory { get => _enemyFactory; }
 
-    public Transform _InGameObjects_Parent;
+    public static Transform _InGameObjects_Parent;
 
     private void Awake()
     {
@@ -44,9 +44,14 @@ public class Factory : MonoBehaviour
         _InGameObjects_Parent = parent;
     }
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-
+        switch (Input.GetKeyDown(KeyCode.B))
+        {
+            case true:
+                _bonusFactory.Instantiate_DicedBonus(Vector3.zero);
+                break;
+        }
     }
 
     public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely // Current uses : Turrets and Components loot 
