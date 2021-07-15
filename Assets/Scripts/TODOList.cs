@@ -21,8 +21,9 @@ namespace HQRDa
     {
 
         //TO DO:
-        // - Shield Bonus
-        //   Shield Mechanics
-        //   Remove all lifeTime and Timer from Bonuses (no longer relevant if they cn check isOnMap instead
+        // ok - Shield Bonus
+        // ok - Shield Mechanics
+        // - Creates bonus rarity for shields and repairDrones bonuses
+        // - Remove all _lifeTime updates from Bonuses and replace with Map.IsOnScreen check (as done in repairbonus.cs)
     }
 }
