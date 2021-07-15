@@ -111,7 +111,7 @@ public class ProfileHandler : MonoBehaviour
         for (int i = 0; i<lootedComponents.Length; i++)
         {
             m_activeProfile.ModifyNumberOf_Components(i, lootedComponents[i]);
-            Debug.Log("COmponent " + i + " ok");
+            //Debug.Log("COmponent " + i + " ok");
         }
     }
     private void Update_HighScores(int score)
