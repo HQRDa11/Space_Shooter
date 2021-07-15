@@ -21,17 +21,8 @@ namespace HQRDa
     {
 
         //TO DO:
-        // ok - importer rarete materials and enum
-        // ok - give bonus rarity
-        // ok - resoudre pb couleurs 
-        // -Create Turret Factory =>  construct turret with rarity
-        // - modify turret system to have AddTurret(Turret) fnctn
-        // - OnBonus: AddTurret(new Turret...)
-
-        // - augmenter degats;
-        // -verifier si le level/la vie des enemy est bien random mtn (isBug?)
-
-        // - Enemy shot
-        // - panel de loot sur la vague et pointeur enemy vers panel.
+        // - Shield Bonus
+        //   Shield Mechanics
+        //   Remove all lifeTime and Timer from Bonuses (no longer relevant if they cn check isOnMap instead
     }
 }

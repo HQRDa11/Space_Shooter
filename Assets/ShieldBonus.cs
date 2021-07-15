@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RepairBonus : MonoBehaviour
+public class ShieldBonus : MonoBehaviour
 {
     private float _speed;
 
     // Start is called before the first frame update
     void Start()
     {
-        _speed = 2;
+        _speed = 1; // BUG HERE why is it moving faster than other bonuses at _speed = 2 ?
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class RepairBonus : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Player>())
             {
-                collision.gameObject.GetComponent<Player>().OnRepairBonus();
+                collision.gameObject.GetComponent<Player>().OnShieldBonus();
                 GameObject.Destroy(this.gameObject);
             }
         }

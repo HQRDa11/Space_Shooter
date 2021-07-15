@@ -12,6 +12,8 @@ public class Ship : MonoBehaviour
     private int  _AllyId;
     private Player _player;
     private Vector3 _velocity;
+
+    public Shield Shield;
     public float HealthRatio { get { return _health / _maxHealth; } }
 
     private GameObject _explosionAnim;
@@ -104,4 +106,11 @@ public class Ship : MonoBehaviour
         GameObject explosion = GameObject.Instantiate(_explosionAnim);
         explosion.transform.position = this.gameObject.transform.position;
     }
+
+    public void NewShield()
+    {
+        Shield = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Shield"),this.gameObject.transform).GetComponent<Shield>();
+    }
+
+
 }

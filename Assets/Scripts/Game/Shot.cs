@@ -64,12 +64,33 @@ public class Shot : MonoBehaviour
                 return;
 
             case "Enemy":
-                if (collision.gameObject.tag == "PlayerShip")
-                {
 
-                    collision.GetComponent<Ship>().TakeDamage(_damage);
-                    GameObject.Destroy(this.gameObject);
+                switch (collision.gameObject.tag)
+                {
+                    case "Enemy":
+                        return;
+
+                    case "Player":
+                        return;
+
+                    case "Bonus":
+                        return;
+
+                    case "PlayerShip":
+                        collision.GetComponent<Ship>().TakeDamage(_damage);
+                        GameObject.Destroy(this.gameObject);
+                        return;
+
+                    case "PlayerShield":
+                        collision.GetComponent<Shield>().TakeDamage(_damage);
+                        GameObject.Destroy(this.gameObject);
+                        return;
+
+                    default:
+                        Debug.Log("Unkown collision Exception / " + gameObject.tag + " shot - " + collision.gameObject.tag + " called:"+ collision.gameObject.name + " at: " + collision.transform.position );
+                        break;
                 }
+
                 return;
             default:
                 Debug.Log("Unkown Exception");

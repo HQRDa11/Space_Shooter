@@ -8,6 +8,7 @@ TagManager:
   - HealthBar
   - PlayerShip
   - ApplicationState
+  - PlayerShield
   layers:
   - Default
   - TransparentFX

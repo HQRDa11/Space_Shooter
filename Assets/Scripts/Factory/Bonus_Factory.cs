@@ -14,17 +14,22 @@ public class Bonus_Factory
     public void Instantiate_DicedBonus(Vector2 position)
     {
         
-        int luck = Random.Range(0, 100);  // Turret 67% / Zone 15% / Repair 10% / Pilot 5% / Component 3% //
+        int luck = Random.Range(0, 100);  // Turret 62% / Zone 12% / Shield 10% / Repair 8% / Pilot 5% / Component 3% //
        
-        if (luck <= 67)
+        if (luck <= 62)
         {
             Instantiate_TurretBonus(position, Factory.Dice_Rarity());
             return;
         }
 
-        else if (luck <= 82)
+        else if (luck <= 74)
         {
             Instantiate_ZoneBonus(position);
+            return;
+        }
+        else if (luck <= 84)
+        {
+            Instantiate_ShieldBonus(position);
             return;
         }
 
@@ -79,6 +84,13 @@ public class Bonus_Factory
         if (!bonusLoot.GetComponent<RepairBonus>()) { bonusLoot.AddComponent<RepairBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<RepairBonus>();
+    }
+    public ShieldBonus Instantiate_ShieldBonus(Vector2 position)
+    {
+        GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/ShieldBonus"));
+        if (!bonusLoot.GetComponent<RepairBonus>()) { bonusLoot.AddComponent<ShieldBonus>(); }
+        bonusLoot.transform.position = position;
+        return bonusLoot.GetComponent<ShieldBonus>();
     }
     public ZoneBonus Instantiate_ZoneBonus(Vector2 position)
     {
