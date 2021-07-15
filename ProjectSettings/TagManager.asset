@@ -9,6 +9,7 @@ TagManager:
   - PlayerShip
   - ApplicationState
   - PlayerShield
+  - Bonus
   layers:
   - Default
   - TransparentFX
