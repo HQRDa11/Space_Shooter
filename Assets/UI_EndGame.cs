@@ -39,7 +39,7 @@ public class UI_EndGame : MonoBehaviour
         Debug.LogWarning("RarityGrey = " + m_rarityIndex);
         m_additionValue = 0;
         m_timer = 0;
-        m_timerMax = 0.3f;
+        m_timerMax = 0.12f;
     }
 
     // Update is called once per frame
@@ -92,7 +92,6 @@ public class UI_EndGame : MonoBehaviour
             case true:
                 Sound.Instance.Play_ComponentCollect();
                 m_addedComponents_Display[m_rarityIndex].text = "+" + m_additionValue;
-                m_totalComponents_Display[m_rarityIndex + 1].text = m_totalComponents[m_rarityIndex].ToString();
                 break;
         }
     }
@@ -108,9 +107,16 @@ public class UI_EndGame : MonoBehaviour
         switch (TryNextRarity())
         {
             case true:
-                m_timerMax += 0.4f * m_timerMax;
-                m_rarityIndex ++;
+                switch (m_additionValue-1!=0)
+                {
+                    case true:
+                        Sound.Instance.Play_ComponentCollect();
+                        m_totalComponents_Display[m_rarityIndex + 1].text = (m_totalComponents[m_rarityIndex] + m_additionValue - 1).ToString();
+                        break;
+                }
+                m_timerMax += 0.3f * m_timerMax;
                 m_additionValue = 0;
+                m_rarityIndex ++;
                 break;
         }
     }
