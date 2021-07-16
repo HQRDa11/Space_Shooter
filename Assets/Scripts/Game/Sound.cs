@@ -11,6 +11,7 @@ public class Sound : MonoBehaviour
     private AudioClip m_weaponDeployShort;
     private AudioClip m_droidShort;
     private AudioClip m_componentCollect;
+    private AudioClip m_startSound;
 
     // Start is called before the first frame update
     void Awake()
@@ -20,6 +21,7 @@ public class Sound : MonoBehaviour
         m_weaponDeployShort = Resources.Load<AudioClip>("AudioClips/WeaponDeployShort");
         m_droidShort = Resources.Load<AudioClip>("AudioClips/DroidShort");
         m_componentCollect = Resources.Load<AudioClip>("AudioClips/ComponentCollect");
+        m_startSound = Resources.Load<AudioClip>("AudioClips/StartSound");
     }
 
     // Update is called once per frame
@@ -29,6 +31,11 @@ public class Sound : MonoBehaviour
         {
             Play_Droid();
         }
+    }
+    public void Play_StartSound()
+    {
+
+        m_audioSource.PlayOneShot(m_startSound, 0.8f);
     }
 
     public void Play_WeaponDeployShort()
