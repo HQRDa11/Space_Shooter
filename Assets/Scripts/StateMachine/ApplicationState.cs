@@ -48,7 +48,7 @@ public class ApplicationState
         //Debug.Log("state." + m_type + " ending...");
     }
 
-    public virtual int GetMainThemeSchedule()
+    public virtual float GetMainThemeSchedule()
     {
         return 0;
     }

@@ -24,7 +24,7 @@ public class MainMenu_ApplicationState : ApplicationState
         //Debug.Log("state" + m_type + " ending! ");
     }
 
-    public override int GetMainThemeSchedule()
+    public override float GetMainThemeSchedule()
     {
         return 0;
     }

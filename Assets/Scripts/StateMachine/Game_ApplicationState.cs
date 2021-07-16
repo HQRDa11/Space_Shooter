@@ -31,7 +31,7 @@ public class Game_ApplicationState : ApplicationState
         GameObject.Destroy(m_game);
     }
 
-    public override int GetMainThemeSchedule()
+    public override float GetMainThemeSchedule()
     {
         return 117;
     }
