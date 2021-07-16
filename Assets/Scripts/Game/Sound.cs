@@ -8,16 +8,18 @@ public class Sound : MonoBehaviour
     public static Sound Instance { get => _instance; }
 
     private AudioSource m_audioSource;
-    private AudioClip m_weaponDeploy;
+    private AudioClip m_weaponDeployShort;
     private AudioClip m_droidShort;
+    private AudioClip m_componentCollect;
 
     // Start is called before the first frame update
     void Awake()
     {
         _instance = this;
         m_audioSource = GetComponent<AudioSource>();
-        m_weaponDeploy = Resources.Load<AudioClip>("AudioClips/WeaponDeploy");
+        m_weaponDeployShort = Resources.Load<AudioClip>("AudioClips/WeaponDeployShort");
         m_droidShort = Resources.Load<AudioClip>("AudioClips/DroidShort");
+        m_componentCollect = Resources.Load<AudioClip>("AudioClips/ComponentCollect");
     }
 
     // Update is called once per frame
@@ -29,12 +31,16 @@ public class Sound : MonoBehaviour
         }
     }
 
-    public void Play_WeaponDeploy()
+    public void Play_WeaponDeployShort()
     {
-        m_audioSource.PlayOneShot(m_weaponDeploy,0.3f);
+        m_audioSource.PlayOneShot(m_weaponDeployShort,0.2f);
     }
     public void Play_Droid()
     {
-        m_audioSource.PlayOneShot(m_droidShort, 1);
+        m_audioSource.PlayOneShot(m_droidShort, 0.7f);
+    }
+    public void Play_ComponentCollect()
+    {
+        m_audioSource.PlayOneShot(m_componentCollect, 0.9f);
     }
 }
