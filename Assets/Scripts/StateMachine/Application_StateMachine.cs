@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum ApplicationState_Type { NULL, INTRO, MAINMENU, PREPARE, GAME, ENDGAME, PAUSE, OPTIONS, CREDITS, QUIT }
+public enum ApplicationState_Type { NULL, INTRO, MAINMENU, PREPARE, UPGRADE, GAME, ENDGAME, PAUSE, OPTIONS, CREDITS, QUIT }
 public class Application_StateMachine : MonoBehaviour
 {
     private static Application_StateMachine _instance;
@@ -90,6 +90,13 @@ public class Application_StateMachine : MonoBehaviour
                         SetCurrentState(new Game_ApplicationState("State_Game"));
                         isSwitch = true;
                         break;
+
+                    case ApplicationState_Type.UPGRADE:
+                        EndCurrentState();
+                        SetCurrentState(new Upgrade_ApplicationState("State_Upgrade"));
+                        isSwitch = true;
+                        break;
+
                     case ApplicationState_Type.MAINMENU:
                         EndCurrentState();
                         SetCurrentState(new MainMenu_ApplicationState("State_MainMenu"));
@@ -98,7 +105,20 @@ public class Application_StateMachine : MonoBehaviour
                 }
                 break;
 
-             case ApplicationState_Type.GAME:
+
+            case ApplicationState_Type.UPGRADE:
+
+                switch (stateResquest)
+                {
+                    case ApplicationState_Type.PREPARE:
+                        EndCurrentState();
+                        SetCurrentState(new Prepare_ApplicationState("State_Prepare"));
+                        isSwitch = true;
+                        break;
+                }
+                break;
+
+            case ApplicationState_Type.GAME:
 
                 switch (stateResquest)
                 {
