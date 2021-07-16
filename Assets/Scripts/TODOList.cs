@@ -23,7 +23,10 @@ namespace HQRDa
         //TO DO:
         // ok - Shield Bonus
         // ok - Shield Mechanics
+        // ok - Add satisfying compponent loot display in EndGameScreen
+        // - Add Highest wave achieved in SaveObject
         // - Creates bonus rarity for shields and repairDrones bonuses
         // - Remove all _lifeTime updates from Bonuses and replace with Map.IsOnScreen check (as done in repairbonus.cs)
+        // - dans UI_EndGame. cs possible de caluler et afficher une mention a partir des loot et du score? (: viur 'NOTE1' dans UI_EndGame.cs)
     }
 }

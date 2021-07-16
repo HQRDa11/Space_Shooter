@@ -15,7 +15,7 @@ public class ComboSystem : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        _resetDelay = 2f;
+        _resetDelay = 2.1f;
         _clock = 0;
     }
 

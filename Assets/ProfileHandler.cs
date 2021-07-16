@@ -5,11 +5,19 @@ using System.IO;
 
 public class ProfileHandler : MonoBehaviour
 {
+
+    private static ProfileHandler _instance;
+    public static ProfileHandler Instance { get => _instance; }
+
     private const string SAVE_SEPARATOR = "#SAVE-VALUE#";
     [SerializeField] private GameObject m_profileObject;
     private Profile m_activeProfile;
+
+    public Profile ActiveProfile { get => m_activeProfile; }
     private void Start()
     {
+        _instance = this;
+
         SaveSystem.Init();
 
         m_profileObject = GameObject.Find("ActiveProfile");
@@ -43,7 +51,7 @@ public class ProfileHandler : MonoBehaviour
         string profileID = m_activeProfile.ID;
         int gameCurrency = m_activeProfile.GameCurrency;
         int[] highScores = m_activeProfile.HighScores;
-        int[] components = m_activeProfile.Components;
+        int[] components = m_activeProfile.TotalComponents;
 
         SaveObject saveObject = new SaveObject
         {
@@ -72,7 +80,7 @@ public class ProfileHandler : MonoBehaviour
                     m_activeProfile.ID = saveObject._profileID;
                     m_activeProfile.GameCurrency = saveObject._gameCurrency;
                     m_activeProfile.HighScores = saveObject._highScores;
-                    m_activeProfile.Components = saveObject._components;
+                    m_activeProfile.TotalComponents = saveObject._components;
                     Debug.LogWarning("Profile Loaded");
                     return true;
                 case false:

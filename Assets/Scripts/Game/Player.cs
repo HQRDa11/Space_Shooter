@@ -14,13 +14,10 @@ public class Player : MonoBehaviour
 
     private GameInfo m_gameInfo;
 
-    //private int m_maxAllies;
-
     // Start is called before the first frame update
     void Start()
     {
         m_allAllies = new Ally[4];
-        //m_maxAllies = 4;
 
         m_ship = GetComponentInChildren<Ship>();
         m_ship.InitialisePlayerShip(200);
@@ -78,7 +75,7 @@ public class Player : MonoBehaviour
     public void OnTurretBonus(Rarity rarity)
     {
         //this.gameObject.GetComponent<TurretSystem>().AddTurret(Factory.Instance.Turret_Factory.CreateTurret(rarity));
-        GameObject.Find("Sound").GetComponent<Sound>().Play_WeaponDeploy();
+        GameObject.Find("Sound").GetComponent<Sound>().Play_WeaponDeployShort();
         Turret turret = Factory.Instance.Turret_Factory.CreateTurret(rarity);
 
         switch (m_ship.gameObject.GetComponent<TurretSystem>().AddTurret(turret))
@@ -122,7 +119,9 @@ public class Player : MonoBehaviour
 
     public void OnComponentBonus(Rarity rarity)
     {
+        Sound.Instance.Play_ComponentCollect();
         m_gameInfo.AddNewComponent(rarity);
+        m_gameInfo.DisplayComponents();
     }
 
     public Ship Assign_Drone()

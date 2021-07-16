@@ -10,43 +10,24 @@ public class EndGame_ApplicationState : ApplicationState
         : base(name)
     {
         m_type = ApplicationState_Type.ENDGAME;
-        Instantiate_UI();
-        m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>() ;
+        m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
         if (m_gameInfo == null)
         {
             Debug.LogWarning(" No GameInfo Object");
         }
+        Instantiate_UI();
         GameObject.Find("ProfileHandler").GetComponent<ProfileHandler>().UpdateProfile_WithGameResults(m_gameInfo);
-        Display_GameInfo();
+       
     }
 
     private void Instantiate_UI()
     {
         m_UI = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_States/UI_EndGame"));
+        m_UI.GetComponent<UI_EndGame>().LootedComponents = m_gameInfo.GetComponent<GameInfo>().Get_lootedComponents();
         m_UI.transform.SetParent(GameObject.Find("State_EndGame").gameObject.transform);
+        m_UI.GetComponent<UI_EndGame>().Display_GameInfo(m_gameInfo);
     }
 
-    private void Display_GameInfo()
-    {
-
-        m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
-        int[] loot = m_gameInfo.Get_lootedComponents();
-        m_UI.transform.GetChild(0).GetComponent<Text>().text =
-            "Game Over \n" +
-            "\n" +
-            "\n" +
-            "\n" +
-            "Score : " + m_gameInfo.Get_Score() + "\n" +
-            "Last Wave : " + "\n" +
-            "Looted Components : " + "\n" + 
-            "// GREY " + loot[0] + "\n" + 
-            "// WHITE " + loot[1] + "\n" + 
-            "// GREEN " + loot[2] + "\n" + 
-            "// BLUE " + loot[3] + "\n" + 
-            "// PURPLE " + loot[4] + "\n" + 
-            "// ORANGE " + loot[5] + "\n" +
-            "RewardChestOpening : ";
-    }
     public override void update()
     {
         base.update();
