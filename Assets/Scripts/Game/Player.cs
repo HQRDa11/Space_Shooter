@@ -37,6 +37,11 @@ public class Player : MonoBehaviour
         {
             OnRepairBonus();
         }
+        if (Input.GetKeyDown(KeyCode.Equals) == true)
+        {
+
+            OnComponentBonus(Factory.Dice_Rarity());
+        }
     }
 
     public void Shoot()
