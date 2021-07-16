@@ -111,6 +111,7 @@ public class Player : MonoBehaviour
                 Ship newShip = Factory.Instance.Ship_Factory.CreateAllyShip(this.gameObject, GetRelativeAllyPosition(i), i, 200);
                 Ally newAlly = new Ally(newShip);
                 m_allAllies[i]=newAlly;
+                newShip.gameObject.transform.position += Vector3.down * Screen.height / 3;
                 return;
             }
         }
