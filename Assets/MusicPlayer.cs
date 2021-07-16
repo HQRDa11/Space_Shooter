@@ -30,10 +30,14 @@ public class MusicPlayer : MonoBehaviour
                         PlayMainTheme_ScheduledByState();
                         return;
                     case ApplicationState_Type.GAME:
-                        m_audioSource.GetCustomCurve(AudioSourceCurveType.CustomRolloff);
+                        m_audioSource.PlayDelayed(1.8f);
                         PlayMainTheme_ScheduledByState();
                         return;
                     case ApplicationState_Type.PREPARE:
+                        m_audioSource.GetCustomCurve(AudioSourceCurveType.CustomRolloff);
+                        PlayMainTheme_ScheduledByState();
+                        return;
+                    case ApplicationState_Type.UPGRADE:
                         m_audioSource.GetCustomCurve(AudioSourceCurveType.CustomRolloff);
                         PlayMainTheme_ScheduledByState();
                         return;

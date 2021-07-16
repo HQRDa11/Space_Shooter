@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
+        Sound.Instance.Play_StartSound();
         m_gameInfo = new GameObject("GameInfo").AddComponent<GameInfo>();
         m_gameInfo.transform.SetParent(GameObject.Find("ActiveProfile").transform);
         m_scoreSystem = GameObject.Find("ScoreSystem").GetComponent<ScoreSystem>();
