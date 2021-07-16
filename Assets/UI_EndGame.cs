@@ -23,7 +23,8 @@ public class UI_EndGame : MonoBehaviour
     void Awake()
     {
         m_lootedcomponents = new int[6];
-        m_totalComponents = ProfileHandler.Instance.ActiveProfile.TotalComponents;
+        m_totalComponents = new int[6];
+        m_totalComponents = (int[])ProfileHandler.Instance.ActiveProfile.TotalComponents.Clone();
 
         m_hasFinishedDisplay = false;
 
@@ -39,7 +40,7 @@ public class UI_EndGame : MonoBehaviour
         Debug.LogWarning("RarityGrey = " + m_rarityIndex);
         m_additionValue = 0;
         m_timer = 0;
-        m_timerMax = 0.12f;
+        m_timerMax = 0.16f;
     }
 
     // Update is called once per frame
@@ -61,7 +62,7 @@ public class UI_EndGame : MonoBehaviour
                                 Update_Step();
                                 return;
                             case false:
-                                m_hasFinishedDisplay = true;
+                                Update_Last();
                                 break;
                         }
                         break;
@@ -86,6 +87,7 @@ public class UI_EndGame : MonoBehaviour
 
     private void PlusOne()
     {
+        Debug.LogWarning("should be 0 first");
         m_additionValue++;
         switch (m_additionValue <= m_lootedcomponents[m_rarityIndex])
         {
@@ -107,16 +109,44 @@ public class UI_EndGame : MonoBehaviour
         switch (TryNextRarity())
         {
             case true:
-                switch (m_additionValue-1!=0)
+                Debug.LogWarning(" m_totalComponents[m_rarityIndex]=" + m_totalComponents[m_rarityIndex] + "//  m_additionValue - 1)=" + (m_additionValue));
+                switch (m_lootedcomponents[m_rarityIndex] != 0)
                 {
                     case true:
                         Sound.Instance.Play_ComponentCollect();
-                        m_totalComponents_Display[m_rarityIndex + 1].text = (m_totalComponents[m_rarityIndex] + m_additionValue - 1).ToString();
+                        m_totalComponents_Display[m_rarityIndex + 1].text = (m_totalComponents[m_rarityIndex] + m_additionValue).ToString();
+                        break;
+                    case false:
                         break;
                 }
-                m_timerMax += 0.3f * m_timerMax;
+                
+                m_timerMax += 0.42f * m_timerMax;
                 m_additionValue = 0;
-                m_rarityIndex ++;
+                m_rarityIndex++;
+                break;
+        }
+    }
+
+    private void Update_Last()
+    {
+        PlusOne();
+        switch (TryNextRarity())
+        {
+            case true:
+                Debug.LogWarning(" m_totalComponents[m_rarityIndex]=" + m_totalComponents[m_rarityIndex] + "//  m_additionValue - 1)=" + (m_additionValue));
+                switch (m_lootedcomponents[m_rarityIndex] != 0)
+                {
+                    case true:
+                        Sound.Instance.Play_ComponentCollect();
+                        m_totalComponents_Display[m_rarityIndex + 1].text = (m_totalComponents[m_rarityIndex] + m_additionValue).ToString();
+                        break;
+                    case false:
+                        break;
+                }
+                m_hasFinishedDisplay = true;
+                m_timerMax += 0.42f * m_timerMax;
+                m_additionValue = 0;
+                m_rarityIndex = 0;
                 break;
         }
     }
