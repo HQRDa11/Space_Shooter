@@ -569,6 +569,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d81e56769e5f34096ce182d48bc719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_squadronData:
+    m_player:
+      m_name: PLAYER
+      m_equippedShip:
+        m_name: 
+        m_Level:
+          m_current: 0
+          m_xp_curret: 0
+          m_xp_toNextLevel: 0
+        m_equippedModules: []
+    m_maxAllies: 1
+    m_allShips: []
+    m_allies:
+    - m_name: ALLY ONE
+      m_equippedShip:
+        m_name: 
+        m_Level:
+          m_current: 0
+          m_xp_curret: 0
+          m_xp_toNextLevel: 0
+        m_equippedModules: []
+    m_allModules: []
   m_gameCurrency: 0
   m_id: 
   m_highScores: 
