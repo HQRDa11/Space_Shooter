@@ -31,17 +31,20 @@ public class Profile : MonoBehaviour
         m_highScores = new int[10];
         m_components = new int[6];
         m_squadronData = new SquadronData();
-        Debug.LogWarning("squadDataOnAwake? " + m_squadronData);
+    }
+
+    public void ResetProfile()
+    {
+        m_gameCurrency = 0;
+        m_id = "noID";
+        m_highScores = new int[10];
+        m_components = new int[6];
+        m_squadronData = new SquadronData();
+        Debug.LogWarning("Profile reset");
     }
 
     public void ModifyNumberOf_Components( int rarityIndex, int modifier)
     {
         m_components[rarityIndex] += modifier;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

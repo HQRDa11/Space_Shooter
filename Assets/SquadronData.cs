@@ -34,6 +34,7 @@ public class SquadronData
         m_allies[0] = new AllyData("ALLY ONE");
     }
 }
+
 [System.Serializable]
 public class PlayerData
 {

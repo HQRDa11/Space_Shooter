@@ -5,7 +5,6 @@ using System.IO;
 
 public class ProfileHandler : MonoBehaviour
 {
-
     private static ProfileHandler _instance;
     public static ProfileHandler Instance { get => _instance; }
 
@@ -14,6 +13,7 @@ public class ProfileHandler : MonoBehaviour
     private Profile m_activeProfile;
 
     public Profile ActiveProfile { get => m_activeProfile; }
+
     private void Start()
     {
         _instance = this;
@@ -27,35 +27,30 @@ public class ProfileHandler : MonoBehaviour
             m_activeProfile = m_profileObject.AddComponent<Profile>();
             Debug.Log("error here");
         }
-        Load();
+        switch(Load()) { case false: m_activeProfile.ResetProfile(); break; }
     }
-
-    // Update is called once per frame
-    private void Update()
+    private class SaveObject
     {
-        //if(Input.GetKeyDown(KeyCode.S))
-        //{
-        //    Save();
-        //}       
-        //else if(Input.GetKeyDown(KeyCode.L))
-        //{
-        //    Load();
-        //}
+        public string applicationVersion;
+        public string profileID;
+        public int gameCurrency;
+        public int[] highScores;
+        public int[] components;
+        public SquadronData squadronData;
     }
-
     private void Save()
     {
-        // Save
+        // RETRIEVE ACTIVE PRODILE INFOS:
         //Debug.Log("Saving:" + m_activeProfile.ID + "//" + "highScores:" + m_activeProfile.HighScores[0] + "/" + m_activeProfile.HighScores[1]);
         string newProfileId = m_activeProfile.ID;
         int newGameCurrency = m_activeProfile.GameCurrency;
         int[] newHighScores = m_activeProfile.HighScores;
         int[] newComponents = m_activeProfile.TotalComponents;
         SquadronData newSquadronData = m_activeProfile.SquadronData;
+        //Debug.LogWarning("IsSquadronData?:" + newSquadronData) ;
+        //Debug.LogWarning("IsSquadronDataPlayerName?:" + newSquadronData.Player.name) ;
 
-        Debug.LogWarning("IsSquadronData?:" + newSquadronData) ;
-        Debug.LogWarning("IsSquadronDataPlayerName?:" + newSquadronData.Player.name) ;
-
+        //CREATE SAVEOBJECT:
         SaveObject saveObject = new SaveObject
         {
             applicationVersion = ApplicationInfo.VERSION,
@@ -65,12 +60,15 @@ public class ProfileHandler : MonoBehaviour
             components = newComponents,
             squadronData = newSquadronData
         };
+
+        // SAVEOBJECT TO JSON STRING:
         string json = JsonUtility.ToJson(saveObject);
+
+        // SAVE JSON STRING:
         SaveSystem.Save(json);
+
         Debug.LogWarning("Profile Saved");
-
     }
-
     private bool Load()
     {
         // Load
@@ -99,17 +97,6 @@ public class ProfileHandler : MonoBehaviour
         }
         return false;
     }
-
-    private class SaveObject
-    {
-        public string applicationVersion;
-        public string profileID;
-        public int gameCurrency;
-        public int[] highScores;
-        public int[] components;
-        public SquadronData squadronData;
-    }
-
     public void UpdateProfile_WithGameResults( GameInfo info)
     {
         Update_HighScores(info.Get_Score()) ;
@@ -148,5 +135,9 @@ public class ProfileHandler : MonoBehaviour
             }
         }
         m_activeProfile.HighScores = highScores;
+    }
+    private void NewProfile()
+    {
+        m_activeProfile.ResetProfile();
     }
 }

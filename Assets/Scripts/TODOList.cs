@@ -24,10 +24,11 @@ namespace HQRDa
         // ok - Shield Bonus
         // ok - Shield Mechanics
         // ok - Add satisfying compponent loot display in EndGameScreen
-        // - Creates SquadronData NewSquadron() in Profile Handler.cs
-        // - Creates Profile Handler.cs: Profile NewProfile()
-        // - Profile Handler.cs: Profile NewProfile() : is launched if no valid latest save
-        // - Profile Handler.cs: Profile NewProfile() : SquadronData NewSquadron()
+        // ok - Creates a default SquadronData class CTOR returning simplest SquadronData for new prodiles.
+        // ok - Creates Profile Handler.cs: Profile NewProfile()
+        // ok - Create Profile.ResetProfile();
+        // ok - Profile Handler.cs: Profile NewProfile() : is launched if no valid latest save
+        // ok - SquadronData is now save in profile correctly;
         // - Profile Squaadron display in Upgrade screen 
         // - Ship/Module Update Mechanics
         // - UI_Game.cs : image + Text pop-Up On bonus pickup
