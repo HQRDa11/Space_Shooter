@@ -87,7 +87,6 @@ public class UI_EndGame : MonoBehaviour
 
     private void PlusOne()
     {
-        Debug.LogWarning("should be 0 first");
         m_additionValue++;
         switch (m_additionValue <= m_lootedcomponents[m_rarityIndex])
         {
@@ -109,7 +108,7 @@ public class UI_EndGame : MonoBehaviour
         switch (TryNextRarity())
         {
             case true:
-                Debug.LogWarning(" m_totalComponents[m_rarityIndex]=" + m_totalComponents[m_rarityIndex] + "//  m_additionValue - 1)=" + (m_additionValue));
+                //Debug.LogWarning(" m_totalComponents[m_rarityIndex]=" + m_totalComponents[m_rarityIndex] + "//  m_additionValue - 1)=" + (m_additionValue));
                 switch (m_lootedcomponents[m_rarityIndex] != 0)
                 {
                     case true:
@@ -133,7 +132,7 @@ public class UI_EndGame : MonoBehaviour
         switch (TryNextRarity())
         {
             case true:
-                Debug.LogWarning(" m_totalComponents[m_rarityIndex]=" + m_totalComponents[m_rarityIndex] + "//  m_additionValue - 1)=" + (m_additionValue));
+               // Debug.LogWarning(" m_totalComponents[m_rarityIndex]=" + m_totalComponents[m_rarityIndex] + "//  m_additionValue - 1)=" + (m_additionValue));
                 switch (m_lootedcomponents[m_rarityIndex] != 0)
                 {
                     case true:

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public enum ApplicationState_Type { NULL, INTRO, MAINMENU, PREPARE, UPGRADE, GAME, ENDGAME, PAUSE, OPTIONS, CREDITS, QUIT }
-public class Application_StateMachine : MonoBehaviour
+public class Application_StateMachine : MonoBehaviour 
 {
     private static Application_StateMachine _instance;
     public static Application_StateMachine Instance { get => _instance; }

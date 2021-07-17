@@ -28,7 +28,6 @@ public class ProfileHandler : MonoBehaviour
             Debug.Log("error here");
         }
         Load();
-
     }
 
     // Update is called once per frame
@@ -48,18 +47,23 @@ public class ProfileHandler : MonoBehaviour
     {
         // Save
         //Debug.Log("Saving:" + m_activeProfile.ID + "//" + "highScores:" + m_activeProfile.HighScores[0] + "/" + m_activeProfile.HighScores[1]);
-        string profileID = m_activeProfile.ID;
-        int gameCurrency = m_activeProfile.GameCurrency;
-        int[] highScores = m_activeProfile.HighScores;
-        int[] components = m_activeProfile.TotalComponents;
+        string newProfileId = m_activeProfile.ID;
+        int newGameCurrency = m_activeProfile.GameCurrency;
+        int[] newHighScores = m_activeProfile.HighScores;
+        int[] newComponents = m_activeProfile.TotalComponents;
+        SquadronData newSquadronData = m_activeProfile.SquadronData;
+
+        Debug.LogWarning("IsSquadronData?:" + newSquadronData) ;
+        Debug.LogWarning("IsSquadronDataPlayerName?:" + newSquadronData.Player.name) ;
 
         SaveObject saveObject = new SaveObject
         {
-            _ApplicationVersion = ApplicationInfo.VERSION,
-            _profileID = profileID,
-            _gameCurrency = gameCurrency,
-            _highScores = highScores,
-            _components = components
+            applicationVersion = ApplicationInfo.VERSION,
+            profileID = newProfileId,
+            gameCurrency = newGameCurrency,
+            highScores = newHighScores,
+            components = newComponents,
+            squadronData = newSquadronData
         };
         string json = JsonUtility.ToJson(saveObject);
         SaveSystem.Save(json);
@@ -74,13 +78,14 @@ public class ProfileHandler : MonoBehaviour
         if (saveString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(saveString);
-            switch (saveObject._ApplicationVersion == ApplicationInfo.VERSION)
+            switch (saveObject.applicationVersion == ApplicationInfo.VERSION)
             {
                 case true:
-                    m_activeProfile.ID = saveObject._profileID;
-                    m_activeProfile.GameCurrency = saveObject._gameCurrency;
-                    m_activeProfile.HighScores = saveObject._highScores;
-                    m_activeProfile.TotalComponents = saveObject._components;
+                    m_activeProfile.ID = saveObject.profileID;
+                    m_activeProfile.GameCurrency = saveObject.gameCurrency;
+                    m_activeProfile.HighScores = saveObject.highScores;
+                    m_activeProfile.TotalComponents = saveObject.components;
+                    m_activeProfile.SquadronData = saveObject.squadronData;
                     Debug.LogWarning("Profile Loaded");
                     return true;
                 case false:
@@ -97,11 +102,12 @@ public class ProfileHandler : MonoBehaviour
 
     private class SaveObject
     {
-        public string _ApplicationVersion;
-        public string _profileID;
-        public int _gameCurrency;
-        public int[] _highScores;
-        public int[] _components;
+        public string applicationVersion;
+        public string profileID;
+        public int gameCurrency;
+        public int[] highScores;
+        public int[] components;
+        public SquadronData squadronData;
     }
 
     public void UpdateProfile_WithGameResults( GameInfo info)

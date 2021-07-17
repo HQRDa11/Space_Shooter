@@ -5,6 +5,10 @@ using UnityEngine;
 public class Profile : MonoBehaviour
 {
     [SerializeField]
+    private SquadronData m_squadronData;
+    public SquadronData SquadronData { get { return m_squadronData; } set { m_squadronData = value; } }
+
+    [SerializeField]
     private int m_gameCurrency;
     public int GameCurrency { get { return m_gameCurrency; } set { m_gameCurrency = value; } }
     [SerializeField]
@@ -26,7 +30,8 @@ public class Profile : MonoBehaviour
         m_id = "noID";
         m_highScores = new int[10];
         m_components = new int[6];
-
+        m_squadronData = new SquadronData();
+        Debug.LogWarning("squadDataOnAwake? " + m_squadronData);
     }
 
     public void ModifyNumberOf_Components( int rarityIndex, int modifier)

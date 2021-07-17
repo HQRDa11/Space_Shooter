@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class ApplicationInfo
 { 
-    public const string VERSION = "v.0.0.02";
+    public const string VERSION = "v.0.0.07";
 }
