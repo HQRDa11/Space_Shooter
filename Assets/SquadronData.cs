@@ -46,7 +46,7 @@ public class PlayerData
     public PlayerData(string name)
     {
         m_name = name;
-        m_equippedShip = null;
+        m_equippedShip = new ShipData("LIGHT FIGHTER", new LevelData(1, 0, 100));
     }
 }
 [System.Serializable]
@@ -59,7 +59,7 @@ public class AllyData
     public AllyData(string name)
     {
         m_name = name;
-        m_equippedShip = null;
+        m_equippedShip = new ShipData("LIGHT FIGHTER", new LevelData(1, 0, 100));
     }
 }
 [System.Serializable]
@@ -71,6 +71,14 @@ public class ShipData
     private LevelData m_Level;
     [SerializeField]
     private ModuleData[] m_equippedModules;
+
+    public ShipData(string name,LevelData lvlData)
+    {
+        m_name = name;
+        m_Level = new LevelData(1, 0, 100);
+        m_equippedModules = new ModuleData[3];
+        m_equippedModules[0] = new ModuleData(ModuleType.SHIELD, Rarity.GREY, "", new LevelData(1, 0, 100));
+    }
 }
 
 public enum ModuleType { SHIELD = 0, REPAIRDRONE }
@@ -80,9 +88,19 @@ public class ModuleData
     [SerializeField]
     private ModuleType m_type;
     [SerializeField]
+    private Rarity m_rarity;
+    [SerializeField]
     private string m_name;
     [SerializeField]
     private LevelData m_Level;
+
+    public ModuleData(ModuleType type, Rarity rarity, string name, LevelData levelData)
+    {
+        m_type = type;
+        m_rarity = rarity;
+        m_Level = levelData;
+        m_name = rarity + " " + type + name;
+    }
 }
 [System.Serializable]
 public class LevelData
@@ -90,7 +108,14 @@ public class LevelData
     [SerializeField]
     private int m_current;
     [SerializeField]
-    private float m_xp_curret;
+    private float m_xp_current;
     [SerializeField]
     private float m_xp_toNextLevel;
+
+    public LevelData(int current, float currentXp, float nextLvLXp)
+    {
+        m_current = current;
+        m_xp_current = current;
+        m_xp_toNextLevel = nextLvLXp;
+    }
 }
