@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ModuleType { SHIELD = 0, REPAIRDRONE }
+public enum ModuleType { NULL = 0, SHIELD, REPAIRDRONE, TURRET, TOTAL }
 // SQUADRONDATA // has 1-* MEMBERDATAS
 [System.Serializable]
 public class SquadronData
@@ -52,8 +52,8 @@ public class PlayerData : MemberData
     {
         m_name = "[noID]";
         m_equippedShip = new ShipData("FREGATE", new LevelData(3, 0, 100));
-        m_equippedShip.AllModules[0] = new ModuleData(ModuleType.REPAIRDRONE, Rarity.GREEN, " OF FIRE", new LevelData(5, 82, 1430));
-        m_equippedShip.AllModules[1] = new ModuleData(ModuleType.SHIELD, Rarity.WHITE, "", new LevelData(12,29,1200));
+        m_equippedShip.AllModules[0] = Factory.Instance.Module_Factory.Dice_Module(3);
+        m_equippedShip.AllModules[1] = Factory.Instance.Module_Factory.Dice_Module(2);
     }
 } 
 
@@ -95,8 +95,8 @@ public class ShipData
         m_name = name;
         m_level = lvlData;
         m_allModules = new ModuleData[2];
-        AllModules[0] = new ModuleData(ModuleType.SHIELD, Rarity.WHITE, "", new LevelData(Random.Range(1, 7), 82, 1430));
-        AllModules[1] = new ModuleData(ModuleType.REPAIRDRONE, Rarity.GREY, "", new LevelData(Random.Range(1, 7), 29, 1200));
+        AllModules[0] = Factory.Instance.Module_Factory.Dice_Module(2);
+        AllModules[1] = Factory.Instance.Module_Factory.Dice_Module(1);
     }
 }
 
@@ -110,21 +110,30 @@ public class ModuleData
     public ModuleType Type { get => m_type; }
     [SerializeField]
     private Rarity m_rarity;
-    public Rarity Rarity { get => m_rarity; }  
+    public Rarity Rarity { get => m_rarity; }
     [SerializeField]
     private string m_name;
     public string Name { get => m_name; }
+    [SerializeField]
+    private int m_tier;
+    public int Tier { get => m_tier; }
 
     [SerializeField]
     private LevelData m_level;
     public LevelData Level { get => m_level; }
 
-    public ModuleData(ModuleType type, Rarity rarity, string name, LevelData levelData)
+    public ModuleData(ModuleType type, Rarity rarity, string name, LevelData levelData, int tier)
     {
         m_type = type;
         m_rarity = rarity;
+        m_name = name;
         m_level = levelData;
-        m_name = rarity + " " + type + name;
+        m_tier = tier;
+        //m_sprite = Factory.Instance.ModuleFactory
+    }
+    public Sprite Sprite()
+    {
+        return Factory.Instance.Module_Factory.GetSprite(m_type);
     }
 }
 
@@ -140,7 +149,7 @@ public class LevelData
     public float Xp_Current { get => m_xp_current; }
     [SerializeField]
     private float m_xp_toNextLevel;
-    public float Xp_ToNextLevel{ get => m_xp_toNextLevel; }
+    public float Xp_ToNextLevel { get => m_xp_toNextLevel; }
 
     public LevelData(int current, float currentXp, float nextLvLXp)
     {
