@@ -34,10 +34,36 @@ public class SquadronData
         m_player = new PlayerData(PlayerName);
         m_maxAllies = 1;
         m_allStoredShips = null;
-        m_allMembers = new MemberData[2];
+        m_allMembers = new MemberData[5];
         m_allMembers[0] = m_player;
         m_allMembers[1] = new MemberData("ALLY ONE");
+        m_allMembers[2] = new MemberData("ALLY TWO");
         m_allStoredModules = new ModuleData[0];
+    }
+    public int NewMemberIndex(bool isNext_ifNotPrevious,int current)
+    {
+        switch (isNext_ifNotPrevious)
+        {
+            case true:
+                int nextIndex = (current % m_allMembers.Length) + 1;
+                switch(nextIndex >= m_allMembers.Length || nextIndex < 0)
+                {
+                    case true:
+                        return m_allMembers.Length-1;
+                    case false:
+                        return nextIndex;
+                }
+                
+            case false:
+                int previousIndex = (current % m_allMembers.Length) - 2;
+                switch (previousIndex >= m_allMembers.Length || previousIndex < 0)
+                {
+                    case true:
+                        return 0;
+                    case false:
+                        return previousIndex;
+                }
+        }
     }
 }
 
@@ -48,7 +74,10 @@ public class PlayerData : MemberData
     // Here we'll stock some more player specific datas
     public PlayerData(string name) : base (name)
     {
-        
+        m_name = "[noID]";
+        m_equippedShip = new ShipData("FREGATE", new LevelData(3, 0, 100));
+        m_equippedShip.AllModules[0] = new ModuleData(ModuleType.REPAIRDRONE, Rarity.GREEN, "OF FIRE", new LevelData(5, 82, 1430));
+        m_equippedShip.AllModules[1] = new ModuleData(ModuleType.SHIELD, Rarity.WHITE, "", new LevelData(12,29,1200));
     }
 } 
 
@@ -56,10 +85,10 @@ public class PlayerData : MemberData
 public class MemberData
 {
     [SerializeField]
-    private string m_name;
+    protected string m_name;
     public string Name { get { return m_name; } set { m_name = value; } }
     [SerializeField]
-    private ShipData m_equippedShip;
+    protected ShipData m_equippedShip;
     public ShipData Ship { get => m_equippedShip; }
     public MemberData(string name)
     {

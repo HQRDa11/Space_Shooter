@@ -41,12 +41,10 @@ public class Upgrade_ApplicationState : ApplicationState
     }
     public override ApplicationState_Type Next()
     {
-        Debug.Log("next ok");
         return ApplicationState_Type.NULL;
     }
     public override ApplicationState_Type Previous()
     {
-        Debug.Log("previous ok");
         return ApplicationState_Type.PREPARE;
     }
 }

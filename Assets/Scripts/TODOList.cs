@@ -28,15 +28,18 @@ namespace HQRDa
         // ok - Create Profile.ResetProfile();
         // ok - Profile Handler.cs: Profile NewProfile() : is launched if no valid latest save
         // ok - SquadronData is now save in profile correctly;
-
+        //
         // now - Update : UI_Update.cs
         //          ok - Button : back to mainMenu
         //                  ok - Button template : switch states(previous/next)
         //          now - Fonctionnal Squadron Display 
-        //                  ok - Correctly display indexed Member
-        //                  now - Next/Previous Mechanics:
-        //                         now - SquadronData: has Next()/Previous() method to return MemberData index
-        //                        
+        //                  ok - Functionnal MemberDisplay
+        //                      ok - Correctly display indexed Member
+        //                      ok - Next/Previous Mechanics:
+        //                              ok - SquadronData: new fctn: int NewIndex( bool isNext_ifNotPrevious, int currentIndex)  
+        //                     - Functionnal ModuleDisplay
+        //
+        // - Create a Reset Profile button in MainMenu
         // delayed - (need sprites) - UI_Game.cs : image + Text pop-Up On bonus pickup
         // delayed - UI_Upgrade.cs + prefab
         //      delayed - to do: Panel m_shipStats_Display; 

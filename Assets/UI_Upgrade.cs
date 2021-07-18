@@ -16,6 +16,7 @@ public class UI_Upgrade : MonoBehaviour
 
     //MEMBER_SWITCH_DISPLAY
     private MemberData m_currentDisplayedMember;
+    private int m_memberIndex;
     private Text   m_text_member;
     private Button m_previousMember_btn;
     private Button m_nextMember_btn;
@@ -41,24 +42,64 @@ public class UI_Upgrade : MonoBehaviour
 
     private void Start()
     {
-        Link_UI_Elements();
-        Initialise_UI_Elements("UPGRADE SQUAD");
-
         Load_Profile_Components();
-        Display_Components();
-
         Load_Profile_SquadronData();
 
-        Display_SquadData();
+        FindAll_UI_Elements();
+        Initialise_StateSwitch_Element("UPGRADES");
+        Initialise_MemberSwitch_Element();
 
+
+        Display_Components();
+        Display_SquadData();
+    }
+    void Update()
+    {
+        
     }
 
-    private void Initialise_StateButtons()
+    // LINK UI_PREFABS 
+    public void FindAll_UI_Elements()
     {
+        // STATE DISPLAY
+        m_previousState_btn = Find_Button_Element("Button_PreviousState");
+        m_nextState_btn = Find_Button_Element("Button_NextState");
+        m_stateName = Find_Text_Element("Text_State");
+
+        //MEMBER_SWITCH_DISPLAY
+        m_text_member = Find_Text_Element("Text_Member");
+        m_previousMember_btn = Find_Button_Element("Button_PreviousMember");
+        m_nextMember_btn = Find_Button_Element("Button_NextMember");
+
+        //SHIP_DISPLAY
+        m_shipName_Display = Find_Text_Element("Text_ShipName");
+        m_shipLevel_Display = Find_Text_Element("Text_ShipLevel"); 
+
+        //MODULE_SWITCH_DISPLAY
+        m_text_module = Find_Text_Element("Text_Module");
+        m_previousModule_btn = Find_Button_Element("Button_PreviousModule");
+        m_nextModule_btn = Find_Button_Element("Button_PreviousModule");
+
+        //MODULE_DISPLAY
+        m_moduleName_Display = Find_Text_Element("Text_ModuleName");
+        m_moduleLevel_Display = Find_Text_Element("Text_ModuleLevel");
+    }
+    public Text Find_Text_Element(string textGo_name)
+    {
+        return GameObject.Find(textGo_name).GetComponent<Text>();
+    }
+    public Button Find_Button_Element(string buttonGo_name)
+    {
+        return GameObject.Find(buttonGo_name).GetComponent<Button>();
+    }
+
+    // INITIALISE GENERIC UI ELEMENTS
+    private void Initialise_StateSwitch_Element(string stateName)
+    {
+        m_stateName.text = stateName;
+
         Application_StateMachine stateMachine = Application_StateMachine.Instance;
         ApplicationState_Type previous = stateMachine.Get_CurrentState().Previous();
-        
-        Debug.Log("StateType: " + stateMachine.Get_CurrentStateType().ToString());
 
         switch (previous != ApplicationState_Type.NULL)
         {
@@ -82,59 +123,30 @@ public class UI_Upgrade : MonoBehaviour
 
         }
     }
-    public void Initialise_UI_Elements(string stateName)
+    private void Initialise_MemberSwitch_Element()
     {
-        m_stateName.text = stateName;
-
-        Initialise_StateButtons();
-
+        m_memberIndex = 1;
+        m_nextMember_btn.onClick.AddListener(() => NextMember());
+        m_previousMember_btn.onClick.AddListener(() => PreviousMember());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void NextMember()
     {
-        
+        m_memberIndex = m_squadronData.NewMemberIndex(true, m_memberIndex);
+        m_currentDisplayedMember = m_squadronData.AllMembers[m_memberIndex];
+        Display_SquadData();
     }
 
-    public Text LinkText(string textGo_name)
+    private void PreviousMember()
     {
-        return GameObject.Find(textGo_name).GetComponent<Text>();
+        m_memberIndex = m_squadronData.NewMemberIndex(false, m_memberIndex);
+        m_currentDisplayedMember = m_squadronData.AllMembers[m_memberIndex];
+        Display_SquadData();
     }
-    public Button LinkButton(string buttonGo_name)
-    {
-        return GameObject.Find(buttonGo_name).GetComponent<Button>();
-    }
-    public void Link_UI_Elements()
-    {
-        // STATE DISPLAY
-        m_previousState_btn = LinkButton("Button_PreviousState");
-        m_nextState_btn = LinkButton("Button_NextState");
-        m_stateName = LinkText("Text_State");
-
-        //MEMBER_SWITCH_DISPLAY
-        m_text_member = LinkText("Text_Member");
-        m_previousMember_btn = LinkButton("Button_PreviousMember");
-        m_nextMember_btn = LinkButton("Button_NextMember");
-
-        //SHIP_DISPLAY
-        m_shipName_Display = LinkText("Text_ShipName");
-        m_shipLevel_Display = LinkText("Text_ShipLevel"); 
-
-        //MODULE_SWITCH_DISPLAY
-        m_text_module = LinkText("Text_Module");
-        m_previousModule_btn = LinkButton("Button_PreviousModule");
-        m_nextModule_btn = LinkButton("Button_PreviousModule");
-
-        //MODULE_DISPLAY
-        m_moduleName_Display = LinkText("Text_ModuleName");
-        m_moduleLevel_Display = LinkText("Text_ModuleLevel");
-    }
-
     private void Load_Profile_Components()
     {
         m_totalComponents = ProfileHandler.Instance.ActiveProfile.TotalComponents;
     }
-
     private void Load_Profile_SquadronData()
     {
         m_squadronData = ProfileHandler.Instance.ActiveProfile.SquadronData;
@@ -179,7 +191,7 @@ public class UI_Upgrade : MonoBehaviour
         switch (m_currentDisplayedMember != null)
         {
             case true:
-                m_text_member.text = m_currentDisplayedMember.Name;
+                m_text_member.text = m_currentDisplayedMember.Name + " " + (m_memberIndex+1).ToString() + "/" + m_squadronData.AllMembers.Length;
 
                 m_shipName_Display.text = m_currentDisplayedMember.Ship.Name;
                 m_shipLevel_Display.text = m_currentDisplayedMember.Ship.Level.Current.ToString();
