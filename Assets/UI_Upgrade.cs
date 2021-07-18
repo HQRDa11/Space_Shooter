@@ -24,7 +24,7 @@ public class UI_Upgrade : MonoBehaviour
     //SHIP_DISPLAY
     private Text m_shipName_Display;
     private Text m_shipLevel_Display;
-    // to do: Sprite m_shipSprite;
+    // to do: SpriteRenderer m_shipSprite;
     // to do: Panel m_shipStats_Display; 
 
 
@@ -38,7 +38,7 @@ public class UI_Upgrade : MonoBehaviour
     //MODULE_DISPLAY
     private Text m_moduleName_Display;
     private Text m_moduleLevel_Display;
-    // to do: Sprite m_moduleSprite;
+    private Image m_moduleImage_Display;
     // to do: Panel m_moduleStats_Display;
 
 
@@ -86,6 +86,7 @@ public class UI_Upgrade : MonoBehaviour
         //MODULE_DISPLAY
         m_moduleName_Display = Find_Text_Element("Text_ModuleName");
         m_moduleLevel_Display = Find_Text_Element("Text_ModuleLevel");
+        m_moduleImage_Display = GameObject.Find("Image_Module").GetComponent<Image>();
     }
     public Text Find_Text_Element(string textGo_name)
     {
@@ -233,14 +234,28 @@ public class UI_Upgrade : MonoBehaviour
         switch (m_currentDisplayedModule != null)
         {
             case true:
-                m_text_module.text = "Module " + (m_moduleIndex + 1).ToString() + "/" + m_currentDisplayedMember.Ship.AllModules.Length;
+                ShipData   ship   = m_currentDisplayedMember.Ship;
+                ModuleData module = ship.AllModules[m_moduleIndex];
+                Color      color  = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
 
-                m_moduleName_Display.text = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex].Name;
-                m_moduleName_Display.color = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
-                m_moduleLevel_Display.text = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex].Level.Current.ToString();
+                //Switch display
+                int index = m_moduleIndex + 1;
+                int total = ship.AllModules.Length;
+                m_text_module.text           = "Module " + index + "/" + total;
+
+                //Name display
+                m_moduleName_Display.text    = module.Name;
+                m_moduleName_Display.color   = color;
+
+                //Level display
+                m_moduleLevel_Display.text   = module.Level.Current.ToString();
+                //Sprite display
+
+                m_moduleImage_Display.sprite = module.Sprite();
+                m_moduleImage_Display.color  = color;
                 break;
             case false:
-                Debug.LogError("cant load Member");
+                Debug.LogError("cant display module");
                 return;
         }
 
