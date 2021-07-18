@@ -18,6 +18,10 @@ public class Application_StateMachine : MonoBehaviour
         _instance = this;
         m_states = new List<ApplicationState>();
         m_states.Add(new Intro_ApplicationState("State_Intro"));
+        if (m_states[0] == null)
+        {
+            Debug.LogError("No IntroState");
+        }
         m_currentState = m_states[0];
     }
 
