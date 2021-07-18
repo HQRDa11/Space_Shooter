@@ -16,6 +16,9 @@ public class Factory : MonoBehaviour
     private Turret_Factory _turretFactory;
     public Turret_Factory Turret_Factory { get => _turretFactory; }
 
+    private Module_Factory _moduleFactory;
+    public Module_Factory Module_Factory { get => _moduleFactory; }
+
     private Shot_Factory _shotFactory;
     public Shot_Factory  Shot_Factory { get => _shotFactory; }
 
@@ -27,10 +30,13 @@ public class Factory : MonoBehaviour
 
     public static Transform _InGameObjects_Parent;
 
+    public Sprite SpriteError { get => Resources.Load<Sprite>("Sprites/Icons/SpriteError"); } 
+
     private void Awake()
     {
         _instance = this;
         _materialFactory = new Material_Factory();
+        _moduleFactory = new Module_Factory();
         _bonusFactory = new Bonus_Factory();
         _turretFactory = new Turret_Factory();
         _shotFactory = new Shot_Factory();
@@ -53,8 +59,34 @@ public class Factory : MonoBehaviour
                 break;
         }
     }
+    public static int Dice_BonusTier(int tier)
+    {
+        int luck = Random.Range(0, 100);
+        return (luck <= 60) ? tier : (luck <= 90 ) ? tier + 1 : tier + 2;
+    }
 
-    public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely // Current uses : Turrets and Components loot 
+    public static string RarityToString(Rarity rarity)
+    {
+        switch (rarity)
+        {
+            case Rarity.GREY:
+                return "COMMON";
+            case Rarity.WHITE:
+                return "UNCOMMON";
+            case Rarity.GREEN:
+                return "RARE";
+            case Rarity.BLUE:
+                return "EXEPTIONNAL";
+            case Rarity.PURPLE:
+                return "UNIQUE";
+            case Rarity.ORANGE:
+                return "LEGENDARY";
+            default:
+                return "RarityError";
+        }
+    }
+    public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely 
+                                       // Current uses : Turret Bonus, Modules/Components loot 
     {
         int luck = Random.Range(0, 100); // GREY 53% / WHITE 25% / GREEN 12% / BLUE 6% / PURPLE 3% / ORANGE 1% //
 
