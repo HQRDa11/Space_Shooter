@@ -10,6 +10,7 @@ public class MainMenu_ApplicationState : ApplicationState
         m_type = ApplicationState_Type.MAINMENU;
         m_UI = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_States/UI_MainMenu"));
         m_UI.transform.SetParent(GameObject.Find("State_MainMenu").gameObject.transform);
+       ProfileHandler.Instance.Load();
     }
 
     public override void update()

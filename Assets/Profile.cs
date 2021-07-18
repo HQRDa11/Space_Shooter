@@ -30,7 +30,7 @@ public class Profile : MonoBehaviour
         m_id = "noID";
         m_highScores = new int[10];
         m_components = new int[6];
-        m_squadronData = new SquadronData();
+        m_squadronData = new SquadronData("Unnamed");
     }
 
     public void ResetProfile()
@@ -39,7 +39,7 @@ public class Profile : MonoBehaviour
         m_id = "noID";
         m_highScores = new int[10];
         m_components = new int[6];
-        m_squadronData = new SquadronData();
+        m_squadronData = new SquadronData(ProfileHandler.Instance.ActiveProfile.ID);
         Debug.LogWarning("Profile reset");
     }
 

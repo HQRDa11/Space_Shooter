@@ -14,7 +14,7 @@ public class ProfileHandler : MonoBehaviour
 
     public Profile ActiveProfile { get => m_activeProfile; }
 
-    private void Start()
+    private void Awake()
     {
         _instance = this;
 
@@ -27,7 +27,6 @@ public class ProfileHandler : MonoBehaviour
             m_activeProfile = m_profileObject.AddComponent<Profile>();
             Debug.Log("error here");
         }
-        switch(Load()) { case false: m_activeProfile.ResetProfile(); break; }
     }
     private class SaveObject
     {
@@ -38,6 +37,7 @@ public class ProfileHandler : MonoBehaviour
         public int[] components;
         public SquadronData squadronData;
     }
+    
     private void Save()
     {
         // RETRIEVE ACTIVE PRODILE INFOS:
@@ -46,6 +46,7 @@ public class ProfileHandler : MonoBehaviour
         int newGameCurrency = m_activeProfile.GameCurrency;
         int[] newHighScores = m_activeProfile.HighScores;
         int[] newComponents = m_activeProfile.TotalComponents;
+        m_activeProfile.SquadronData.AllMembers[0].Name = m_activeProfile.ID;
         SquadronData newSquadronData = m_activeProfile.SquadronData;
         //Debug.LogWarning("IsSquadronData?:" + newSquadronData) ;
         //Debug.LogWarning("IsSquadronDataPlayerName?:" + newSquadronData.Player.name) ;
@@ -69,7 +70,12 @@ public class ProfileHandler : MonoBehaviour
 
         Debug.LogWarning("Profile Saved");
     }
-    private bool Load()
+    public void MainMenuSave()
+    {
+        Save();
+    }
+
+    public bool Load()
     {
         // Load
         string saveString = SaveSystem.LoadMostRecentFile();
@@ -84,17 +90,19 @@ public class ProfileHandler : MonoBehaviour
                     m_activeProfile.HighScores = saveObject.highScores;
                     m_activeProfile.TotalComponents = saveObject.components;
                     m_activeProfile.SquadronData = saveObject.squadronData;
-                    Debug.LogWarning("Profile Loaded");
+                    //m_activeProfile.SquadronData.Player.Name = saveObject.profileID;
+                    Debug.Log("Profile Loaded");
                     return true;
                 case false:
                     Debug.LogError("Can't load last profile save ( save version outdated ).");
-                    return false;
+                    break;
             }
         }
         else
         {
-            Debug.LogError("There is no save in directory: " + Application.persistentDataPath + "/Saves/" );
+            Debug.LogWarning("There is no save in directory: " + Application.persistentDataPath + "/Saves/" );
         }
+        m_activeProfile.ResetProfile() ;Debug.LogWarning("New profile created");
         return false;
     }
     public void UpdateProfile_WithGameResults( GameInfo info)

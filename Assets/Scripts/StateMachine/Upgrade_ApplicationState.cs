@@ -9,6 +9,7 @@ public class Upgrade_ApplicationState : ApplicationState
     {
         m_type = ApplicationState_Type.UPGRADE;
         Instantiate_UI();
+        ProfileHandler.Instance.Load();
     }
 
     private void Instantiate_UI()
