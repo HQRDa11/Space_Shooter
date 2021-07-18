@@ -27,8 +27,10 @@ public class UI_Upgrade : MonoBehaviour
     // to do: Sprite m_shipSprite;
     // to do: Panel m_shipStats_Display; 
 
+
     //MODULE_SWITCH_DISPLAY
     private ModuleData m_currentDisplayedModule;
+    private int    m_moduleIndex;
     private Text   m_text_module;
     private Button m_previousModule_btn;
     private Button m_nextModule_btn;
@@ -46,12 +48,13 @@ public class UI_Upgrade : MonoBehaviour
         Load_Profile_SquadronData();
 
         FindAll_UI_Elements();
-        Initialise_StateSwitch_Element("UPGRADES");
-        Initialise_MemberSwitch_Element();
 
+        Initialise_StateSwitch("UPGRADES");
+        Initialise_MemberSwitch();
+        Initialise_ModuleSwitch();
 
         Display_Components();
-        Display_SquadData();
+        Display_SquadMember();
     }
     void Update()
     {
@@ -78,7 +81,7 @@ public class UI_Upgrade : MonoBehaviour
         //MODULE_SWITCH_DISPLAY
         m_text_module = Find_Text_Element("Text_Module");
         m_previousModule_btn = Find_Button_Element("Button_PreviousModule");
-        m_nextModule_btn = Find_Button_Element("Button_PreviousModule");
+        m_nextModule_btn = Find_Button_Element("Button_NextModule");
 
         //MODULE_DISPLAY
         m_moduleName_Display = Find_Text_Element("Text_ModuleName");
@@ -94,7 +97,7 @@ public class UI_Upgrade : MonoBehaviour
     }
 
     // INITIALISE GENERIC UI ELEMENTS
-    private void Initialise_StateSwitch_Element(string stateName)
+    private void Initialise_StateSwitch(string stateName)
     {
         m_stateName.text = stateName;
 
@@ -123,25 +126,45 @@ public class UI_Upgrade : MonoBehaviour
 
         }
     }
-    private void Initialise_MemberSwitch_Element()
+    private void Initialise_MemberSwitch()
     {
-        m_memberIndex = 1;
+        m_memberIndex = 0;
         m_nextMember_btn.onClick.AddListener(() => NextMember());
         m_previousMember_btn.onClick.AddListener(() => PreviousMember());
+    }    
+    private void Initialise_ModuleSwitch()
+    {
+        m_moduleIndex = 0;
+        m_nextModule_btn.onClick.AddListener(() => NextModule());
+        m_previousModule_btn.onClick.AddListener(() => PreviousModule());
     }
 
     private void NextMember()
     {
-        m_memberIndex = m_squadronData.NewMemberIndex(true, m_memberIndex);
+        m_memberIndex = Tools.StepIndex(true, m_memberIndex, m_squadronData.AllMembers.Length);
         m_currentDisplayedMember = m_squadronData.AllMembers[m_memberIndex];
-        Display_SquadData();
+        Display_SquadMember();
+        Display_Module();
     }
 
     private void PreviousMember()
     {
-        m_memberIndex = m_squadronData.NewMemberIndex(false, m_memberIndex);
+        m_memberIndex = Tools.StepIndex(false, m_memberIndex, m_squadronData.AllMembers.Length);
         m_currentDisplayedMember = m_squadronData.AllMembers[m_memberIndex];
-        Display_SquadData();
+        Display_SquadMember();
+        Display_Module();
+    }
+    private void NextModule()
+    {
+        m_moduleIndex = Tools.StepIndex(true, m_moduleIndex, m_currentDisplayedMember.Ship.AllModules.Length);
+        m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex];
+        Display_Module();
+    }
+    private void PreviousModule()
+    {
+        m_moduleIndex = Tools.StepIndex(false, m_moduleIndex, m_currentDisplayedMember.Ship.AllModules.Length);
+        m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex];
+        Display_Module();
     }
     private void Load_Profile_Components()
     {
@@ -186,7 +209,7 @@ public class UI_Upgrade : MonoBehaviour
         }
     }
 
-    public void Display_SquadData()
+    public void Display_SquadMember()
     {
         switch (m_currentDisplayedMember != null)
         {
@@ -195,14 +218,31 @@ public class UI_Upgrade : MonoBehaviour
 
                 m_shipName_Display.text = m_currentDisplayedMember.Ship.Name;
                 m_shipLevel_Display.text = m_currentDisplayedMember.Ship.Level.Current.ToString();
-
-                m_moduleName_Display.text = m_currentDisplayedModule.Name;
-                m_moduleLevel_Display.text = m_currentDisplayedModule.Level.Current.ToString();
+                m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[0];
+                m_moduleIndex = 0;
+                Display_Module();
                 break;
             case false:
                 Debug.LogError("cant load Member");
                 return;
         }
-       
+
+    }
+    public void Display_Module()
+    {
+        switch (m_currentDisplayedModule != null)
+        {
+            case true:
+                m_text_module.text = "Module " + (m_moduleIndex + 1).ToString() + "/" + m_currentDisplayedMember.Ship.AllModules.Length;
+
+                m_moduleName_Display.text = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex].Name;
+                m_moduleName_Display.color = Factory.Instance.Material_Factory.GetMaterial(m_currentDisplayedModule.Rarity).color;
+                m_moduleLevel_Display.text = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex].Level.Current.ToString();
+                break;
+            case false:
+                Debug.LogError("cant load Member");
+                return;
+        }
+
     }
 }

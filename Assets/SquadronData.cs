@@ -32,39 +32,15 @@ public class SquadronData
     public SquadronData(string PlayerName)
     {
         m_player = new PlayerData(PlayerName);
-        m_maxAllies = 1;
+        m_maxAllies = 2;
         m_allStoredShips = null;
-        m_allMembers = new MemberData[5];
+        m_allMembers = new MemberData[3];
         m_allMembers[0] = m_player;
         m_allMembers[1] = new MemberData("ALLY ONE");
         m_allMembers[2] = new MemberData("ALLY TWO");
         m_allStoredModules = new ModuleData[0];
     }
-    public int NewMemberIndex(bool isNext_ifNotPrevious,int current)
-    {
-        switch (isNext_ifNotPrevious)
-        {
-            case true:
-                int nextIndex = (current % m_allMembers.Length) + 1;
-                switch(nextIndex >= m_allMembers.Length || nextIndex < 0 || m_allMembers[nextIndex] == null)
-                {
-                    case true:
-                        return m_allMembers.Length-1;
-                    case false:
-                        return nextIndex;
-                }
-                
-            case false:
-                int previousIndex = (current % m_allMembers.Length) - 1;
-                switch (previousIndex >= m_allMembers.Length || previousIndex < 0)
-                {
-                    case true:
-                        return 0;
-                    case false:
-                        return previousIndex;
-                }
-        }
-    }
+
 }
 
 // MEMBERDATA 
@@ -76,7 +52,7 @@ public class PlayerData : MemberData
     {
         m_name = "[noID]";
         m_equippedShip = new ShipData("FREGATE", new LevelData(3, 0, 100));
-        m_equippedShip.AllModules[0] = new ModuleData(ModuleType.REPAIRDRONE, Rarity.GREEN, "OF FIRE", new LevelData(5, 82, 1430));
+        m_equippedShip.AllModules[0] = new ModuleData(ModuleType.REPAIRDRONE, Rarity.GREEN, " OF FIRE", new LevelData(5, 82, 1430));
         m_equippedShip.AllModules[1] = new ModuleData(ModuleType.SHIELD, Rarity.WHITE, "", new LevelData(12,29,1200));
     }
 } 
@@ -93,7 +69,9 @@ public class MemberData
     public MemberData(string name)
     {
         m_name = name;
-        m_equippedShip = new ShipData("LIGHT FIGHTER", new LevelData(1, 0, 100));
+        m_equippedShip = new ShipData("LIGHT FIGHTER", new LevelData(Random.Range(1,5), 0, 100));
+        
+        
     }
 }
 
@@ -116,8 +94,9 @@ public class ShipData
     {
         m_name = name;
         m_level = lvlData;
-        m_allModules = new ModuleData[3];
-        m_allModules[0] = new ModuleData(ModuleType.SHIELD, Rarity.GREY, "", new LevelData(1, 0, 100));
+        m_allModules = new ModuleData[2];
+        AllModules[0] = new ModuleData(ModuleType.SHIELD, Rarity.WHITE, "", new LevelData(Random.Range(1, 7), 82, 1430));
+        AllModules[1] = new ModuleData(ModuleType.REPAIRDRONE, Rarity.GREY, "", new LevelData(Random.Range(1, 7), 29, 1200));
     }
 }
 
