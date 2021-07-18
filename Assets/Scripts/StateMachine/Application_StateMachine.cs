@@ -115,6 +115,14 @@ public class Application_StateMachine : MonoBehaviour
                         SetCurrentState(new Prepare_ApplicationState("State_Prepare"));
                         isSwitch = true;
                         break;
+                    case ApplicationState_Type.NULL:
+                        Debug.LogWarning("This Should not happen");
+                        isSwitch = false;
+                        break;
+                    default:
+                        Debug.LogWarning("This Should not happen");
+                        isSwitch = false;
+                        break;
                 }
                 break;
 

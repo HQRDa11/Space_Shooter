@@ -9,6 +9,11 @@ public class UI_Upgrade : MonoBehaviour
     private Text[] m_totalComponents_Display;
     private SquadronData m_squadronData;
 
+    // STATE DISPLAY
+    private Button m_previousState_btn;
+    private Button m_nextState_btn;
+    private Text   m_stateName;
+
     //MEMBER_SWITCH_DISPLAY
     private MemberData m_currentDisplayedMember;
     private Text   m_text_member;
@@ -34,9 +39,10 @@ public class UI_Upgrade : MonoBehaviour
     // to do: Panel m_moduleStats_Display;
 
 
-    private void Awake()
+    private void Start()
     {
         Link_UI_Elements();
+        Initialise_UI_Elements("UPGRADE SQUAD");
 
         Load_Profile_Components();
         Display_Components();
@@ -44,6 +50,43 @@ public class UI_Upgrade : MonoBehaviour
         Load_Profile_SquadronData();
 
         Display_SquadData();
+
+    }
+
+    private void Initialise_StateButtons()
+    {
+        Application_StateMachine stateMachine = Application_StateMachine.Instance;
+        ApplicationState_Type previous = stateMachine.Get_CurrentState().Previous();
+        
+        Debug.Log("StateType: " + stateMachine.Get_CurrentStateType().ToString());
+
+        switch (previous != ApplicationState_Type.NULL)
+        {
+            case true:
+                m_previousState_btn.onClick.AddListener(() => stateMachine.stateRequest(previous));
+                break;
+            case false:
+                m_previousState_btn.image.color = Color.clear ;
+                break;
+
+        }
+        ApplicationState_Type next = stateMachine.Get_CurrentState().Next();
+        switch (next != ApplicationState_Type.NULL)
+        {
+            case true:
+                m_nextState_btn.onClick.AddListener(() => stateMachine.stateRequest(next));
+                break;
+            case false:
+                m_nextState_btn.image.color = Color.clear;
+                break;
+
+        }
+    }
+    public void Initialise_UI_Elements(string stateName)
+    {
+        m_stateName.text = stateName;
+
+        Initialise_StateButtons();
 
     }
 
@@ -63,31 +106,27 @@ public class UI_Upgrade : MonoBehaviour
     }
     public void Link_UI_Elements()
     {
-        int i = 0; Debug.Log(i);
+        // STATE DISPLAY
+        m_previousState_btn = LinkButton("Button_PreviousState");
+        m_nextState_btn = LinkButton("Button_NextState");
+        m_stateName = LinkText("Text_State");
+
         //MEMBER_SWITCH_DISPLAY
         m_text_member = LinkText("Text_Member");
-        i++; Debug.Log(i);
         m_previousMember_btn = LinkButton("Button_PreviousMember");
-        i++; Debug.Log(i);
         m_nextMember_btn = LinkButton("Button_NextMember");
 
         //SHIP_DISPLAY
-        i++; Debug.Log(i);
         m_shipName_Display = LinkText("Text_ShipName");
-        i++; Debug.Log(i);
         m_shipLevel_Display = LinkText("Text_ShipLevel"); 
 
         //MODULE_SWITCH_DISPLAY
         m_text_module = LinkText("Text_Module");
-        i++; Debug.Log(i);
         m_previousModule_btn = LinkButton("Button_PreviousModule");
-        i++; Debug.Log(i);
         m_nextModule_btn = LinkButton("Button_PreviousModule");
 
         //MODULE_DISPLAY
-        i++; Debug.Log(i);
         m_moduleName_Display = LinkText("Text_ModuleName");
-        i++; Debug.Log(i);
         m_moduleLevel_Display = LinkText("Text_ModuleLevel");
     }
 
@@ -116,12 +155,10 @@ public class UI_Upgrade : MonoBehaviour
                                 Debug.LogError("cant load Module Data");
                                 return;
                         }
-                        break;
                     case false:
                         Debug.LogError("cant load Squadron Data");
                         return;
                 }
-                break;
             case false:
                 Debug.LogError("cant load Member Data");
                 return;

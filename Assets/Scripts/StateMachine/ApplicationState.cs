@@ -52,4 +52,13 @@ public class ApplicationState
     {
         return 0;
     }
+
+    public virtual ApplicationState_Type Next()
+    {
+        return ApplicationState_Type.NULL;
+    }
+    public virtual ApplicationState_Type Previous()
+    {
+        return ApplicationState_Type.NULL;
+    }
 }

@@ -19,7 +19,6 @@ namespace HQRDa
 {
     public class TODOList
     {
-
         //TO DO:
         // ok - Shield Bonus
         // ok - Shield Mechanics
@@ -29,15 +28,22 @@ namespace HQRDa
         // ok - Create Profile.ResetProfile();
         // ok - Profile Handler.cs: Profile NewProfile() : is launched if no valid latest save
         // ok - SquadronData is now save in profile correctly;
-        // ok - Profile Squaadron display in Upgrade screen 
-        //
-        // now - UI_Upgrade.cs + prefab
-        //      now - to do: Panel m_shipStats_Display; 
-        //      now - to do: Panel m_moduleStats_Display;
-        //      - to do: Sprite m_shipSprite;
-        //      - to do: Sprite m_moduleSprite;
+
+        // now - Update : UI_Update.cs
+        //          ok - Button : back to mainMenu
+        //                  ok - Button template : switch states(previous/next)
+        //          now - Fonctionnal Squadron Display 
+        //                  ok - Correctly display indexed Member
+        //                  now - Next/Previous Mechanics:
+        //                         now - SquadronData: has Next()/Previous() method to return MemberData index
+        //                        
+        // delayed - (need sprites) - UI_Game.cs : image + Text pop-Up On bonus pickup
+        // delayed - UI_Upgrade.cs + prefab
+        //      delayed - to do: Panel m_shipStats_Display; 
+        //      delayed - to do: Panel m_moduleStats_Display;
+        //      delayed (need sprites) - to do: Sprite m_shipSprite;
+        //      delayed (need sprites) - to do: Sprite m_moduleSprite;
         // - Ship/Module Update Mechanics
-        // - UI_Game.cs : image + Text pop-Up On bonus pickup
         // - Add Highest wave achieved in SaveObject
         // - Creates bonus rarity for shields and repairDrones bonuses
         // - Remove all _lifeTime updates from Bonuses and replace with Map.IsOnScreen check (as done in repairbonus.cs)

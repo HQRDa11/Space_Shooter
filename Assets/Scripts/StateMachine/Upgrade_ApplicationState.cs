@@ -21,11 +21,6 @@ public class Upgrade_ApplicationState : ApplicationState
     public override void update()
     {
         base.update();
-        //Debug.Log("I am state." + m_type + " and I just updated! ");
-        if (Input.GetMouseButtonDown(0))
-        {
-            m_stateMachine.stateRequest(ApplicationState_Type.PREPARE);
-        }
     }
 
     public override void end()
@@ -43,5 +38,15 @@ public class Upgrade_ApplicationState : ApplicationState
     private void Save()
     {
         // here save
+    }
+    public override ApplicationState_Type Next()
+    {
+        Debug.Log("next ok");
+        return ApplicationState_Type.NULL;
+    }
+    public override ApplicationState_Type Previous()
+    {
+        Debug.Log("previous ok");
+        return ApplicationState_Type.PREPARE;
     }
 }
