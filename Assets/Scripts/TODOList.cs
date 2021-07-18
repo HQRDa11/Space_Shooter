@@ -30,15 +30,24 @@ namespace HQRDa
         // ok - Profile Handler.cs: Profile NewProfile() : is launched if no valid latest save
         // ok - SquadronData is now save in profile correctly;
         // ok - Update : UI_Update.cs
-        //    ok - Button : back to mainMenu
-        //    ok - Button template : switch states(previous/next)
-        //       ok - Next/Previous States Mechanics
-        //    ok - Fonctionnal Squadron Display 
-        //    ok - Functionnal Member Display
-        //    ok - Functionnal Module Display
+        //      ok - Button : back to mainMenu
+        //      ok - Button template : switch states(previous/next)
+        //          ok - Next/Previous States Mechanics
+        //      ok - Fonctionnal Squadron Display 
+        //      ok - Functionnal Member Display
+        //      ok - Functionnal Module Display
         // ok - Tools new fctn: int NewIndex( bool isNext_ifNotPrevious, int currentIndex) 
+        // ok - ModuleData.cs:
+        //      ok - Add [m_tier: int]
+        //      ok - Add fnctn Sprite GetSprite()
+        // ok - Create a Module_Factory class
+        //      ok - Create 'ModuleData RandomModule()'.
+        // ok - Factory.cs :
+        //      ok - Dice_BonusTier(int tier).
+        //      ok - add  [m_moduleFactory : Module_Factory]
         //
-        // now - Ship/Module Update Mechanics.
+        // - EndGame Chest Prise based on Score
+        // - Ship/Module Update Mechanics. 
         //
         // - Create a Reset Profile button in MainMenu
         // delayed - (need sprites) - UI_Game.cs : image + Text pop-Up On bonus pickup
