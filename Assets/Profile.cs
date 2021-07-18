@@ -24,7 +24,7 @@ public class Profile : MonoBehaviour
     public int[] TotalComponents { get { return m_components; } set { m_components = value; } }
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         m_gameCurrency = 0;
         m_id = "noID";
