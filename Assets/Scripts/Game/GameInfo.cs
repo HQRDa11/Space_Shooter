@@ -47,7 +47,7 @@ public class GameInfo : MonoBehaviour
         int[] components = new int[6];
         for (int i = 0; i < components.Length; i++)
         {
-            components[i] = m_lootedComponents[(Rarity)i];
+            components[i] = m_lootedComponents[(Rarity)i+1];
         }
         return components;
     }
@@ -61,7 +61,7 @@ public class GameInfo : MonoBehaviour
     {
         for (int i = 1; i <m_AllComponentsTexts.Length; i++) // reason of 1 instead of 0 : index 0 is the "components:" text, we dont want to touch it.
         {
-            Rarity rarity = (Rarity)i -1; // reason of -1 : see upper.
+            Rarity rarity = (Rarity)i; 
             m_AllComponentsTexts[i].text = m_lootedComponents[rarity].ToString();
         }
     }

@@ -236,7 +236,7 @@ public class UI_Upgrade : MonoBehaviour
                 m_text_module.text = "Module " + (m_moduleIndex + 1).ToString() + "/" + m_currentDisplayedMember.Ship.AllModules.Length;
 
                 m_moduleName_Display.text = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex].Name;
-                m_moduleName_Display.color = Factory.Instance.Material_Factory.GetMaterial(m_currentDisplayedModule.Rarity).color;
+                m_moduleName_Display.color = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
                 m_moduleLevel_Display.text = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex].Level.Current.ToString();
                 break;
             case false:

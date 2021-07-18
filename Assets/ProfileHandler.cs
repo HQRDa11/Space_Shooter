@@ -144,8 +144,5 @@ public class ProfileHandler : MonoBehaviour
         }
         m_activeProfile.HighScores = highScores;
     }
-    private void NewProfile()
-    {
-        m_activeProfile.ResetProfile();
-    }
+
 }

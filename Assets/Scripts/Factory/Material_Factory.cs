@@ -27,7 +27,8 @@ public class Material_Factory
 
     public Material GetMaterial(Rarity color)
     {
-        return rarityMaterials[(int)color];
+        int colorIndex = (int)color - 1;
+        return rarityMaterials[colorIndex];
     }
     public Material GetMaterial(Status color)
     {
