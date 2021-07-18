@@ -46,7 +46,7 @@ public class SquadronData
         {
             case true:
                 int nextIndex = (current % m_allMembers.Length) + 1;
-                switch(nextIndex >= m_allMembers.Length || nextIndex < 0)
+                switch(nextIndex >= m_allMembers.Length || nextIndex < 0 || m_allMembers[nextIndex] == null)
                 {
                     case true:
                         return m_allMembers.Length-1;
@@ -55,7 +55,7 @@ public class SquadronData
                 }
                 
             case false:
-                int previousIndex = (current % m_allMembers.Length) - 2;
+                int previousIndex = (current % m_allMembers.Length) - 1;
                 switch (previousIndex >= m_allMembers.Length || previousIndex < 0)
                 {
                     case true:
