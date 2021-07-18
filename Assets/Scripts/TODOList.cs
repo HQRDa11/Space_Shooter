@@ -29,7 +29,13 @@ namespace HQRDa
         // ok - Create Profile.ResetProfile();
         // ok - Profile Handler.cs: Profile NewProfile() : is launched if no valid latest save
         // ok - SquadronData is now save in profile correctly;
-        // - Profile Squaadron display in Upgrade screen 
+        // ok - Profile Squaadron display in Upgrade screen 
+        //
+        // now - UI_Upgrade.cs + prefab
+        //      now - to do: Panel m_shipStats_Display; 
+        //      now - to do: Panel m_moduleStats_Display;
+        //      - to do: Sprite m_shipSprite;
+        //      - to do: Sprite m_moduleSprite;
         // - Ship/Module Update Mechanics
         // - UI_Game.cs : image + Text pop-Up On bonus pickup
         // - Add Highest wave achieved in SaveObject
