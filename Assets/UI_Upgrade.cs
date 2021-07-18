@@ -248,7 +248,7 @@ public class UI_Upgrade : MonoBehaviour
                 m_moduleName_Display.color   = color;
 
                 //Level display
-                m_moduleLevel_Display.text   = module.Level.Current.ToString();
+                m_moduleLevel_Display.text   = "LVL "+module.Level.Current.ToString();
                 //Sprite display
 
                 m_moduleImage_Display.sprite = module.Sprite();
