@@ -49,17 +49,19 @@ namespace HQRDa
         // ok - Creates FinalLoot.cs:
         //      ok - m_options : ModuleData[3]
         // - EndGame_ApplicationState:
-        //      - Chest FinalLoot based on Score : "pick 1 option out of 3" style
-        //          - FinalLoot_HiddenDisplay(); 
-        //          - FinalLoot_DiscoveredDisplay();
-        //          - FinalLoot_Open(int selection);
-        // - UI_Endgame.cs & prefab :
-        //      - Display_FinalLoot.prefab
-        //          - Button_LootOption.prefab
-        //      - Link buttons to UI_EnGame class fields
+        //      ok - m_finalLoot : FinalLoot
+        //      ok - Chest FinalLoot based on Score : "pick 1 option out of 3" style
+        //          ok - FinalLoot_HiddenDisplay(); 
+        //          ok - FinalLoot_DiscoveredDisplay();
+        //          ok - FinalLoot_Open(int selection);
+        // ok - UI_Endgame.cs & prefab :
+        //      ok - Display_FinalLoot.prefab
+        //          ok - Button_LootOption.prefab
+        //      ok - Link buttons to UI_EnGame class fields
         //          
         // - Ship/Module Update Mechanics.
         // - Create a Reset Profile button in MainMenu
+        // - Update gameInfo with last achieved wave number.
         // delayed - Factory.cs:  Dice_FinalLoot() : FinalLoot (delay : FinalLootObject not complex enough)
         // delayed - (need sprites) - UI_Game.cs : image + Text pop-Up On bonus pickup
         // delayed - UI_Upgrade.cs + prefab
@@ -67,7 +69,6 @@ namespace HQRDa
         //      ok - to do: Sprite m_moduleSprite;
         //      delayed - to do: Panel m_shipStats_Display; 
         //      delayed (need sprites) - to do: Sprite m_shipSprite;
-        // - Save 'highest_achieved_wave' in SaveObject
         // - Creates bonus rarity for shields and repairDrones bonuses
         // - Remove all _lifeTime updates from Bonuses and replace with Map.IsOnScreen check (as done in repairbonus.cs)
         // - dans UI_EndGame. cs possible de caluler et afficher une mention a partir des loot et du score? (: viur 'NOTE1' dans UI_EndGame.cs)
