@@ -19,6 +19,7 @@ public class GameInfo : MonoBehaviour
     void Start()
     {
         m_score = 0;
+        m_lastWave = 0;
         m_lootedComponents = new Dictionary<Rarity, int>();
         m_lootedComponents.Add(Rarity.GREY, 0);
         m_lootedComponents.Add(Rarity.WHITE, 0);

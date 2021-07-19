@@ -21,7 +21,7 @@ public class MainMenu_ApplicationState : ApplicationState
 
     public override void end()
     {
-        ProfileHandler.Instance.MainMenuSave();
+        ProfileHandler.Instance.StateSave();
         GameObject.Destroy(m_UI);
         //Debug.Log("state" + m_type + " ending! ");
     }
