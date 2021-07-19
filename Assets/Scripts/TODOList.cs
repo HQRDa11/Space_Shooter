@@ -41,22 +41,33 @@ namespace HQRDa
         //      ok - Add [m_tier: int]
         //      ok - Add fnctn Sprite GetSprite()
         // ok - Create a Module_Factory class
-        //      ok - Create 'ModuleData RandomModule()'.
+        //      ok - RandomModule() : ModuleData 
         // ok - Factory.cs :
-        //      ok - Dice_BonusTier(int tier).
-        //      ok - add  [m_moduleFactory : Module_Factory]
-        //
-        // - EndGame Chest Prise based on Score
-        // - Ship/Module Update Mechanics. 
-        //
+        //      ok - Dice_BonusTier(int tier) :  int 
+        //      ok - m_moduleFactory : Module_Factory
+        //      
+        // ok - Creates FinalLoot.cs:
+        //      ok - m_options : ModuleData[3]
+        // - EndGame_ApplicationState:
+        //      - Chest FinalLoot based on Score : "pick 1 option out of 3" style
+        //          - FinalLoot_HiddenDisplay(); 
+        //          - FinalLoot_DiscoveredDisplay();
+        //          - FinalLoot_Open(int selection);
+        // - UI_Endgame.cs & prefab :
+        //      - Display_FinalLoot.prefab
+        //          - Button_LootOption.prefab
+        //      - Link buttons to UI_EnGame class fields
+        //          
+        // - Ship/Module Update Mechanics.
         // - Create a Reset Profile button in MainMenu
+        // delayed - Factory.cs:  Dice_FinalLoot() : FinalLoot (delay : FinalLootObject not complex enough)
         // delayed - (need sprites) - UI_Game.cs : image + Text pop-Up On bonus pickup
         // delayed - UI_Upgrade.cs + prefab
+        //      ok - to do: Panel m_moduleStats_Display;
+        //      ok - to do: Sprite m_moduleSprite;
         //      delayed - to do: Panel m_shipStats_Display; 
-        //      delayed - to do: Panel m_moduleStats_Display;
         //      delayed (need sprites) - to do: Sprite m_shipSprite;
-        //      delayed (need sprites) - to do: Sprite m_moduleSprite;
-        // - Add Highest wave achieved in SaveObject
+        // - Save 'highest_achieved_wave' in SaveObject
         // - Creates bonus rarity for shields and repairDrones bonuses
         // - Remove all _lifeTime updates from Bonuses and replace with Map.IsOnScreen check (as done in repairbonus.cs)
         // - dans UI_EndGame. cs possible de caluler et afficher une mention a partir des loot et du score? (: viur 'NOTE1' dans UI_EndGame.cs)
