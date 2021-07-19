@@ -8,6 +8,7 @@ public class ApplicationState
     protected GameObject m_gameObject;
     protected GameObject m_UI;
     protected Application_StateMachine m_stateMachine;
+    protected bool m_waitUserEntry;
     public ApplicationState_Type Type { get {return m_type; } }
 
     public ApplicationState(string name)
@@ -60,5 +61,10 @@ public class ApplicationState
     public virtual ApplicationState_Type Previous()
     {
         return ApplicationState_Type.NULL;
+    }
+
+    public virtual void WaitUserEntry() // Tell the state to wait the next user entry (eg. click) to call next state. 
+    {
+        m_waitUserEntry = true;
     }
 }
