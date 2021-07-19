@@ -41,6 +41,16 @@ public class SquadronData
         m_allStoredModules = new ModuleData[0];
     }
 
+    public void AddModule(ModuleData newModule)
+    {
+        ModuleData[] newList = new ModuleData[m_allStoredModules.Length + 1];
+        for (int i=0;i<m_allStoredModules.Length;i++)
+        {
+            newList[i] = m_allStoredModules[i];
+        }
+        newList[m_allStoredModules.Length] = newModule;
+        m_allStoredModules = newList;
+    }
 }
 
 // MEMBERDATA 
