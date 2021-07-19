@@ -127,19 +127,13 @@ public class UI_Upgrade : MonoBehaviour
 
         }
     }
+    //MEMBER SWITCH
     private void Initialise_MemberSwitch()
     {
         m_memberIndex = 0;
         m_nextMember_btn.onClick.AddListener(() => NextMember());
         m_previousMember_btn.onClick.AddListener(() => PreviousMember());
     }    
-    private void Initialise_ModuleSwitch()
-    {
-        m_moduleIndex = 0;
-        m_nextModule_btn.onClick.AddListener(() => NextModule());
-        m_previousModule_btn.onClick.AddListener(() => PreviousModule());
-    }
-
     private void NextMember()
     {
         m_memberIndex = Tools.StepIndex(true, m_memberIndex, m_squadronData.AllMembers.Length);
@@ -147,13 +141,19 @@ public class UI_Upgrade : MonoBehaviour
         Display_SquadMember();
         Display_Module();
     }
-
     private void PreviousMember()
     {
         m_memberIndex = Tools.StepIndex(false, m_memberIndex, m_squadronData.AllMembers.Length);
         m_currentDisplayedMember = m_squadronData.AllMembers[m_memberIndex];
         Display_SquadMember();
         Display_Module();
+    }
+    //MODULE SWITCH
+    private void Initialise_ModuleSwitch()
+    {
+        m_moduleIndex = 0;
+        m_nextModule_btn.onClick.AddListener(() => NextModule());
+        m_previousModule_btn.onClick.AddListener(() => PreviousModule());
     }
     private void NextModule()
     {
@@ -167,6 +167,7 @@ public class UI_Upgrade : MonoBehaviour
         m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[m_moduleIndex];
         Display_Module();
     }
+    //LOADING
     private void Load_Profile_Components()
     {
         m_totalComponents = ProfileHandler.Instance.ActiveProfile.TotalComponents;
@@ -200,7 +201,7 @@ public class UI_Upgrade : MonoBehaviour
                 return;
         }
     }
-
+    //DISPLAY
     private void Display_Components()
     {
         m_totalComponents_Display = GameObject.Find("Element_TotalComponentsDisplay").GetComponentsInChildren<Text>();
@@ -209,17 +210,17 @@ public class UI_Upgrade : MonoBehaviour
             m_totalComponents_Display[i].text = m_totalComponents[i - 1].ToString();
         }
     }
-
     public void Display_SquadMember()
     {
-        switch (m_currentDisplayedMember != null)
+        MemberData displayed = m_currentDisplayedMember;
+        switch (displayed != null)
         {
             case true:
-                m_text_member.text = m_currentDisplayedMember.Name + " " + (m_memberIndex+1).ToString() + "/" + m_squadronData.AllMembers.Length;
+                m_text_member.text = displayed.Name + " " + (m_memberIndex+1).ToString() + "/" + m_squadronData.AllMembers.Length;
 
-                m_shipName_Display.text = m_currentDisplayedMember.Ship.Name;
-                m_shipLevel_Display.text = m_currentDisplayedMember.Ship.Level.Current.ToString();
-                m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[0];
+                m_shipName_Display.text = displayed.Ship.Name;
+                m_shipLevel_Display.text = displayed.Ship.Level.Current.ToString();
+                m_currentDisplayedModule = displayed.Ship.AllModules[0];
                 m_moduleIndex = 0;
                 Display_Module();
                 break;
