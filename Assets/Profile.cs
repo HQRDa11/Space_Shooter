@@ -23,6 +23,14 @@ public class Profile : MonoBehaviour
     private int[] m_components;
     public int[] TotalComponents { get { return m_components; } set { m_components = value; } }
 
+    [SerializeField]
+    private ProfileData m_profileData;
+    public ProfileData Data { get; set; }
+
+    private void Awake()
+    {
+        m_profileData = new ProfileData();
+    }
     // Start is called before the first frame update
     void Start()
     {

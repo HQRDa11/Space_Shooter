@@ -11,12 +11,16 @@ public class EndGame_Logic
     public EndGame_Logic()
     {
         m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
-        if (m_gameInfo == null)
+        if (m_gameInfo == null )
         {
             Debug.LogWarning(" No GameInfo Object");
         }
-        GameObject.Find("ProfileHandler").GetComponent<ProfileHandler>().UpdateProfile_WithGameResults(m_gameInfo);
-        m_finalLoot = new FinalLoot(1, GameInfo.Get_Score());
+        else
+        {
+            ProfileHandler.Instance.ActiveProfile.Data.UpdateProfile_WithGameResults(m_gameInfo);
+            m_finalLoot = new FinalLoot(1, GameInfo.Get_Score());
+        }
+
     }
 
     public void OnUserChoice(int choice)
