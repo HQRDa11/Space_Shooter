@@ -70,7 +70,7 @@ public class Ship : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.K))
         {
-            TakeDamage(100); Debug.Log("Key K has been Pressed");
+            TakeDamage(100); Debug.Log("Damage taken: 100 - Key K has been Pressed");
         }
     }
 

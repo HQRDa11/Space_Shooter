@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UI_EndGame : MonoBehaviour
 {
-
     private int[] m_totalComponents;
     private int[] m_lootedcomponents;
     public int[] LootedComponents { set { m_lootedcomponents = value; Debug.LogWarning("Component set with values:" + m_lootedcomponents[0].ToString() + m_lootedcomponents[1].ToString() + m_lootedcomponents[2].ToString()); } }

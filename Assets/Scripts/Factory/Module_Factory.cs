@@ -36,7 +36,6 @@ public class Module_Factory
     public ModuleType RandomType()
     {
         int newType = (int)Random.Range(1, (int)ModuleType.TOTAL);
-        Debug.LogWarning(newType + " " + (ModuleType)newType);
         return (ModuleType)newType;
     }
 
