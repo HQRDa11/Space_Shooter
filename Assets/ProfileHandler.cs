@@ -70,7 +70,7 @@ public class ProfileHandler : MonoBehaviour
 
         Debug.LogWarning("Profile Saved");
     }
-    public void MainMenuSave()
+    public void StateSave()
     {
         Save();
     }
