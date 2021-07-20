@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class UI_Upgrade : MonoBehaviour
 { 
+    private enum Focus { MAIN = 0, CHANGE_MODULE}; // UI change displayed elements depending on user input
+    private Focus m_currentFocus;
+    //GameObject are linked to be easily enabled/disabled on focus change.
+    private UiFocus[] m_allFocuses; // Focus is like an UI_State
+
     private int[] m_totalComponents;
     private Text[] m_totalComponents_Display;
     private SquadronData m_squadronData;
@@ -41,6 +46,8 @@ public class UI_Upgrade : MonoBehaviour
     private Image m_moduleImage_Display;
     // to do: Panel m_moduleStats_Display;
 
+    //LIST OF MODULES_ELEMENTS
+    private List<Button> m_moduleButtons;
 
     private void Start()
     {
@@ -64,6 +71,10 @@ public class UI_Upgrade : MonoBehaviour
     // LINK UI_PREFABS 
     public void FindAll_UI_Elements()
     {
+        m_allFocuses = new UiFocus[2];
+        m_allFocuses = Resources.FindObjectsOfTypeAll<UiFocus>();
+        m_currentFocus = Focus.MAIN;
+
         // STATE DISPLAY
         m_previousState_btn = Find_Button_Element("Button_PreviousState");
         m_nextState_btn = Find_Button_Element("Button_NextState");
@@ -87,6 +98,7 @@ public class UI_Upgrade : MonoBehaviour
         m_moduleName_Display = Find_Text_Element("Text_ModuleName");
         m_moduleLevel_Display = Find_Text_Element("Text_ModuleLevel");
         m_moduleImage_Display = GameObject.Find("Image_Module").GetComponent<Image>();
+        Initialise_Buttons_StockChangeUpgrade();
     }
     public Text Find_Text_Element(string textGo_name)
     {
@@ -155,6 +167,15 @@ public class UI_Upgrade : MonoBehaviour
         m_nextModule_btn.onClick.AddListener(() => NextModule());
         m_previousModule_btn.onClick.AddListener(() => PreviousModule());
     }
+    private void Initialise_Buttons_StockChangeUpgrade()
+    {
+        GameObject panel = GameObject.Find("ChoicePanel_Module");
+        Button[] buttons = panel.GetComponentsInChildren<Button>();
+        //buttons[0].onClick.AddListener(() =>); STOCK MODULE
+        buttons[1].onClick.AddListener(() => RequestFocus(Focus.CHANGE_MODULE));
+        //buttons[2].onClick.AddListener(() =>); UPGRADE MODULE
+
+    }
     private void NextModule()
     {
         m_moduleIndex = Tools.StepIndex(true, m_moduleIndex, m_currentDisplayedMember.Ship.AllModules.Length);
@@ -197,7 +218,7 @@ public class UI_Upgrade : MonoBehaviour
                         return;
                 }
             case false:
-                Debug.LogError("cant load Member Data");
+                Debug.LogError( "no Squadron Data");
                 return;
         }
     }
@@ -238,6 +259,7 @@ public class UI_Upgrade : MonoBehaviour
                 ShipData   ship   = m_currentDisplayedMember.Ship;
                 ModuleData module = ship.AllModules[m_moduleIndex];
                 Color      color  = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
+                Debug.Log(color);
 
                 //Switch display
                 int index = m_moduleIndex + 1;
@@ -245,7 +267,7 @@ public class UI_Upgrade : MonoBehaviour
                 m_text_module.text           = "Module " + index + "/" + total;
 
                 //Name display
-                m_moduleName_Display.text    = module.Name;
+                m_moduleName_Display.text    = "T" + module.Tier + " " + module.Name;
                 m_moduleName_Display.color   = color;
 
                 //Level display
@@ -260,5 +282,71 @@ public class UI_Upgrade : MonoBehaviour
                 return;
         }
 
+    }
+
+    private void RequestFocus(Focus newFocus) // <- Is it ok to let it private with btn.AddListeners()()=>RequestFocus()) ?
+    {
+        Debug.Log(" CURRENT FOCUS:" + m_currentFocus + "SWITCH TO:" + newFocus);
+        switch (m_currentFocus)
+        {
+            case Focus.MAIN:
+                switch(newFocus)
+                {
+                    case Focus.CHANGE_MODULE:
+                        m_allFocuses[1].gameObject.SetActive(false); // <- Strangely Main_Syaye_Focus is set to 1 on FindObjectOfTypeAll();
+                        m_allFocuses[0].gameObject.SetActive(true); // <- so this is Change_State_Focus
+
+                        int totalModules = m_squadronData.AllStoredModules.Length;
+                        m_moduleButtons = new List<Button>();
+                        GameObject newParent = Resources.FindObjectsOfTypeAll<Grid_Scaler>()[0].gameObject;
+                        for (int i = 0; i < totalModules; i++) 
+                        {
+                            if (m_squadronData.AllStoredModules[i] != null)
+                            {
+                                GameObject newDisplay = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_Elements/ListElement"), newParent.transform);
+                                m_moduleButtons.Add( newDisplay.GetComponent<Button>());
+                                newDisplay.GetComponentsInChildren<Text>()[0].text = m_squadronData.AllStoredModules[i].FullName;
+                                newDisplay.GetComponentsInChildren<Image>()[1].sprite = m_squadronData.AllStoredModules[i].Sprite();
+                                Rarity rarity = m_squadronData.AllStoredModules[i].Rarity;
+                                newDisplay.GetComponentsInChildren<Image>()[1].color = Factory.Instance.Material_Factory.GetMaterial(rarity).color;
+                                // Monobehaviour issue: using the iterator 'i' in AddListener() results in all buttons sharing the same 
+                                // last iteration value of i;
+                                int tempSourceIndex = i; //<- (solucion internet): temp variable fixes the issue.
+                                int tempTargetIndex = m_moduleIndex;
+                                newDisplay.GetComponent<Button>().onClick.AddListener(() => OnModuleChange(tempSourceIndex, tempTargetIndex));
+                                Debug.Log("Instanciated: " + m_squadronData.AllStoredModules[i].FullName);
+                            }
+
+                        }
+                        Debug.Log("List Ok");
+                        m_currentFocus = Focus.CHANGE_MODULE;
+                        break;
+                }
+                break;
+            case Focus.CHANGE_MODULE:
+                switch (newFocus)
+                {
+                    case Focus.MAIN:
+                        Button[] allRemoved =  GameObject.Find("List_GridScaler_Module").GetComponentsInChildren<Button>();
+                        for (int i = 0; i< allRemoved.Length; i++)
+                        {
+                            GameObject.Destroy(allRemoved[i].gameObject);
+                        }
+                        m_allFocuses[0].gameObject.SetActive(false);
+                        m_allFocuses[1].gameObject.SetActive(true);
+                        Display_Module();
+                        m_currentFocus = Focus.MAIN;
+                        break;
+                }
+                break;
+        }
+    }
+    public void OnModuleChange(int sourceIndex, int targetIndex)
+    {
+        Debug.Log("try change module to " + sourceIndex);
+        m_currentDisplayedMember.Ship.EquipModule(sourceIndex, targetIndex);
+        m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[targetIndex];
+        Debug.LogWarning("Module Switched");
+        RequestFocus(Focus.MAIN);
     }
 }

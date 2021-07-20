@@ -25,7 +25,7 @@ public class SquadronData
     private ModuleData[] m_allStoredModules;
     public ModuleData[] AllStoredModules { get => m_allStoredModules; }
 
-    [SerializeField]
+    [SerializeReference]
     private ShipData[] m_allStoredShips;
     public ShipData[] AllStoredShips { get => m_allStoredShips; }
 
@@ -38,10 +38,10 @@ public class SquadronData
         m_allMembers[0] = m_player;
         m_allMembers[1] = new MemberData("ALLY ONE");
         m_allMembers[2] = new MemberData("ALLY TWO");
-        m_allStoredModules = new ModuleData[0];
+        m_allStoredModules = new ModuleData[1];
     }
 
-    public void AddModule(ModuleData newModule)
+    public void Add_StoredModule(ModuleData newModule)
     {
         ModuleData[] newList = new ModuleData[m_allStoredModules.Length + 1];
         for (int i=0;i<m_allStoredModules.Length;i++)
@@ -49,6 +49,23 @@ public class SquadronData
             newList[i] = m_allStoredModules[i];
         }
         newList[m_allStoredModules.Length] = newModule;
+        m_allStoredModules = newList;
+    }
+    public void Remove_StoredModule(int atIndex)
+    {
+        ModuleData[] newList = new ModuleData[m_allStoredModules.Length-1];
+        for (int i = 0; i < newList.Length; i++)
+        {
+            switch (i < atIndex)
+            {
+                case true:
+                    newList[i] = m_allStoredModules[i];
+                    break;
+                case false:
+                    newList[i] = m_allStoredModules[i+1];
+                    break;
+            }
+        }
         m_allStoredModules = newList;
     }
 }
@@ -80,8 +97,6 @@ public class MemberData
     {
         m_name = name;
         m_equippedShip = new ShipData("LIGHT FIGHTER", new LevelData(Random.Range(1,5), 0, 100));
-        
-        
     }
 }
 
@@ -108,17 +123,32 @@ public class ShipData
         AllModules[0] = Factory.Instance.Module_Factory.Dice_Module(2);
         AllModules[1] = Factory.Instance.Module_Factory.Dice_Module(1);
     }
+    public bool EquipModule(int sourceIndex, int atIndex)
+    {
+        if (m_allModules[atIndex]!= null)
+        {
+            ModuleData incoming = ProfileHandler.Instance.ActiveProfile.SquadronData.AllStoredModules[sourceIndex];
+            if (incoming != null && incoming.Type != ModuleType.NULL)
+            {
+                ProfileHandler.Instance.ActiveProfile.SquadronData.Add_StoredModule(m_allModules[atIndex]);
+                m_allModules[atIndex] = incoming;
+                ProfileHandler.Instance.ActiveProfile.SquadronData.Remove_StoredModule(sourceIndex);
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 //MODULEDATA
 [System.Serializable] // has 1 LevelData
 public class ModuleData
 {
-
+    public string FullName { get => "T" + Tier.ToString() + " " + m_name + " LVL " + m_level.Current.ToString(); }
     [SerializeField]
     private ModuleType m_type;
     public ModuleType Type { get => m_type; }
-    [SerializeField]
+    [SerializeReference]
     private Rarity m_rarity;
     public Rarity Rarity { get => m_rarity; }
     [SerializeField]
@@ -131,6 +161,16 @@ public class ModuleData
     [SerializeField]
     private LevelData m_level;
     public LevelData Level { get => m_level; }
+
+    public ModuleData()
+    {
+        m_type = ModuleType.SHIELD;
+        m_rarity = Rarity.ORANGE;
+        m_name = "ErrorObject";
+        m_level = new LevelData (0,10,100);
+        m_tier = 0;
+        //m_sprite = Factory.Instance.ModuleFactory
+    }
 
     public ModuleData(ModuleType type, Rarity rarity, string name, LevelData levelData, int tier)
     {

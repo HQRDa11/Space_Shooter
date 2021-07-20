@@ -25,9 +25,9 @@ public class EndGame_Logic
 
     public void OnUserChoice(int choice)
     {
-        Debug.LogWarning("index " + choice + " on tab length" + m_finalLoot.Options.Length);
         Application_StateMachine.Instance.Get_CurrentState().WaitUserEntry();
-        ProfileHandler.Instance.ActiveProfile.SquadronData.AddModule(m_finalLoot.Options[choice]);
+        ProfileHandler.Instance.ActiveProfile.SquadronData.Add_StoredModule(m_finalLoot.Options[choice]);
+        Debug.Log(" Module aded to list, current moduleCount:" + ProfileHandler.Instance.ActiveProfile.SquadronData.AllStoredModules.Length);
         ProfileHandler.Instance.StateSave();
     }
 }

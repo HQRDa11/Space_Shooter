@@ -37,7 +37,7 @@ public class Upgrade_ApplicationState : ApplicationState
 
     private void Save()
     {
-        // here save
+        ProfileHandler.Instance.StateSave();
     }
     public override ApplicationState_Type Next()
     {
