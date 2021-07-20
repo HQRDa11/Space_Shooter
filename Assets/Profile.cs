@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Profile : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeReference]
     private SquadronData m_squadronData;
     public SquadronData SquadronData { get { return m_squadronData; } set { m_squadronData = value; } }
 
