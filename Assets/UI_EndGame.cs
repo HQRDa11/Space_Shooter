@@ -32,6 +32,7 @@ public class UI_EndGame : MonoBehaviour
     {
         m_logic = logic;
         LootedComponents = logic.GameInfo.GetComponent<GameInfo>().Get_lootedComponents();
+        ProfileHandler.Instance.ActiveProfile.Data.UpdateProfile_WithGameResults(logic.GameInfo);
         Display_GameInfo();
     }
     // Update is called once per frame

@@ -17,7 +17,6 @@ public class EndGame_Logic
         }
         else
         {
-            ProfileHandler.Instance.ActiveProfile.Data.UpdateProfile_WithGameResults(m_gameInfo);
             m_finalLoot = new FinalLoot(1, GameInfo.Get_Score());
         }
 
