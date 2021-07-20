@@ -129,7 +129,7 @@ public class UI_EndGame : MonoBehaviour
                         switch (m_rarityIndex < 5)
                         {
                             case true:
-                                Debug.Log("Updating State: " + ((Rarity)m_rarityIndex).ToString() + "or index:" + m_rarityIndex);
+                                //Debug.Log("Updating State: " + ((Rarity)m_rarityIndex).ToString() + "or index:" + m_rarityIndex);
                                 Update_Step();
                                 return;
                             case false:

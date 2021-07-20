@@ -87,7 +87,7 @@ public class ProfileHandler : MonoBehaviour
                         case true:
                             m_activeProfile.Data = saveObject.profileData;
                             m_activeProfile.SquadronData = saveObject.squadronData;
-                            Debug.Log("Profile Loaded");
+                            Debug.LogWarning("Profile Loaded");
                             return true;
                         case false:
                             Debug.LogError("Can't load last profile save ( save version outdated )");

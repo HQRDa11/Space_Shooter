@@ -29,7 +29,6 @@ public class Module_Factory
         int tier = Factory.Dice_BonusTier(level);
         Rarity rarity = Factory.Dice_Rarity();
         string name = Factory.RarityToString(rarity) + " "+ type.ToString();
-        Debug.LogWarning("New Module: " + name);
         return new ModuleData(type,rarity, name, new LevelData(1, 0, baseXPforLevelUp), tier);
     }
 
@@ -50,6 +49,7 @@ public class Module_Factory
             case ModuleType.TURRET:
                 return m_turret_sprite;
             default:
+                Debug.Log("error ModuleType:" + type);
                 Debug.LogError("Cant load " + type.ToString() + " sprite");
                 return Factory.Instance.SpriteError;
         }

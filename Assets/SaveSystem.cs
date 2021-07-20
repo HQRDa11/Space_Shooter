@@ -44,7 +44,7 @@ public static class SaveSystem
         }
         if (mostReccentFile != null)
         {
-            Debug.Log(mostReccentFile.FullName);
+            Debug.Log("Loading most recent file :" + mostReccentFile.FullName); ;
             string saveString = File.ReadAllText( mostReccentFile.FullName);
             return saveString;
         }

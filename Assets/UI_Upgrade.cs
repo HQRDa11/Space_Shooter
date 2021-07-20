@@ -207,7 +207,7 @@ public class UI_Upgrade : MonoBehaviour
                         switch (m_currentDisplayedModule != null)
                         {
                             case true:
-                                Debug.Log("SquadronData Loading ok");
+                                //Debug.Log("SquadronData Loading ok");
                                 return;
                             case false:
                                 Debug.LogError("cant load Module Data");
@@ -259,7 +259,7 @@ public class UI_Upgrade : MonoBehaviour
                 ShipData   ship   = m_currentDisplayedMember.Ship;
                 ModuleData module = ship.AllModules[m_moduleIndex];
                 Color      color  = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
-                Debug.Log(color);
+                // Debug.Log(color);
 
                 //Switch display
                 int index = m_moduleIndex + 1;
@@ -286,7 +286,7 @@ public class UI_Upgrade : MonoBehaviour
 
     private void RequestFocus(Focus newFocus) // <- Is it ok to let it private with btn.AddListeners()()=>RequestFocus()) ?
     {
-        Debug.Log(" CURRENT FOCUS:" + m_currentFocus + "SWITCH TO:" + newFocus);
+        //Debug.Log(" CURRENT FOCUS:" + m_currentFocus + "SWITCH TO:" + newFocus);
         switch (m_currentFocus)
         {
             case Focus.MAIN:
@@ -314,11 +314,9 @@ public class UI_Upgrade : MonoBehaviour
                                 int tempSourceIndex = i; //<- (solucion internet): temp variable fixes the issue.
                                 int tempTargetIndex = m_moduleIndex;
                                 newDisplay.GetComponent<Button>().onClick.AddListener(() => OnModuleChange(tempSourceIndex, tempTargetIndex));
-                                Debug.Log("Instanciated: " + m_squadronData.AllStoredModules[i].FullName);
                             }
 
                         }
-                        Debug.Log("List Ok");
                         m_currentFocus = Focus.CHANGE_MODULE;
                         break;
                 }
@@ -343,10 +341,9 @@ public class UI_Upgrade : MonoBehaviour
     }
     public void OnModuleChange(int sourceIndex, int targetIndex)
     {
-        Debug.Log("try change module to " + sourceIndex);
         m_currentDisplayedMember.Ship.EquipModule(sourceIndex, targetIndex);
         m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[targetIndex];
-        Debug.LogWarning("Module Switched");
+        //Debug.LogWarning("Module Switched. (new module: " + m_currentDisplayedModule.FullName + ")");
         RequestFocus(Focus.MAIN);
     }
 }

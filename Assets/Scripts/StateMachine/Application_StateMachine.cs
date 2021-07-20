@@ -211,7 +211,7 @@ public class Application_StateMachine : MonoBehaviour
         }
     
         // DEBUG
-        if (isSwitch) Debug.Log(" State switched to:" + stateResquest);
+        if (isSwitch) Debug.Log("State switched to: " + stateResquest + "_STATE");
         else Debug.Log(" State didn't switch to:" + stateResquest);
 
         return isSwitch;
