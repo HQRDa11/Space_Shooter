@@ -18,14 +18,14 @@ public class ProfileHandler : MonoBehaviour
         _instance = this;
 
         SaveSystem.Init();
-
+        Debug.Log("SaveSystem initialised");
         m_profileObject = GameObject.Find("ActiveProfile");
         m_activeProfile = m_profileObject.GetComponent<Profile>();
         if (m_activeProfile == null)
         {
+            Debug.Log("Profile check: No active Profile");
             m_activeProfile = m_profileObject.AddComponent<Profile>();
             m_activeProfile.Data = new ProfileData();
-            Debug.Log("error here");
         }
     }
     private class SaveObject
@@ -103,7 +103,7 @@ public class ProfileHandler : MonoBehaviour
         {
             Debug.LogWarning("There is no save in directory: " + Application.persistentDataPath + "/Saves/" );
         }
-        m_activeProfile.ResetProfile() ;Debug.LogWarning("New profile created");
+        m_activeProfile.NewProfile();
         return false;
     }
 

@@ -24,7 +24,7 @@ public class ProfileData
 
     public ProfileData()
     {
-        Debug.LogWarning("New ProfileData");
+        //Debug.LogWarning("New default ProfileData");
         m_appVersion = ApplicationInfo.VERSION;
         m_profileID = "noID";
         m_gameCurrency = 0;

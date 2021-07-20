@@ -10,11 +10,11 @@ public class Profile : MonoBehaviour
 
     [SerializeField]
     private ProfileData m_profileData;
-    public ProfileData Data { get { return m_profileData; } set { m_profileData = value; Debug.LogWarning("profile data new value"); } }
+    public ProfileData Data { get { return m_profileData; } set { m_profileData = value; Debug.LogWarning("- setting new value to ProfileData"); } }
 
     private void Awake()
     {
-        m_profileData = new ProfileData();
+        //ResetProfile();
     }
     // Start is called before the first frame update
     void Start()
@@ -22,11 +22,11 @@ public class Profile : MonoBehaviour
         m_squadronData = new SquadronData("Unnamed");
     }
 
-    public void ResetProfile()
+    public void NewProfile()
     {
-        Debug.LogWarning("Profile reset");
         m_profileData = new ProfileData();
         m_squadronData = new SquadronData(m_profileData.ProfileID);
+        Debug.LogWarning("New profile created");
     }
 
     public void ModifyNumberOf_Components( int rarityIndex, int modifier)
