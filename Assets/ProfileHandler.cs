@@ -42,20 +42,20 @@ public class ProfileHandler : MonoBehaviour
     {
         // RETRIEVE ACTIVE PRODILE INFOS:
         //Debug.Log("Saving:" + m_activeProfile.ID + "//" + "highScores:" + m_activeProfile.HighScores[0] + "/" + m_activeProfile.HighScores[1]);
-        string newProfileId = m_activeProfile.ID;
-        int newGameCurrency = m_activeProfile.GameCurrency;
-        int[] newHighScores = m_activeProfile.HighScores;
-        int[] newComponents = m_activeProfile.TotalComponents;
-        m_activeProfile.SquadronData.AllMembers[0].Name = m_activeProfile.ID;
+        ProfileData profileData = m_activeProfile.Data;
+        string newProfileId = profileData.ProfileID;
+        int newGameCurrency = profileData.GameCurrency;
+        int[] newHighScores = profileData.HighScores;
+        int[] newComponents = profileData.Components;
+        m_activeProfile.SquadronData.AllMembers[0].Name = profileData.ProfileID;
         SquadronData newSquadronData = m_activeProfile.SquadronData;
-        ProfileData prodileData = m_activeProfile.Data;
         //Debug.LogWarning("IsSquadronData?:" + newSquadronData) ;
         //Debug.LogWarning("IsSquadronDataPlayerName?:" + newSquadronData.Player.name) ;
 
         //CREATE SAVEOBJECT:
         SaveObject saveObject = new SaveObject
         {
-            profileData = prodileData,
+            profileData = profileData,
             squadronData = newSquadronData
         };
 
@@ -65,7 +65,7 @@ public class ProfileHandler : MonoBehaviour
         // SAVE JSON STRING:
         SaveSystem.Save(json);
 
-        Debug.LogWarning("Profile Saved");
+        Debug.LogWarning("Profile Saved:" + saveObject.profileData.ProfileID);
     }
     public void StateSave()
     {
@@ -87,7 +87,7 @@ public class ProfileHandler : MonoBehaviour
                         case true:
                             m_activeProfile.Data = saveObject.profileData;
                             m_activeProfile.SquadronData = saveObject.squadronData;
-                            Debug.LogWarning("Profile Loaded");
+                            Debug.LogWarning("Profile Loaded:" + m_activeProfile.Data.ProfileID);
                             return true;
                         case false:
                             Debug.LogError("Can't load last profile save ( save version outdated )");

@@ -5,19 +5,31 @@ using UnityEngine;
 [System.Serializable]
 public class ProfileData
 {
-    public string AppVersion { get; set; }
-    public string ProfileID { get; set; }
-    public int GameCurrency { get; set; }
-    public int[] HighScores { get; set; }
-    public int[] Components { get; set; }
+    [SerializeField]
+    private string m_appVersion;
+    public string AppVersion { get=>m_appVersion; }
+    [SerializeField]
+    private string m_profileID;
+    public string ProfileID { get => m_profileID; }
+    [SerializeField]
+    private int m_gameCurrency;
+    public int GameCurrency { get=>m_gameCurrency;}
+
+    [SerializeField]
+    private int[] m_highScores;
+    public int[] HighScores { get=>m_highScores; set { m_highScores = value; } }
+    [SerializeField]
+    private int[] m_allComponents;
+    public int[] Components { get => m_allComponents; }
 
     public ProfileData()
     {
-        AppVersion = ApplicationInfo.VERSION;
-        ProfileID = "noID";
-        GameCurrency = 0;
-        HighScores = new int[10];
-        Components = new int[6];
+        Debug.LogWarning("New ProfileData");
+        m_appVersion = ApplicationInfo.VERSION;
+        m_profileID = "noID";
+        m_gameCurrency = 0;
+        m_highScores = new int[10];
+        m_allComponents = new int[6];
     }
 
     public void UpdateProfile_WithGameResults(GameInfo info)
@@ -47,7 +59,7 @@ public class ProfileData
         int[] highScores = new int[10];
         for (int i = 0; i < highScores.Length; i++)
         {
-            highScores[i] = ProfileHandler.Instance.ActiveProfile.HighScores[i];
+            highScores[i] = ProfileHandler.Instance.ActiveProfile.Data.HighScores[i];
         }
         int temp = 0;
         for (int i = 0; i < highScores.Length; i++)
@@ -61,6 +73,6 @@ public class ProfileData
                     break;
             }
         }
-        ProfileHandler.Instance.ActiveProfile.HighScores = highScores;
+        ProfileHandler.Instance.ActiveProfile.Data.HighScores = highScores;
     }
 }

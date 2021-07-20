@@ -9,8 +9,8 @@ public class SquadronData
 {
     // SQUAD MEMBERS:
 
-    [SerializeField]
-    private int m_maxAllies;
+    //[SerializeField]
+    //private int m_maxAllies;
 
     [SerializeReference] // [SerializeReference] is MonoBeahaviour feature to support serialized field inheritance ( using pattern decorator )
     private PlayerData m_player;
@@ -25,14 +25,14 @@ public class SquadronData
     private ModuleData[] m_allStoredModules;
     public ModuleData[] AllStoredModules { get => m_allStoredModules; }
 
-    [SerializeReference]
+    [SerializeField]
     private ShipData[] m_allStoredShips;
     public ShipData[] AllStoredShips { get => m_allStoredShips; }
 
     public SquadronData(string PlayerName)
     {
         m_player = new PlayerData(PlayerName);
-        m_maxAllies = 2;
+        // m_maxAllies = 2;
         m_allStoredShips = null;
         m_allMembers = new MemberData[3];
         m_allMembers[0] = m_player;
