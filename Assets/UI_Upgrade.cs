@@ -191,7 +191,7 @@ public class UI_Upgrade : MonoBehaviour
     //LOADING
     private void Load_Profile_Components()
     {
-        m_totalComponents = ProfileHandler.Instance.ActiveProfile.TotalComponents;
+        m_totalComponents = ProfileHandler.Instance.ActiveProfile.Data.Components;
     }
     private void Load_Profile_SquadronData()
     {
@@ -225,9 +225,11 @@ public class UI_Upgrade : MonoBehaviour
     //DISPLAY
     private void Display_Components()
     {
+        Debug.Log("ok here");
         m_totalComponents_Display = GameObject.Find("Element_TotalComponentsDisplay").GetComponentsInChildren<Text>();
         for (int i = 1; i < m_totalComponents_Display.Length; i++) // reason of 1 instead of 0 : index 0 is the "Total Components:" text, we dont want to touch it.
         {
+            Debug.Log("Displaying Components:" + m_totalComponents[i - 1]);
             m_totalComponents_Display[i].text = m_totalComponents[i - 1].ToString();
         }
     }
