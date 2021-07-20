@@ -227,10 +227,10 @@ public class UI_Upgrade : MonoBehaviour
     {
         Debug.Log("ok here");
         m_totalComponents_Display = GameObject.Find("Element_TotalComponentsDisplay").GetComponentsInChildren<Text>();
-        for (int i = 1; i < m_totalComponents_Display.Length; i++) // reason of 1 instead of 0 : index 0 is the "Total Components:" text, we dont want to touch it.
+        for (int i = 1; i < m_totalComponents_Display.Length; i++) 
         {
-            Debug.Log("Displaying Components:" + m_totalComponents[i - 1]);
-            m_totalComponents_Display[i].text = m_totalComponents[i - 1].ToString();
+            Debug.Log("Displaying Components:" + m_totalComponents[i-1]);
+            m_totalComponents_Display[i].text = m_totalComponents[i-1].ToString();
         }
     }
     public void Display_SquadMember()

@@ -85,23 +85,24 @@ public class UI_EndGame : MonoBehaviour
     {
         m_lootedcomponents = new int[6];
         m_totalComponents = new int[6];
-        m_totalComponents = (int[])ProfileHandler.Instance.ActiveProfile.TotalComponents.Clone();
+        m_totalComponents = (int[])ProfileHandler.Instance.ActiveProfile.Data.Components.Clone();
 
         m_hasFinishedDisplay = false;
 
         m_totalComponents_Display = GameObject.Find("Element_TotalComponentsDisplay").GetComponentsInChildren<Text>();
         m_addedComponents_Display = GameObject.Find("Element_AddedComponentsDisplay").GetComponentsInChildren<Text>();
 
-        for (int i = 1; i < m_totalComponents_Display.Length; i++) // reason of 1 instead of 0 : index 0 is the "Total Components:" text, we dont want to touch it.
+
+        for (int i = 0; i < 6; i++) // reason of 1 instead of 0 : index 0 is the "Total Components:" text, we dont want to touch it.
         {
-            m_totalComponents_Display[i].text = m_totalComponents[i - 1].ToString();
+            m_totalComponents_Display[i].text = m_totalComponents[i].ToString();
         }
 
-        m_rarityIndex = (int)Rarity.GREY;
+        m_rarityIndex = 0;
        // Debug.LogWarning("RarityGrey = " + m_rarityIndex);
         m_additionValue = 0;
         m_timer = 0;
-        m_timerMax = 0.16f;
+        m_timerMax = 0.32f;
     }
     private bool isTimerOk()
     {
@@ -172,7 +173,8 @@ public class UI_EndGame : MonoBehaviour
                 {
                     case true:
                         Sound.Instance.Play_ComponentCollect();
-                        m_totalComponents_Display[m_rarityIndex + 1].text = (m_totalComponents[m_rarityIndex] + m_additionValue).ToString();
+                        m_totalComponents_Display[m_rarityIndex].text = (m_totalComponents[m_rarityIndex] + m_additionValue).ToString();
+                        m_additionValue = 0;
                         break;
                     case false:
                         break;
