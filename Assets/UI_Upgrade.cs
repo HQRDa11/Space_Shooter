@@ -258,23 +258,31 @@ public class UI_Upgrade : MonoBehaviour
         switch (m_currentDisplayedModule != null)
         {
             case true:
-                ShipData   ship   = m_currentDisplayedMember.Ship;
+                ShipData ship = m_currentDisplayedMember.Ship;
                 ModuleData module = ship.AllModules[m_moduleIndex];
-                Color      color  = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
+                Color color = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
                 // Debug.Log(color);
 
                 //Switch display
                 int index = m_moduleIndex + 1;
                 int total = ship.AllModules.Length;
-                m_text_module.text           = "Module " + index + "/" + total;
+                m_text_module.text = "Module " + index + "/" + total;
 
                 //Name display
-                m_moduleName_Display.text    = "T" + module.Tier + " " + module.Name;
-                m_moduleName_Display.color   = color;
+                m_moduleName_Display.text = "T" + module.Tier + " " + module.Name;
+                m_moduleName_Display.color = color;
 
                 //Level display
-                m_moduleLevel_Display.text   = "LVL "+module.Level.Current.ToString();
+                m_moduleLevel_Display.text = "LVL " + module.Level.Current.ToString();
                 //Sprite display
+
+                //Stats display
+                if (GameObject.Find("Display_ModuleStats") == null) Debug.LogWarning(1);
+                if (GameObject.Find("Display_ModuleStats").GetComponentInChildren<Panel_Stats>() == null) Debug.LogWarning(2);
+                if (Factory.Instance.ModuleStat_Factory == null) Debug.LogWarning(3);
+                if (module == null) Debug.LogWarning(4);
+
+                GameObject.Find("Display_ModuleStats").GetComponentInChildren<Panel_Stats>().Display_ModuleStats(Factory.Instance.ModuleStat_Factory.Create_Stats(module));
 
                 m_moduleImage_Display.sprite = module.Sprite();
                 m_moduleImage_Display.color  = color;
