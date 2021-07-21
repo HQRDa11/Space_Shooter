@@ -41,6 +41,7 @@ public class UI_Upgrade : MonoBehaviour
     private Button m_nextModule_btn;
 
     //MODULE_DISPLAY
+    UiElement_StatsPanel m_moduleStatsPanel;
     private Text m_moduleName_Display;
     private Text m_moduleLevel_Display;
     private Image m_moduleImage_Display;
@@ -48,7 +49,6 @@ public class UI_Upgrade : MonoBehaviour
 
     //LIST OF MODULES_ELEMENTS
     private List<Button> m_moduleButtons;
-
     private void Start()
     {
         Load_Profile_Components();
@@ -99,6 +99,9 @@ public class UI_Upgrade : MonoBehaviour
         m_moduleLevel_Display = Find_Text_Element("Text_ModuleLevel");
         m_moduleImage_Display = GameObject.Find("Image_Module").GetComponent<Image>();
         Initialise_Buttons_StockChangeUpgrade();
+
+        //ModuleStats display
+        m_moduleStatsPanel = GameObject.FindObjectOfType<UiElement_StatsPanel>();
     }
     public Text Find_Text_Element(string textGo_name)
     {
@@ -225,11 +228,10 @@ public class UI_Upgrade : MonoBehaviour
     //DISPLAY
     private void Display_Components()
     {
-        Debug.Log("ok here");
         m_totalComponents_Display = GameObject.Find("Element_TotalComponentsDisplay").GetComponentsInChildren<Text>();
         for (int i = 1; i < m_totalComponents_Display.Length; i++) 
         {
-            Debug.Log("Displaying Components:" + m_totalComponents[i-1]);
+            //Debug.Log("Displaying Components:" + m_totalComponents[i-1]);
             m_totalComponents_Display[i].text = m_totalComponents[i-1].ToString();
         }
     }
@@ -277,12 +279,9 @@ public class UI_Upgrade : MonoBehaviour
                 //Sprite display
 
                 //Stats display
-                if (GameObject.Find("Display_ModuleStats") == null) Debug.LogWarning(1);
-                if (GameObject.Find("Display_ModuleStats").GetComponentInChildren<Panel_Stats>() == null) Debug.LogWarning(2);
-                if (Factory.Instance.ModuleStat_Factory == null) Debug.LogWarning(3);
-                if (module == null) Debug.LogWarning(4);
+                if (m_moduleStatsPanel == null) Debug.LogWarning("no stat panel to display");
 
-                GameObject.Find("Display_ModuleStats").GetComponentInChildren<Panel_Stats>().Display_ModuleStats(Factory.Instance.ModuleStat_Factory.Create_Stats(module));
+                m_moduleStatsPanel.Display_ModuleStats(Factory.Instance.ModuleStat_Factory.Create_Stats(module));
 
                 m_moduleImage_Display.sprite = module.Sprite();
                 m_moduleImage_Display.color  = color;

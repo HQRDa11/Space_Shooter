@@ -20,7 +20,7 @@ public class ModuleStat_Factory
         float currentValue = data.Level.Current * maxValue / levelMax;
 
 
-        Debug.LogWarning("NEW TEST:" + tierBaseValue);
+        //Debug.LogWarning("NEW TEST:" + tierBaseValue);
         switch (data.Type)
         {
             case ModuleType.REPAIRDRONE:
