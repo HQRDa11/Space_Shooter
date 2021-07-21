@@ -26,14 +26,14 @@ public class Panel_Stats : MonoBehaviour
                     string values = (System.Math.Round(stat.Value, 2)).ToString() + " / " + (System.Math.Round(stat.MaxValue, 2)).ToString();
                     statDisplay.GetComponentInChildren<Image>().GetComponentsInChildren<Text>()[1].text = values;
                     statDisplay.GetComponentsInChildren<Image>()[1].fillAmount = stat.Value / stat.MaxValue;
-                    Debug.LogWarning(" ratio = " + statDisplay.GetComponentInChildren<Image>().name);
+                    // Debug.LogWarning(" ratio = " + statDisplay.GetComponentInChildren<Image>().name);
                 }
                 break;
         }
     }
     private void ResetPanel()
     {
-        Debug.LogWarning(gameObject.GetComponentInChildren<UiElement_VerticalGridLayout>() == true);
+        // Debug.LogWarning(gameObject.GetComponentInChildren<UiElement_VerticalGridLayout>() == true);
         gameObject.GetComponentInChildren<UiElement_VerticalGridLayout>().Reset_AllElements();
     }
 }
