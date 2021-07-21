@@ -38,6 +38,13 @@ public class Module_Factory
         return (ModuleType)newType;
     }
 
+
+    public void LevelUp(ModuleData module)
+    {
+        module.Level = new LevelData(module.Level.Current+1, 0, 100);
+        Debug.Log("new level:" + module.Level.Current);
+    }
+
     public Sprite GetSprite(ModuleType type)
     {
         switch (type)
