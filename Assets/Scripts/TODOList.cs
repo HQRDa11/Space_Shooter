@@ -45,7 +45,6 @@ namespace HQRDa
         // ok - Factory.cs :
         //      ok - Dice_BonusTier(int tier) :  int 
         //      ok - m_moduleFactory : Module_Factory
-        //      
         // ok - Creates FinalLoot.cs:
         //      ok - m_options : ModuleData[3]
         // - EndGame_ApplicationState:
@@ -58,7 +57,17 @@ namespace HQRDa
         //      ok - Display_FinalLoot.prefab
         //          ok - Button_LootOption.prefab
         //      ok - Link buttons to UI_EnGame class fields
-        //          
+        // - highScore: 918230 v0.0.02    
+        //
+        // ok - component stats mechanics
+        //      ok - Create stats panel Prefab.
+        //      ok - class ModuleStat
+        //      ok - class ModuleStats_Factory: 
+        //          ok - GetStats(Module module) : ModuleStat[]
+        //
+        // 
+        // ok - ScrollPanel.prefab
+        //
         // - Ship/Module Update Mechanics.
         // - Create a Reset Profile button in MainMenu
         // - Update gameInfo with last achieved wave number.
