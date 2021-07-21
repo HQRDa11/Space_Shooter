@@ -29,8 +29,39 @@ public class Profile : MonoBehaviour
         Debug.LogWarning("New profile created");
     }
 
-    public void ModifyNumberOf_Components( int rarityIndex, int modifier)
+    public void ModifyNumberOf_Components(int rarityIndex, int modifier)
     {
         m_profileData.Components[rarityIndex] += modifier;
     }
+
+    public bool TryCost(int[] cost)
+    {
+        for (int i = 0; i<cost.Length; i++)
+        {
+            switch( cost[i]>Data.Components[i])
+            {
+                case true:
+                    Debug.Log("Not enough components");
+                    return false;
+            }
+        }
+        return true;
+    }
+    public bool SpendComponent(int[] cost)
+    {
+        switch (TryCost(cost))
+        {
+            case true:
+                for (int i = 0; i < cost.Length; i++)
+                {
+                    Data.Components[i] -= cost[i];
+                }
+                return true;
+            case false:
+                Debug.LogWarning("Error : Not enough components");
+                return false;
+        }
+    }
+
+
 }
