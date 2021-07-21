@@ -8,7 +8,7 @@ public class UiElement_StatsPanel : MonoBehaviour
     private Transform m_parentGrid;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_parentGrid = GetComponentsInChildren<Image>()[1].GetComponentInChildren<UiElement_VerticalGridLayout>().transform;
     }
