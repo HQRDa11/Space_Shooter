@@ -49,6 +49,11 @@ public class UI_Upgrade : MonoBehaviour
 
     //LIST OF MODULES_ELEMENTS
     private List<Button> m_moduleButtons;
+
+    // Upgrade button
+    private Button m_upgradeModuleButton; 
+
+
     private void Start()
     {
         Load_Profile_Components();
@@ -102,6 +107,9 @@ public class UI_Upgrade : MonoBehaviour
 
         //ModuleStats display
         m_moduleStatsPanel = GameObject.FindObjectOfType<UiElement_StatsPanel>();
+
+        //Upgrade 
+        m_upgradeModuleButton = GameObject.Find("ChoicePanel_Module").GetComponentsInChildren<Button>()[2];
     }
     public Text Find_Text_Element(string textGo_name)
     {
@@ -176,7 +184,6 @@ public class UI_Upgrade : MonoBehaviour
         Button[] buttons = panel.GetComponentsInChildren<Button>();
         //buttons[0].onClick.AddListener(() =>); STOCK MODULE
         buttons[1].onClick.AddListener(() => RequestFocus(Focus.CHANGE_MODULE));
-        //buttons[2].onClick.AddListener(() =>); UPGRADE MODULE
 
     }
     private void NextModule()
@@ -285,6 +292,26 @@ public class UI_Upgrade : MonoBehaviour
 
                 m_moduleImage_Display.sprite = module.Sprite();
                 m_moduleImage_Display.color  = color;
+
+                //Upgrade button
+                int[] cost = Factory.Instance.ModuleStat_Factory.Get_UpgradeCost(module);
+                UiElement_ComponentCostsDisplay costDisplay = GameObject.FindObjectOfType<UiElement_ComponentCostsDisplay>();
+                costDisplay.Display_Costs(cost);
+                Color upgradeButtonColor = m_upgradeModuleButton.gameObject.GetComponentInChildren<Image>().color;
+                switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost))
+                {
+                    case true:
+                        upgradeButtonColor = new Color(color.r, color.g, color.b, 1);
+                        m_upgradeModuleButton.onClick.AddListener(() => OnUpgradeButtonPressed());
+                        break;
+                    case false:
+                        upgradeButtonColor = new Color(color.r, color.g, color.b, 0.5f);
+                        m_upgradeModuleButton.onClick.RemoveAllListeners();
+                        break;
+                }
+                
+                
+                
                 break;
             case false:
                 Debug.LogError("cant display module");
@@ -354,5 +381,14 @@ public class UI_Upgrade : MonoBehaviour
         m_currentDisplayedModule = m_currentDisplayedMember.Ship.AllModules[targetIndex];
         //Debug.LogWarning("Module Switched. (new module: " + m_currentDisplayedModule.FullName + ")");
         RequestFocus(Focus.MAIN);
+    }
+
+    private void OnUpgradeButtonPressed()
+    {
+        m_upgradeModuleButton.onClick.RemoveAllListeners();
+        ProfileHandler.Instance.ActiveProfile.SpendComponent(Factory.Instance.ModuleStat_Factory.Get_UpgradeCost(m_currentDisplayedModule));
+        Factory.Instance.Module_Factory.LevelUp(m_currentDisplayedModule);
+        Display_Components();
+        Display_Module();
     }
 }

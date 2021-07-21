@@ -160,7 +160,7 @@ public class ModuleData
 
     [SerializeField]
     private LevelData m_level;
-    public LevelData Level { get => m_level; }
+    public LevelData Level { get => m_level; set { m_level = value; } }
 
     public ModuleData()
     {
@@ -193,7 +193,7 @@ public class LevelData
 {
     [SerializeField]
     private int m_current;
-    public int Current { get => m_current; }
+    public int Current { get => m_current; set { m_current = value; } }
     [SerializeField]
     private float m_xp_current;
     public float Xp_Current { get => m_xp_current; }
