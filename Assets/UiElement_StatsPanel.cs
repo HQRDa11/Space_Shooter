@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Panel_Stats : MonoBehaviour
+public class UiElement_StatsPanel : MonoBehaviour
 {
     private Transform m_parentGrid;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_parentGrid = GameObject.Find("ModuleStats_Grid").transform;
+        m_parentGrid = GetComponentsInChildren<Image>()[1].GetComponentInChildren<UiElement_VerticalGridLayout>().transform;
     }
 
     public void Display_ModuleStats(ModuleStat[] stats)
@@ -31,7 +31,7 @@ public class Panel_Stats : MonoBehaviour
                 break;
         }
     }
-    private void ResetPanel()
+    public void ResetPanel()
     {
         // Debug.LogWarning(gameObject.GetComponentInChildren<UiElement_VerticalGridLayout>() == true);
         gameObject.GetComponentInChildren<UiElement_VerticalGridLayout>().Reset_AllElements();
