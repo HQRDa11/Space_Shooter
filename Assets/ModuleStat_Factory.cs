@@ -107,4 +107,24 @@ public class ModuleStat_Factory
     {
         return 3 * (((int)data) + 1);
     }
+    public int[] Get_UpgradeCost(ModuleData data)
+    {
+        int[] componentCost = new int[6];
+        int rarity = (int)data.Rarity;
+        Debug.Log("rarity cost" + rarity);
+        int tier = data.Tier;
+
+        for (int h = rarity; h != 0; h--)
+        {
+            for (int index = 0; index < rarity; index++)
+            {
+                componentCost[index] += tier;
+            }
+            rarity--;
+        }
+
+        Debug.Log("cost:" + componentCost.ToString());
+        return componentCost;
+    }
+
 }
