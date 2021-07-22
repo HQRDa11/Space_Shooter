@@ -89,6 +89,11 @@ public class UI_EndGame : MonoBehaviour
         m_totalComponents = (int[])ProfileHandler.Instance.ActiveProfile.Data.Components.Clone();
 
         m_hasFinishedDisplay = false;
+        m_rarityIndex = 0;
+        // Debug.LogWarning("RarityGrey = " + m_rarityIndex);
+        m_additionValue = 0;
+        m_timer = 0;
+        m_timerMax = 0.12f;
 
         m_totalComponents_Display = GameObject.Find("Element_TotalComponentsDisplay").GetComponentsInChildren<Text>();
         m_addedComponents_Display = GameObject.Find("Element_AddedComponentsDisplay").GetComponentsInChildren<Text>();
@@ -99,11 +104,7 @@ public class UI_EndGame : MonoBehaviour
             m_totalComponents_Display[i].text = m_totalComponents[i].ToString();
         }
 
-        m_rarityIndex = 0;
-       // Debug.LogWarning("RarityGrey = " + m_rarityIndex);
-        m_additionValue = 0;
-        m_timer = 0;
-        m_timerMax = 0.32f;
+
     }
     private bool isTimerOk()
     {

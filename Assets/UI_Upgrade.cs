@@ -264,6 +264,7 @@ public class UI_Upgrade : MonoBehaviour
     }
     public void Display_Module()
     {
+
         switch (m_currentDisplayedModule != null)
         {
             case true:
@@ -298,14 +299,18 @@ public class UI_Upgrade : MonoBehaviour
                 UiElement_ComponentCostsDisplay costDisplay = GameObject.FindObjectOfType<UiElement_ComponentCostsDisplay>();
                 costDisplay.Display_Costs(cost);
                 Color upgradeButtonColor = m_upgradeModuleButton.gameObject.GetComponentInChildren<Image>().color;
-                switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost))
+                switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost) && m_currentDisplayedModule.Level.Current<Factory.Instance.ModuleStat_Factory.LevelMax(m_currentDisplayedModule.Rarity))
                 {
                     case true:
-                        upgradeButtonColor = new Color(color.r, color.g, color.b, 1);
+                        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g,upgradeButtonColor.b, 1);
+                        m_upgradeModuleButton.image.color = upgradeButtonColor;
+                        m_upgradeModuleButton.onClick.RemoveAllListeners();
                         m_upgradeModuleButton.onClick.AddListener(() => OnUpgradeButtonPressed());
                         break;
                     case false:
-                        upgradeButtonColor = new Color(color.r, color.g, color.b, 0.5f);
+
+                        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g, upgradeButtonColor.b, 0.26f);
+                        m_upgradeModuleButton.image.color = upgradeButtonColor;
                         m_upgradeModuleButton.onClick.RemoveAllListeners();
                         break;
                 }
@@ -385,10 +390,16 @@ public class UI_Upgrade : MonoBehaviour
 
     private void OnUpgradeButtonPressed()
     {
-        m_upgradeModuleButton.onClick.RemoveAllListeners();
-        ProfileHandler.Instance.ActiveProfile.SpendComponent(Factory.Instance.ModuleStat_Factory.Get_UpgradeCost(m_currentDisplayedModule));
-        Factory.Instance.Module_Factory.LevelUp(m_currentDisplayedModule);
-        Display_Components();
-        Display_Module();
+        switch (m_currentDisplayedModule.Level.Current < Factory.Instance.ModuleStat_Factory.LevelMax(m_currentDisplayedModule.Rarity))
+        {
+            case true:
+                m_upgradeModuleButton.onClick.RemoveAllListeners();
+                ProfileHandler.Instance.ActiveProfile.SpendComponent(Factory.Instance.ModuleStat_Factory.Get_UpgradeCost(m_currentDisplayedModule));
+                Factory.Instance.Module_Factory.LevelUp(m_currentDisplayedModule);
+                Display_Components();
+                Display_Module();
+                return;
+        }
+        Debug.LogWarning("MaxLevel reached.");
     }
 }

@@ -31,7 +31,7 @@ public class ModuleStat_Factory
 
     public ModuleStat[] Create_Stats(ModuleData data)
     {
-        float levelMax = 3 * (((int)data.Rarity) + 1);
+        int levelMax = LevelMax(data.Rarity);
         //double increment = Math.Log(level + 1);
 
         float tierBaseValue = Mathf.Log(data.Tier+(int)data.Rarity);
@@ -78,5 +78,10 @@ public class ModuleStat_Factory
                 return turretStat;
         }
         return null;
+    }
+
+    public int LevelMax(Rarity data)
+    {
+        return 3 * (((int)data) + 1);
     }
 }
