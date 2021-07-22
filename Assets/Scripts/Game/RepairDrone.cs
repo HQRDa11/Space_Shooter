@@ -59,7 +59,7 @@ public class RepairDrone : MonoBehaviour
                 {
                     if (_lifeTime <= 0)
                     {
-                        _owner.hasDrone = false;
+                        _owner.HasDrone = false;
                         GameObject.Destroy(this.gameObject);
                     }
                 }
