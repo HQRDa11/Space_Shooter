@@ -132,10 +132,10 @@ public class Player : MonoBehaviour
 
     public Ship Assign_Drone()
     {
-        switch(this.Ship.hasDrone == false)
+        switch(this.Ship.HasDrone == false)
         {
             case true:
-                this.Ship.hasDrone = true;
+                this.Ship.HasDrone = true;
                 return this.Ship;
 
             case false:
@@ -144,10 +144,10 @@ public class Player : MonoBehaviour
                     switch (ally != null && ally.Ship != null)
                     {
                         case true:
-                            switch (ally.Ship.hasDrone)
+                            switch (ally.Ship.HasDrone)
                             {
                                 case false:
-                                    ally.Ship.hasDrone = true;
+                                    ally.Ship.HasDrone = true;
                                     return ally.Ship;
                                 default:
                                     break;
