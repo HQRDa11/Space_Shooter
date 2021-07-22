@@ -67,7 +67,7 @@ namespace HQRDa
         //
         // 
         // ok - ScrollPanel.prefab
-        // - Recharge raate on shield and drones (is used when pickip up a drone and no drone slot free, converted to energy);
+        //
         // - Ship/Module Update Mechanics.
         // - Create a Reset Profile button in MainMenu
         // - Update gameInfo with last achieved wave number.

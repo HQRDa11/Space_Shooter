@@ -7,21 +7,15 @@ public class Shield : MonoBehaviour
     private float m_energy;
     public float Energy { get => m_energy; }
     private float m_maxEnergy;
-    private int m_baseEnergy;
+
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        m_baseEnergy = 30;
-        m_maxEnergy = m_baseEnergy;
+        m_maxEnergy = 30;
         m_energy = m_maxEnergy;
     }
 
-    public void Initialise(float energyModuleModifier)
-    {
-        m_maxEnergy = m_baseEnergy + energyModuleModifier;
-        m_energy = m_maxEnergy;
-    }
     // Update is called once per frame
     void Update()
     {
