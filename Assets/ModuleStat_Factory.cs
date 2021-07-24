@@ -88,12 +88,12 @@ public class ModuleStat_Factory
                 switch (request)
                 {
                     case ModuleStatType.DAMAGE:
-                        float damageRatio = 1;
+                        float damageRatio = 1/5f;
                         switch (getCurrent_ifNotMax) // If request maxValue
                         {
-                            case false: return maxValue / damageRatio;
+                            case false: return maxValue * damageRatio;
                         }
-                        float damage = currentRelatedToMax / damageRatio;
+                        float damage = currentRelatedToMax * damageRatio;
                         return damage;
                 }
                 break;

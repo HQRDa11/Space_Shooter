@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TurretSlot : MonoBehaviour
 {
-
+    private double m_damage;
+    public double Damage { get=>m_damage; set { m_damage = value; } }
     private Turret m_turret;
     public bool isFree { get; set; }
     // Start is called before the first frame update
@@ -20,7 +21,7 @@ public class TurretSlot : MonoBehaviour
         {
             case true:
                 m_turret = turret;
-                m_turret.SlotTransform = this.gameObject.transform;
+                m_turret.Slot = this;
                 this.gameObject.GetComponentInChildren<SpriteRenderer>().color = Factory.Instance.Material_Factory.GetMaterial(m_turret.Rarity).color;
                 isFree = false;
                 return true;
@@ -32,9 +33,10 @@ public class TurretSlot : MonoBehaviour
                     case true:
                         Rarity replaced = m_turret.Rarity;
                         m_turret = turret;
-                        m_turret.SlotTransform = this.gameObject.transform;
+                        m_turret.Slot = this;
                         this.gameObject.GetComponentInChildren<SpriteRenderer>().color = Factory.Instance.Material_Factory.GetMaterial(m_turret.Rarity).color;
                         GameObject.Find("Player").GetComponent<Player>().OnTurretBonus(replaced);
+                        Debug.LogWarning("here ok");
                         return true;
 
                     case false:

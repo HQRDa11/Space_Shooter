@@ -9,9 +9,9 @@ public class Enemy_Health_Normal : Enemy_Behaviours.Health
             enemy.OnDestruction();
         }
     }
-    public float TakeDamage(float damage)
+    public double TakeDamage(double damage)
     {
-        //Debug.Log("HERE");
+        Debug.Log("Damage Dealt:" + damage);
         return damage;
     }
 }

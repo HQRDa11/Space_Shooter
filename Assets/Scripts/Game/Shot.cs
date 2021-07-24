@@ -8,17 +8,12 @@ public class Shot : MonoBehaviour
     [SerializeField]
     private float _speed;
     [SerializeField]
-    private float _damage;
+    private double _damage;
 
     private Vector2 _direction;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _damage = 10;
-    }
 
-    public void Initialise(int damage, Vector2 direction, float speed)
+    public void Initialise(double damage, Vector2 direction, float speed)
     {
         _damage = damage ;
         _direction = direction;

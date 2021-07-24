@@ -96,9 +96,9 @@ public class Enemy : MonoBehaviour
             _movementBehaviour.Rotation(this);   
         }
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(double damage)
     {
-        _currentHealth -= _healthBehaviour.TakeDamage(damage);
+        _currentHealth -= (float)_healthBehaviour.TakeDamage(damage);
     }
     public void Shoot()
     {

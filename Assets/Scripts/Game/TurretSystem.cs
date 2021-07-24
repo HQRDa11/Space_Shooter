@@ -6,16 +6,25 @@ using System.Linq;
 public class TurretSystem : MonoBehaviour
 {
     private List<TurretSlot> m_allTurretSlots;
-
-    private void Start()
+    private void Awake()
     {
         m_allTurretSlots = new List<TurretSlot>();
         m_allTurretSlots = GetComponentsInChildren<TurretSlot>().ToList<TurretSlot>();
+
+    }
+    private void Start()
+    {
         //Debug.Log("nbOfTurretSlots: " + m_allTurretSlots.Count);
         AddTurret(Factory.Instance.Turret_Factory.CreateTurret(Rarity.GREY));
     }
-
-
+    public void SetTurretSlotDamage(double damage)
+    {
+        for (int i = 0; i<m_allTurretSlots.Count;i++)
+        {
+            m_allTurretSlots[i].Damage = damage;
+            Debug.Log("finaltestdamage=" + damage);
+        }
+    }
 
     public bool AddTurret(Turret turret)
     {

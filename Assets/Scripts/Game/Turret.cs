@@ -9,7 +9,9 @@ public class Turret
 
     private Rarity _rarity;
     public Rarity Rarity { get=>_rarity; }
-    public Transform SlotTransform { get; set; }
+
+    public TurretSlot m_slot;
+    public TurretSlot Slot { get => m_slot; set { m_slot = value; } }
 
     public Turret( float shotTimerMax, Rarity rarity )
     {
@@ -28,13 +30,10 @@ public class Turret
     {
         if (_shotTimer >= _shotTimerMax)
         {
-            GameObject newShot = Factory.Instance.Shot_Factory.CreateShot(SlotTransform,_rarity,Vector2.up,10f,"Player");
-            newShot.transform.position = (Vector2)SlotTransform.position + new Vector2(0f,0.1f) ;
+            GameObject newShot = Factory.Instance.Shot_Factory.CreateShot(m_slot.transform,_rarity,m_slot.Damage,Vector2.up,10f,"Player");
+            newShot.transform.position = (Vector2)m_slot.transform.position + new Vector2(0f,0.1f) ;
             _shotTimer = 0;
         }
     }
-    public void SetParent()
-    {
 
-    }
 }

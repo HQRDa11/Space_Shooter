@@ -38,8 +38,8 @@ public class Shield : MonoBehaviour
         m_energy = m_maxEnergy;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(double damage)
     {
-        m_energy -= damage;
+        m_energy -= (float)damage;
     }
 }

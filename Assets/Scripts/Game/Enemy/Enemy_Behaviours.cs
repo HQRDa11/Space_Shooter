@@ -3,7 +3,7 @@ public class Enemy_Behaviours
     public interface Health
     {
         public void Health(Enemy enemy);
-        public float TakeDamage(float damage);
+        public double TakeDamage(double damage);
     }
     public interface Movement
     {

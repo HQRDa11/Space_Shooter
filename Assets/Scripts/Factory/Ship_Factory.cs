@@ -33,6 +33,12 @@ public class Ship_Factory
                 break;
         }
 
+        TurretSlot[] allturrets = newShip.GetComponentsInChildren<TurretSlot>();
+        foreach (TurretSlot slot in allturrets)
+        {
+            slot.Damage = 1+newShip.GetComponent<Ship>().TurretDamageBonus;
+        }
+
         return newShip.GetComponent<Ship>();
     }
                 

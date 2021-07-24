@@ -25,18 +25,19 @@ public class Ship : MonoBehaviour
     private GameObject _explosionAnim;
 
     private StatBonuses m_statBonuses;
+    public double TurretDamageBonus { get => m_statBonuses.TurretDamage; }
     private struct StatBonuses
     {
         public float ShieldEnergy;
         public float RepairDroneLifespan;
         public float RepairDroneEfficiency;
-        public float TurretDamage;
-        public StatBonuses(float shieldEnergy,float repairDroneLifespan, float repairDroneEfficiency)
+        public double TurretDamage;
+        public StatBonuses(float shieldEnergy,float repairDroneLifespan, float repairDroneEfficiency, double turretDamage)
         {
             ShieldEnergy = shieldEnergy;
             RepairDroneLifespan = repairDroneLifespan;
             RepairDroneEfficiency = repairDroneEfficiency;
-            TurretDamage = 999;
+            TurretDamage = turretDamage;
         }
     }
     public void Start()
@@ -51,6 +52,7 @@ public class Ship : MonoBehaviour
     {
         m_isPlayerShip = true;
         InitialiseShipBonuses_wProfileData();
+        this.GetComponent<TurretSystem>().SetTurretSlotDamage(10 + m_statBonuses.TurretDamage);
         m_maxHealth = maxHealth;
         m_health = m_maxHealth;
         this.m_healtBar = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().HealthBars[0];
@@ -61,6 +63,7 @@ public class Ship : MonoBehaviour
         this.gameObject.transform.localScale *= 0.5f;
         m_isPlayerShip = false;
         InitialiseShipBonuses_wProfileData();
+        this.GetComponent<TurretSystem>().SetTurretSlotDamage(1 + m_statBonuses.TurretDamage);
         m_allyId = AllyId;
         m_maxHealth = maxHealth;
         m_health = m_maxHealth;
@@ -84,6 +87,7 @@ public class Ship : MonoBehaviour
         float shieldEnergy = 0;
         float repairDroneLifeSpan = 0;
         float repairDroneEfficiency = 0;
+        double turretDamage = 0;
         foreach (ModuleData data in moduleDatas)
         {
             switch (data.Type)
@@ -96,11 +100,14 @@ public class Ship : MonoBehaviour
                     repairDroneLifeSpan   += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.LIFESPAN, true);
                     repairDroneEfficiency += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.EFFICIENCY, true);
                     break;
+                case ModuleType.TURRET:
+                    turretDamage += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.DAMAGE, true);
+                    break;
                 default:
                     break;
             }
         }
-        m_statBonuses = new StatBonuses(shieldEnergy,repairDroneLifeSpan,repairDroneEfficiency);
+        m_statBonuses = new StatBonuses(shieldEnergy,repairDroneLifeSpan,repairDroneEfficiency,turretDamage);
     }
 
     
@@ -138,9 +145,9 @@ public class Ship : MonoBehaviour
         Update_HealthBar();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(double damage)
     {
-        m_health -= damage;
+        m_health -= (float)damage;
         Update_HealthBar();
     }
     public void ModifyHealth(float modifier)
@@ -174,7 +181,6 @@ public class Ship : MonoBehaviour
     public void NewRepairDrone()
     {
         ModuleStat_Factory factory = Factory.Instance.ModuleStat_Factory;
-        ShipData data;
         GameObject.Find("Sound").GetComponent<Sound>().Play_Droid();
         RepairDrone = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"), Factory._InGameObjects_Parent).GetComponent<RepairDrone>();
         RepairDrone.Initialise(this, m_statBonuses.RepairDroneLifespan, m_statBonuses.RepairDroneEfficiency);
