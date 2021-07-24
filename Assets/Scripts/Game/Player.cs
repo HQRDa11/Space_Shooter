@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.U) == true)
         {
-            OnRepairBonus();
+            OnRepairDroneBonus();
         }
         if (Input.GetKeyDown(KeyCode.Equals) == true)
         {
@@ -117,10 +117,47 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnRepairBonus()
-    {
-        GameObject.Find("Sound").GetComponent<Sound>().Play_Droid();
-        GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"),Factory._InGameObjects_Parent);
+    public void OnRepairDroneBonus()
+    { 
+        switch (this.Ship.RepairDrone == null)
+        {
+            case true:
+                this.Ship.NewRepairDrone();
+                return;
+
+            case false:
+                RepairDrone lowestDrone = this.Ship.RepairDrone;
+                foreach (Ally ally in m_allAllies)
+                {
+                    switch (ally != null)
+                    {
+                        case true:
+                            switch (ally.Ship != null)
+                            {
+                                case true:
+                                    switch (ally.Ship.RepairDrone == null)
+                                    {
+                                        case true:
+                                            ally.Ship.NewRepairDrone();
+                                            return;
+
+                                        case false:
+                                            switch (ally.Ship.RepairDrone.LifeSpan < lowestDrone.LifeSpan)
+                                            {
+                                                case true:
+                                                    lowestDrone = ally.Ship.RepairDrone;
+                                                    break;
+                                            }
+                                            break;
+                                    }
+                                    break;
+                            }
+                            break;
+                    }
+                }
+                Debug.LogWarning("Drone Recharge not implemented yet:"); // lowestRepairDrone.RechargeFull();
+                return;
+        }
     }
 
     public void OnComponentBonus(Rarity rarity)

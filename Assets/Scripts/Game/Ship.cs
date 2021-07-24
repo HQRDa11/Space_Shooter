@@ -18,6 +18,7 @@ public class Ship : MonoBehaviour
     private Image    m_healtBar;
 
     public Shield Shield;
+    public RepairDrone RepairDrone;
     public bool HasDrone { get; set; }
 
     //next should be removre from here:
@@ -27,9 +28,15 @@ public class Ship : MonoBehaviour
     private struct StatBonuses
     {
         public float ShieldEnergy;
-        public StatBonuses(float shieldEnergy)
+        public float RepairDroneLifespan;
+        public float RepairDroneEfficiency;
+        public float TurretDamage;
+        public StatBonuses(float shieldEnergy,float repairDroneLifespan, float repairDroneEfficiency)
         {
             ShieldEnergy = shieldEnergy;
+            RepairDroneLifespan = repairDroneLifespan;
+            RepairDroneEfficiency = repairDroneEfficiency;
+            TurretDamage = 999;
         }
     }
     public void Start()
@@ -43,7 +50,7 @@ public class Ship : MonoBehaviour
     public void InitialisePlayerShip( float maxHealth)
     {
         m_isPlayerShip = true;
-        InitialiseBonuses_wProfileData();
+        InitialiseShipBonuses_wProfileData();
         m_maxHealth = maxHealth;
         m_health = m_maxHealth;
         this.m_healtBar = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().HealthBars[0];
@@ -53,7 +60,7 @@ public class Ship : MonoBehaviour
     {
         this.gameObject.transform.localScale *= 0.5f;
         m_isPlayerShip = false;
-        InitialiseBonuses_wProfileData();
+        InitialiseShipBonuses_wProfileData();
         m_allyId = AllyId;
         m_maxHealth = maxHealth;
         m_health = m_maxHealth;
@@ -61,7 +68,7 @@ public class Ship : MonoBehaviour
         this.gameObject.transform.SetParent(GameObject.Find("InGameObjects").transform);
         Update_HealthBar();
     }
-    private void InitialiseBonuses_wProfileData()
+    private void InitialiseShipBonuses_wProfileData()
     {
         ModuleData[] moduleDatas;
         switch (m_isPlayerShip)
@@ -73,19 +80,27 @@ public class Ship : MonoBehaviour
                 moduleDatas = ProfileHandler.Instance.ActiveProfile.SquadronData.AllMembers[m_allyId + 1].Ship.AllModules;
                 break;
         }
-        float shieldEnergy = 0;
 
+        float shieldEnergy = 0;
+        float repairDroneLifeSpan = 0;
+        float repairDroneEfficiency = 0;
         foreach (ModuleData data in moduleDatas)
         {
-            switch (data.Type == ModuleType.SHIELD)
+            switch (data.Type)
             {
-                case true:
+                case ModuleType.SHIELD:
                     shieldEnergy += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.ENERGY, true);
                     //Debug.LogWarning("repairdroneEnergyBonus = " + shieldEnergy);
                     break;
+                case ModuleType.REPAIRDRONE:
+                    repairDroneLifeSpan   += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.LIFESPAN, true);
+                    repairDroneEfficiency += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.EFFICIENCY, true);
+                    break;
+                default:
+                    break;
             }
         }
-        m_statBonuses = new StatBonuses(shieldEnergy);
+        m_statBonuses = new StatBonuses(shieldEnergy,repairDroneLifeSpan,repairDroneEfficiency);
     }
 
     
@@ -153,6 +168,16 @@ public class Ship : MonoBehaviour
     {
         Shield = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Shield"),this.gameObject.transform).GetComponent<Shield>();
         Shield.Initialise(m_statBonuses.ShieldEnergy);
+        //Debug.LogWarning("Shield energy Value = " + Shield.Energy);
+    }
+
+    public void NewRepairDrone()
+    {
+        ModuleStat_Factory factory = Factory.Instance.ModuleStat_Factory;
+        ShipData data;
+        GameObject.Find("Sound").GetComponent<Sound>().Play_Droid();
+        RepairDrone = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"), Factory._InGameObjects_Parent).GetComponent<RepairDrone>();
+        RepairDrone.Initialise(this, m_statBonuses.RepairDroneLifespan, m_statBonuses.RepairDroneEfficiency);
         //Debug.LogWarning("Shield energy Value = " + Shield.Energy);
     }
 

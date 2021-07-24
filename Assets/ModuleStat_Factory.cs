@@ -51,7 +51,7 @@ public class ModuleStat_Factory
                 switch(request)
                 {
                     case ModuleStatType.LIFESPAN:
-                        float lifeRatio = 1/4;
+                        float lifeRatio = 1/4f;
                         switch (getCurrent_ifNotMax) // If request maxValue
                         {
                             case false: return maxValue * lifeRatio;
@@ -60,7 +60,7 @@ public class ModuleStat_Factory
                         return lifeSpan;
 
                     case ModuleStatType.EFFICIENCY:
-                        float efficiencyRatio = 1/12;
+                        float efficiencyRatio = 1/12f;
                         switch (getCurrent_ifNotMax) // If request maxValue
                         {
                             case false: return maxValue * efficiencyRatio;

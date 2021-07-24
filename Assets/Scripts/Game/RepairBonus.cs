@@ -38,7 +38,7 @@ public class RepairBonus : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Player>())
             {
-                collision.gameObject.GetComponent<Player>().OnRepairBonus();
+                collision.gameObject.GetComponent<Player>().OnRepairDroneBonus();
                 GameObject.Destroy(this.gameObject);
             }
         }

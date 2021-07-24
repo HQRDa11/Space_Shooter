@@ -5,10 +5,12 @@ using UnityEngine;
 public class RepairDrone : MonoBehaviour
 {
     private Player _player;
-    private Ship _owner;
-    private float _lifeTime;
+    private Ship  _owner;
+    private float _lifeSpan;
+    public  float LifeSpan { get => _lifeSpan; }
     private Ship  _target;
     private float _fireRate;
+    private float _efficiency;
     private Vector2 _velocity;
 
     private bool _isHealing;
@@ -17,28 +19,26 @@ public class RepairDrone : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
-
-        _owner = _player.Assign_Drone();
-        switch(_owner == null)
-        {
-            case true:
-                GameObject.Destroy(this.gameObject);
-                return;
-        }
-        _target = _owner;
-        _lifeTime = 8;
         _fireRate = 0.6f;
         _velocity = Vector2.zero;
         _isHealing = false;
+        _lifeSpan = 8;  // base
+        _efficiency = 2; //base
     }
-
+    public void Initialise(Ship owner, float lifespan, float efficiency)
+    {
+        _owner = owner;
+        _target = owner;
+        _lifeSpan += lifespan;
+        _efficiency += efficiency;
+        Debug.LogWarning(owner.name + " has +1 repair drone w " + lifespan + " lifespan and " + efficiency + " efficiency.");
+    }
     // Update is called once per frame
     void Update()
     {
         Update_Target();
         if (_target != null)
         {
-        
             Update_Movement();
             switch(_isHealing)
             {
@@ -55,9 +55,9 @@ public class RepairDrone : MonoBehaviour
         switch (_isHealing)
         {
             case true:
-                _lifeTime -= Time.deltaTime;
+                _lifeSpan -= Time.deltaTime;
                 {
-                    if (_lifeTime <= 0)
+                    if (_lifeSpan <= 0)
                     {
                         _owner.HasDrone = false;
                         GameObject.Destroy(this.gameObject);
@@ -137,7 +137,7 @@ public class RepairDrone : MonoBehaviour
 
     private void RepairTarget()
     {
-        _target.ModifyHealth(2);
+        _target.ModifyHealth(_efficiency);
         GameObject ray = Instantiate(Resources.Load<GameObject>("Prefabs/RepairRay"));
         ray.GetComponent<RepairRay>().Initialise(this.transform, _target.transform);
     }
