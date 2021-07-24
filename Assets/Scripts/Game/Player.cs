@@ -26,24 +26,6 @@ public class Player : MonoBehaviour
         if (m_gameInfo == null) Debug.LogError("no GameInfo go found");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T) == true)
-        {
-            OnPilotBonus();
-        }
-        if (Input.GetKeyDown(KeyCode.U) == true)
-        {
-            OnRepairDroneBonus();
-        }
-        if (Input.GetKeyDown(KeyCode.Equals) == true)
-        {
-
-            OnComponentBonus(Factory.Dice_Rarity());
-        }
-    }
-
     public void Shoot()
     {
         m_ship.GetComponent<TurretSystem>().Shoot();

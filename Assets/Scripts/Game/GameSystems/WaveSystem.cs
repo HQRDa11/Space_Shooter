@@ -35,6 +35,18 @@ public class WaveSystem : MonoBehaviour
 
         if(_currentWaveIndex % 5 > 0) _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5 + 1);
         else _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5 + 1); // <<< A REMPLACER
+
+        int random = Random.Range(0, 10);
+        switch(random>8)
+        {
+            case true:
+                Debug.LogWarning("NEW DEPOSIT");
+                int index = Random.Range(1, 5);
+                Factory.Create_Deposit(200 * _currentWaveIndex, 3, Map.SpawnIndexToPosition(index));
+                break;
+        }
+
+
         // ELSE BossWave !!!
 
         //if(_allWaves.IndexOf(_currentWave) < _allWaves.Count - 1) _currentWave = _allWaves[_allWaves.IndexOf(_currentWave) + 1];

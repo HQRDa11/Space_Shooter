@@ -64,9 +64,12 @@ namespace HQRDa
         //      ok - class ModuleStat
         //      ok - class ModuleStats_Factory: 
         //          ok - GetStats(Module module) : ModuleStat[]
-        //
-        // 
         // ok - ScrollPanel.prefab
+        //
+        // ok - Deposit.cs:
+        //    
+        //     later - mining should be more rewarding than shooting it.
+        //
         // - Recharge raate on shield and drones (is used when pickip up a drone and no drone slot free, converted to energy);
         // - Ship/Module Update Mechanics.
         // - Create a Reset Profile button in MainMenu

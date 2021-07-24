@@ -36,7 +36,6 @@ public class TurretSlot : MonoBehaviour
                         m_turret.Slot = this;
                         this.gameObject.GetComponentInChildren<SpriteRenderer>().color = Factory.Instance.Material_Factory.GetMaterial(m_turret.Rarity).color;
                         GameObject.Find("Player").GetComponent<Player>().OnTurretBonus(replaced);
-                        Debug.LogWarning("here ok");
                         return true;
 
                     case false:

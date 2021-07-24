@@ -11,7 +11,7 @@ public class Enemy_Health_Normal : Enemy_Behaviours.Health
     }
     public double TakeDamage(double damage)
     {
-        Debug.Log("Damage Dealt:" + damage);
+       // Debug.Log("Damage Dealt:" + damage);
         return damage;
     }
 }

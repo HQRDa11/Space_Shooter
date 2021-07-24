@@ -51,6 +51,13 @@ public static class Map
             position.y >= -_height / 2 &&
             position.y <= _height / 2;
     }
+
+    public static Vector3 RandomSpawnAround(Vector3 position, float radius)
+    {
+        float x = Random.Range(-radius, radius);
+        float y = Random.Range(-radius, radius);
+        return position + Vector3.right * x + Vector3.up * y;
+    }
 }
 
  

@@ -119,4 +119,20 @@ public class Factory : MonoBehaviour
             return Rarity.ORANGE;
         }
     }
+
+
+    public static void Create_Deposit(double life, double size, Vector3 position)
+    {
+        Deposit deposit = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Deposit")).GetComponent<Deposit>();
+        switch (deposit == null)
+        {
+            case true: Debug.LogError("error: cant instantiate new deposite"); return;
+
+            case false:
+                deposit.gameObject.transform.position = position;
+                deposit.gameObject.transform.localScale *= (float)size/3;
+                deposit.Initialise(life, size);
+                break;
+        }
+    }
 }
