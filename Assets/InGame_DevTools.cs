@@ -28,7 +28,7 @@ public class InGame_DevTools : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O) == true)
         {
             int index = Random.Range(1, 5);
-            Factory.Create_Deposit(500, 3, Map.SpawnIndexToPosition(index));
+            Factory.Instance.General_Factory.Create_Deposit(500, 3, Map.SpawnIndexToPosition(index));
         }
     }
 }

@@ -33,6 +33,9 @@ public class Factory : MonoBehaviour
 
     public static Transform _InGameObjects_Parent;
 
+    public General_Factory _generalFactory;
+    public General_Factory General_Factory { get => _generalFactory; }
+
     public Sprite SpriteError { get => Resources.Load<Sprite>("Sprites/Icons/SpriteError"); } 
 
     private void Awake()
@@ -46,6 +49,7 @@ public class Factory : MonoBehaviour
         _shotFactory = new Shot_Factory();
         _shipFactory = new Ship_Factory();
         _enemyFactory = new Enemy_Factory();
+        _generalFactory = new General_Factory();
     }
 
     public Transform InGameObjectsList { get => _InGameObjects_Parent; }
@@ -120,19 +124,4 @@ public class Factory : MonoBehaviour
         }
     }
 
-
-    public static void Create_Deposit(double life, double size, Vector3 position)
-    {
-        Deposit deposit = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Deposit")).GetComponent<Deposit>();
-        switch (deposit == null)
-        {
-            case true: Debug.LogError("error: cant instantiate new deposite"); return;
-
-            case false:
-                deposit.gameObject.transform.position = position;
-                deposit.gameObject.transform.localScale *= (float)size/3;
-                deposit.Initialise(life, size);
-                break;
-        }
-    }
 }

@@ -42,7 +42,7 @@ public class WaveSystem : MonoBehaviour
             case true:
                 Debug.LogWarning("NEW DEPOSIT");
                 int index = Random.Range(1, 5);
-                Factory.Create_Deposit(200 * _currentWaveIndex, 3, Map.SpawnIndexToPosition(index));
+                Factory.Instance.General_Factory.Create_Deposit(200 * _currentWaveIndex, 3, Map.SpawnIndexToPosition(index));
                 break;
         }
 
