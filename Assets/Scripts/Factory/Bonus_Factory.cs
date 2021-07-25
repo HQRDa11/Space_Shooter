@@ -88,7 +88,7 @@ public class Bonus_Factory
     public ShieldBonus Instantiate_ShieldBonus(Vector2 position)
     {
         GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/ShieldBonus"));
-        if (!bonusLoot.GetComponent<RepairBonus>()) { bonusLoot.AddComponent<ShieldBonus>(); }
+        if (bonusLoot.GetComponent<ShieldBonus>() == null) { bonusLoot.AddComponent<ShieldBonus>(); Debug.Log("error here"); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<ShieldBonus>();
     }

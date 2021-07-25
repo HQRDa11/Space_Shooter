@@ -181,7 +181,6 @@ public class Player : MonoBehaviour
 
     public void OnShieldBonus() // <= Why is this Method Called 2 times on "ShieldBonus" pick-up? Multiple player collision?
     {
-        Debug.LogError("This Should not be printed 2 times on Shield loot"); 
         switch (this.Ship.Shield == null)
         {
             case true:
