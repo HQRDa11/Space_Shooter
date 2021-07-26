@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
         _shotChance =           data.ShotChance;
         _shotDamage =           data.ShotDamage;
         _shotFrequency =        data.ShotFrequency;
+        _canShoot =             true;
 
         _clock = clock % _shotFrequency;
     }
@@ -82,9 +83,10 @@ public class Enemy : MonoBehaviour
 
         _healthBehaviour.Health(this);
         _weaponBehaviour.ShootOverTime(this);
-
+        Debug.Log("HERE");
         if (_clock >= _shotFrequency && _canShoot)
         {
+        Debug.Log("HERE1");
             Shoot();
             _clock = 0;
         }
