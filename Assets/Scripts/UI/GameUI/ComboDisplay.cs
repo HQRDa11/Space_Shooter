@@ -37,6 +37,8 @@ public class ComboDisplay : MonoBehaviour
         {
             case true:
                 Initialize();
+                return;
+            case false:
                 PulseEffectRevert();
                 return;
         }
