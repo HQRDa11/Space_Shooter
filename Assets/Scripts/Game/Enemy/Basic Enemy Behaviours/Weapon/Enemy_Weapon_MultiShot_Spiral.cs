@@ -23,7 +23,8 @@ public class Enemy_Weapon_MultiShot_Spiral : Enemy_Behaviours.Weapon
             float rad = Mathf.Deg2Rad * angle;
             Vector2 direction = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
 
-            GameObject shot = Factory.Instance.Shot_Factory.CreateShot(Factory.Instance.InGameObjectsList, Rarity.WHITE,1, direction, 2f, "Enemy");
+            GameObject shot = Factory.Instance.Shot_Factory.Create_DefaultEnemyShot(direction);
+
             shot.transform.position = enemy.transform.position;
             _shotIndex++;
         }
