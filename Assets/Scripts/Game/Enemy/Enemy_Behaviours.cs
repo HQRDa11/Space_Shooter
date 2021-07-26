@@ -1,4 +1,4 @@
-public class Enemy_Behaviours
+namespace Enemy_Behaviours
 {
     public interface Health
     {

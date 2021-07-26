@@ -13,8 +13,31 @@ namespace HQRDa
 
             // Tire enemy avec balance de frequence
 
-            // Create BossWave class
-            // + Pattern toussa toussa
+            // Create BossWave class < A voir, suivant la Wave Library
+
+            // Creer class CheckPointsList
+
+            // Filtrer class Enemy
+            // Creer sous classe pour ennemis basics
+            // Creer sous classe pour boss
+            // Creer Wave Factory
+            // Continuer Enemy Factory
+            // Rajouter une "Library" dans les deux Factory
+            
+            // Creer premier Boss > The Worm
+            //  - Creer nouveaux comportement pour The Worm
+
+            // Nouveaux ennemis
+            //  > Ennemi qui bouge rapidement d'un checkpoint a l'autre mais y stagne quelques secondes en chargeant un tir laser dirigé vers la position du joueur quand il est arrivé au checkpoint
+            //  puis le relache avant de bouger au checkpoint suivant.
+            //
+            //  > Ennemi qui garde un checkpoint fixe mais bouger aleatoirement autour de celui ci. Vise constamment le joueur et tire a une frequence a definir.
+
+            // Creer une zone plus large pour la destrcution des projectiles > Sinn quand l'ennemi est en dehors de l'ecran
+            // les projectiles sont detruits directement
+
+            // Faire apparaître la vie des ennemis quand la vie n'est pas au max
+            // Ajouter effet d'impact quand touché > Creer un gameObject en Child avec meme apparence(Sprite), teinte Rouge, Opacité reduite, puis le détruire 0.1 seconde apres;
         }
     }
 
