@@ -19,6 +19,8 @@ public class Wave
     private List<GameObject> _allEnemies; public List<GameObject> AllEnemies { get => _allEnemies; }
 
     private float _enemyInstanceClock; public float EnemyInstanceClock { get => _enemyInstanceClock; }
+    private int _enemyIndex; public int EnemyIndex { get => _enemyIndex; set { _enemyIndex = value; Debug.Log("Index > " + EnemyIndex); }  }
+
     private SpawnBehaviour _spawnBehaviour;
     private float _clock = 0;
     public Wave(int numberOfEnemy, int spawnPoint, float spawnDelay, int repeatTimes, float repeatFrequency, int[] checkPoints, bool mirror, SpawnBehaviour spawnBehaviour)
@@ -33,6 +35,9 @@ public class Wave
 
         _allCheckPoints =       new List<Vector2>();
         foreach (int index in checkPoints) _allCheckPoints.Add(Map.CheckPointIndexToPosition(index));
+
+        _enemyInstanceClock = 0;
+        _enemyIndex = 0;
 
         _enemyRemaining = _numberOfEnemy;
         _allEnemies = new List<GameObject>();
