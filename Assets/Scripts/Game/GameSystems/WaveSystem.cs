@@ -78,6 +78,6 @@ public class WaveSystem : MonoBehaviour
         int[] checkPoints = Library.CheckPoints.Random(Random.Range(3, 5) * difficulty);
         bool mirror = Random.Range(0, 100) <= 100 / difficulty ? false : true;
 
-        return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_Classic());
+        return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_OnDifficulty());
     }
 }
