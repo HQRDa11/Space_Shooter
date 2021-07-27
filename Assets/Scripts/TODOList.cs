@@ -30,6 +30,8 @@ namespace HQRDa
             // >TODO - Ajouter effet d'impact quand touché > Creer un gameObject en Child avec meme apparence(Sprite), teinte Rouge, Opacité reduite, puis le détruire 0.1 seconde apres;
             // >TODO - Enemy shot with Frencency balancing
 
+            // >TODO - Change background sprite (To Vectorized)
+
             // ===============
             // =   ENEMIES   =
             // ===============
