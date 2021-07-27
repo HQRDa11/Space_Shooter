@@ -23,7 +23,6 @@ public class TheWorm_Head : Boss_Head
     {
         if (_allBodyParts.IndexOf(bodyPart) == 0)
         {
-            Debug.Log("HERE");
             return transform.position;
         }
         else return _allBodyParts[_allBodyParts.IndexOf(bodyPart) - 1].transform.position;
