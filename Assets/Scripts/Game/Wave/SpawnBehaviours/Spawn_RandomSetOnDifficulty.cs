@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawn_OnDifficulty : SpawnBehaviour
+public class Spawn_RandomSetOnDifficulty : SpawnBehaviour
 {
     public void Spawn(Wave wave)
     {

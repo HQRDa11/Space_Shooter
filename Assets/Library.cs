@@ -40,7 +40,7 @@ namespace Library
             int[] checkPoints = Library.CheckPointsList.Random(Random.Range(3, 5) * difficulty);
             bool mirror = Random.Range(0, 100) <= 100 / difficulty ? false : true;
 
-            return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_OnDifficulty()); 
+            return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_RandomSetOnDifficulty()); 
         }
         public static Wave Basic(/*int index*/)
         {
