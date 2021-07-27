@@ -60,25 +60,4 @@ public class Wave
         }       
         else if (_allEnemies.Count == 0) WaveSystem.Instance.NextWave();
     }
-    //private void Spawn()
-    //{
-    //    // FAIRE un switch dans la factory pour pouvoir Set Weapon Behaviour avec Index; <<<<<<<<<<<<<<<<<<<<<<<<
-
-    //    GameObject gameObject1 = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint, _allEnemies.Count + 1, this, _enemyInstanceClock, false, 0);
-    //    _allEnemies.Add(gameObject1);
-    //    _enemyRemaining--;
-    //    if((_enemyRemaining % 2 == 0 && !_mirror) || (_enemyRemaining / 2 % 2 == 0 && _mirror))
-    //    {
-    //        gameObject1.GetComponent<Enemy>().SetWeaponBehaviour(new Enemy_Weapon_MultiShot_Circle());
-    //    }
-
-    //    if (_mirror)
-    //    {
-    //        GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(_spawnPoint * new Vector2(-1, 1), _allEnemies.Count + 1, this, _enemyInstanceClock, false, 0);
-    //        gameObject.GetComponent<Enemy>().SetMovementBehaviour(new Enemy_Movement_MoveToCheckPoints_Mirror());
-    //        _allEnemies.Add(gameObject);
-    //        _enemyRemaining--;
-    //        gameObject.GetComponent<Enemy>().SetWeaponBehaviour(gameObject1.GetComponent<Enemy>().WeaponBehaviour);
-    //    }
-    //}
 }
