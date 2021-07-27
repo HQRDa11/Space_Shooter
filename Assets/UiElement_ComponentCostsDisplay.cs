@@ -8,9 +8,9 @@ public class UiElement_ComponentCostsDisplay : MonoBehaviour
     public void Display_Costs(int[] cost)
     {
         Text[] AllComponentTexts = gameObject.GetComponentsInChildren<Text>();
-        for (int i = 0; i<6;i++)
+        for (int i = 1; i<AllComponentTexts.Length;i++)
         {
-            AllComponentTexts[i].text = cost[i].ToString();
+            AllComponentTexts[i].text = cost[i-1].ToString();
         }
     }
 

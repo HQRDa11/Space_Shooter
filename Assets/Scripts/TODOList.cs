@@ -57,27 +57,32 @@ namespace HQRDa
         //      ok - Display_FinalLoot.prefab
         //          ok - Button_LootOption.prefab
         //      ok - Link buttons to UI_EnGame class fields
-        // - highScore: 918230 v0.0.02    
-        //
         // ok - component stats mechanics
         //      ok - Create stats panel Prefab.
         //      ok - class ModuleStat
         //      ok - class ModuleStats_Factory: 
-        //          ok - GetStats(Module module) : ModuleStat[]
-        //
-        // 
+        //      ok - GetStats(Module module) : ModuleStat[]
         // ok - ScrollPanel.prefab
-        // - Recharge raate on shield and drones (is used when pickip up a drone and no drone slot free, converted to energy);
-        // - Ship/Module Update Mechanics.
-        // - Create a Reset Profile button in MainMenu
-        // - Update gameInfo with last achieved wave number.
-        // delayed - Factory.cs:  Dice_FinalLoot() : FinalLoot (delay : FinalLootObject not complex enough)
-        // delayed - (need sprites) - UI_Game.cs : image + Text pop-Up On bonus pickup
-        // delayed - UI_Upgrade.cs + prefab
+        // ok - UI_Upgrade.cs : Module upgrade
         //      ok - to do: Panel m_moduleStats_Display;
         //      ok - to do: Sprite m_moduleSprite;
-        //      delayed - to do: Panel m_shipStats_Display; 
-        //      delayed (need sprites) - to do: Sprite m_shipSprite;
+        //
+        // ok - Deposit.cs:
+        //      - High damage on collision
+        //      - MiningDrones
+        //      later - Mining should be more rewarding than shooting it.
+        //
+        // - Rarety dice : power of 10;
+        //
+        // - UI_Upgrade.cs : Ship upgrade
+        //      - Panel m_shipStats_Display; 
+        //      delayed (need sprites) : Sprite m_shipSprite;
+        // 
+        // - UI_Game.cs : image + Text pop-Up On bonus pickup
+        // - Recharge on shield and drones (is used when pickip up a drone and no drone slot free, converted to energy);.
+        // - Create a Reset Profile button in MainMenu
+        // - Update gameInfo with last achieved wave number. => determine finalLoot value? with score too?
+        // delayed - Factory.cs:  Dice_FinalLoot() : FinalLoot (delay : FinalLootObject not complex enough)
         // - Creates bonus rarity for shields and repairDrones bonuses
         // - Remove all _lifeTime updates from Bonuses and replace with Map.IsOnScreen check (as done in repairbonus.cs)
         // - dans UI_EndGame. cs possible de caluler et afficher une mention a partir des loot et du score? (: viur 'NOTE1' dans UI_EndGame.cs)

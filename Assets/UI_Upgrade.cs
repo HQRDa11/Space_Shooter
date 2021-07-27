@@ -278,13 +278,13 @@ public class UI_Upgrade : MonoBehaviour
                 int total = ship.AllModules.Length;
                 m_text_module.text = "Module " + index + "/" + total;
 
-                //Name display
-                m_moduleName_Display.text = "T" + module.Tier + " " + module.Name;
-                m_moduleName_Display.color = color;
-
-                //Level display
-                m_moduleLevel_Display.text = "LVL " + module.Level.Current.ToString();
-                //Sprite display
+                // DISPLAY TITLE : (0)T1 (1)TURRET (2)LVL1
+                Text[] ModuleTitle_Texts = GameObject.Find("Display_Module_NameAndLevel").GetComponentsInChildren<Text>();
+                ModuleTitle_Texts[0].text = "T" + module.Tier;
+                ModuleTitle_Texts[0].color = color;
+                ModuleTitle_Texts[1].text = module.Name;
+                ModuleTitle_Texts[1].color = color;
+                ModuleTitle_Texts[2].text = "LVL " + module.Level.Current.ToString();
 
                 //Stats display
                 if (m_moduleStatsPanel == null) Debug.LogWarning("no stat panel to display");
@@ -296,7 +296,7 @@ public class UI_Upgrade : MonoBehaviour
 
                 //Upgrade button
                 int[] cost = Factory.Instance.ModuleStat_Factory.Get_UpgradeCost(module);
-                UiElement_ComponentCostsDisplay costDisplay = GameObject.FindObjectOfType<UiElement_ComponentCostsDisplay>();
+                UiElement_ComponentCostsDisplay costDisplay = GameObject.FindObjectsOfType<UiElement_ComponentCostsDisplay>()[0];
                 costDisplay.Display_Costs(cost);
                 Color upgradeButtonColor = m_upgradeModuleButton.gameObject.GetComponentInChildren<Image>().color;
                 switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost) && m_currentDisplayedModule.Level.Current<Factory.Instance.ModuleStat_Factory.LevelMax(m_currentDisplayedModule.Rarity))
