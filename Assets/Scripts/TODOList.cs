@@ -8,36 +8,49 @@ namespace HQRDa
     {
         public class TODOList
         {
-            // DONE - Perte de combo avec le temps
-            // Perte de combo quand touché par enemy
+            // DONE - Add Combo loss overtime
 
-            // Tire enemy avec balance de frequence
+            // DONE - Create Library
+            // DONE - Create new class for CheckPointsList in Library
 
-            // Create BossWave class < A voir, suivant la Wave Library
+            // DONE - Create new class for Basic Enemy
+            // DONE - Create new class for Boss (Head & Body)
+            // DONE - Enemy Factory Refont            
 
-            // Creer class CheckPointsList
+            // >TODO - Add ShotLoading effect in General Factory
+            // >TODO - Add The Worm wave to Library
+            // >TODO - Add Combo loss when touch by enemy's hitbox <<< For some enemies only
+            // >TODO - Creer une zone plus large pour la destrcution des projectiles > Sinn quand l'ennemi est en dehors de l'ecran
+            //      les projectiles sont detruits directement
 
-            // Filtrer class Enemy
-            // Creer sous classe pour ennemis basics
-            // Creer sous classe pour boss
-            // Creer Wave Factory
-            // Continuer Enemy Factory
-            // Rajouter une "Library" dans les deux Factory
-            
-            // Creer premier Boss > The Worm
-            //  - Creer nouveaux comportement pour The Worm
+            // >TODO - Faire apparaître la vie des ennemis quand la vie n'est pas au max
+            // >TODO - Ajouter effet d'impact quand touché > Creer un gameObject en Child avec meme apparence(Sprite), teinte Rouge, Opacité reduite, puis le détruire 0.1 seconde apres;
+            // >TODO - Enemy shot with Frencency balancing
 
-            // Nouveaux ennemis
-            //  > Ennemi qui bouge rapidement d'un checkpoint a l'autre mais y stagne quelques secondes en chargeant un tir laser dirigé vers la position du joueur quand il est arrivé au checkpoint
-            //  puis le relache avant de bouger au checkpoint suivant.
-            //
-            //  > Ennemi qui garde un checkpoint fixe mais bouger aleatoirement autour de celui ci. Vise constamment le joueur et tire a une frequence a definir.
+            // ===============
+            // =   ENEMIES   =
+            // ===============
 
-            // Creer une zone plus large pour la destrcution des projectiles > Sinn quand l'ennemi est en dehors de l'ecran
-            // les projectiles sont detruits directement
+            // --- Basic ---
 
-            // Faire apparaître la vie des ennemis quand la vie n'est pas au max
-            // Ajouter effet d'impact quand touché > Creer un gameObject en Child avec meme apparence(Sprite), teinte Rouge, Opacité reduite, puis le détruire 0.1 seconde apres;
+            // DONE - Add Enemy with normal single shot, following the wave's checkpoints list.
+            // DONE - Add Enemy with circle shot, picking a random checkpoint to move around.
+            // DONE - Add Enemy with spiral shot, picking a random checkpoint to move around.
+            // >TODO - Ennemi qui bouge rapidement d'un checkpoint a l'autre mais y stagne quelques secondes en chargeant un tir laser dirigé vers la position du joueur quand il est arrivé au checkpoint
+            //      puis le relache avant de bouger au checkpoint suivant.
+            // >TODO - Ennemi qui garde un checkpoint fixe mais bouger aleatoirement autour de celui ci. Vise constamment le joueur et tire a une frequence a definir.
+
+            // --- Boss ---
+
+            // DONE - Add Boss > The Worm
+
+            // ================
+            // =  BEHAVIOURS  =
+            // ================
+
+            // DONE - Add MoveBehaviour > Random movement around checkpoint
+            // DONE - Add DeathHebaviour for The Worm(Head) > Stop all body parts moves and set them OnHeadDeath
+            // DONE - Add DeathBehaviour for The Worm(Body) > Shoot OnDestruction
         }
     }
 
