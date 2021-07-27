@@ -41,13 +41,22 @@ namespace HQRDa
             // DONE - Add Enemy with normal single shot, following the wave's checkpoints list.
             // DONE - Add Enemy with circle shot, picking a random checkpoint to move around.
             // DONE - Add Enemy with spiral shot, picking a random checkpoint to move around.
-            // >TODO - Ennemi qui bouge rapidement d'un checkpoint a l'autre mais y stagne quelques secondes en chargeant un tir laser dirigé vers la position du joueur quand il est arrivé au checkpoint
-            //      puis le relache avant de bouger au checkpoint suivant.
-            // >TODO - Ennemi qui garde un checkpoint fixe mais bouger aleatoirement autour de celui ci. Vise constamment le joueur et tire a une frequence a definir.
 
+            // >TODO - Add Enemy Sniper
+            //      > New Weapon Behaviour = Load shot when he's arrived on his checkPoint and keep Player's position ATM,
+            //      then shoot in the direction when shot is load. Then Unfreeze Movement.
+            //      Also Update Movement Behaviour Rotation
+            //      > New Movement Behaviour = Move to checkPoints choosen when the last is reached. Shoot() when he's is at radius range and Freeze when he's on the point.
+            //      CheckPoint is always between 0 - Width * 3;
+            //      MoveSpeed = Fast;
+            // >TODO - Add Enemy ShotGun
+            // >TODO - Ennemi qui garde un checkpoint fixe mais bouger aleatoirement autour de celui ci. Vise constamment le joueur et tire a une frequence a definir.
+            
             // --- Boss ---
 
             // DONE - Add Boss > The Worm
+
+            // >TODO - Add Enemy TheCrab
 
             // ================
             // =  BEHAVIOURS  =
@@ -125,6 +134,15 @@ namespace HQRDa
         // - Creates bonus rarity for shields and repairDrones bonuses
         // - Remove all _lifeTime updates from Bonuses and replace with Map.IsOnScreen check (as done in repairbonus.cs)
         // - dans UI_EndGame. cs possible de caluler et afficher une mention a partir des loot et du score? (: viur 'NOTE1' dans UI_EndGame.cs)
+    }
+
+    public class GameStories
+    {
+        // CAMPAGNE
+
+        // Chapitre 1 - Le terrain d'entrainement
+        // - Nous sommes envoyés dans cette zone quasi déserte ou quelques NormalShot trainent encore de temps à autres.
+        // - Notre seule mission est de s'amuser avec notre nouveau Joujou, histoire de se faire la main./5
     }
 }
 
