@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Enemy_Weapon_MultiShot_Spiral : Enemy_Behaviours.Weapon
 {
-    private int _numberOfShot = 50;
+    private int _numberOfShot;
     private int _shotIndex = 0;
     private float _shotAngle = 10f;
     private float _shotDelay = .01f;
 
     private bool _isFiring;
     private float _clock;
+
+    public Enemy_Weapon_MultiShot_Spiral(int numberOfShot)
+    {
+        _numberOfShot = numberOfShot;
+    }
     public void Shoot(Enemy enemy)
     {
         _isFiring = true;
