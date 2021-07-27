@@ -20,6 +20,7 @@ namespace HQRDa
             // DONE - Create new class for Boss (Head & Body)
             // DONE - Enemy Factory Refont            
 
+            // >TODO - Add Spawn area VisualAlert
             // >TODO - Add ShotLoading effect in General Factory
             // >TODO - Add Combo loss when touch by enemy's hitbox <<< For some enemies only
             // >TODO - Creer une zone plus large pour la destrcution des projectiles > Sinn quand l'ennemi est en dehors de l'ecran
