@@ -20,12 +20,13 @@ namespace HQRDa
             // DONE - Create new class for Boss (Head & Body)
             // DONE - Enemy Factory Refont            
 
+            // DONE - Enemy HealthBar appear when isn't full HP
+
             // >TODO - Add Spawn area VisualAlert
             // >TODO - Add ShotLoading effect in General Factory
             // >TODO - Add Combo loss when touch by enemy's hitbox <<< For some enemies only
             // >TODO - Creer une zone plus large pour la destrcution des projectiles > Sinn quand l'ennemi est en dehors de l'ecran
             //      les projectiles sont detruits directement
-            // >TODO - Faire apparaître la vie des ennemis quand la vie n'est pas au max
             // >TODO - Ajouter effet d'impact quand touché > Creer un gameObject en Child avec meme apparence(Sprite), teinte Rouge, Opacité reduite, puis le détruire 0.1 seconde apres;
             // >TODO - Enemy shot with Frencency balancing
 
