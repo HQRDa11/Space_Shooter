@@ -6,7 +6,7 @@ public class Spawn_OnDifficulty : SpawnBehaviour
 {
     public void Spawn(Wave wave)
     {
-        for (int i = 1; i <= Library.EnemyData.NUMBER_OF_BASIC; i++)
+        for (int i = 1; i <= Library.EnemyList.NUMBER_OF_BASIC; i++)
         {
             if (i == 1)
             {
