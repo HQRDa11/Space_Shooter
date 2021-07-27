@@ -22,7 +22,7 @@ public class Enemy_Weapon_MultiShot_Circle : Enemy_Behaviours.Weapon
             
             Vector2 direction = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
 
-            GameObject shot = Factory.Instance.Shot_Factory.Create_DefaultEnemyShot(direction);
+            GameObject shot = Factory.Instance.Shot_Factory.CreateShot(enemy.gameObject.transform, enemy.Rarity, enemy.ShotDamage,direction,3, "Enemy");
 
             shot.transform.position = enemy.transform.position;
 

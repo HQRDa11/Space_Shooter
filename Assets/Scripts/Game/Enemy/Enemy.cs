@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
     private float _wireRadius;
     private bool _canMove;
 
-
     // DEATH
     private Enemy_Behaviours.Death _deathBehaviour;
 
@@ -43,6 +42,8 @@ public class Enemy : MonoBehaviour
 
     private float _clock;
 
+    private Rarity _rarity;
+    public Rarity Rarity { get=> _rarity; set { _rarity = value; } }
     public void Initialize(Enemy_Data data, int index, Wave wave, float clock)
     {
         _index = index;
@@ -98,6 +99,17 @@ public class Enemy : MonoBehaviour
             _movementBehaviour.Rotation(this);   
         }
     }
+
+    public void Set_Rarity(Rarity rarity)
+    {
+        _rarity = rarity;
+        int rarityMultiplier = (int)rarity;
+        _maxHealth *= rarityMultiplier;
+        _currentHealth = _maxHealth;
+        //_shotDamage *= rarityMultiplier;
+        gameObject.GetComponent<SpriteRenderer>().color = Factory.Instance.Material_Factory.GetMaterial(rarity).color;
+    }
+
     public void Update_Clock()
     {
         _clock += Time.deltaTime;
@@ -167,7 +179,7 @@ public class Enemy : MonoBehaviour
     // Health
     public Enemy_Behaviours.Health HealthBehaviour { get => _healthBehaviour; }
     public float MaxHealth { get => _maxHealth; }
-    public float CurrentHealth { get => _currentHealth; }
+    public float CurrentHealth { get => _currentHealth;  }
     public Transform HealthBarTransform { get => _healthBarTransform; }
     public Image HealthBarImage { get => _healthBarImage; }
 
@@ -188,7 +200,7 @@ public class Enemy : MonoBehaviour
     // Weapon
     public Enemy_Behaviours.Weapon WeaponBehaviour { get => _weaponBehaviour; }
     public float ShotChance { get => _shotChance; }
-    public float ShotDamage { get => _shotDamage; }
+    public float ShotDamage { get => _shotDamage;}
 
     public float Clock { get => _clock; }
 }

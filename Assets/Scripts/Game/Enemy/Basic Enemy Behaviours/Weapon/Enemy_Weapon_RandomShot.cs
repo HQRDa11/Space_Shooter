@@ -8,7 +8,8 @@ public class Enemy_Weapon_RandomShot : Enemy_Behaviours.Weapon
     {
         if (Random.Range(0, 100) < enemy.ShotChance)
         {
-            GameObject shot = Factory.Instance.Shot_Factory.Create_DefaultEnemyShot(enemy.transform.rotation * Vector2.up);
+            Vector3 direction = enemy.transform.rotation * Vector2.up;
+            GameObject shot = Factory.Instance.Shot_Factory.CreateShot(enemy.gameObject.transform, enemy.Rarity, enemy.ShotDamage, direction, 3, "Enemy");
             shot.transform.position = enemy.transform.position;
         }
     }
