@@ -6,38 +6,39 @@ public class WaveSystem : MonoBehaviour
 {
     private static WaveSystem _instance; public static WaveSystem Instance { get => _instance;}
 
+    private const int BOSS_WAVE_FREQUENCY = 10;
+    private const int NUMBER_OF_WAVES_BY_DIFFICULTY = 10;
+    private int _indexOfDifficulty;
+
     private List<Wave> _allWaves;
     private Wave _currentWave;
-
-    [SerializeField]
-    private int _startAtWave;
     private int _currentWaveIndex; public int CurrentWaveIndex { get => _currentWaveIndex; }
 
     private void Awake()
     {
         _instance = this;
+        _indexOfDifficulty = 1;
 
         _allWaves = new List<Wave>();
-        _allWaves.Add(SetWaveOnDiffilculty(_startAtWave));
+        _allWaves.Add(Library.WaveList.RandomWave(_indexOfDifficulty));
 
         _currentWave = _allWaves[0];
-        _currentWaveIndex = _startAtWave;
+        _currentWaveIndex = 1;
     }
     void Update()
     {
         if (_currentWave != null) _currentWave.Update();
     }
-
     public void NextWave()
     {
         _currentWaveIndex++;
         WaveDisplay.Instance.PulseEffect();
 
-        if(_currentWaveIndex % 10 > 0) _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5 + 1);
-        else _currentWave = new Wave(10 * (_currentWaveIndex / 10), 3, 0f, 0, 0, Library.CheckPointsList.Boss(0), false, new Spawn_TheWorm()); // <<< A REMPLACER
+        if (_currentWaveIndex % BOSS_WAVE_FREQUENCY > 0) _currentWave = Library.WaveList.RandomWave(_indexOfDifficulty);
+        else _currentWave = Library.WaveList.Boss(_currentWaveIndex / BOSS_WAVE_FREQUENCY % Library.EnemyList.NUMBER_OF_BOSS + 1);
 
         int random = Random.Range(0, 10);
-        switch(random>8)
+        switch(random > 8)
         {
             case true:
                 Debug.LogWarning("NEW DEPOSIT");
@@ -45,39 +46,14 @@ public class WaveSystem : MonoBehaviour
                 Factory.Instance.General_Factory.Create_Deposit(200 * _currentWaveIndex, 3, Map.SpawnIndexToPosition(index));
                 break;
         }
-
-
-        // ELSE BossWave !!!
-
-        //if(_allWaves.IndexOf(_currentWave) < _allWaves.Count - 1) _currentWave = _allWaves[_allWaves.IndexOf(_currentWave) + 1];
+        if (_currentWaveIndex % NUMBER_OF_WAVES_BY_DIFFICULTY == 0)
+        {
+            SetDifficulty(_indexOfDifficulty + _currentWaveIndex / NUMBER_OF_WAVES_BY_DIFFICULTY);
+        }
     }
-
-    private Wave RandomWave()
+    public void SetDifficulty(int difficulty)
     {
-        int numberOfEnemy = Random.Range(5, 20); 
-        int spawnPoint = Random.Range(0, Map.SpawnDensity - 1); 
-        float spawnDelay = Random.Range(.1f, 1f); 
-        int repeatTimes = Random.Range(0, 3); 
-        float repeatFrenquency = Random.Range(3f, 5f); 
-        int[] checkPoints = new int[Random.Range(5, 10)]; 
-        for (int i = 0; i < checkPoints.Length; i++) checkPoints[i] = Random.Range(0, Map.CheckPointDensityWidth * Map.CheckPointDensityHeight - 1);
-        bool mirror = true;
-        float shotFrequency = Random.Range(3, 5);
-
-        return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_Classic());
-    }
-
-    private Wave SetWaveOnDiffilculty(int difficulty)
-    {
-        //Debug.Log(difficulty);
-        int numberOfEnemy = (int)(Random.Range(5, 10) * Mathf.Sqrt(difficulty));
-        int spawnPoint = Random.Range(0, Map.SpawnDensity - 1);
-        float spawnDelay = Random.Range(.5f, 2f) / difficulty;
-        int repeatTimes = Random.Range(0, 1) * difficulty;
-        float repeatFrenquency = Random.Range(3f, 5f) / difficulty;
-        int[] checkPoints = Library.CheckPointsList.Random(Random.Range(3, 5) * difficulty);
-        bool mirror = Random.Range(0, 100) <= 100 / difficulty ? false : true;
-
-        return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_OnDifficulty());
+        _indexOfDifficulty = difficulty;
+        Debug.Log("Difficulty is now " + (Diffulty)difficulty);
     }
 }
