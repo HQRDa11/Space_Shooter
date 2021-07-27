@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Library
 {
-    public static class CheckPoints
+    public static class CheckPointsList
     {
         public static int[] Random(int listSize)
         {
@@ -30,10 +30,22 @@ namespace Library
 
     public static class WaveList
     {
+        public static class Basic
+        {
 
+        }
+        public static Wave Boss(int index)
+        {
+            switch (index)
+            {
+                case 1: return new Wave(10 * (WaveSystem.Instance.CurrentWaveIndex / 10), 3, 0f, 0, 0, Library.CheckPointsList.Boss(0), false, new Spawn_TheWorm());
+
+                default: return null;
+            }
+        }
     }
 
-    public static class EnemyData
+    public static class EnemyList
     {
         public const int NUMBER_OF_BASIC = 3;
         public const int NUMBER_OF_BOSS = 1;
