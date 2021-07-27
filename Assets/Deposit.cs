@@ -42,7 +42,7 @@ public class Deposit : MonoBehaviour
         switch(m_life <= 0)
         {
             case true:
-                switch(m_size < 1)
+                switch(m_size <= 1)
                 {
                     case true:
                         Destroy();
@@ -57,6 +57,7 @@ public class Deposit : MonoBehaviour
     }
     public void Destroy()
     {
+        Debug.LogWarning("should destroy and loot");
         Rarity rarity = Factory.Dice_Rarity();
         Factory.Instance.Bonus_Factory.Instantiate_ComponentBonus(this.transform.position, rarity);
         Factory.Instance.General_Factory.Create_Explosion(this.transform.position);
@@ -78,9 +79,9 @@ public class Deposit : MonoBehaviour
                     break;
             }
             Vector3 newDepositPosition = Map.RandomSpawnAround(this.gameObject.transform.position, 0.5f);
-            Factory.Instance.General_Factory.Create_Deposit(m_totalLife, m_size - 1f, newDepositPosition);
+            Factory.Instance.General_Factory.Create_Deposit(m_totalLife, m_size - 1, newDepositPosition);
             Factory.Instance.General_Factory.Create_Explosion(this.transform.position);
-            Debug.Log("new size:" + (m_size - 1f).ToString());
+            //Debug.Log("new size:" + (m_size - 0.8f).ToString());
             break;
         }
         GameObject.Destroy(this.gameObject);
