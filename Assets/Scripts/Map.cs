@@ -31,7 +31,7 @@ public static class Map
 
     private static Vector2 _firstCheckPoint = new Vector2(-_width / 2 + .5f, _height / 2 - 1.5f);
     private static Vector2 _lastCheckPoint = new Vector2(_width / 2 - .5f, -_height / 2 + .5f);
-
+    public static int CheckPointDensity() { return _checkPointDensityWidth * _checkPointDensityHeight; }
     public static Vector2 CheckPointIndexToPosition(int index)
     {
         float ratioWidth = Mathf.Abs(_lastCheckPoint.x - _firstCheckPoint.x) / (_checkPointDensityWidth - 1);
