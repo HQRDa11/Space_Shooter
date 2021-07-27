@@ -33,8 +33,8 @@ public class WaveSystem : MonoBehaviour
         _currentWaveIndex++;
         WaveDisplay.Instance.PulseEffect();
 
-        if(_currentWaveIndex % 5 > 0) _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5 + 1);
-        else _currentWave = new Wave(10 * (_currentWaveIndex / 5), 3, 0f, 0, 0, Library.CheckPoints.Boss(0), false, new Spawn_TheWorm()); // <<< A REMPLACER
+        if(_currentWaveIndex % 10 > 0) _currentWave = SetWaveOnDiffilculty(_currentWaveIndex / 5 + 1);
+        else _currentWave = new Wave(10 * (_currentWaveIndex / 10), 3, 0f, 0, 0, Library.CheckPointsList.Boss(0), false, new Spawn_TheWorm()); // <<< A REMPLACER
 
         int random = Random.Range(0, 10);
         switch(random>8)
@@ -75,7 +75,7 @@ public class WaveSystem : MonoBehaviour
         float spawnDelay = Random.Range(.5f, 2f) / difficulty;
         int repeatTimes = Random.Range(0, 1) * difficulty;
         float repeatFrenquency = Random.Range(3f, 5f) / difficulty;
-        int[] checkPoints = Library.CheckPoints.Random(Random.Range(3, 5) * difficulty);
+        int[] checkPoints = Library.CheckPointsList.Random(Random.Range(3, 5) * difficulty);
         bool mirror = Random.Range(0, 100) <= 100 / difficulty ? false : true;
 
         return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_OnDifficulty());
