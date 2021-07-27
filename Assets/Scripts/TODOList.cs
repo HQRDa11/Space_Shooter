@@ -11,18 +11,19 @@ namespace HQRDa
             // DONE - Add Combo loss overtime
 
             // DONE - Create Library
-            // DONE - Create new class for CheckPointsList in Library
+            // DONE - Add new class for CheckPointsList in Library
+            // DONE - Add new class for WaveList in Library
+            // DONE - Add new class for EnemyList in Library
+            // DONE - Add The Worm wave to Library
 
             // DONE - Create new class for Basic Enemy
             // DONE - Create new class for Boss (Head & Body)
             // DONE - Enemy Factory Refont            
 
             // >TODO - Add ShotLoading effect in General Factory
-            // >TODO - Add The Worm wave to Library
             // >TODO - Add Combo loss when touch by enemy's hitbox <<< For some enemies only
             // >TODO - Creer une zone plus large pour la destrcution des projectiles > Sinn quand l'ennemi est en dehors de l'ecran
             //      les projectiles sont detruits directement
-
             // >TODO - Faire apparaître la vie des ennemis quand la vie n'est pas au max
             // >TODO - Ajouter effet d'impact quand touché > Creer un gameObject en Child avec meme apparence(Sprite), teinte Rouge, Opacité reduite, puis le détruire 0.1 seconde apres;
             // >TODO - Enemy shot with Frencency balancing
