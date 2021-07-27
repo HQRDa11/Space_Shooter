@@ -10,7 +10,7 @@ public class Enemy_Factory
 {
     public GameObject CreateEnemy(Vector2 spawnPoint, int index, Wave wave, float time, int type, int libraryIndex)
     {
-        Enemy_Data data = Library.EnemyData.GetData(type, libraryIndex);
+        Enemy_Data data = Library.EnemyList.GetData(type, libraryIndex);
         GameObject gameObject = GameObject.Instantiate(data.GameObject, Factory.Instance.InGameObjectsList.transform);
         gameObject.transform.position = spawnPoint;
         gameObject.GetComponent<Enemy>().Initialize(data, index, wave, time);
