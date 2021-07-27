@@ -22,6 +22,9 @@ namespace HQRDa
 
             // DONE - Enemy HealthBar appear when isn't full HP
 
+            // DONE - Add Tool to translate direction in rotation
+            // DONE - Add Tool to translate rotation in direction
+
             // >TODO - Add Spawn area VisualAlert
             // >TODO - Add ShotLoading effect in General Factory
             // >TODO - Add Combo loss when touch by enemy's hitbox <<< For some enemies only

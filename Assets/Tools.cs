@@ -29,4 +29,13 @@ public static class Tools
                 }
         }
     }
+
+    public static float DirectionToRotation(Vector2 direction)
+    {
+        return Mathf.Atan2(-direction.x, direction.y) * 180 / Mathf.PI;
+    }
+    public static Vector2 RotationToDirection(float angle)
+    {
+        return new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+    }
 }
