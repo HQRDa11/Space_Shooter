@@ -30,9 +30,21 @@ namespace Library
 
     public static class WaveList
     {
-        public static class Basic
+        public static Wave RandomWave(int difficulty)
         {
+            int numberOfEnemy = (int)(Random.Range(5, 10) * Mathf.Sqrt(difficulty));
+            int spawnPoint = Random.Range(0, Map.SpawnDensity - 1);
+            float spawnDelay = Random.Range(.5f, 2f) / difficulty;
+            int repeatTimes = Random.Range(0, 1) * difficulty;
+            float repeatFrenquency = Random.Range(3f, 5f) / difficulty;
+            int[] checkPoints = Library.CheckPointsList.Random(Random.Range(3, 5) * difficulty);
+            bool mirror = Random.Range(0, 100) <= 100 / difficulty ? false : true;
 
+            return new Wave(numberOfEnemy, spawnPoint, spawnDelay, repeatTimes, repeatFrenquency, checkPoints, mirror, new Spawn_OnDifficulty()); 
+        }
+        public static Wave Basic(/*int index*/)
+        {
+            return null;
         }
         public static Wave Boss(int index)
         {
