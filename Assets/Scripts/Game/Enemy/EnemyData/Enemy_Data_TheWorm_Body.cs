@@ -21,7 +21,7 @@ public class Enemy_Data_TheWorm_Body : Enemy_Data
         _scoreReward = 20f;
         _lootChance = 5f;
 
-        _weaponBehaviour = new Enemy_Weapon_MultiShot_Circle();
+        _weaponBehaviour = new Enemy_Weapon_MultiShot_Circle(10);
         _shotChance = 100f;
         _shotDamage = 10f;
         _shotFrequency = 0f;
