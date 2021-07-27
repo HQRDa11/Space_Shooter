@@ -5,8 +5,12 @@ using UnityEngine;
 public class Enemy_Weapon_MultiShot_Circle : Enemy_Behaviours.Weapon
 {
     private bool _isFiring = false;
-    private int _numberOfShot = 10;
+    private int _numberOfShot;
     private int _shotIndex = 0;
+    public Enemy_Weapon_MultiShot_Circle(int numberOfShot)
+    {
+        _numberOfShot = numberOfShot;
+    }
     public void Shoot(Enemy enemy)
     {
         if (_isFiring == false) _isFiring = true;
