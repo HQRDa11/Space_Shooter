@@ -107,9 +107,18 @@ public class ShipData
     [SerializeField]
     private string m_name;
     public string Name { get => m_name; }
+
+    [SerializeField]
+    private int m_tier;
+    public int Tier { get => m_tier; }
+
+    [SerializeReference]
+    private Rarity m_rarity;
+    public Rarity Rarity { get => m_rarity; }
+
     [SerializeField]
     private LevelData m_level;
-    public LevelData Level { get => m_level; }
+    public LevelData Level { get => m_level; set { m_level = value; } }
 
     [SerializeField]
     private ModuleData[] m_allModules;
@@ -119,6 +128,8 @@ public class ShipData
     {
         m_name = name;
         m_level = lvlData;
+        m_rarity = Rarity.WHITE;
+        m_tier = 1;
         m_allModules = new ModuleData[2];
         AllModules[0] = Factory.Instance.Module_Factory.Dice_Module(2);
         AllModules[1] = Factory.Instance.Module_Factory.Dice_Module(1);
@@ -148,6 +159,7 @@ public class ModuleData
     [SerializeField]
     private ModuleType m_type;
     public ModuleType Type { get => m_type; }
+
     [SerializeReference]
     private Rarity m_rarity;
     public Rarity Rarity { get => m_rarity; }
