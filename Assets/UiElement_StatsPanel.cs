@@ -13,13 +13,32 @@ public class UiElement_StatsPanel : MonoBehaviour
         m_parentGrid = GetComponentsInChildren<Image>()[1].GetComponentInChildren<UiElement_VerticalGridLayout>().transform;
     }
 
-    public void Display_ModuleStats(ModuleStat[] stats)
+    public void Display_ModuleStats(Module_Factory.ModuleStat[] stats)
     {
         ResetPanel();
         switch (stats != null)
         {
             case true:
-                foreach (ModuleStat stat in stats)
+                foreach (Module_Factory.ModuleStat stat in stats)
+                {
+                    GameObject statDisplay = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_Elements/StatDisplay"), m_parentGrid);
+                    statDisplay.GetComponentInChildren<Text>().text = stat.Name;
+                    string values = (System.Math.Round(stat.Value, 2)).ToString() + " / " + (System.Math.Round(stat.MaxValue, 2)).ToString();
+                    statDisplay.GetComponentInChildren<Image>().GetComponentsInChildren<Text>()[1].text = values;
+                    statDisplay.GetComponentsInChildren<Image>()[1].fillAmount = stat.Value / stat.MaxValue;
+                    // Debug.LogWarning(" ratio = " + statDisplay.GetComponentInChildren<Image>().name);
+                }
+                break;
+        }
+    }
+
+    public void Display_ShipStats(Ship_Factory.ShipStat[] stats)
+    {
+        ResetPanel();
+        switch (stats != null)
+        {
+            case true:
+                foreach (Ship_Factory.ShipStat stat in stats)
                 {
                     GameObject statDisplay = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI_Elements/StatDisplay"), m_parentGrid);
                     statDisplay.GetComponentInChildren<Text>().text = stat.Name;
