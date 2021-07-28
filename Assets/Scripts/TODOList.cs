@@ -44,17 +44,11 @@ namespace HQRDa
             // DONE - Add Enemy with normal single shot, following the wave's checkpoints list.
             // DONE - Add Enemy with circle shot, picking a random checkpoint to move around.
             // DONE - Add Enemy with spiral shot, picking a random checkpoint to move around.
-
-            // >TODO - Add Enemy Sniper
-            //      > New Weapon Behaviour = Load shot when he's arrived on his checkPoint and keep Player's position ATM,
-            //      then shoot in the direction when shot is load. Then Unfreeze Movement.
-            //      Also Update Movement Behaviour Rotation
-            //      > New Movement Behaviour = Move to checkPoints choosen when the last is reached. Shoot() when he's is at radius range and Freeze when he's on the point.
-            //      CheckPoint is always between 0 - Width * 3;
-            //      MoveSpeed = Fast;
+            // DONE - Add Enemy Sniper
+            // 
             // >TODO - Add Enemy ShotGun
             // >TODO - Ennemi qui garde un checkpoint fixe mais bouger aleatoirement autour de celui ci. Vise constamment le joueur et tire a une frequence a definir.
-            
+
             // --- Boss ---
 
             // DONE - Add Boss > The Worm
@@ -68,6 +62,16 @@ namespace HQRDa
             // DONE - Add MoveBehaviour > Random movement around checkpoint
             // DONE - Add DeathHebaviour for The Worm(Head) > Stop all body parts moves and set them OnHeadDeath
             // DONE - Add DeathBehaviour for The Worm(Body) > Shoot OnDestruction
+            // DONE - Add Weapon Behaviour = Load shot when he's arrived on his checkPoint and keep Player's position ATM,
+            //      then shoot in the direction when shot is load. Then Unfreeze Movement.
+            // DONE - Add Movement Behaviour = Move to checkPoints choosen when the last is reached. Shoot() when he's is at radius range and Freeze when he's on the point.
+
+            // Rajouter pattern de tir sur TheWorm quand midLife, tir circle toutes les 5 sec pour ex. avec autant de projectiles que de parties de corps.
+            // Gagne des effets de projectiles avec des modules de tourelle de haut niveau
+            // IDEE module de tire secondaire gros rayon avec grand temps de reload
+            // BOSS Un pour chaque type de Basic enemy dans la mesure du possible
+            // BOSS IDEE + Pour le 2e, tir avec les 6 pattes (J'me comprends)
+            
         }
     }
 
@@ -149,7 +153,10 @@ namespace HQRDa
 
         // Chapitre 1 - Le terrain d'entrainement
         // - Nous sommes envoyés dans cette zone quasi déserte ou quelques NormalShot trainent encore de temps à autres.
-        // - Notre seule mission est de s'amuser avec notre nouveau Joujou, histoire de se faire la main./5
+        // - Notre seule mission est de s'amuser avec notre nouveau Joujou, histoire de se faire la main.
+
+        // - Nous sommes prévenus qu'un ver de l'espace a été aperçu non loin du terrain, et demandés en aide d'urgence.
+        // - On déconne pas avec ces bêtes la !
     }
 }
 
