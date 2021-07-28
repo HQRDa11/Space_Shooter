@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemyType { NULL = 0, Basic = 1, BossHead = 2, BossBody = 3 }
-public enum BasicEnemy { NULL = 0, NormalShot = 1, CircleShot_10 = 2, SpiralShot_36 = 3, Lenght }
+public enum BasicEnemy { NULL = 0, NormalShot = 1, CircleShot_10 = 2, SpiralShot_36 = 3, SniperShot = 4, Lenght }
 public enum BossHead { NULL = 0, TheWorm = 1, Lenght }
 public enum BossBody { NULL = 0, TheWorm = 1 }
 public class Enemy_Factory
