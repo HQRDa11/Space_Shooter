@@ -30,6 +30,9 @@ public class Factory : MonoBehaviour
 
     public static Transform _InGameObjects_Parent;
 
+    public General_Factory _generalFactory;
+    public General_Factory General_Factory { get => _generalFactory; }
+
     public Sprite SpriteError { get => Resources.Load<Sprite>("Sprites/Icons/SpriteError"); } 
 
     private void Awake()
@@ -42,6 +45,7 @@ public class Factory : MonoBehaviour
         _shotFactory = new Shot_Factory();
         _shipFactory = new Ship_Factory();
         _enemyFactory = new Enemy_Factory();
+        _generalFactory = new General_Factory();
     }
 
     public Transform InGameObjectsList { get => _InGameObjects_Parent; }
@@ -88,13 +92,13 @@ public class Factory : MonoBehaviour
     public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely 
                                        // Current uses : Turret Bonus, Modules/Components loot 
     {
-        int luck = Random.Range(0, 100); // GREY 53% / WHITE 25% / GREEN 12% / BLUE 6% / PURPLE 3% / ORANGE 1% //
+        int luck = Random.Range(0, 100); // GREY 52% / WHITE 25% / GREEN 13% / BLUE 5% / PURPLE 3% / ORANGE 1% //
 
-        if (luck <= 53)
+        if (luck <= 52)
         {
             return Rarity.GREY;
         }
-        else if (luck <= 78)
+        else if (luck <= 77)
         {
             return Rarity.WHITE;
         }
@@ -102,11 +106,11 @@ public class Factory : MonoBehaviour
         {
             return Rarity.GREEN;
         }
-        else if (luck <= 96)
+        else if (luck <= 95)
         {
             return Rarity.BLUE;
         }
-        else if (luck <= 99)
+        else if (luck <= 98)
         {
             return Rarity.PURPLE;
         }
@@ -115,4 +119,5 @@ public class Factory : MonoBehaviour
             return Rarity.ORANGE;
         }
     }
+
 }

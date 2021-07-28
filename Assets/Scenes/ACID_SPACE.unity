@@ -570,31 +570,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_squadronData:
-    m_player:
-      m_name: PLAYER
-      m_equippedShip:
-        m_name: 
-        m_Level:
-          m_current: 0
-          m_xp_curret: 0
-          m_xp_toNextLevel: 0
-        m_equippedModules: []
-    m_maxAllies: 1
-    m_allShips: []
-    m_allies:
-    - m_name: ALLY ONE
-      m_equippedShip:
-        m_name: 
-        m_Level:
-          m_current: 0
-          m_xp_curret: 0
-          m_xp_toNextLevel: 0
-        m_equippedModules: []
-    m_allModules: []
-  m_gameCurrency: 0
-  m_id: 
-  m_highScores: 
-  m_components: 
+    id: 0
+  m_profileData:
+    m_appVersion: v.0.0.03
+    m_profileID: noID
+    m_gameCurrency: 0
+    m_highScores: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+    m_allComponents: 000000000000000000000000000000000000000000000000
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!1 &1726231610
 GameObject:
   m_ObjectHideFlags: 0

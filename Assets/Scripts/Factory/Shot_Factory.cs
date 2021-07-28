@@ -9,7 +9,7 @@ public class Shot_Factory
     {
         _shotPrefab = Resources.Load<GameObject>("Prefabs/Shot");
     }
-    public GameObject CreateShot(Transform parent, Rarity rarity,double damage, Vector2 direction, float speed, string tag)
+    public GameObject CreateShot(Transform parent, Rarity rarity, double damage, Vector2 direction, float speed, string tag)
     {
         //Debug.LogWarning("damage: " + (double)damage + "*" + ((int)rarity) + "= " + (double)damage * ((int)rarity));
         GameObject newShot = GameObject.Instantiate(_shotPrefab, Factory.Instance.InGameObjectsList);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Diffulty { EASY = 1, NORMAL, HARD, HARDCORE }
+public enum Diffulty { EASY = 1, NORMAL, HARD, HARDCORE, INSANE, GODLIKE, FREE_BRUTALITY }
 
 public class Level 
 {

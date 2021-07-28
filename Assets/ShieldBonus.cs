@@ -9,7 +9,7 @@ public class ShieldBonus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _speed = 1; // BUG HERE why is it moving faster than other bonuses at _speed = 2 ?
+        _speed = 2;
     }
 
     // Update is called once per frame
@@ -38,6 +38,7 @@ public class ShieldBonus : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Player>())
             {
+                GameObject.Destroy(this.gameObject.GetComponent<Collider2D>());
                 collision.gameObject.GetComponent<Player>().OnShieldBonus();
                 GameObject.Destroy(this.gameObject);
             }

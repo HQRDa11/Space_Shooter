@@ -47,14 +47,22 @@ public class Shot : MonoBehaviour
         switch (gameObject.tag)
         {
             case "Player":
-                if (collision.gameObject.tag == "Enemy")
+                switch (collision.gameObject.tag)
                 {
-                    if (collision.GetComponent<Enemy>())
-                    {
-                        collision.GetComponent<Enemy>().TakeDamage(_damage);
-                        GameObject.Destroy(this.gameObject);
-                    }
-                   
+                    case "Enemy":
+                        if (collision.GetComponent<Enemy>())
+                        {
+                            collision.GetComponent<Enemy>().TakeDamage(_damage);
+                            GameObject.Destroy(this.gameObject);
+                        }
+                        return;
+                    case "Damageable":
+                        if (collision.GetComponent<Deposit>())
+                        {
+                            collision.GetComponent<Deposit>().TakeDamage(_damage);
+                            GameObject.Destroy(this.gameObject);
+                        }
+                        return;
                 }
                 return;
 

@@ -22,7 +22,6 @@ public class TurretSystem : MonoBehaviour
         for (int i = 0; i<m_allTurretSlots.Count;i++)
         {
             m_allTurretSlots[i].Damage = damage;
-            Debug.Log("finaltestdamage=" + damage);
         }
     }
 

@@ -10,6 +10,7 @@ TagManager:
   - ApplicationState
   - PlayerShield
   - Bonus
+  - Damageable
   layers:
   - Default
   - TransparentFX
@@ -70,4 +71,7 @@ TagManager:
     locked: 0
   - name: TopTop
     uniqueID: 2067052865
+    locked: 0
+  - name: Damageable
+    uniqueID: 728951495
     locked: 0

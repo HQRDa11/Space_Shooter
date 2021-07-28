@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
     private float _wireRadius;
     private bool _canMove;
 
-
     // DEATH
     private Enemy_Behaviours.Death _deathBehaviour;
 
@@ -39,9 +38,12 @@ public class Enemy : MonoBehaviour
     private float _shotChance;
     private float _shotDamage;
     private float _shotFrequency;
+    private bool _canShoot;
 
     private float _clock;
 
+    private Rarity _rarity;
+    public Rarity Rarity { get=> _rarity; set { _rarity = value; } }
     public void Initialize(Enemy_Data data, int index, Wave wave, float clock)
     {
         _index = index;
@@ -71,30 +73,46 @@ public class Enemy : MonoBehaviour
         _shotChance =           data.ShotChance;
         _shotDamage =           data.ShotDamage;
         _shotFrequency =        data.ShotFrequency;
+        _canShoot =             true;
 
         _clock = clock % _shotFrequency;
     }
 
-    public void Update()
+    protected void Update()
     {
-        _clock += Time.deltaTime;
+        Update_Clock();
 
         _healthBehaviour.Health(this);
         _weaponBehaviour.ShootOverTime(this);
 
-        if (_clock >= _shotFrequency)
+        if (_clock >= _shotFrequency && _canShoot)
         {
             Shoot();
             _clock = 0;
         }
     }
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (_canMove)
         {
             _movementBehaviour.Move(this);
             _movementBehaviour.Rotation(this);   
         }
+    }
+
+    public void Set_Rarity(Rarity rarity)
+    {
+        _rarity = rarity;
+        int rarityMultiplier = (int)rarity;
+        _maxHealth *= rarityMultiplier;
+        _currentHealth = _maxHealth;
+        //_shotDamage *= rarityMultiplier;
+        gameObject.GetComponent<SpriteRenderer>().color = Factory.Instance.Material_Factory.GetMaterial(rarity).color;
+    }
+
+    public void Update_Clock()
+    {
+        _clock += Time.deltaTime;
     }
     public void TakeDamage(double damage)
     {
@@ -112,6 +130,14 @@ public class Enemy : MonoBehaviour
     {
         if (b == false) GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         _canMove = b;
+    }
+    public void CanShoot(bool b)
+    {
+        _canShoot = b;
+    }
+    public void ResetClock()
+    {
+        _clock = 0;
     }
 
     // BEHAVIOUR SETTERS
@@ -144,7 +170,7 @@ public class Enemy : MonoBehaviour
 
     // ACCESSORS
 
-    public int Index { get => _index; }
+    public int Index { get => _index; set => _index = value; }
     public Wave Wave { get => _wave; }
 
     // GameObject
@@ -153,7 +179,7 @@ public class Enemy : MonoBehaviour
     // Health
     public Enemy_Behaviours.Health HealthBehaviour { get => _healthBehaviour; }
     public float MaxHealth { get => _maxHealth; }
-    public float CurrentHealth { get => _currentHealth; }
+    public float CurrentHealth { get => _currentHealth;  }
     public Transform HealthBarTransform { get => _healthBarTransform; }
     public Image HealthBarImage { get => _healthBarImage; }
 
@@ -174,5 +200,7 @@ public class Enemy : MonoBehaviour
     // Weapon
     public Enemy_Behaviours.Weapon WeaponBehaviour { get => _weaponBehaviour; }
     public float ShotChance { get => _shotChance; }
-    public float ShotDamage { get => _shotDamage; }
+    public float ShotDamage { get => _shotDamage;}
+
+    public float Clock { get => _clock; }
 }
