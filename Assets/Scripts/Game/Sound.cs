@@ -12,6 +12,7 @@ public class Sound : MonoBehaviour
     private AudioClip m_droidShort;
     private AudioClip m_componentCollect;
     private AudioClip m_startSound;
+    private AudioClip m_buttonSound;
 
     // Start is called before the first frame update
     void Awake()
@@ -22,6 +23,7 @@ public class Sound : MonoBehaviour
         m_droidShort = Resources.Load<AudioClip>("AudioClips/DroidShort");
         m_componentCollect = Resources.Load<AudioClip>("AudioClips/ComponentCollect");
         m_startSound = Resources.Load<AudioClip>("AudioClips/StartSound");
+        m_buttonSound = Resources.Load<AudioClip>("AudioClips/ButtonSound");
     }
 
     // Update is called once per frame
@@ -49,5 +51,9 @@ public class Sound : MonoBehaviour
     public void Play_ComponentCollect()
     {
         m_audioSource.PlayOneShot(m_componentCollect, 0.9f);
+    }
+    public void Play_ButtonSound()
+    {
+        m_audioSource.PlayOneShot(m_buttonSound, 1f);
     }
 }

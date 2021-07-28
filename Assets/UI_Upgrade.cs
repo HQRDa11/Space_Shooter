@@ -127,6 +127,7 @@ public class UI_Upgrade : MonoBehaviour
         {
             case true:
                 m_previousState_btn.onClick.AddListener(() => stateMachine.stateRequest(previous));
+                m_previousState_btn.onClick.AddListener(() => Sound.Instance.Play_ButtonSound());
                 break;
             case false:
                 m_previousState_btn.image.color = Color.clear ;
@@ -138,6 +139,7 @@ public class UI_Upgrade : MonoBehaviour
         {
             case true:
                 m_nextState_btn.onClick.AddListener(() => stateMachine.stateRequest(next));
+                m_nextState_btn.onClick.AddListener(() => Sound.Instance.Play_ButtonSound());
                 break;
             case false:
                 m_nextState_btn.image.color = Color.clear;
@@ -171,7 +173,9 @@ public class UI_Upgrade : MonoBehaviour
     {
         m_moduleIndex = 0;
         m_nextModule_btn.onClick.AddListener(() => NextModule());
+        m_nextModule_btn.onClick.AddListener(() => Sound.Instance.Play_ButtonSound());
         m_previousModule_btn.onClick.AddListener(() => PreviousModule());
+        m_previousModule_btn.onClick.AddListener(() => Sound.Instance.Play_ButtonSound());
     }
     private void Initialise_Buttons_StockChangeUpgrade()
     {
@@ -349,6 +353,7 @@ public class UI_Upgrade : MonoBehaviour
                         m_upgradeModuleButton.image.color = upgradeButtonColor;
                         m_upgradeModuleButton.onClick.RemoveAllListeners();
                         m_upgradeModuleButton.onClick.AddListener(() => OnUpgradeButtonPressed());
+                        // to do add listender sound.Play_buttonUpgrade()
                         break;
                     case false:
 
