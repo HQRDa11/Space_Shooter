@@ -59,7 +59,7 @@ namespace Library
 
     public static class EnemyList
     {
-        public const int NUMBER_OF_BASIC = 3;
+        public const int NUMBER_OF_BASIC = (int)BasicEnemy.Lenght - 1;
         public const int NUMBER_OF_BOSS = 1;
         public static Enemy_Data GetData(int type, int index)
         {
@@ -72,6 +72,7 @@ namespace Library
                         case 1: return new Enemy_Data_Basic_NormalShot();
                         case 2: return new Enemy_Data_Basic_CircleShot_10();
                         case 3: return new Enemy_Data_Basic_SpiralShot_36();
+                        case 4: return new Enemy_Data_Basic_SniperShot();
                         default:
                             Debug.Log("Unknow Basic Enemy Index");
                             return null;

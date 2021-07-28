@@ -41,7 +41,7 @@ public class Enemy_Movement_RandomlyAroundRandomCheckPoint : Enemy_Behaviours.Mo
     }
     public Vector2 NextCheckPoint()
     {
-        return Map.CheckPointIndexToPosition(Random.Range(1, Map.CheckPointDensity()));
+        return Map.CheckPointIndexToPosition(Random.Range(0, Map.CheckPointDensity()));
     }
     public Vector2 NextTarget()
     {
@@ -49,6 +49,7 @@ public class Enemy_Movement_RandomlyAroundRandomCheckPoint : Enemy_Behaviours.Mo
     }
     public void Rotation(Enemy enemy)
     {
+        // HERE HERE HERE
     }
     public Movement GetNextBehaviour()
     {

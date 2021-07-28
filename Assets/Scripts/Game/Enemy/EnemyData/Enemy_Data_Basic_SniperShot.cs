@@ -1,15 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Data_Sample : Enemy_Data
+public class Enemy_Data_Basic_SniperShot : Enemy_Data
 {
-    public Enemy_Data_Sample()
+    public Enemy_Data_Basic_SniperShot()
     {
-        _gameObject = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
+        _gameObject = Resources.Load<GameObject>("Prefabs/Enemies/Enemy_Basic_Snipershot");
         _healthBehaviour = new Enemy_Health_Normal();
         _health = 20f;
 
         _movementBehaviour = new Enemy_Movement_FreezeOnCheckPoint();
-        _moveSpeed = 80f;
+        _moveSpeed = 70f;
         _smoothingSpeed = .3f;
         _wireRadius = .5f;
 

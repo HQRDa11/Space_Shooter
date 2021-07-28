@@ -31,4 +31,8 @@ public class General_Factory
         GameObject explosion = GameObject.Instantiate(_explosionAnim);
         explosion.transform.position = position;
     }
+    public GameObject Create_EnergyAbsorbEffect(Transform parent)
+    {
+        return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/EnergyAbsorbEffect"), parent);
+    }
 }

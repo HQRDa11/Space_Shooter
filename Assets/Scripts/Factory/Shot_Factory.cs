@@ -18,6 +18,15 @@ public class Shot_Factory
         newShot.tag = tag;
         return newShot;
     }
+    public GameObject CreateSniperShot(Rarity rarity, double damage, Vector2 direction, string tag, Vector2 position)
+    {
+        GameObject newShot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/SniperShot"), Factory.Instance.InGameObjectsList);
+        newShot.transform.position = position;
+        newShot.GetComponentInChildren<SpriteRenderer>().material = Factory.Instance.Material_Factory.GetMaterial(rarity);
+        newShot.GetComponent<SniperShot>().Initialize((float)damage * ((int)rarity), direction);
+        newShot.tag = tag;
+        return newShot;
+    }
 
     public GameObject Create_DefaultEnemyShot(Vector2 direction)
     {
