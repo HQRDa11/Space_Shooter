@@ -71,6 +71,8 @@ namespace HQRDa
         //      - High damage on collision
         //      - MiningDrones
         //      later - Mining should be more rewarding than shooting it.
+        //      
+        //  now - supprimer moduleStat_Factory et mettre les methode type de retour de stat respectivement dans module_factory et ship_factory ( bien plus intelligent et pratique )
         //
         // - Rarety dice : power of 10;
         //

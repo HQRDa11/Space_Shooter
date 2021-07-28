@@ -26,7 +26,7 @@ public class ProfileData
     {
         //Debug.LogWarning("New default ProfileData");
         m_appVersion = ApplicationInfo.VERSION;
-        m_profileID = "noID";
+        m_profileID = "[PLAYER_NAME]";
         m_gameCurrency = 0;
         m_highScores = new int[10];
         m_allComponents = new int[6];

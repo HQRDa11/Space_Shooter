@@ -19,9 +19,6 @@ public class Factory : MonoBehaviour
     private Module_Factory _moduleFactory;
     public Module_Factory Module_Factory { get => _moduleFactory; }
 
-    private ModuleStat_Factory _moduleStat_Factory;
-    public ModuleStat_Factory ModuleStat_Factory { get => _moduleStat_Factory; }
-
     private Shot_Factory _shotFactory;
     public Shot_Factory  Shot_Factory { get => _shotFactory; }
 
@@ -40,7 +37,6 @@ public class Factory : MonoBehaviour
         _instance = this;
         _materialFactory = new Material_Factory();
         _moduleFactory = new Module_Factory();
-        _moduleStat_Factory = new ModuleStat_Factory();
         _bonusFactory = new Bonus_Factory();
         _turretFactory = new Turret_Factory();
         _shotFactory = new Shot_Factory();
