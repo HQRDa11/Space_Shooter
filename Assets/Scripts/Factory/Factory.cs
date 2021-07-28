@@ -89,7 +89,7 @@ public class Factory : MonoBehaviour
                 return "RarityError";
         }
     }
-    public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely 
+    public static Rarity Dice_RarityOLD() // Dice according to a rarity ratio standard // Tweak it wisely 
                                        // Current uses : Turret Bonus, Modules/Components loot 
     {
         int luck = Random.Range(0, 100); // GREY 52% / WHITE 25% / GREEN 13% / BLUE 5% / PURPLE 3% / ORANGE 1% //
@@ -119,5 +119,34 @@ public class Factory : MonoBehaviour
             return Rarity.ORANGE;
         }
     }
+    public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely 
+                                       // Current uses : Turret Bonus, Modules/Components loot 
+    {
+        float luck = Random.Range(0f, 128f); // 1/4 -> 1/4 -> ...
 
+        if (luck > 64)
+        {
+            return Rarity.GREY;
+        }
+        else if (luck >= 16)
+        {
+            return Rarity.WHITE;
+        }
+        else if (luck >= 4)
+        {
+            return Rarity.GREEN;
+        }
+        else if (luck >= 1)
+        {
+            return Rarity.BLUE;
+        }
+        else if (luck >= 0.25)
+        {
+            return Rarity.PURPLE;
+        }
+        else 
+        {
+            return Rarity.ORANGE;
+        }
+    }
 }
