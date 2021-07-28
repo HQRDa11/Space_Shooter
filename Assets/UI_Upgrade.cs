@@ -38,6 +38,7 @@ public class UI_Upgrade : MonoBehaviour
     private Text   m_text_module;
     private Button m_previousModule_btn;
     private Button m_nextModule_btn;
+    private Button m_upgradeShipButton; 
 
     //MODULE_DISPLAY
     UiElement_StatsPanel m_moduleStatsPanel;
@@ -91,6 +92,8 @@ public class UI_Upgrade : MonoBehaviour
         UiElement_StatsPanel[] allStatsPanels = GameObject.FindObjectsOfType<UiElement_StatsPanel>();
         m_shipStatsPanel = allStatsPanels[1];
         m_moduleStatsPanel = allStatsPanels[0];
+            //Upgrade 
+        m_upgradeShipButton = GameObject.Find("ChoicePanel_Ship").GetComponentsInChildren<Button>()[2];
 
         //MODULE_SWITCH_DISPLAY
         m_text_module = Find_Text_Element("Text_Module");
