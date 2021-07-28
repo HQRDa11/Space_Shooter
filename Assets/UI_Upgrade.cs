@@ -27,8 +27,7 @@ public class UI_Upgrade : MonoBehaviour
     private Button m_nextMember_btn;
 
     //SHIP_DISPLAY
-    private Text m_shipName_Display;
-    private Text m_shipLevel_Display;
+    UiElement_StatsPanel m_shipStatsPanel;
     // to do: SpriteRenderer m_shipSprite;
     // to do: Panel m_shipStats_Display; 
 
@@ -42,8 +41,6 @@ public class UI_Upgrade : MonoBehaviour
 
     //MODULE_DISPLAY
     UiElement_StatsPanel m_moduleStatsPanel;
-    private Text m_moduleName_Display;
-    private Text m_moduleLevel_Display;
     private Image m_moduleImage_Display;
     // to do: Panel m_moduleStats_Display;
 
@@ -91,8 +88,9 @@ public class UI_Upgrade : MonoBehaviour
         m_nextMember_btn = Find_Button_Element("Button_NextMember");
 
         //SHIP_DISPLAY
-        m_shipName_Display = Find_Text_Element("Text_ShipName");
-        m_shipLevel_Display = Find_Text_Element("Text_ShipLevel"); 
+        UiElement_StatsPanel[] allStatsPanels = GameObject.FindObjectsOfType<UiElement_StatsPanel>();
+        m_shipStatsPanel = allStatsPanels[1];
+        m_moduleStatsPanel = allStatsPanels[0];
 
         //MODULE_SWITCH_DISPLAY
         m_text_module = Find_Text_Element("Text_Module");
@@ -100,15 +98,9 @@ public class UI_Upgrade : MonoBehaviour
         m_nextModule_btn = Find_Button_Element("Button_NextModule");
 
         //MODULE_DISPLAY
-        m_moduleName_Display = Find_Text_Element("Text_ModuleName");
-        m_moduleLevel_Display = Find_Text_Element("Text_ModuleLevel");
         m_moduleImage_Display = GameObject.Find("Image_Module").GetComponent<Image>();
         Initialise_Buttons_StockChangeUpgrade();
-
-        //ModuleStats display
-        m_moduleStatsPanel = GameObject.FindObjectOfType<UiElement_StatsPanel>();
-
-        //Upgrade 
+            //Upgrade 
         m_upgradeModuleButton = GameObject.Find("ChoicePanel_Module").GetComponentsInChildren<Button>()[2];
     }
     public Text Find_Text_Element(string textGo_name)
@@ -249,11 +241,9 @@ public class UI_Upgrade : MonoBehaviour
         {
             case true:
                 m_text_member.text = displayed.Name + " " + (m_memberIndex+1).ToString() + "/" + m_squadronData.AllMembers.Length;
-
-                m_shipName_Display.text = displayed.Ship.Name;
-                m_shipLevel_Display.text = displayed.Ship.Level.Current.ToString();
                 m_currentDisplayedModule = displayed.Ship.AllModules[0];
                 m_moduleIndex = 0;
+                Display_Ship();
                 Display_Module();
                 break;
             case false:
@@ -262,16 +252,66 @@ public class UI_Upgrade : MonoBehaviour
         }
 
     }
-    public void Display_Module()
-    {
 
+    private void Display_Ship()
+    {
+        switch (m_currentDisplayedMember != null)
+        {
+            case true:
+                ShipData ship = m_currentDisplayedMember.Ship;
+                Color color = Factory.Instance.Material_Factory.GetMaterial((ship.Rarity)).color;
+
+                // DISPLAY TITLE : (0)T1 (1)TURRET (2)LVL1
+                Text[] Title_Texts = GameObject.Find("Display_Ship_NameAndLevel").GetComponentsInChildren<Text>();
+                Title_Texts[0].text = "T" + ship.Tier;
+                Title_Texts[0].color = color;
+                Title_Texts[1].text = ship.Name;
+                Title_Texts[1].color = color;
+                Title_Texts[2].text = "LVL " + ship.Level.Current.ToString();
+
+                //Stats display
+                if (m_shipStatsPanel == null) Debug.LogWarning("no stat panel to display");
+
+                m_shipStatsPanel.Display_ShipStats(Factory.Instance.Ship_Factory.Create_Stats(ship));
+
+                // maybe: m_shipImage_Display.sprite = ship.Sprite();
+                // maybe: m_shipImage_Display.color = color;
+
+                //Upgrade button
+                int[] cost = Factory.Instance.Ship_Factory.Get_UpgradeCost(ship);
+                UiElement_ComponentCostsDisplay costDisplay = GameObject.FindObjectsOfType<UiElement_ComponentCostsDisplay>()[1];
+                costDisplay.Display_Costs(cost);
+                // TO DO :
+                //Color upgradeButtonColor = m_upgradeShipButton.gameObject.GetComponentInChildren<Image>().color;
+                //switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost) && m_currentDisplayedModule.Level.Current < Factory.Instance.ModuleStat_Factory.LevelMax(m_currentDisplayedModule.Rarity))
+                //{
+                //    case true:
+                //        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g, upgradeButtonColor.b, 1);
+                //        m_upgradeModuleButton.image.color = upgradeButtonColor;
+                //        m_upgradeModuleButton.onClick.RemoveAllListeners();
+                //        m_upgradeModuleButton.onClick.AddListener(() => OnUpgradeButtonPressed());
+                //        break;
+                //    case false:
+
+                //        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g, upgradeButtonColor.b, 0.26f);
+                //        m_upgradeModuleButton.image.color = upgradeButtonColor;
+                //        m_upgradeModuleButton.onClick.RemoveAllListeners();
+                //        break;
+                //}
+                break;
+            case false:
+                Debug.LogError("cant display Ship");
+                return;
+        }
+    }
+    private void Display_Module()
+    {
         switch (m_currentDisplayedModule != null)
         {
             case true:
                 ShipData ship = m_currentDisplayedMember.Ship;
                 ModuleData module = ship.AllModules[m_moduleIndex];
                 Color color = Factory.Instance.Material_Factory.GetMaterial((m_currentDisplayedModule.Rarity)).color;
-                // Debug.Log(color);
 
                 //Switch display
                 int index = m_moduleIndex + 1;
@@ -279,27 +319,27 @@ public class UI_Upgrade : MonoBehaviour
                 m_text_module.text = "Module " + index + "/" + total;
 
                 // DISPLAY TITLE : (0)T1 (1)TURRET (2)LVL1
-                Text[] ModuleTitle_Texts = GameObject.Find("Display_Module_NameAndLevel").GetComponentsInChildren<Text>();
-                ModuleTitle_Texts[0].text = "T" + module.Tier;
-                ModuleTitle_Texts[0].color = color;
-                ModuleTitle_Texts[1].text = module.Name;
-                ModuleTitle_Texts[1].color = color;
-                ModuleTitle_Texts[2].text = "LVL " + module.Level.Current.ToString();
+                Text[] Title_Texts = GameObject.Find("Display_Module_NameAndLevel").GetComponentsInChildren<Text>();
+                Title_Texts[0].text = "T" + module.Tier;
+                Title_Texts[0].color = color;
+                Title_Texts[1].text = module.Name;
+                Title_Texts[1].color = color;
+                Title_Texts[2].text = "LVL " + module.Level.Current.ToString();
 
                 //Stats display
                 if (m_moduleStatsPanel == null) Debug.LogWarning("no stat panel to display");
 
-                m_moduleStatsPanel.Display_ModuleStats(Factory.Instance.ModuleStat_Factory.Create_Stats(module));
+                m_moduleStatsPanel.Display_ModuleStats(Factory.Instance.Module_Factory.Create_Stats(module));
 
                 m_moduleImage_Display.sprite = module.Sprite();
                 m_moduleImage_Display.color  = color;
 
                 //Upgrade button
-                int[] cost = Factory.Instance.ModuleStat_Factory.Get_UpgradeCost(module);
+                int[] cost = Factory.Instance.Module_Factory.Get_UpgradeCost(module);
                 UiElement_ComponentCostsDisplay costDisplay = GameObject.FindObjectsOfType<UiElement_ComponentCostsDisplay>()[0];
                 costDisplay.Display_Costs(cost);
                 Color upgradeButtonColor = m_upgradeModuleButton.gameObject.GetComponentInChildren<Image>().color;
-                switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost) && m_currentDisplayedModule.Level.Current<Factory.Instance.ModuleStat_Factory.LevelMax(m_currentDisplayedModule.Rarity))
+                switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost) && m_currentDisplayedModule.Level.Current<Factory.Instance.Module_Factory.LevelMax(m_currentDisplayedModule.Rarity))
                 {
                     case true:
                         upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g,upgradeButtonColor.b, 1);
@@ -314,9 +354,6 @@ public class UI_Upgrade : MonoBehaviour
                         m_upgradeModuleButton.onClick.RemoveAllListeners();
                         break;
                 }
-                
-                
-                
                 break;
             case false:
                 Debug.LogError("cant display module");
@@ -390,11 +427,11 @@ public class UI_Upgrade : MonoBehaviour
 
     private void OnUpgradeButtonPressed()
     {
-        switch (m_currentDisplayedModule.Level.Current < Factory.Instance.ModuleStat_Factory.LevelMax(m_currentDisplayedModule.Rarity))
+        switch (m_currentDisplayedModule.Level.Current < Factory.Instance.Module_Factory.LevelMax(m_currentDisplayedModule.Rarity))
         {
             case true:
                 m_upgradeModuleButton.onClick.RemoveAllListeners();
-                ProfileHandler.Instance.ActiveProfile.SpendComponent(Factory.Instance.ModuleStat_Factory.Get_UpgradeCost(m_currentDisplayedModule));
+                ProfileHandler.Instance.ActiveProfile.SpendComponent(Factory.Instance.Module_Factory.Get_UpgradeCost(m_currentDisplayedModule));
                 Factory.Instance.Module_Factory.LevelUp(m_currentDisplayedModule);
                 Display_Components();
                 Display_Module();

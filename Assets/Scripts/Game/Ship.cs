@@ -93,15 +93,15 @@ public class Ship : MonoBehaviour
             switch (data.Type)
             {
                 case ModuleType.SHIELD:
-                    shieldEnergy += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.ENERGY, true);
+                    shieldEnergy += Factory.Instance.Module_Factory.Get_Stat(data, Module_Factory.ModuleStatType.ENERGY, true);
                     //Debug.LogWarning("repairdroneEnergyBonus = " + shieldEnergy);
                     break;
                 case ModuleType.REPAIRDRONE:
-                    repairDroneLifeSpan   += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.LIFESPAN, true);
-                    repairDroneEfficiency += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.EFFICIENCY, true);
+                    repairDroneLifeSpan   += Factory.Instance.Module_Factory.Get_Stat(data, Module_Factory.ModuleStatType.LIFESPAN, true);
+                    repairDroneEfficiency += Factory.Instance.Module_Factory.Get_Stat(data, Module_Factory.ModuleStatType.EFFICIENCY, true);
                     break;
                 case ModuleType.TURRET:
-                    turretDamage += Factory.Instance.ModuleStat_Factory.Get_Stat(data, ModuleStatType.DAMAGE, true);
+                    turretDamage += Factory.Instance.Module_Factory.Get_Stat(data, Module_Factory.ModuleStatType.DAMAGE, true);
                     break;
                 default:
                     break;
@@ -180,7 +180,7 @@ public class Ship : MonoBehaviour
 
     public void NewRepairDrone()
     {
-        ModuleStat_Factory factory = Factory.Instance.ModuleStat_Factory;
+        Module_Factory factory = Factory.Instance.Module_Factory;
         GameObject.Find("Sound").GetComponent<Sound>().Play_Droid();
         RepairDrone = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RepairDrone"), Factory._InGameObjects_Parent).GetComponent<RepairDrone>();
         RepairDrone.Initialise(this, m_statBonuses.RepairDroneLifespan, m_statBonuses.RepairDroneEfficiency);
