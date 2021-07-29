@@ -17,7 +17,7 @@ public class Enemy_Data_TheWorm_Head : Enemy_Data
 
         _deathBehaviour = new TheWorm_Head_Death();
 
-        _rewardBehaviour = new Enemy_Reward_Normal(); // < A remplacer par une recompense special TheWorm
+        _rewardBehaviour = new Enemy_Reward_Boss(); // < A remplacer par une recompense special TheWorm
         _scoreReward = 100f;
         _lootChance = 30f;
 
