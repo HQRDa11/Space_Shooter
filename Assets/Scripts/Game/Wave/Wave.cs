@@ -19,7 +19,7 @@ public class Wave
     private List<GameObject> _allEnemies; public List<GameObject> AllEnemies { get => _allEnemies; }
 
     private float _enemyInstanceClock; public float EnemyInstanceClock { get => _enemyInstanceClock; }
-    private int _enemyIndex; public int EnemyIndex { get => _enemyIndex; set { _enemyIndex = value; Debug.Log("Index > " + EnemyIndex); }  }
+    private int _enemyIndex; public int EnemyIndex { get => _enemyIndex; set { _enemyIndex = value; /*Debug.Log("Index > " + EnemyIndex);*/ }  }
 
     private SpawnBehaviour _spawnBehaviour;
     private float _clock = 0;

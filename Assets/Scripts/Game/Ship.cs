@@ -12,6 +12,7 @@ public class Ship : MonoBehaviour
 
     private float      m_health;
     private float   m_maxHealth;
+    public float Health { get => m_maxHealth; }
     public  float HealthRatio { get { return m_health / m_maxHealth; } }
     
     private Vector3  m_velocity;
@@ -48,48 +49,40 @@ public class Ship : MonoBehaviour
         HasDrone = false;
     }
 
-    public void InitialisePlayerShip( float maxHealth)
+    public void InitialisePlayerShip( ShipData data)
     {
+        this.gameObject.transform.localScale *= 0.5f;
         m_isPlayerShip = true;
-        InitialiseShipBonuses_wProfileData();
+        Initialise_ModuleBonuses(data);
         this.GetComponent<TurretSystem>().SetTurretSlotDamage(10 + m_statBonuses.TurretDamage);
-        m_maxHealth = maxHealth;
+        m_maxHealth = Ship_Factory.Get_Stat(data, Ship_Factory.ShipStatType.HULL, true);
         m_health = m_maxHealth;
         this.m_healtBar = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().HealthBars[0];
         Update_HealthBar();
     }
-    public void InitialiseAllyShip(int AllyId, float maxHealth)
+    public void InitialiseAllyShip(int AllyId, ShipData data)
     {
         this.gameObject.transform.localScale *= 0.5f;
         m_isPlayerShip = false;
-        InitialiseShipBonuses_wProfileData();
+        Initialise_ModuleBonuses(data);
         this.GetComponent<TurretSystem>().SetTurretSlotDamage(1 + m_statBonuses.TurretDamage);
         m_allyId = AllyId;
-        m_maxHealth = maxHealth;
+        m_maxHealth = Ship_Factory.Get_Stat(data, Ship_Factory.ShipStatType.HULL, true);
         m_health = m_maxHealth;
         this.m_healtBar = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo>().HealthBars[AllyId+1];
         this.gameObject.transform.SetParent(GameObject.Find("InGameObjects").transform);
         Update_HealthBar();
     }
-    private void InitialiseShipBonuses_wProfileData()
+    private void Initialise_ModuleBonuses(ShipData shipData)
     {
-        ModuleData[] moduleDatas;
-        switch (m_isPlayerShip)
-        {
-            case true:
-                moduleDatas = ProfileHandler.Instance.ActiveProfile.SquadronData.AllMembers[0].Ship.AllModules;
-                break;
-            case false:
-                moduleDatas = ProfileHandler.Instance.ActiveProfile.SquadronData.AllMembers[m_allyId + 1].Ship.AllModules;
-                break;
-        }
-
+        ModuleData[] moduleDatas= shipData.AllModules;
         float shieldEnergy = 0;
         float repairDroneLifeSpan = 0;
         float repairDroneEfficiency = 0;
         double turretDamage = 0;
         foreach (ModuleData data in moduleDatas)
         {
+            Debug.LogWarning(data.Type);
             switch (data.Type)
             {
                 case ModuleType.SHIELD:

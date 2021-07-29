@@ -129,14 +129,21 @@ namespace HQRDa
         //      - MiningDrones
         //      later - Mining should be more rewarding than shooting it.
         //      
-        //  now - supprimer moduleStat_Factory et mettre les methode type de retour de stat respectivement dans module_factory et ship_factory ( bien plus intelligent et pratique )
+        //  ok - supprimer moduleStat_Factory et mettre les methode type de retour de stat respectivement dans module_factory et ship_factory ( bien plus intelligent et pratique )
         //
-        // - Rarety dice : power of 10;
+        // ok - Rarety dice : 1/4 chance of looting higher rarity
         //
         // - UI_Upgrade.cs : Ship upgrade
-        //      - Panel m_shipStats_Display; 
+        //      - Triple upgrade cost
+        //      ok - Panel m_shipStats_Display; 
         //      delayed (need sprites) : Sprite m_shipSprite;
-        // 
+        // - construct Ship GameObject with ShipData object on game start
+        // - Null module type:
+        //      - m_name: string "no module";
+        //      - m_sprite : Sprite ("Resources.load/Sprites/noModule")
+        //
+        // - ShipData & ModuleData new update mechanics: spend components to add xp to LevelData
+        //
         // - UI_Game.cs : image + Text pop-Up On bonus pickup
         // - Recharge on shield and drones (is used when pickip up a drone and no drone slot free, converted to energy);.
         // - Create a Reset Profile button in MainMenu

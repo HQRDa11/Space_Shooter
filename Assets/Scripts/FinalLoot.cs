@@ -12,7 +12,7 @@ public class FinalLoot
         m_options = new ModuleData[3];
         for (int i = 0; i<m_options.Length; i++)
         {
-            m_options[i] = Factory.Instance.Module_Factory.Dice_Module(level);
+            m_options[i] = Factory.Instance.Module_Factory.Dice_ModuleData(level);
         }
     }
 }
