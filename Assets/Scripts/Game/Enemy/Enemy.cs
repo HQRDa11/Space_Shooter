@@ -125,7 +125,6 @@ public class Enemy : MonoBehaviour
     public void OnDestruction()
     {
         _deathBehaviour.OnDestruction(this);
-        Handheld.Vibrate();
     }
     public void CanMove(bool b)
     {

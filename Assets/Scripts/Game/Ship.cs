@@ -147,6 +147,7 @@ public class Ship : MonoBehaviour
 
     public void TakeDamage(double damage)
     {
+        Handheld.Vibrate();
         Debug.LogWarning("damage = " + damage);
         m_health -= (float)damage;
         Update_HealthBar();
