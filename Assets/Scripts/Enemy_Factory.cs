@@ -8,13 +8,13 @@ public enum BossHead { NULL = 0, TheWorm = 1, Lenght }
 public enum BossBody { NULL = 0, TheWorm = 1 }
 public class Enemy_Factory
 {
-    public GameObject CreateEnemy(Vector2 spawnPoint, int index, Wave wave, float time, int type, int libraryIndex)
+    public GameObject CreateEnemy(Vector2 spawnPoint, int index, Wave wave, float time, int type, int libraryIndex, Rarity rarity)
     {
         Enemy_Data data = Library.EnemyList.GetData(type, libraryIndex);
         GameObject newEnemy = GameObject.Instantiate(data.GameObject, Factory.Instance.InGameObjectsList.transform);
         newEnemy.transform.position = spawnPoint;
         newEnemy.GetComponent<Enemy>().Initialize(data, index, wave, time);
-        newEnemy.GetComponent<Enemy>().Set_Rarity(Factory.Dice_Rarity());
+        newEnemy.GetComponent<Enemy>().Set_Rarity(rarity);
         return newEnemy;
     }
 

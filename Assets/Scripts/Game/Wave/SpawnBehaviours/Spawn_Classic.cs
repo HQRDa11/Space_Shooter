@@ -6,7 +6,7 @@ public class Spawn_Classic : SpawnBehaviour
 {
     public void Spawn(Wave wave)
     {
-        GameObject gameObject1 = Factory.Instance.Enemy_Factory.CreateEnemy(wave.SpawnPoint, wave.AllEnemies.Count + 1, wave, wave.EnemyInstanceClock, ((int)EnemyType.Basic), ((int)BasicEnemy.NormalShot));
+        GameObject gameObject1 = Factory.Instance.Enemy_Factory.CreateEnemy(wave.SpawnPoint, wave.AllEnemies.Count + 1, wave, wave.EnemyInstanceClock, ((int)EnemyType.Basic), ((int)BasicEnemy.NormalShot), Factory.Dice_Rarity()) ;
         wave.AllEnemies.Add(gameObject1);
         wave.EnemyRemaining--;
         if ((wave.EnemyRemaining % 2 == 0 && !wave.Mirror) || (wave.EnemyRemaining / 2 % 2 == 0 && wave.Mirror))
@@ -16,7 +16,7 @@ public class Spawn_Classic : SpawnBehaviour
 
         if (wave.Mirror)
         {
-            GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(wave.SpawnPoint * new Vector2(-1, 1), wave.AllEnemies.Count + 1, wave, wave.EnemyInstanceClock, ((int)EnemyType.Basic), ((int)BasicEnemy.NormalShot));
+            GameObject gameObject = Factory.Instance.Enemy_Factory.CreateEnemy(wave.SpawnPoint * new Vector2(-1, 1), wave.AllEnemies.Count + 1, wave, wave.EnemyInstanceClock, ((int)EnemyType.Basic), ((int)BasicEnemy.NormalShot),Factory.Dice_Rarity());
             gameObject.GetComponent<Enemy>().SetMovementBehaviour(new Enemy_Movement_MoveToCheckPoints_Mirror());
             wave.AllEnemies.Add(gameObject);
             wave.EnemyRemaining--;
