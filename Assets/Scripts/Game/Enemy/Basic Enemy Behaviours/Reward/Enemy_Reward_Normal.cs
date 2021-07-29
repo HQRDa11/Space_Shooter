@@ -11,3 +11,17 @@ public class Enemy_Reward_Normal : Enemy_Behaviours.Reward
         }
     }
 }
+public class Enemy_Reward_Boss : Enemy_Behaviours.Reward
+{
+    public void GetReward(Enemy enemy)
+    {
+        ScoreSystem.Instance.AddScore(enemy.ScoreReward);
+
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject newBonus = Factory.Instance.Bonus_Factory.Instantiate_DicedComponent(enemy.transform.position);
+            Map.RandomAround(enemy.transform.position,1f);
+        }
+    }
+}
+
