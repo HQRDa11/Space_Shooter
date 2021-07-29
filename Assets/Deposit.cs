@@ -74,11 +74,11 @@ public class Deposit : MonoBehaviour
                 case true:
                     Rarity rarity = Factory.Dice_Rarity();
                     this.gameObject.transform.localScale /= (float)m_size;
-                    Vector3 componentPosition = Map.RandomSpawnAround(this.gameObject.transform.position,0.5f);
+                    Vector3 componentPosition = Map.RandomAround(this.gameObject.transform.position,0.5f);
                     Factory.Instance.Bonus_Factory.Instantiate_ComponentBonus(componentPosition, rarity);
                     break;
             }
-            Vector3 newDepositPosition = Map.RandomSpawnAround(this.gameObject.transform.position, 0.5f);
+            Vector3 newDepositPosition = Map.RandomAround(this.gameObject.transform.position, 0.5f);
             Factory.Instance.General_Factory.Create_Deposit(m_totalLife, m_size - 1, newDepositPosition);
             Factory.Instance.General_Factory.Create_Explosion(this.transform.position);
             //Debug.Log("new size:" + (m_size - 0.8f).ToString());
