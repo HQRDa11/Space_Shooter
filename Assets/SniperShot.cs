@@ -11,7 +11,7 @@ public class SniperShot : MonoBehaviour
 
     public void Initialize(float damage, Vector2 direction)
     {
-        _lifeTime = 1f;
+        _lifeTime = 1.5f;
         _clock = 0;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>().transform;
 
