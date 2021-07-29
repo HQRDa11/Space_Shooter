@@ -19,8 +19,8 @@ public class Enemy_Reward_Boss : Enemy_Behaviours.Reward
 
         for (int i = 0; i < 5; i++)
         {
-            GameObject newBonus = Factory.Instance.Bonus_Factory.Instantiate_DicedComponent(enemy.transform.position);
-            Map.RandomAround(enemy.transform.position,1f);
+            GameObject newBonus = Factory.Instance.Bonus_Factory.Instantiate_DicedComponent(enemy.Rarity, enemy.transform.position); ;
+            newBonus.transform.position = Map.RandomAround(enemy.transform.position,1f);
         }
     }
 }
