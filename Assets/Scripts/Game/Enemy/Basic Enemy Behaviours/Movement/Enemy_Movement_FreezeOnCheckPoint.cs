@@ -16,7 +16,7 @@ public class Enemy_Movement_FreezeOnCheckPoint : Enemy_Behaviours.Movement
     }
     public void Move(Enemy enemy)
     {
-        _playerDirection = (GameObject.Find("Ship1").transform.position - enemy.transform.position).normalized;
+        _playerDirection = (GameObject.FindObjectOfType<Player>().transform.position - enemy.transform.position).normalized;
 
         Vector2 direction = (_currentCheckPointTargeted - (Vector2)enemy.transform.position).normalized;
 

@@ -15,17 +15,19 @@ public class Player : MonoBehaviour
     private GameInfo m_gameInfo;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_allAllies = new Ally[4];
 
-        m_ship = GetComponentInChildren<Ship>();
-        m_ship.InitialisePlayerShip(200);
+        m_ship = Factory.Instance.Ship_Factory.Create_Ship(ProfileHandler.Instance.ActiveProfile.SquadronData.AllMembers[0].Ship,
+                                                           true, this.gameObject,Vector3.zero,0);
 
+    }
+    void Start()
+    {
         m_gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
         if (m_gameInfo == null) Debug.LogError("no GameInfo go found");
     }
-
     public void Shoot()
     {
         m_ship.GetComponent<TurretSystem>().Shoot();
@@ -46,11 +48,11 @@ public class Player : MonoBehaviour
         switch (id)
         {
             case 0:
-                return (Vector2)this.gameObject.transform.position + new Vector2(pos, -pos / 2);
+                return (Vector2)this.gameObject.transform.position + new Vector2( pos, -pos / 2);
             case 1:
                 return (Vector2)this.gameObject.transform.position + new Vector2(-pos, -pos / 2);
             case 2:
-                return (Vector2)this.gameObject.transform.position + new Vector2(pos * 1.8f, -pos);
+                return (Vector2)this.gameObject.transform.position + new Vector2( pos * 1.8f, -pos);
             case 3:
                 return (Vector2)this.gameObject.transform.position + new Vector2(-pos * 1.8f, -pos);
             default:
@@ -90,7 +92,8 @@ public class Player : MonoBehaviour
         {
             if (m_allAllies[i] == null)
             {
-                Ship newShip = Factory.Instance.Ship_Factory.CreateAllyShip(this.gameObject, GetRelativeAllyPosition(i), i, 200);
+                Ship newShip = Factory.Instance.Ship_Factory.Create_Ship(ProfileHandler.Instance.ActiveProfile.SquadronData.AllMembers[i+1].Ship,
+                                                                         false, this.gameObject, GetRelativeAllyPosition(i), i);
                 Ally newAlly = new Ally(newShip);
                 m_allAllies[i]=newAlly;
                 newShip.gameObject.transform.position += Vector3.down * Screen.height / 3;

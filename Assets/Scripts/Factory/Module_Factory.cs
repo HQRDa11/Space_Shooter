@@ -9,12 +9,14 @@ public class Module_Factory
     private Sprite m_shield_sprite;
     private Sprite m_repairDrone_sprite;
     private Sprite m_turret_sprite;
+    private Sprite m_nullModule_sprite;
 
     public Module_Factory()
     {
         m_shield_sprite      = Resources.Load<Sprite>("Sprites/Icons/Shield");
         m_repairDrone_sprite = Resources.Load<Sprite>("Sprites/Icons/RepairDrone");
         m_turret_sprite      = Resources.Load<Sprite>("Sprites/Icons/Turret");
+        m_nullModule_sprite = Resources.Load<Sprite>("Sprites/Icons/NullModule");
     }
 
     // FACTORY
@@ -23,7 +25,7 @@ public class Module_Factory
         string name = Rarity.GREY.ToString() + type.ToString();
         return new ModuleData(type, Rarity.GREY, name, new LevelData(1, 0, baseXPforLevelUp), 1);
     }
-    public ModuleData Dice_Module(int level)
+    public ModuleData Dice_ModuleData(int level)
     {
         ModuleType type = RandomType();
         int tier = Factory.Dice_BonusTier(level);
@@ -44,6 +46,8 @@ public class Module_Factory
     {
         switch (type)
         {
+            case ModuleType.NULL:
+                return m_nullModule_sprite;
             case ModuleType.SHIELD:
                 return m_shield_sprite;
             case ModuleType.REPAIRDRONE:
@@ -166,7 +170,6 @@ public class Module_Factory
     {
         int[] componentCost = new int[6];
         int rarity = (int)data.Rarity;
-        Debug.Log("rarity cost" + rarity);
         int tier = data.Tier;
 
         for (int h = rarity; h != 0; h--)

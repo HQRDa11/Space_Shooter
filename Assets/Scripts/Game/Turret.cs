@@ -30,6 +30,7 @@ public class Turret
     {
         if (_shotTimer >= _shotTimerMax)
         {
+           // Debug.Log("ShotDamage: " + m_slot.Damage);
             GameObject newShot = Factory.Instance.Shot_Factory.CreateShot(m_slot.transform,_rarity,m_slot.Damage,Vector2.up,10f,"Player");
             newShot.transform.position = (Vector2)m_slot.transform.position + new Vector2(0f,0.1f) ;
             _shotTimer = 0;

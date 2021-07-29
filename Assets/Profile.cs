@@ -10,7 +10,7 @@ public class Profile : MonoBehaviour
 
     [SerializeField]
     private ProfileData m_profileData;
-    public ProfileData Data { get { return m_profileData; } set { m_profileData = value; Debug.LogWarning("- setting new value to ProfileData"); } }
+    public ProfileData Data { get { return m_profileData; } set { m_profileData = value; /*Debug.LogWarning("- setting new value to ProfileData");*/ } }
 
     private void Awake()
     {
