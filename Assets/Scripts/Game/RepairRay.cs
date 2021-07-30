@@ -30,7 +30,7 @@ public class RepairRay : MonoBehaviour
                 break;
         }
 
-        if (this._origin != null)
+        if (this._origin != null && _target != null)
         {
             this.gameObject.GetComponent<LineRenderer>().SetPosition(0, _origin.position);
             this.gameObject.GetComponent<LineRenderer>().SetPosition(1, _target.position);
