@@ -8,6 +8,10 @@ public class Shield : MonoBehaviour
     public float Energy { get => m_energy; }
     private float m_maxEnergy;
     private int m_baseEnergy;
+    private GameObject _particules;
+
+    [SerializeField]
+    private float rotationSpeed;
 
     // Start is called before the first frame update
     void Awake()
@@ -15,6 +19,7 @@ public class Shield : MonoBehaviour
         m_baseEnergy = 30;
         m_maxEnergy = m_baseEnergy;
         m_energy = m_maxEnergy;
+        _particules = gameObject.GetComponentInChildren<ParticleSystem>().gameObject;
     }
 
     public void Initialise(float energyModuleModifier)
@@ -25,6 +30,7 @@ public class Shield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _particules.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
         switch (m_energy <=0)
         {
             case true:
