@@ -51,7 +51,6 @@ public class UI_Upgrade : MonoBehaviour
     // Upgrade button
     private Button m_upgradeModuleButton; 
 
-
     private void Start()
     {
         Load_Profile_Components();
@@ -102,7 +101,7 @@ public class UI_Upgrade : MonoBehaviour
 
         //MODULE_DISPLAY
         m_moduleImage_Display = GameObject.Find("Image_Module").GetComponent<Image>();
-        Initialise_Buttons_StockChangeUpgrade();
+        Initialise_ModuleButtons_StockChangeUpgrade();
             //Upgrade 
         m_upgradeModuleButton = GameObject.Find("ChoicePanel_Module").GetComponentsInChildren<Button>()[2];
     }
@@ -168,6 +167,16 @@ public class UI_Upgrade : MonoBehaviour
         Display_SquadMember();
         Display_Module();
     }
+    // SHIP DISPLAY
+    private void Initialise_ShipButtons_StockChangeUpgrade()
+    {
+        GameObject panel = GameObject.Find("ChoicePanel_Ship");
+        Button[] buttons = panel.GetComponentsInChildren<Button>();
+        //buttons[0].onClick.AddListener(() =>); STOCK MODULE
+        //buttons[1].onClick.AddListener(() => RequestFocus(Focus.CHANGE_MODULE));
+        m_upgradeShipButton = buttons[3];
+    }
+
     //MODULE SWITCH
     private void Initialise_ModuleSwitch()
     {
@@ -177,7 +186,7 @@ public class UI_Upgrade : MonoBehaviour
         m_previousModule_btn.onClick.AddListener(() => PreviousModule());
         m_previousModule_btn.onClick.AddListener(() => Sound.Instance.Play_ButtonSound());
     }
-    private void Initialise_Buttons_StockChangeUpgrade()
+    private void Initialise_ModuleButtons_StockChangeUpgrade()
     {
         GameObject panel = GameObject.Find("ChoicePanel_Module");
         Button[] buttons = panel.GetComponentsInChildren<Button>();
@@ -247,7 +256,7 @@ public class UI_Upgrade : MonoBehaviour
         switch (displayed != null)
         {
             case true:
-                m_text_member.text = displayed.Name + " " + (m_memberIndex+1).ToString() + "/" + m_squadronData.AllMembers.Length;
+                m_text_member.text = displayed.Name + " " + (m_memberIndex + 1).ToString() + "/" + m_squadronData.AllMembers.Length;
                 m_currentDisplayedModule = displayed.Ship.AllModules[0];
                 m_moduleIndex = 0;
                 Display_Ship();
@@ -259,7 +268,6 @@ public class UI_Upgrade : MonoBehaviour
         }
 
     }
-
     private void Display_Ship()
     {
         switch (m_currentDisplayedMember != null)
@@ -284,27 +292,27 @@ public class UI_Upgrade : MonoBehaviour
                 // maybe: m_shipImage_Display.sprite = ship.Sprite();
                 // maybe: m_shipImage_Display.color = color;
 
-                //Upgrade button
-                int[] cost = Factory.Instance.Ship_Factory.Get_UpgradeCost(ship);
+                //Upgrade Button
+                int[] cost = Factory.Instance.Ship_Factory.Get_UpgradeCost(m_currentDisplayedMember.Ship);
                 UiElement_ComponentCostsDisplay costDisplay = GameObject.FindObjectsOfType<UiElement_ComponentCostsDisplay>()[1];
                 costDisplay.Display_Costs(cost);
-                // TO DO :
-                //Color upgradeButtonColor = m_upgradeShipButton.gameObject.GetComponentInChildren<Image>().color;
-                //switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost) && m_currentDisplayedModule.Level.Current < Factory.Instance.ModuleStat_Factory.LevelMax(m_currentDisplayedModule.Rarity))
-                //{
-                //    case true:
-                //        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g, upgradeButtonColor.b, 1);
-                //        m_upgradeModuleButton.image.color = upgradeButtonColor;
-                //        m_upgradeModuleButton.onClick.RemoveAllListeners();
-                //        m_upgradeModuleButton.onClick.AddListener(() => OnUpgradeButtonPressed());
-                //        break;
-                //    case false:
+                Color upgradeButtonColor = m_upgradeShipButton.gameObject.GetComponentInChildren<Image>().color;
+                switch (ProfileHandler.Instance.ActiveProfile.TryCost(cost) && m_currentDisplayedMember.Ship.Level.Current < Ship_Factory.LevelMax(m_currentDisplayedMember.Ship.Rarity))
+                {
+                    case true:
+                        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g, upgradeButtonColor.b, 1);
+                        m_upgradeShipButton.image.color = upgradeButtonColor;
+                        m_upgradeShipButton.onClick.RemoveAllListeners();
+                        m_upgradeShipButton.onClick.AddListener(() => OnUpgradeShipPressed());
+                        m_upgradeShipButton.onClick.AddListener(() => Sound.Instance.Play_ShipLevelUp());
+                        break;
+                    case false:
 
-                //        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g, upgradeButtonColor.b, 0.26f);
-                //        m_upgradeModuleButton.image.color = upgradeButtonColor;
-                //        m_upgradeModuleButton.onClick.RemoveAllListeners();
-                //        break;
-                //}
+                        upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g, upgradeButtonColor.b, 0.26f);
+                        m_upgradeShipButton.image.color = upgradeButtonColor;
+                        m_upgradeShipButton.onClick.RemoveAllListeners();
+                        break;
+                }
                 break;
             case false:
                 Debug.LogError("cant display Ship");
@@ -352,8 +360,8 @@ public class UI_Upgrade : MonoBehaviour
                         upgradeButtonColor = new Color(upgradeButtonColor.r, upgradeButtonColor.g,upgradeButtonColor.b, 1);
                         m_upgradeModuleButton.image.color = upgradeButtonColor;
                         m_upgradeModuleButton.onClick.RemoveAllListeners();
-                        m_upgradeModuleButton.onClick.AddListener(() => OnUpgradeButtonPressed());
-                        // to do add listender sound.Play_buttonUpgrade()
+                        m_upgradeModuleButton.onClick.AddListener(() => OnUpgradeModulePressed());
+                        m_upgradeModuleButton.onClick.AddListener(() => Sound.Instance.Play_ModuleLevelUp());
                         break;
                     case false:
 
@@ -404,6 +412,7 @@ public class UI_Upgrade : MonoBehaviour
 
                         }
                         m_currentFocus = Focus.CHANGE_MODULE;
+
                         break;
                 }
                 break;
@@ -433,7 +442,21 @@ public class UI_Upgrade : MonoBehaviour
         RequestFocus(Focus.MAIN);
     }
 
-    private void OnUpgradeButtonPressed()
+    private void OnUpgradeShipPressed()
+    {
+        switch (m_currentDisplayedMember.Ship.Level.Current < Ship_Factory.LevelMax(m_currentDisplayedMember.Ship.Rarity))
+        {
+            case true:
+                m_upgradeShipButton.onClick.RemoveAllListeners();
+                ProfileHandler.Instance.ActiveProfile.SpendComponent(Factory.Instance.Ship_Factory.Get_UpgradeCost(m_currentDisplayedMember.Ship));
+                Factory.Instance.Ship_Factory.LevelUp(m_currentDisplayedMember.Ship);
+                Display_Components();
+                Display_Ship();
+                return;
+        }
+        Debug.LogWarning("MaxLevel reached.");
+    }
+    private void OnUpgradeModulePressed()
     {
         switch (m_currentDisplayedModule.Level.Current < Factory.Instance.Module_Factory.LevelMax(m_currentDisplayedModule.Rarity))
         {
