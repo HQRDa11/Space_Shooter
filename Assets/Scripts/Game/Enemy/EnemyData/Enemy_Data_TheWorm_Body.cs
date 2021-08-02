@@ -10,8 +10,8 @@ public class Enemy_Data_TheWorm_Body : Enemy_Data
         _healthBehaviour = new Enemy_Health_Normal();
         _health = 50f;
 
-        _movementBehaviour = new Enemy_Movement_MoveToCheckPoints();
-        _moveSpeed = 80f;
+        _movementBehaviour = new Enemy_Movement_MoveToCheckPoints_Infinity_WithoutSmoothdamp();
+        _moveSpeed = 1.6f;
         _smoothingSpeed = .3f;
         _wireRadius = .5f;
 

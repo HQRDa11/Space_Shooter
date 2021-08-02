@@ -11,7 +11,7 @@ public class Enemy_Data_Basic_SniperShot : Enemy_Data
         _health = 20f;
 
         _movementBehaviour = new Enemy_Movement_FreezeOnCheckPoint();
-        _moveSpeed = 70f;
+        _moveSpeed = 1.4f;
         _smoothingSpeed = .3f;
         _wireRadius = .5f;
 

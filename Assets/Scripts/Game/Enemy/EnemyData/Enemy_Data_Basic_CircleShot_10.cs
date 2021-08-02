@@ -11,7 +11,7 @@ public class Enemy_Data_Basic_CircleShot_10 : Enemy_Data
         _health = 30f;
 
         _movementBehaviour = new Enemy_Movement_RandomlyAroundRandomCheckPoint();
-        _moveSpeed = 100f;
+        _moveSpeed = 2f;
         _smoothingSpeed = .3f;
         _wireRadius = .5f;
 

@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     private float _smoothingSpeed; 
     private float _wireRadius;
     private bool _canMove;
+    private int _checkPointIndex;
+    private Vector2 _moveDirection;
 
     // DEATH
     private Enemy_Behaviours.Death _deathBehaviour;
@@ -95,8 +97,14 @@ public class Enemy : MonoBehaviour
     {
         if (_canMove)
         {
-            _movementBehaviour.Move(this);
-            _movementBehaviour.Rotation(this);   
+            switch (_checkPointIndex)
+            {
+                case 0: FastTravel(); break;
+                default:
+                    _movementBehaviour.Move(this);
+                    _movementBehaviour.Rotation(this);
+                    break;
+            }            
         }
     }
 
@@ -138,6 +146,16 @@ public class Enemy : MonoBehaviour
     public void ResetClock()
     {
         _clock = 0;
+    }
+    public void FastTravel()
+    {
+        float speedMem = _moveSpeed;
+        _moveSpeed *= 3;
+
+        _movementBehaviour.Move(this);
+        _movementBehaviour.Rotation(this);
+
+        _moveSpeed = speedMem;
     }
 
     // BEHAVIOUR SETTERS
@@ -188,6 +206,8 @@ public class Enemy : MonoBehaviour
     public float MoveSpeed { get => _moveSpeed; }
     public float SmoothingSpeed { get => _smoothingSpeed; }
     public float WireRadius { get => _wireRadius; }
+    public int CheckPointIndex { get => _checkPointIndex; set => _checkPointIndex = value; }
+    public Vector2 MoveDirection { get => _moveDirection; set => _moveDirection = value; }
 
     // Death
     public Enemy_Behaviours.Death DeathBehaviour { get => _deathBehaviour; }
