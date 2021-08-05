@@ -139,6 +139,16 @@ public class Enemy : MonoBehaviour
     {
         _clock = 0;
     }
+    public void FastTravel()
+    {
+        float speedMem = _moveSpeed;
+        _moveSpeed *= 1.6f;
+
+        _movementBehaviour.Move(this);
+        _movementBehaviour.Rotation(this);
+
+        _moveSpeed = speedMem;
+    }
 
     // BEHAVIOUR SETTERS
 

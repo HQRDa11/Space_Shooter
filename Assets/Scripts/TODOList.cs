@@ -134,6 +134,8 @@ namespace HQRDa
         // ok - Rarety dice : 1/4 chance of looting higher rarity
         //
         // - UI_Upgrade.cs : Ship upgrade
+        //      - make lvl fnctn
+        //      - link UI_Upgrade buttons
         //      - Triple upgrade cost
         //      ok - Panel m_shipStats_Display; 
         //      delayed (need sprites) : Sprite m_shipSprite;
@@ -164,6 +166,18 @@ namespace HQRDa
 
         // - Nous sommes prévenus qu'un ver de l'espace a été aperçu non loin du terrain, et demandés en aide d'urgence.
         // - On déconne pas avec ces bêtes la !
+    }
+
+    public class OtherReferences
+    {
+        // Galaxy Warfighter (Nintendo switch) : https://www.youtube.com/watch?v=MuP9O4_PXqE
+    }
+    public class Tutorials
+    {
+        // 2D lightnings: https://www.youtube.com/watch?v=kJ4Ovd5HaMc
+        // - 
+        // Space Shooter : Galaxy Shooting : https://www.youtube.com/watch?v=omlwJ8iFpK4
+
     }
 }
 

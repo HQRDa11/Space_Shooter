@@ -8,7 +8,7 @@ public class Enemy_Data_TheWorm_Head : Enemy_Data
     {
         _gameObject = Resources.Load<GameObject>("Prefabs/Enemies/TheWorm_Head");
         _healthBehaviour = new Enemy_Health_Normal();
-        _health = 1000f;
+        _health = 666f;
 
         _movementBehaviour = new Enemy_Movement_MoveToCheckPoints();
         _moveSpeed = 80f;
