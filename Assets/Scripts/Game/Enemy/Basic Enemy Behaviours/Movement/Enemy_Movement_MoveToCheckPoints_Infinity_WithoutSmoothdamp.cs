@@ -1,25 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Movement_MoveToCheckPoints : Enemy_Behaviours.Movement
+public class Enemy_Movement_MoveToCheckPoints_Infinity_WithoutSmoothdamp : Enemy_Behaviours.Movement
 {
-    private Vector2 _velocity = Vector2.zero;
-    private bool _firstUpdate;
     public void Move(Enemy enemy)
     {
         Vector2 checkPointTargeted = enemy.Wave.AllCheckPoints[enemy.CheckPointIndex];
         Vector2 position = enemy.transform.position;
 
-        if (!_firstUpdate)
-        {
-            _firstUpdate = true;
-            enemy.MoveDirection = (checkPointTargeted - position).normalized;
-        }
-
-        enemy.MoveDirection = Vector2.SmoothDamp(
-            enemy.MoveDirection,
-            (checkPointTargeted - position).normalized,
-            ref _velocity,
-            enemy.SmoothingSpeed);
+        enemy.MoveDirection = (checkPointTargeted - position).normalized;
 
         enemy.transform.position += (Vector3)enemy.MoveDirection * enemy.MoveSpeed * Time.deltaTime;
 
@@ -29,11 +19,9 @@ public class Enemy_Movement_MoveToCheckPoints : Enemy_Behaviours.Movement
         {
             enemy.CheckPointIndex++;
         }
-
         if (enemy.CheckPointIndex == enemy.Wave.AllCheckPoints.Count)
         {
-            enemy.SetWeaponBehaviour(new Enemy_Weapon_RandomShot());
-            enemy.SetNextMovementBehaviour();
+            enemy.CheckPointIndex = 1;
         }
     }
     public void Rotation(Enemy enemy)
@@ -43,6 +31,6 @@ public class Enemy_Movement_MoveToCheckPoints : Enemy_Behaviours.Movement
     }
     public Enemy_Behaviours.Movement GetNextBehaviour()
     {
-        return new Enemy_Movement_MoveToIndexPosition();
+        return null;
     }
 }

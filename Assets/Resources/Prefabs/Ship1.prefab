@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3102433793454816856}
   - component: {fileID: 8326107870802059888}
   m_Layer: 0
-  m_Name: Trail_Left
+  m_Name: Trail_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 48616fbcd8d30de4a805fff75cecca56, type: 2}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69,10 +69,10 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1201852711
+  m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.14
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -81,7 +81,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.052246094
+        value: 0.076049805
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -333,6 +333,7 @@ Transform:
   - {fileID: 1873608564430515068}
   - {fileID: 3102433793454816856}
   - {fileID: 5194620341418470728}
+  - {fileID: 5822866321994568654}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -349,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 0}
+  RepairDrone: {fileID: 0}
 --- !u!114 &-2170226838257421008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,6 +444,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9469bf10aa320a84aa207b1768afe1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1190794803144617126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5822866321994568654}
+  - component: {fileID: 998850726012115376}
+  m_Layer: 0
+  m_Name: Freeform Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5822866321994568654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190794803144617126}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 939396360807877132}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &998850726012115376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190794803144617126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 0
+  m_BlendStyleIndex: 1
+  m_FalloffIntensity: 0.95
+  m_Color: {r: 0.5911949, g: 0.8754422, b: 1, a: 1}
+  m_Intensity: 0.82
+  m_LightVolumeOpacity: 0.2
+  m_ApplyToSortingLayers: d92e5db8c10f9cab
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 10
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 0.5
+  m_ShapeLightFalloffSize: 0.8
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &1548343966387505726
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +905,7 @@ GameObject:
   - component: {fileID: 5194620341418470728}
   - component: {fileID: 6817316738112997872}
   m_Layer: 0
-  m_Name: Trail_Right
+  m_Name: Trail_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -871,7 +945,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 48616fbcd8d30de4a805fff75cecca56, type: 2}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -889,10 +963,10 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1201852711
+  m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.14
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -901,7 +975,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.052246094
+        value: 0.076057434
         inSlope: 0
         outSlope: 0
         tangentMode: 0

@@ -14,6 +14,7 @@ public class Shot_Factory
         //Debug.LogWarning("damage: " + (double)damage + "*" + ((int)rarity) + "= " + (double)damage * ((int)rarity));
         GameObject newShot = GameObject.Instantiate(_shotPrefab, Factory.Instance.InGameObjectsList);
         newShot.GetComponent<SpriteRenderer>().material = Factory.Instance.Material_Factory.GetMaterial(rarity);
+        newShot.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>().color = Factory.Instance.Material_Factory.GetMaterial(rarity).color;
         newShot.GetComponent<Shot>().Initialise( (double)damage*((int)rarity), direction, speed );
         newShot.tag = tag;
         return newShot;

@@ -11,44 +11,44 @@ public class Bonus_Factory
 
     }
 
-    public void Instantiate_DicedBonus(Vector2 position)
+    public GameObject Instantiate_DicedBonus(Vector2 position)
     {
         
         int luck = Random.Range(0, 100);  // Turret 62% / Zone 12% / Shield 10% / Repair 8% / Pilot 5% / Component 3% //
-       
+        GameObject newBonus;
         if (luck <= 62)
         {
-            Instantiate_TurretBonus(position, Factory.Dice_Rarity());
-            return;
+            newBonus = Instantiate_TurretBonus(position, Factory.Dice_Rarity()).gameObject;
+            return newBonus;
         }
 
         else if (luck <= 74)
         {
-            Instantiate_ZoneBonus(position);
-            return;
+            newBonus = Instantiate_ZoneBonus(position).gameObject;
+            return newBonus;
         }
         else if (luck <= 84)
         {
-            Instantiate_ShieldBonus(position);
-            return;
+            newBonus = Instantiate_ShieldBonus(position).gameObject;
+            return newBonus;
         }
 
         else if (luck <= 92)
         {
-            Instantiate_RepairBonus(position);
-            return;
+            newBonus = Instantiate_RepairBonus(position).gameObject;
+            return newBonus;
         }
 
         else if (luck <= 97)
         {
-            Instantiate_PilotBonus(position);
-            return;
+            newBonus = Instantiate_PilotBonus(position).gameObject;
+            return newBonus;
         }
 
         else
         {
-            Instantiate_ComponentBonus(position, Factory.Dice_Rarity());
-            return;
+            newBonus = Instantiate_ComponentBonus(position, Factory.Dice_Rarity()).gameObject;
+            return newBonus;
         }
     }
 
@@ -98,5 +98,11 @@ public class Bonus_Factory
         if (!bonusLoot.GetComponent<ZoneBonus>()) { bonusLoot.AddComponent<ZoneBonus>(); }
         bonusLoot.transform.position = position;
         return bonusLoot.GetComponent<ZoneBonus>();
+    }
+
+    public GameObject Instantiate_DicedComponent(Rarity minRarity, Vector3 position)
+    {
+        Rarity diced = Factory.Dice_Rarity(minRarity);
+        return Instantiate_ComponentBonus(position,diced).gameObject;
     }
 }

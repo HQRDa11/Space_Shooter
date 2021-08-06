@@ -21,6 +21,7 @@ public class WaveSystem : MonoBehaviour
 
         _allWaves = new List<Wave>();
         _allWaves.Add(Library.WaveList.RandomWave(_indexOfDifficulty));
+        //_allWaves.Add(Library.WaveList.Boss((int)BossHead.TheWorm));
 
         _currentWave = _allWaves[0];
         _currentWaveIndex = 1;

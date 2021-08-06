@@ -12,7 +12,7 @@ public class Enemy_Movement_MoveToIndexPosition : Enemy_Behaviours.Movement
             enemy.transform.position,
             Map.CheckPointIndexToPosition(enemy.Index),
             ref _velocity,
-            enemy.SmoothingSpeed * Time.deltaTime * enemy.MoveSpeed);
+            enemy.SmoothingSpeed);
     }
     public void Rotation(Enemy enemy)
     {

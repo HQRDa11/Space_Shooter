@@ -151,9 +151,9 @@ public class Application_StateMachine : MonoBehaviour
 
                 switch (stateResquest)
                 {
-                    case ApplicationState_Type.MAINMENU:
+                    case ApplicationState_Type.PREPARE:
                         EndCurrentState();
-                        SetCurrentState(new MainMenu_ApplicationState("State_MainMenu"));
+                        SetCurrentState(new Prepare_ApplicationState("State_Prepare"));
                         isSwitch = true;
                         break;
                 }

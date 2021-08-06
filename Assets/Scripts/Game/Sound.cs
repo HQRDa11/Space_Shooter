@@ -13,6 +13,8 @@ public class Sound : MonoBehaviour
     private AudioClip m_componentCollect;
     private AudioClip m_startSound;
     private AudioClip m_buttonSound;
+    private AudioClip m_moduleLevelUp;
+    private AudioClip m_shipLevelUp;
 
     // Start is called before the first frame update
     void Awake()
@@ -20,11 +22,14 @@ public class Sound : MonoBehaviour
         _instance = this;
         m_audioSource = GetComponent<AudioSource>();
         m_weaponDeployShort = Resources.Load<AudioClip>("AudioClips/WeaponDeployShort");
-        m_droidShort = Resources.Load<AudioClip>("AudioClips/DroidShort");
-        m_componentCollect = Resources.Load<AudioClip>("AudioClips/ComponentCollect");
-        m_startSound = Resources.Load<AudioClip>("AudioClips/StartSound");
-        m_buttonSound = Resources.Load<AudioClip>("AudioClips/ButtonSound");
+        m_droidShort        = Resources.Load<AudioClip>("AudioClips/DroidShort");
+        m_componentCollect  = Resources.Load<AudioClip>("AudioClips/ComponentCollect");
+        m_startSound        = Resources.Load<AudioClip>("AudioClips/StartSound");
+        m_buttonSound       = Resources.Load<AudioClip>("AudioClips/ButtonSound");
+        m_moduleLevelUp     = Resources.Load<AudioClip>("AudioClips/Selection");
+        m_shipLevelUp       = Resources.Load<AudioClip>("AudioClips/WeaponDeploy");
     }
+
 
     // Update is called once per frame
     void Update()
@@ -54,6 +59,14 @@ public class Sound : MonoBehaviour
     }
     public void Play_ButtonSound()
     {
-        m_audioSource.PlayOneShot(m_buttonSound, 1f);
+        m_audioSource.PlayOneShot(m_buttonSound, 0.7f);
+    }    
+    public void Play_ModuleLevelUp()
+    {
+       m_audioSource.PlayOneShot(m_moduleLevelUp, 0.7f);
+    }
+    public void Play_ShipLevelUp()
+    {
+       m_audioSource.PlayOneShot(m_shipLevelUp, 0.7f);
     }
 }

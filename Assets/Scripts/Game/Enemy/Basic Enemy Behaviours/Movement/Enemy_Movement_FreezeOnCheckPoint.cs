@@ -20,7 +20,7 @@ public class Enemy_Movement_FreezeOnCheckPoint : Enemy_Behaviours.Movement
 
         Vector2 direction = (_currentCheckPointTargeted - (Vector2)enemy.transform.position).normalized;
 
-        enemy.Rigidbody2D.velocity = direction * enemy.MoveSpeed * Time.deltaTime;
+        enemy.Rigidbody2D.velocity = direction * enemy.MoveSpeed;
 
         switch (Vector2.Distance(enemy.transform.position, _currentCheckPointTargeted) <= enemy.WireRadius / 10)
         {

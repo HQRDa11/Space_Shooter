@@ -119,6 +119,18 @@ public class Factory : MonoBehaviour
             return Rarity.ORANGE;
         }
     }
+
+    public static Rarity Dice_Rarity(Rarity minimumRarity)
+    {
+        Rarity rarity = minimumRarity;
+        Rarity diced = Dice_Rarity();
+        switch (diced > minimumRarity)
+        {
+            case true:
+                return diced;
+        }
+        return minimumRarity;
+    }
     public static Rarity Dice_Rarity() // Dice according to a rarity ratio standard // Tweak it wisely 
                                        // Current uses : Turret Bonus, Modules/Components loot 
     {

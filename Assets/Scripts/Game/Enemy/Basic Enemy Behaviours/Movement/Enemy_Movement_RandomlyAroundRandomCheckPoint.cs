@@ -37,7 +37,7 @@ public class Enemy_Movement_RandomlyAroundRandomCheckPoint : Enemy_Behaviours.Mo
             _currentPointTargeted = NextTarget();
         }
 
-        enemy.transform.position = Vector2.SmoothDamp(enemy.transform.position, _currentPointTargeted, ref _velocity, enemy.MoveSpeed * Time.deltaTime);
+        enemy.transform.position = Vector2.SmoothDamp(enemy.transform.position, _currentPointTargeted, ref _velocity, enemy.SmoothingSpeed);
     }
     public Vector2 NextCheckPoint()
     {

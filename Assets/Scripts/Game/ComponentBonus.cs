@@ -6,6 +6,9 @@ public class ComponentBonus : MonoBehaviour
 {
     private float _speed;
     private Rarity _rarity;
+    private float _timerBefore_isTargetingPlayer;
+
+    private Player _player;
 
     public Rarity Rarity { get => _rarity; set { _rarity = value; } }
 
@@ -13,6 +16,9 @@ public class ComponentBonus : MonoBehaviour
     void Start()
     {
         _speed = 2;
+        _timerBefore_isTargetingPlayer = 1;
+
+        _player = GameObject.FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -24,12 +30,19 @@ public class ComponentBonus : MonoBehaviour
 
     private void Move()
     {
+        switch (_timerBefore_isTargetingPlayer<0 && _player != null)
         {
-            this.transform.Translate(Vector3.down * _speed * Time.deltaTime);
+            case true:
+                this.transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, Time.deltaTime * 2);
+                break;
+            case false:
+                this.transform.Translate(Vector3.down * _speed * Time.deltaTime);
+                break;
         }
     }
     private void Update_LifeTime()
     {
+        _timerBefore_isTargetingPlayer -= Time.deltaTime;
         if (!Map.IsOnScreen(this.transform.position))
         {
             GameObject.Destroy(this.gameObject);

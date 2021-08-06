@@ -11,7 +11,7 @@ public class Enemy_Data_Basic_NormalShot : Enemy_Data
         _health = 20f;
 
         _movementBehaviour = new Enemy_Movement_MoveToCheckPoints();
-        _moveSpeed = 80f;
+        _moveSpeed = 1.6f;
         _smoothingSpeed = .3f;
         _wireRadius = .5f;
 

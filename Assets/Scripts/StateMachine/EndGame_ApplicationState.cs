@@ -33,7 +33,7 @@ public class EndGame_ApplicationState : ApplicationState
                 {
                     case true:
                         ProfileHandler.Instance.StateSave();
-                        m_stateMachine.stateRequest(ApplicationState_Type.MAINMENU);
+                        m_stateMachine.stateRequest(ApplicationState_Type.PREPARE);
                         break;
                     case false:
                         break;

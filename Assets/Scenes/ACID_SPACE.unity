@@ -395,6 +395,14 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1900843549539534955, guid: 2b566cdd477d60b4ba89a9faeb3b9ec0, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cff001e77760c0e4dae18fb0541e332c, type: 3}
+    - target: {fileID: 1900843549539534955, guid: 2b566cdd477d60b4ba89a9faeb3b9ec0, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4725181318903804413, guid: 2b566cdd477d60b4ba89a9faeb3b9ec0, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -439,7 +447,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1636963897724729111, guid: 2b566cdd477d60b4ba89a9faeb3b9ec0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2b566cdd477d60b4ba89a9faeb3b9ec0, type: 3}
 --- !u!4 &722453470 stripped
 Transform:
