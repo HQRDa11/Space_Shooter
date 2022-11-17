@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bonus_Factory 
+public class Bonus_Factory
 {
 
 
@@ -13,7 +11,7 @@ public class Bonus_Factory
 
     public GameObject Instantiate_DicedBonus(Vector2 position)
     {
-        
+
         int luck = Random.Range(0, 100);  // Turret 62% / Zone 12% / Shield 10% / Repair 8% / Pilot 5% / Component 3% //
         GameObject newBonus;
         if (luck <= 62)
@@ -53,7 +51,7 @@ public class Bonus_Factory
     }
 
 
-    public TurretBonus Instantiate_TurretBonus(Vector2 position, Rarity rarity )
+    public TurretBonus Instantiate_TurretBonus(Vector2 position, Rarity rarity)
     {
         GameObject bonusLoot = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Bonuses/TurretBonus"));
         if (!bonusLoot.GetComponent<TurretBonus>()) { bonusLoot.AddComponent<TurretBonus>(); }
@@ -103,6 +101,6 @@ public class Bonus_Factory
     public GameObject Instantiate_DicedComponent(Rarity minRarity, Vector3 position)
     {
         Rarity diced = Factory.Dice_Rarity(minRarity);
-        return Instantiate_ComponentBonus(position,diced).gameObject;
+        return Instantiate_ComponentBonus(position, diced).gameObject;
     }
 }
